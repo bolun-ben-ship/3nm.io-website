@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies — Real Singapore Service Businesses · RightClick:AI</title>
+  <meta name="description" content="Five real Singapore service businesses. Five operational systems. From education consulting to financial compliance, family offices, 3PL logistics, and executive recruitment — built in 6 weeks.">
+  <meta name="theme-color" content="#FAFAF7">
+  <link rel="canonical" href="https://3nm.io/case-studies">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://3nm.io/case-studies">
+  <meta property="og:site_name" content="RightClick:AI">
+  <meta property="og:title" content="Case Studies — Singapore Service Businesses on AI Operating Systems">
+  <meta property="og:description" content="Five real builds. Education, compliance, family office, 3PL, recruitment. One platform each. Six weeks each.">
+  <meta property="og:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg">
+  <meta property="og:locale" content="en_SG">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Case Studies — RightClick:AI">
+  <meta name="twitter:description" content="Five real Singapore SMEs. Five operational systems built in 6 weeks each.">
+  <meta name="twitter:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/logo/rightclickai-mark.svg">
+  <link rel="alternate icon" href="assets/logo/rightclickai-mark.svg">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
+  <link href="assets/site.css" rel="stylesheet">
+  <link href="assets/case-study.css" rel="stylesheet">
+
+  <!-- Google tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TW8DK7YTJG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TW8DK7YTJG');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "RightClick:AI — Case Studies",
+    "description": "Five real Singapore service businesses on RightClick:AI operating systems.",
+    "url": "https://3nm.io/case-studies",
+    "publisher": { "@type": "Organization", "name": "RightClick:AI", "url": "https://3nm.io" },
+    "hasPart": [
+      { "@type": "Article", "headline": "Education Consulting · No New Admin Hire", "url": "https://3nm.io/case-study-education-consulting" },
+      { "@type": "Article", "headline": "Compliance Workflow · Approval Chains Replaced", "url": "https://3nm.io/case-study-compliance-workflow" },
+      { "@type": "Article", "headline": "Family Office · Bank Statement Intelligence", "url": "https://3nm.io/case-study-family-office" },
+      { "@type": "Article", "headline": "3PL Logistics · Multi-Retailer BI Dashboard", "url": "https://3nm.io/case-study-3pl-logistics" },
+      { "@type": "Article", "headline": "Executive Recruitment · Pipeline Intelligence", "url": "https://3nm.io/case-study-executive-recruitment" }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Page-specific ──────────────────── */
+    .csi-hero {
+      padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 60px);
+      background: var(--bg);
+      position: relative;
+    }
+    .csi-hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .csi-hero-meta-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: csi-pulse 2s var(--ease-out) infinite;
+    }
+    @keyframes csi-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.7); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .csi-hero-meta-dot { animation: none; }
+    }
+    .csi-hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.04;
+      color: var(--ink);
+      margin: 0 0 22px;
+      max-width: 16ch;
+    }
+    .csi-hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .csi-hero-lede {
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--ink-mid);
+      line-height: 1.6;
+      max-width: 56ch;
+      margin: 0;
+    }
+    .csi-hero-stats {
+      display: flex;
+      gap: clamp(20px, 4vw, 48px);
+      flex-wrap: wrap;
+      margin-top: 36px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+    }
+    .csi-stat-val {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .csi-stat-label {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Index grid ─────────────────────── */
+    .csi-grid {
+      padding: clamp(40px, 6vw, 80px) 0 var(--section-y);
+      background: var(--bg);
+    }
+    .csi-list {
+      display: grid;
+      gap: clamp(24px, 3vw, 32px);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .csi-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .csi-list .csi-item.is-feature {
+      grid-column: 1 / -1;
+    }
+    .csi-item {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--dur-hover) var(--ease-snap), border-color var(--dur-hover) var(--ease-snap), box-shadow var(--dur-hover) var(--ease-snap);
+    }
+    .csi-item.is-feature {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .csi-item.is-feature .csi-thumb {
+      flex: 1 1 50%;
+      min-width: 320px;
+    }
+    .csi-item.is-feature .csi-body {
+      flex: 1 1 50%;
+      min-width: 320px;
+      padding: clamp(28px, 3vw, 40px);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .csi-item:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-mid);
+        box-shadow: 0 18px 40px -12px rgba(13, 18, 15, 0.12);
+      }
+    }
+    .csi-item:active {
+      transform: translateY(-1px);
+    }
+    .csi-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: var(--bg-warm);
+      overflow: hidden;
+    }
+    .csi-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms var(--ease-out);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .csi-item:hover .csi-thumb img {
+        transform: scale(1.04);
+      }
+    }
+    .csi-thumb-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(8, 16, 10, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: var(--r-pill);
+    }
+    /* Compliance card uses a graphic mock instead of a photo */
+    .csi-thumb.is-mock {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--surface-dark-elevated) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    .csi-mock-card {
+      width: 100%;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-on-dark-mid);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      font-family: var(--font);
+    }
+    .csi-mock-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-on-dark);
+      font-size: 12px;
+      color: var(--on-dark);
+    }
+    .csi-mock-row:last-child { border-bottom: none; }
+    .csi-mock-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .csi-mock-dot.is-ok { background: var(--accent-on-dark); }
+    .csi-mock-dot.is-warn { background: #FBBF24; }
+    .csi-mock-dot.is-err { background: var(--state-error-on-dark); }
+    .csi-mock-label { flex: 1; }
+    .csi-mock-meta {
+      font-size: 10.5px;
+      color: var(--on-dark-mute);
+      letter-spacing: 0.02em;
+    }
+    .csi-body {
+      padding: 24px 24px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .csi-tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .csi-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 4px 9px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      background: var(--bg);
+    }
+    .csi-title {
+      font-size: clamp(20px, 2.2vw, 24px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 0;
+    }
+    .csi-item.is-feature .csi-title {
+      font-size: clamp(24px, 2.6vw, 30px);
+    }
+    .csi-summary {
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .csi-kpis {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .csi-kpi-val {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .csi-kpi-label {
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+    .csi-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+    .csi-arrow span { transition: transform var(--dur-hover) var(--ease-snap); }
+    @media (hover: hover) and (pointer: fine) {
+      .csi-item:hover .csi-arrow span { transform: translateX(4px); }
+    }
+    .csi-cover-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+    .csi-cover-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -3px;
+    }
+
+    /* ── Closing CTA ────────────────────── */
+    .csi-cta {
+      background: var(--bg-dark);
+      padding: var(--section-y) 0;
+      text-align: center;
+    }
+    .csi-cta-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-on-dark);
+      margin-bottom: 16px;
+    }
+    .csi-cta h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      color: #fff;
+      max-width: 22ch;
+      margin: 0 auto 16px;
+    }
+    .csi-cta p {
+      font-size: 16px;
+      color: var(--on-dark-mute);
+      line-height: 1.65;
+      max-width: 52ch;
+      margin: 0 auto 28px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#csi-hero" class="skip-link">Skip to content</a>
+
+  <div class="scroll-progress" id="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+  <!-- ── NAV ──────────────────────────── -->
+  <nav class="site-nav" id="main-nav" aria-label="Main">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo" aria-label="RightClick AI home">
+          <svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z" fill="currentColor"/>
+            <circle cx="24" cy="18" r="1.6" fill="currentColor" opacity="0.45"/>
+            <circle cx="24" cy="23" r="1.6" fill="currentColor" opacity="0.45"/>
+            <circle cx="24" cy="28" r="1.6" fill="currentColor" opacity="0.45"/>
+          </svg>
+          RightClick<span>:AI</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="/#foundation">Foundation</a></li>
+          <li><a href="how-it-works">How it works</a></li>
+          <li><a href="case-studies" class="active" aria-current="page">Our work</a></li>
+          <li><a href="faq">FAQ</a></li>
+          <li><a href="about">About</a></li>
+        </ul>
+        <a href="#" class="nav-cta" data-modal-open="discovery">Book a call</a>
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <span class="nav-toggle-line" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="/#foundation">Foundation</a></li>
+      <li><a href="how-it-works">How it works</a></li>
+      <li><a href="case-studies">Our work</a></li>
+      <li><a href="faq">FAQ</a></li>
+      <li><a href="about">About</a></li>
+    </ul>
+    <a href="#" class="nav-cta" data-modal-open="discovery">Book a call</a>
+  </div>
+
+  <!-- ── HERO ─────────────────────────── -->
+  <section class="csi-hero" id="csi-hero">
+    <div class="wrap">
+      <div class="csi-hero-meta">
+        <span class="csi-hero-meta-dot" aria-hidden="true"></span>
+        <span>Case studies · Singapore SMEs</span>
+      </div>
+      <h1 class="reveal">Five businesses.<br>Five operating systems.<br><em>Built in six weeks each.</em></h1>
+      <p class="csi-hero-lede reveal reveal-d1">Real Singapore service businesses we've put on a Foundation. Anonymous on request — but every number, every workflow, every artefact below is real. Pick the one that looks like yours.</p>
+      <div class="csi-hero-stats reveal reveal-d2">
+        <div>
+          <div class="csi-stat-val">5</div>
+          <div class="csi-stat-label">Live builds</div>
+        </div>
+        <div>
+          <div class="csi-stat-val">6w</div>
+          <div class="csi-stat-label">Average build cycle</div>
+        </div>
+        <div>
+          <div class="csi-stat-val">0</div>
+          <div class="csi-stat-label">New ops hires triggered</div>
+        </div>
+        <div>
+          <div class="csi-stat-val">100%</div>
+          <div class="csi-stat-label">Owned by client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INDEX GRID ───────────────────── -->
+  <section class="csi-grid">
+    <div class="wrap">
+      <div class="csi-list">
+
+        <!-- 1. Education Consulting (feature) -->
+        <article class="csi-item is-feature reveal">
+          <div class="csi-thumb">
+            <img src="assets/case-study-images/education.jpg" alt="University admissions consulting environment" loading="lazy" width="1600" height="900">
+            <span class="csi-thumb-tag">Education consulting</span>
+          </div>
+          <div class="csi-body">
+            <div class="csi-tag-row">
+              <span class="csi-tag">University admissions</span>
+              <span class="csi-tag">Singapore</span>
+            </div>
+            <h2 class="csi-title">From shared inboxes and PDF folders to one platform. No new admin hire.</h2>
+            <p class="csi-summary">Dozens of student applications per consultant — tracked across spreadsheets, shared inboxes, and PDF folders. We unified the work in 6 weeks. The 3-hour weekly sync between consultants and the sales/CS manager is gone.</p>
+            <div class="csi-kpis">
+              <div>
+                <div class="csi-kpi-val">3h → 0</div>
+                <div class="csi-kpi-label">Weekly sync</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">6w</div>
+                <div class="csi-kpi-label">Build time</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">1</div>
+                <div class="csi-kpi-label">Platform replaces 5</div>
+              </div>
+            </div>
+            <span class="csi-arrow">Read case study <span aria-hidden="true">→</span></span>
+          </div>
+          <a href="case-study-education-consulting" class="csi-cover-link" aria-label="Read the Education Consulting case study">Read case study</a>
+        </article>
+
+        <!-- 2. Compliance Workflow -->
+        <article class="csi-item reveal reveal-d1">
+          <div class="csi-thumb is-mock" aria-hidden="true">
+            <div class="csi-mock-card">
+              <div class="csi-mock-row">
+                <span class="csi-mock-dot is-ok"></span>
+                <span class="csi-mock-label">Onboarding · KYC complete</span>
+                <span class="csi-mock-meta">L1</span>
+              </div>
+              <div class="csi-mock-row">
+                <span class="csi-mock-dot is-ok"></span>
+                <span class="csi-mock-label">Compliance review</span>
+                <span class="csi-mock-meta">L2</span>
+              </div>
+              <div class="csi-mock-row">
+                <span class="csi-mock-dot is-warn"></span>
+                <span class="csi-mock-label">Risk approval pending</span>
+                <span class="csi-mock-meta">L3</span>
+              </div>
+              <div class="csi-mock-row">
+                <span class="csi-mock-dot is-err"></span>
+                <span class="csi-mock-label">SLA breach · re-route</span>
+                <span class="csi-mock-meta">auto</span>
+              </div>
+            </div>
+            <span class="csi-thumb-tag">Compliance workflow</span>
+          </div>
+          <div class="csi-body">
+            <div class="csi-tag-row">
+              <span class="csi-tag">Financial services</span>
+              <span class="csi-tag">Singapore</span>
+            </div>
+            <h2 class="csi-title">Approval chains, replaced. 13% errors → near zero.</h2>
+            <p class="csi-summary">Multi-step compliance routing was held together by email and chasing. We rebuilt the chain as a versioned workflow with auto-escalation. Errors collapsed. The compliance officer stopped being a router.</p>
+            <div class="csi-kpis">
+              <div>
+                <div class="csi-kpi-val">13% → ~0</div>
+                <div class="csi-kpi-label">Routing errors</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">6w</div>
+                <div class="csi-kpi-label">Build time</div>
+              </div>
+            </div>
+            <span class="csi-arrow">Read case study <span aria-hidden="true">→</span></span>
+          </div>
+          <a href="case-study-compliance-workflow" class="csi-cover-link" aria-label="Read the Compliance Workflow case study">Read case study</a>
+        </article>
+
+        <!-- 3. Family Office -->
+        <article class="csi-item reveal reveal-d2">
+          <div class="csi-thumb">
+            <img src="assets/case-study-images/family-office.jpg" alt="Financial documents and portfolio analysis on a desk" loading="lazy" width="1600" height="900">
+            <span class="csi-thumb-tag">Family office</span>
+          </div>
+          <div class="csi-body">
+            <div class="csi-tag-row">
+              <span class="csi-tag">Wealth · OCR</span>
+              <span class="csi-tag">Singapore</span>
+            </div>
+            <h2 class="csi-title">Bank statement intelligence — OCR, consolidation, risk flags.</h2>
+            <p class="csi-summary">Hundreds of bank statements per quarter, manually consolidated by analysts. We built a pipeline that ingests, reconciles, flags anomalies, and outputs a portfolio view by Monday morning.</p>
+            <div class="csi-kpis">
+              <div>
+                <div class="csi-kpi-val">~80%</div>
+                <div class="csi-kpi-label">Manual prep killed</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">6w</div>
+                <div class="csi-kpi-label">Build time</div>
+              </div>
+            </div>
+            <span class="csi-arrow">Read case study <span aria-hidden="true">→</span></span>
+          </div>
+          <a href="case-study-family-office" class="csi-cover-link" aria-label="Read the Family Office case study">Read case study</a>
+        </article>
+
+        <!-- 4. 3PL Logistics -->
+        <article class="csi-item reveal reveal-d1">
+          <div class="csi-thumb">
+            <img src="assets/case-study-images/3pl-logistics.jpg" alt="Last-mile delivery warehouse with sorted parcels" loading="lazy" width="1600" height="900">
+            <span class="csi-thumb-tag">3PL logistics</span>
+          </div>
+          <div class="csi-body">
+            <div class="csi-tag-row">
+              <span class="csi-tag">Multi-retailer</span>
+              <span class="csi-tag">Singapore</span>
+            </div>
+            <h2 class="csi-title">Multi-retailer BI dashboard with AI analysis agent.</h2>
+            <p class="csi-summary">Operational data from multiple retailer systems was reconciled by hand each week. We unified it into one BI surface with an AI agent that surfaces what changed and why — no more pivot-table archaeology.</p>
+            <div class="csi-kpis">
+              <div>
+                <div class="csi-kpi-val">1 view</div>
+                <div class="csi-kpi-label">Replaces 6+ exports</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">6w</div>
+                <div class="csi-kpi-label">Build time</div>
+              </div>
+            </div>
+            <span class="csi-arrow">Read case study <span aria-hidden="true">→</span></span>
+          </div>
+          <a href="case-study-3pl-logistics" class="csi-cover-link" aria-label="Read the 3PL Logistics case study">Read case study</a>
+        </article>
+
+        <!-- 5. Executive Recruitment -->
+        <article class="csi-item reveal reveal-d2">
+          <div class="csi-thumb">
+            <img src="assets/case-study-images/executive-recruitment.jpg" alt="Executive recruitment interview setting" loading="lazy" width="1600" height="900">
+            <span class="csi-thumb-tag">Executive recruitment</span>
+          </div>
+          <div class="csi-body">
+            <div class="csi-tag-row">
+              <span class="csi-tag">Senior placements</span>
+              <span class="csi-tag">Singapore</span>
+            </div>
+            <h2 class="csi-title">Pipeline intelligence — no more &ldquo;where are we with this candidate?&rdquo;</h2>
+            <p class="csi-summary">Senior placements lived in inboxes, calendars, and partners' heads. We built a pipeline view with movement tracking, follow-up alerts, and signal scoring. The Monday catch-up became a 5-minute scan.</p>
+            <div class="csi-kpis">
+              <div>
+                <div class="csi-kpi-val">5 min</div>
+                <div class="csi-kpi-label">Monday catch-up</div>
+              </div>
+              <div>
+                <div class="csi-kpi-val">6w</div>
+                <div class="csi-kpi-label">Build time</div>
+              </div>
+            </div>
+            <span class="csi-arrow">Read case study <span aria-hidden="true">→</span></span>
+          </div>
+          <a href="case-study-executive-recruitment" class="csi-cover-link" aria-label="Read the Executive Recruitment case study">Read case study</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BAND ─────────────────────── -->
+  <section class="csi-cta">
+    <div class="wrap">
+      <div class="csi-cta-eyebrow reveal">Yours could be the next one</div>
+      <h2 class="reveal reveal-d1">Build the system before you build the next hire.</h2>
+      <p class="reveal reveal-d2">No pitch. No proposal. We talk about your business, identify the leverage, and tell you honestly whether we can help.</p>
+      <a href="#" class="btn btn-white reveal reveal-d3" data-modal-open="discovery">Book a 30-minute call <span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────── -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-row">
+        <div class="footer-logo">RightClick<span>:AI</span></div>
+        <div class="footer-links">
+          <a href="about">About</a>
+          <a href="faq">FAQ</a>
+          <a href="blog">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div>
+        <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── DISCOVERY MODAL ──────────────────── -->
+  <div class="modal" id="discovery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" type="button" aria-label="Close" data-modal-close>
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="modal-eyebrow">Get started</div>
+      <h2 class="modal-title" id="modal-title">Book a 30-minute call.<br>It's free.</h2>
+      <p class="modal-sub">No pitch. No proposal. We talk about your business, identify the leverage, and tell you honestly whether we can help.</p>
+      <form class="discovery-form" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="modal-name">Your name</label>
+            <input class="form-input" type="text" id="modal-name" name="name" placeholder="Jane Smith" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="modal-email">Work email</label>
+            <input class="form-input" type="email" id="modal-email" name="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-bottleneck">Biggest bottleneck right now?</label>
+          <textarea class="form-textarea" id="modal-bottleneck" name="bottleneck" placeholder="2 to 3 sentences is enough." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-white">Book your discovery call <span class="btn-arrow" aria-hidden="true">→</span></button>
+        <p class="form-bottom-note">ben@3nm.io · Singapore · No pitch, no proposal.</p>
+        <div class="form-error" id="modal-form-error" role="alert">Something went wrong. Email <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try again.</div>
+      </form>
+      <div class="form-success" id="modal-form-success" role="status" aria-live="polite">
+        <div class="form-success-title">We'll be in touch shortly.</div>
+        <div class="form-success-sub">Expect an email from ben@3nm.io within 24 hours.<br>Singapore timezone (SGT, UTC+8).</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var nav = document.getElementById('main-nav');
+      var progress = document.getElementById('scroll-progress');
+      var setNav = function () { nav.classList.toggle('scrolled', window.scrollY > 24); };
+      var setProgress = function () {
+        if (!progress) return;
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docH > 0 ? Math.min(100, Math.max(0, (window.scrollY / docH) * 100)) : 0;
+        progress.style.width = pct + '%';
+        progress.setAttribute('aria-valuenow', String(Math.round(pct)));
+      };
+      var onScroll = function () { setNav(); setProgress(); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', setProgress, { passive: true });
+
+      var navToggle = document.getElementById('nav-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (navToggle) {
+        navToggle.addEventListener('click', function () {
+          var isOpen = nav.classList.toggle('menu-open');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+          navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+        mobileMenu.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            nav.classList.remove('menu-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var revealObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              revealObs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+      }
+    })();
+  </script>
+  <script src="assets/modal.js" defer></script>
+
+</body>
+
+</html>

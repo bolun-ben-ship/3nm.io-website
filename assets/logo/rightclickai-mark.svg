@@ -1,0 +1,13 @@
+<!-- RightClick:AI — Icon mark only (32×32, for favicon / app icon / small placements) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="RightClick:AI">
+
+  <!-- Cursor body -->
+  <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z"
+        fill="#15803D"/>
+
+  <!-- Right-click dots -->
+  <circle cx="24" cy="18" r="1.6" fill="#15803D" opacity="0.50"/>
+  <circle cx="24" cy="23" r="1.6" fill="#15803D" opacity="0.50"/>
+  <circle cx="24" cy="28" r="1.6" fill="#15803D" opacity="0.50"/>
+
+</svg>
