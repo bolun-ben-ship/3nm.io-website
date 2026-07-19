@@ -1,10 +1,3 @@
 .DS_Store
 Thumbs.db
 *.log
-
-# Local backup snapshots — not deployable
-index v*.html
-
-# Internal business / strategy docs — keep local
-docs/
-AUDIT-REPORT.md

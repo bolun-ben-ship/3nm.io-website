@@ -1,0 +1,2857 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RightClick:AI — AI Development Partner for Service Businesses</title>
+  <meta name="description"
+    content="We build custom AI systems for 15–35 person service businesses in Singapore. What a development agency quotes at $80,000+, we deliver in 6–8 weeks. Starting from SGD 13,800. You own the code.">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════
+       TOKENS
+    ═══════════════════════════════ */
+    :root {
+      --bg: #FAFAF7;
+      --bg-warm: #F3F1EB;
+      --bg-dark: #101210;
+      --ink: #141210;
+      --ink-mid: #3A3733;
+      --ink-muted: #79746C;
+      --ink-faint: #BDB8AE;
+      --accent: #1A5C3A;
+      --accent-hover: #164F32;
+      --accent-light: #EBF4EE;
+      --accent-mid: rgba(26, 92, 58, 0.12);
+      --border: rgba(20, 18, 16, 0.07);
+      --border-mid: rgba(20, 18, 16, 0.12);
+      --font: 'Satoshi', -apple-system, sans-serif;
+      --max-w: 1160px;
+      --pad-x: clamp(20px, 5vw, 72px);
+      --section-y: clamp(72px, 9vw, 120px);
+    }
+
+    /* ═══════════════════════════════
+       RESET
+    ═══════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ═══════════════════════════════
+       LAYOUT
+    ═══════════════════════════════ */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    section {
+      padding: var(--section-y) 0;
+    }
+
+    /* ═══════════════════════════════
+       REVEAL ANIMATIONS
+    ═══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-d1 {
+      transition-delay: 0.08s;
+    }
+
+    .reveal-d2 {
+      transition-delay: 0.16s;
+    }
+
+    .reveal-d3 {
+      transition-delay: 0.24s;
+    }
+
+    .reveal-d4 {
+      transition-delay: 0.32s;
+    }
+
+    /* ═══════════════════════════════
+       BUTTONS
+    ═══════════════════════════════ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 13px 28px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26, 92, 58, 0.22);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-mid);
+      border: 1px solid var(--border-mid);
+      background: transparent;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--ink);
+      border-color: var(--ink-faint);
+      background: var(--bg-warm);
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-dark:hover {
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-white:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* ═══════════════════════════════
+       NAV
+    ═══════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 250, 247, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid rgba(26, 92, 58, 0.28);
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
+    #hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 60px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 58fr 42fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-h1 {
+      font-size: clamp(34px, 4vw, 54px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 24px;
+      max-width: 580px;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 16.5px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 26px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      padding-right: 22px;
+      margin-right: 22px;
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-item:last-child {
+      border-right: none;
+      margin-right: 0;
+      padding-right: 0;
+    }
+
+    .trust-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Hero right — process preview card */
+    .process-preview {
+      background: #fff;
+      border: 1px solid var(--border-mid);
+      border-radius: 14px;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    .preview-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .prev-step {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .prev-step:last-child {
+      border-bottom: none;
+    }
+
+    .prev-step:hover {
+      background: var(--bg);
+    }
+
+    .prev-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      flex-shrink: 0;
+    }
+
+    .prev-step.active .prev-num {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .prev-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1px;
+    }
+
+    .prev-sub {
+      font-size: 11.5px;
+      color: var(--ink-muted);
+    }
+
+    .prev-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 9px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .prev-badge.muted {
+      color: var(--ink-muted);
+      background: var(--bg-warm);
+    }
+
+    @media (max-width: 800px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+
+      .process-preview {
+        order: -1;
+      }
+    }
+
+    /* ═══════════════════════════════
+       SECTION LABEL
+    ═══════════════════════════════ */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+    }
+
+    /* ═══════════════════════════════
+       QUALIFIER
+    ═══════════════════════════════ */
+    #qualifier {
+      background: var(--bg);
+    }
+
+    .qualifier-intro {
+      max-width: 540px;
+      margin-bottom: 52px;
+    }
+
+    .qualifier-h2 {
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .qualifier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .qualifier-item {
+      padding: 36px 40px 36px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .qualifier-item:nth-child(even) {
+      padding-left: 40px;
+      padding-right: 0;
+      border-right: none;
+    }
+
+    .qualifier-item:nth-child(n+3) {
+      border-top: 1px solid var(--border);
+    }
+
+    .qualifier-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .qualifier-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .qualifier-body {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .qualifier-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .qualifier-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 28px 0;
+      }
+
+      .qualifier-item:nth-child(even) {
+        padding-left: 0;
+      }
+
+      .qualifier-item:nth-child(n+3) {
+        border-top: none;
+      }
+
+      .qualifier-item:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* ═══════════════════════════════
+       PROBLEM
+    ═══════════════════════════════ */
+    #problem {
+      background: var(--bg-warm);
+    }
+
+    .problem-intro {
+      max-width: 600px;
+      margin-bottom: 52px;
+    }
+
+    .problem-h2 {
+      font-size: clamp(26px, 2.8vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .problem-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .problem-item {
+      padding: 36px 40px 36px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .problem-item:first-child {
+      padding-left: 0;
+    }
+
+    .problem-item:nth-child(2) {
+      padding-left: 40px;
+    }
+
+    .problem-item:last-child {
+      padding-left: 40px;
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .problem-stat {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .problem-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .problem-body {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 768px) {
+      .problem-row {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 28px 0;
+      }
+
+      .problem-item:nth-child(2),
+      .problem-item:last-child {
+        padding-left: 0;
+      }
+
+      .problem-item:last-child {
+        border-bottom: none;
+        padding-right: 0;
+      }
+    }
+
+    /* ═══════════════════════════════
+       PROCESS
+    ═══════════════════════════════ */
+    #process {
+      background: var(--bg);
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: end;
+      margin-bottom: 52px;
+    }
+
+    .process-h2 {
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .process-tagline {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+    }
+
+    /* 5-step process layout */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .proc-step {
+      padding: 32px 24px 28px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .proc-step:first-child {
+      padding-left: 0;
+    }
+
+    .proc-step:nth-child(n+2) {
+      padding-left: 24px;
+    }
+
+    .proc-step:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .proc-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      margin-bottom: 18px;
+    }
+
+    .proc-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .proc-body {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .proc-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 4px 11px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .proc-badge.neutral {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--ink-muted);
+    }
+
+    .proc-badge.dark {
+      background: var(--bg-dark);
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* Process phase structure */
+    .process-phase-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 0;
+      margin-bottom: 0;
+    }
+
+    .process-phase-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    .process-phase-tag.pre {
+      color: var(--ink-muted);
+      background: var(--bg-warm);
+      border: 1px solid var(--border-mid);
+    }
+
+    .process-phase-tag.post {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .process-phase-note {
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+
+    .process-scope-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 0;
+    }
+
+    .process-scope-divider::before,
+    .process-scope-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-mid);
+    }
+
+    .process-scope-divider span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+      padding: 5px 14px;
+      background: var(--accent-light);
+      border-radius: 100px;
+    }
+
+    .process-steps-pre {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .process-steps-post {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .proc-num.time {
+      color: var(--accent);
+    }
+
+    @media (max-width: 960px) {
+      .process-steps-pre {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-steps-pre .proc-step:nth-child(2) {
+        border-right: none;
+      }
+
+      .process-steps-pre .proc-step:nth-child(3) {
+        border-top: 1px solid var(--border);
+        padding-top: 28px;
+        padding-left: 0;
+      }
+
+      .process-steps-pre .proc-step:nth-child(4) {
+        border-top: 1px solid var(--border);
+        padding-top: 28px;
+        border-right: none;
+      }
+
+      .process-steps-post {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .process-steps-post {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps-post .proc-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .process-steps-post .proc-step:nth-child(n+2) {
+        padding-left: 0;
+      }
+
+      .process-steps-post .proc-step:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .process-steps-pre {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps-pre .proc-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .process-steps-pre .proc-step:nth-child(n+2) {
+        padding-left: 0;
+        border-top: none;
+      }
+
+      .process-steps-pre .proc-step:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .process-philosophy {
+      margin-top: 36px;
+      padding: 20px 24px;
+      background: var(--bg-warm);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .process-philosophy p {
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    .process-philosophy p strong {
+      font-style: normal;
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+
+    @media (max-width: 960px) {
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .proc-step:nth-child(2) {
+        border-right: none;
+      }
+
+      .proc-step:nth-child(3) {
+        border-top: 1px solid var(--border);
+        padding-top: 28px;
+        padding-left: 0;
+      }
+
+      .proc-step:nth-child(4) {
+        border-top: 1px solid var(--border);
+        padding-top: 28px;
+      }
+
+      .proc-step:nth-child(4) {
+        border-right: none;
+      }
+
+      .proc-step:nth-child(5) {
+        border-top: 1px solid var(--border);
+        padding-top: 28px;
+        padding-left: 0;
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .process-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .proc-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .proc-step:nth-child(n+2) {
+        padding-left: 0;
+        border-top: none;
+      }
+
+      .proc-step:nth-child(5) {
+        border-bottom: none;
+      }
+    }
+
+    /* ═══════════════════════════════
+       WORK
+    ═══════════════════════════════ */
+    #work {
+      background: var(--bg-warm);
+    }
+
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
+
+    .work-h2 {
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+
+    .work-disclaimer {
+      font-size: 12px;
+      color: var(--ink-faint);
+      max-width: 200px;
+      text-align: right;
+    }
+
+    .work-items {
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 200px 1fr 190px;
+      gap: 36px;
+      align-items: start;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-client-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .work-client-label.done {
+      color: var(--accent);
+    }
+
+    .work-client-label.ongoing {
+      color: #B07D2A;
+    }
+
+    .work-client-label.inprog {
+      color: var(--ink-faint);
+    }
+
+    .work-industry {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .work-location {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+
+    .work-desc {
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+
+    .work-desc strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .work-result {
+      text-align: right;
+    }
+
+    .result-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+
+    .result-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .result-val.result-multi {
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    .work-also {
+      padding: 28px 0 0;
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+    }
+
+    .work-also strong {
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+
+    .work-also a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .work-also a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .work-item {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .work-result {
+        text-align: left;
+      }
+
+      .work-disclaimer {
+        text-align: left;
+      }
+    }
+
+    /* ═══════════════════════════════
+       ICP
+    ═══════════════════════════════ */
+    #icp {
+      background: var(--bg);
+    }
+
+    .icp-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .icp-heading {
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .icp-sub {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    .icp-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .icp-card {
+      background: var(--bg-warm);
+      border: 1px solid var(--border-mid);
+      border-radius: 10px;
+      padding: 26px;
+    }
+
+    .icp-card-wide {
+      grid-column: span 2;
+    }
+
+    .icp-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .icp-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+
+    .icp-card-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .icp-card-body {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .icp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .icp-tag {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--ink-mid);
+      background: #fff;
+      border: 1px solid var(--border-mid);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    @media (max-width: 768px) {
+      .icp-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .icp-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .icp-card-wide {
+        grid-column: span 1;
+      }
+    }
+
+    /* ═══════════════════════════════
+       AUDIT SECTION
+    ═══════════════════════════════ */
+    #audit {
+      background: #0C2116;
+      padding: clamp(72px, 9vw, 120px) 0;
+    }
+
+    .audit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .audit-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.28);
+      margin-bottom: 14px;
+    }
+
+    .audit-h2 {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .audit-h2 em {
+      font-style: normal;
+      color: #6FBF8E;
+    }
+
+    .audit-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.48);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .audit-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .audit-price {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+
+    .audit-price-note {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .audit-credit {
+      font-size: 13px;
+      color: #6FBF8E;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .audit-deliverables {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .audit-deliverables li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.62);
+      line-height: 1.5;
+    }
+
+    .audit-deliverables li:last-child {
+      border-bottom: none;
+    }
+
+    .audit-check {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: #6FBF8E;
+    }
+
+    .audit-validity {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.28);
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .audit-validity strong {
+      color: rgba(255, 255, 255, 0.48);
+      font-weight: 600;
+    }
+
+    /* Audit right — what to expect */
+    .audit-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 36px;
+    }
+
+    .audit-card-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+      margin-bottom: 20px;
+    }
+
+    .audit-phases {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .audit-phase {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .audit-phase:last-child {
+      border-bottom: none;
+    }
+
+    .phase-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(111, 191, 142, 0.12);
+      border: 1px solid rgba(111, 191, 142, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #6FBF8E;
+      flex-shrink: 0;
+    }
+
+    .phase-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 3px;
+    }
+
+    .phase-desc {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.38);
+      line-height: 1.55;
+    }
+
+    .audit-card-note {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(111, 191, 142, 0.06);
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.38);
+      line-height: 1.6;
+    }
+
+    .audit-card-note strong {
+      color: rgba(111, 191, 142, 0.7);
+      font-weight: 600;
+    }
+
+    @media (max-width: 800px) {
+      .audit-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+    }
+
+    /* ═══════════════════════════════
+       PACKAGES
+    ═══════════════════════════════ */
+    #packages {
+      background: var(--bg);
+    }
+
+    .packages-header {
+      margin-bottom: 44px;
+    }
+
+    .packages-intro {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin-top: 10px;
+    }
+
+    .packages-h2 {
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+      max-width: 440px;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    /* Foundation */
+    .pkg-foundation {
+      background: #fff;
+      border: 1px solid var(--border-mid);
+      border-top: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pkg-tier-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .pkg-name {
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .pkg-price {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pkg-price-note {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+    }
+
+    .pkg-desc {
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pkg-features {
+      list-style: none;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .pkg-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 13.5px;
+      color: var(--ink-mid);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .pkg-features li:last-child {
+      border-bottom: none;
+    }
+
+    .feat-check {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--accent);
+    }
+
+    .pkg-maint {
+      padding: 16px 18px;
+      background: var(--bg-warm);
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+
+    .pkg-maint-top {
+      font-size: 13px;
+      color: var(--ink-mid);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+
+    .pkg-maint-top strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .pkg-maint-saas {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pkg-maint-saas strong {
+      color: var(--ink-mid);
+      font-weight: 600;
+    }
+
+    /* Intelligence */
+    .pkg-intelligence {
+      background: var(--bg-dark);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 3px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .pkg-intelligence .pkg-tier-label {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .pkg-intelligence .pkg-name {
+      color: #fff;
+    }
+
+    .pkg-intelligence .pkg-price {
+      color: #fff;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .pkg-intelligence .pkg-price-note {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .pkg-intelligence .pkg-desc {
+      color: rgba(255, 255, 255, 0.5);
+      border-bottom-color: rgba(255, 255, 255, 0.07);
+    }
+
+    .pkg-audit-entry {
+      padding: 16px 18px;
+      background: rgba(111, 191, 142, 0.06);
+      border: 1px solid rgba(111, 191, 142, 0.15);
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pkg-audit-entry-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6FBF8E;
+      margin-bottom: 6px;
+    }
+
+    .pkg-audit-entry-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+    }
+
+    .pkg-audit-entry-text strong {
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 600;
+    }
+
+    .pkg-slas {
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .pkg-sla-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.28);
+      margin-bottom: 14px;
+    }
+
+    .pkg-sla-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pkg-sla-item:last-child {
+      border-bottom: none;
+    }
+
+    .sla-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #6FBF8E;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .sla-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+    }
+
+    .sla-text strong {
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 600;
+    }
+
+    .pkg-penalty {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.38);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .pkg-penalty strong {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ═══════════════════════════════
+       CLOSING
+    ═══════════════════════════════ */
+    #closing {
+      background: var(--bg-dark);
+      color: #fff;
+      padding: clamp(80px, 12vw, 160px) 0;
+    }
+
+    .closing-inner {
+      text-align: center;
+    }
+
+    .closing-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .closing-h2 {
+      font-size: clamp(26px, 3.8vw, 50px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 580px;
+      margin: 0 auto 18px;
+    }
+
+    .closing-sub {
+      font-size: 15.5px;
+      color: rgba(255, 255, 255, 0.45);
+      max-width: 440px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+
+    .closing-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .closing-note {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 28px 0;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-logo span {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    .footer-email {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+      transition: color 0.2s;
+    }
+
+    .footer-email:hover {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ═══════════════════════════════
+       COMPARISON CALLOUT
+    ═══════════════════════════════ */
+    .pkg-comparison {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      font-style: italic;
+      padding: 10px 14px;
+      background: var(--bg-warm);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .pkg-comparison-dark {
+      color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.03);
+      border-left-color: #6FBF8E;
+      font-style: italic;
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      font-size: 12.5px;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════
+       DISCOVERY FORM
+    ═══════════════════════════════ */
+    .discovery-form {
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.38);
+      margin-bottom: 6px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, 0.88);
+      font-family: var(--font);
+      font-size: 14px;
+      padding: 11px 14px;
+      width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: rgba(111, 191, 142, 0.5);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-select option {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 88px;
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 4px;
+      justify-content: center;
+    }
+
+    .form-bottom-note {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.2);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .form-error-msg {
+      font-size: 13px;
+      color: #ff8080;
+      text-align: center;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      border: 1px solid rgba(255, 100, 100, 0.2);
+      border-radius: 6px;
+      background: rgba(255, 100, 100, 0.06);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 32px;
+      background: rgba(111, 191, 142, 0.08);
+      border: 1px solid rgba(111, 191, 142, 0.2);
+      border-radius: 10px;
+    }
+
+    .form-success-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .form-success-sub {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 560px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MF40NL3J9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4MF40NL3J9');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "RightClick:AI",
+    "description": "AI development partner for service businesses in Singapore. We build custom AI systems for 15–35 person service businesses — delivered in 6–8 weeks from SGD 13,800. You own the code.",
+    "url": "https://3nm.io",
+    "email": "ben@3nm.io",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SG",
+      "addressLocality": "Singapore"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Bolun Liu",
+      "alternateName": "Ben Liu",
+      "jobTitle": "Founder",
+      "email": "ben@3nm.io",
+      "knowsAbout": ["AI automation", "Business systems", "Workflow automation", "Operational visibility", "AI COO", "Process mapping"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "SG",
+        "addressLocality": "Singapore"
+      }
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Singapore"
+    },
+    "knowsAbout": [
+      "AI system development",
+      "Business automation",
+      "Workflow automation",
+      "Business intelligence",
+      "Internal operating systems",
+      "AI agents",
+      "Process mapping"
+    ],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "AI Readiness Audit",
+        "description": "3-week AI readiness assessment with working prototype. Fully credited toward full build.",
+        "price": "697",
+        "priceCurrency": "SGD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Foundation Build — Internal Operating System",
+        "description": "Custom AI system for service businesses. Fixed scope, 6–8 week build, 6 months support. You own the code.",
+        "price": "13800",
+        "priceCurrency": "SGD"
+      }
+    ],
+    "sameAs": ["https://www.linkedin.com/in/liubolun/"]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ── NAV ──────────────────────── -->
+  <nav id="main-nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">RightClick<span>:AI</span></a>
+        <ul class="nav-links">
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#work">Our work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#packages">Services</a></li>
+        </ul>
+        <a href="#closing" class="nav-cta">Book a discovery call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────── -->
+  <section id="hero">
+    <div class="wrap" style="width:100%">
+      <div class="hero-grid">
+
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal">AI Development Partner · Singapore</div>
+          <h1 class="hero-h1 reveal reveal-d1">
+            Every time revenue grows,<br>
+            <em>the answer shouldn't be another hire.</em>
+          </h1>
+          <p class="hero-sub reveal reveal-d2">
+            We build custom AI systems for 15–35 person service businesses in Singapore. What a development agency
+            quotes at $80,000+ and three to four months, we deliver in 6–8 weeks — so your business scales without the
+            headcount to match.
+          </p>
+          <div class="hero-ctas reveal reveal-d3">
+            <a href="#closing" class="btn-primary">Book a discovery call</a>
+            <a href="#work" class="btn-ghost">See our work</a>
+          </div>
+          <div class="hero-trust reveal reveal-d4">
+            <div class="trust-item"><span class="trust-dot"></span>You own the code</div>
+            <div class="trust-item"><span class="trust-dot"></span>Written scope in 24 hours</div>
+            <div class="trust-item"><span class="trust-dot"></span>Functional build in 6–8 weeks</div>
+          </div>
+        </div>
+
+        <div class="process-preview reveal reveal-d2">
+          <div class="preview-header">How an engagement works</div>
+          <div class="prev-step">
+            <div class="prev-num">0</div>
+            <div>
+              <div class="prev-label">30-min discovery call</div>
+              <div class="prev-sub">We check if there's a real opportunity here</div>
+            </div>
+            <span class="prev-badge muted">Free</span>
+          </div>
+          <div class="prev-step">
+            <div class="prev-num">1</div>
+            <div>
+              <div class="prev-label">Mapping session</div>
+              <div class="prev-sub">Deep dive into your tools, workflows, and data</div>
+            </div>
+            <span class="prev-badge muted">45 min</span>
+          </div>
+          <div class="prev-step active">
+            <div class="prev-num">2</div>
+            <div>
+              <div class="prev-label">Written scoping document</div>
+              <div class="prev-sub">Exact deliverables, timeline, cost — in 24 hours</div>
+            </div>
+            <span class="prev-badge">24 hours</span>
+          </div>
+          <div class="prev-step">
+            <div class="prev-num">3</div>
+            <div>
+              <div class="prev-label">Functional build</div>
+              <div class="prev-sub">Foundation or Intelligence — confirmed after MVP</div>
+            </div>
+            <span class="prev-badge">6–8 weeks</span>
+          </div>
+          <div class="prev-step">
+            <div class="prev-num">4</div>
+            <div>
+              <div class="prev-label">Launch and support</div>
+              <div class="prev-sub">6 months post-launch included</div>
+            </div>
+            <span class="prev-badge muted">Ongoing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUALIFIER ──────────────────── -->
+  <section id="qualifier">
+    <div class="wrap">
+      <div class="qualifier-intro reveal">
+        <div class="section-label">Who this is for</div>
+        <h2 class="qualifier-h2">Does this sound like your business?</h2>
+      </div>
+      <div class="qualifier-grid">
+
+        <div class="qualifier-item reveal">
+          <div class="qualifier-num">01</div>
+          <div class="qualifier-title">You run a service business with 25 people or more</div>
+          <p class="qualifier-body">Agencies, consultancies, education firms, and other operators juggling clients,
+            projects, and internal workflows across too many tools — with no single place where the whole picture lives.
+          </p>
+        </div>
+
+        <div class="qualifier-item reveal reveal-d1">
+          <div class="qualifier-num">02</div>
+          <div class="qualifier-title">Your workflows are still mostly manual</div>
+          <p class="qualifier-body">Processes live in email threads, spreadsheets, and people's heads. What gets done
+            each day depends on who showed up and how focused they are. A key person out sick breaks the chain. A key
+            person leaving takes the knowledge with them.</p>
+        </div>
+
+        <div class="qualifier-item reveal reveal-d2">
+          <div class="qualifier-num">03</div>
+          <div class="qualifier-title">You're paying $500+/month on SaaS — and it's still not enough</div>
+          <p class="qualifier-body">Project management, CRM, quoting, proposals, chat, docs — none of them actually work
+            together or reflect how your business really runs. You're paying for tools that solve parts of the problem
+            and create new ones.</p>
+        </div>
+
+        <div class="qualifier-item reveal reveal-d3">
+          <div class="qualifier-num">04</div>
+          <div class="qualifier-title">You want enterprise-grade software at SME pricing</div>
+          <p class="qualifier-body">A custom-built AI platform tailored to your business — delivered in 6–8 weeks at a
+            fraction of what traditional software development costs, easy for your team to use from day one, and ready
+            to evolve as you grow.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ───────────────────── -->
+  <section id="problem">
+    <div class="wrap">
+      <div class="problem-intro reveal">
+        <div class="section-label">The problem</div>
+        <h2 class="problem-h2">Running a 25-person service business on human memory is expensive.</h2>
+      </div>
+      <div class="problem-row">
+        <div class="problem-item reveal">
+          <div class="problem-stat">3–4 hrs</div>
+          <div class="problem-title">Skilled time lost to manual work, every day</div>
+          <p class="problem-body">Your best people — advisors, consultants, analysts — spend hours each day on tasks a
+            system should handle: admin, data entry, status chasing, report formatting. That is not an execution
+            problem. That is a leverage problem.</p>
+        </div>
+        <div class="problem-item reveal reveal-d1">
+          <div class="problem-stat">No data</div>
+          <div class="problem-title">Decisions made without real data</div>
+          <p class="problem-body">Every founder we have spoken to makes critical calls on gut feel or a spreadsheet
+            someone last updated on Thursday. There is no single live view of the business. Pipeline is a feeling.
+            Forecast is a guess.</p>
+        </div>
+        <div class="problem-item reveal reveal-d2">
+          <div class="problem-stat">1:1</div>
+          <div class="problem-title">Growth tied to headcount</div>
+          <p class="problem-body">Every time revenue grows, the answer is another hire. Not because the work requires
+            more people — but because the system can't carry the load. That is a leverage problem, not a staffing one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESS ───────────────────── -->
+  <section id="process">
+    <div class="wrap">
+      <div class="process-header">
+        <div class="reveal">
+          <div class="section-label">How it works</div>
+          <h2 class="process-h2">From first conversation to working system — mapped out, step by step.</h2>
+        </div>
+        <p class="process-tagline reveal reveal-d1">
+          No drawn-out engagements. No vague statements of work. A written scope in 24 hours, a working MVP before you
+          commit to a full build, and a clear path to the right solution for your business.
+        </p>
+      </div>
+      <div class="process-phase-header reveal">
+        <span class="process-phase-tag pre">Before scope is approved</span>
+        <span class="process-phase-note">Free to start · No commitment</span>
+      </div>
+      <div class="process-steps-pre">
+        <div class="proc-step reveal">
+          <div class="proc-num">00</div>
+          <div class="proc-title">30-min discovery call</div>
+          <p class="proc-body">A direct conversation about your business. We ask about your tools, your team, and the
+            specific friction points. If there is a real fit, we go deeper. If not, we tell you honestly.</p>
+          <span class="proc-badge neutral">Free</span>
+        </div>
+        <div class="proc-step reveal reveal-d1">
+          <div class="proc-num">01</div>
+          <div class="proc-title">Mapping session</div>
+          <p class="proc-body">We go deep on your workflows, data sources, and tools. Every input and output documented.
+            We identify what to automate, what to centralise, and where the highest leverage is.</p>
+          <span class="proc-badge neutral">Free · 45 min</span>
+        </div>
+        <div class="proc-step reveal reveal-d2">
+          <div class="proc-num">02</div>
+          <div class="proc-title">Written scoping document</div>
+          <p class="proc-body">Within 24 hours of your mapping session: exact deliverables, timeline, cost, and
+            assumptions — in writing. You know precisely what you are getting before committing to anything.</p>
+          <span class="proc-badge">24 hours</span>
+        </div>
+        <div class="proc-step reveal reveal-d3">
+          <div class="proc-num">03</div>
+          <div class="proc-title">Readiness Audit + MVP</div>
+          <p class="proc-body">The honest starting point. A working prototype of your core system built over 3 weeks.
+            You test it, your team uses it. Then we confirm the full build scope together — no guessing, no surprises.
+          </p>
+          <span class="proc-badge">3 weeks · SGD 697</span>
+        </div>
+      </div>
+
+      <div class="process-scope-divider reveal">
+        <span>Scope approved · Build begins</span>
+      </div>
+
+      <div class="process-phase-header reveal">
+        <span class="process-phase-tag post">After scope is approved</span>
+        <span class="process-phase-note">6–8 weeks total</span>
+      </div>
+      <div class="process-steps-post">
+        <div class="proc-step reveal">
+          <div class="proc-num time">Day 10</div>
+          <div class="proc-title">First working version</div>
+          <p class="proc-body">A functional version of your core system delivered within the first 10 days. You can use
+            it, test it, and break it. This is where the real feedback loop begins — not a mockup, an actual running
+            system.</p>
+          <span class="proc-badge">10 days</span>
+        </div>
+        <div class="proc-step reveal reveal-d1">
+          <div class="proc-num time">Weeks 2–5</div>
+          <div class="proc-title">Iteration sprints</div>
+          <p class="proc-body">Multiple complete versions, each one improved based on your team's feedback. Not just
+            fixes — every sprint is a meaningful step forward. We run 48-hour feedback loops throughout.</p>
+          <span class="proc-badge neutral">Ongoing iterations</span>
+        </div>
+        <div class="proc-step reveal reveal-d2">
+          <div class="proc-num time">Weeks 5–8</div>
+          <div class="proc-title">UI/UX polish and launch</div>
+          <p class="proc-body">The final phase is dedicated to interface clarity, speed, and edge-case handling. When
+            it's right, we launch. 6 months of post-launch support included before handover.</p>
+          <span class="proc-badge neutral">Launch + 6 months</span>
+        </div>
+      </div>
+      <div class="process-philosophy reveal">
+        <p><strong>We don't believe AI is the right answer for everyone.</strong> If your problem has a simpler, cheaper
+          solution — a better process, a different tool, a cleaner workflow — we will tell you. We take on projects
+          where we believe the system we build will return its cost many times over.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORK ──────────────────────── -->
+  <section id="work">
+    <div class="wrap">
+      <div class="work-header reveal">
+        <div>
+          <div class="section-label">Our work</div>
+          <h2 class="work-h2">What we've built</h2>
+        </div>
+        <div class="work-disclaimer">Client details anonymised on request.</div>
+      </div>
+      <div class="work-items">
+
+        <div class="work-item reveal">
+          <div>
+            <div class="work-client-label ongoing">Ongoing engagement</div>
+            <div class="work-industry">Healthcare consulting</div>
+            <div class="work-location">Singapore · Quality assessment</div>
+          </div>
+          <div class="work-desc">
+            <strong>Automated report generation pipeline + full brand system</strong>
+            Eliminated manual report production entirely. Consultants drop a data file into a folder — a fully
+            formatted, on-brand PDF report generates automatically. We built a complete tone guide and brand guide
+            alongside the pipeline, so every output reflects the firm's identity without anyone touching a template. No
+            logins. No new tools to learn. One action on the consultant's end. We are now expanding the system to cover
+            additional service lines.
+          </div>
+          <div class="work-result">
+            <div class="result-label">Timeline</div>
+            <div class="result-val">7 weeks</div>
+          </div>
+        </div>
+
+        <div class="work-item reveal reveal-d1">
+          <div>
+            <div class="work-client-label done">Completed</div>
+            <div class="work-industry">Financial services</div>
+            <div class="work-location">Singapore · Compliance &amp; approvals</div>
+          </div>
+          <div class="work-desc">
+            <strong>Compliance and approval workflow automation</strong>
+            A ~22-person finance firm running manual approval chains across email and spreadsheets — prone to version
+            errors and missed steps. We rebuilt the entire process into a structured workflow system with automated
+            routing, escalation, and audit trails. Two FT equivalent worth of coordination work cut by 60%. Error rate
+            dropped
+            from ~13% to near zero.
+          </div>
+          <div class="work-result">
+            <div class="result-label">Result</div>
+            <div class="result-val result-multi">60% less coordination work<br>Errors: ~13% → near zero</div>
+          </div>
+        </div>
+
+        <div class="work-item reveal reveal-d2">
+          <div>
+            <div class="work-client-label done">Completed</div>
+            <div class="work-industry">Financial services</div>
+            <div class="work-location">Singapore · Family office</div>
+          </div>
+          <div class="work-desc">
+            <strong>Bank statement intelligence — OCR, consolidation, and risk flags</strong>
+            Built an internal OCR engine that parses statements across multiple banks and institutions. Normalises and
+            consolidates position data automatically — no manual compilation. Runs analytics across the full portfolio:
+            flags internal dependencies, surfaces inconsistencies, and generates consolidation suggestions. The director
+            has a complete live view without waiting for anyone to pull the numbers.
+          </div>
+          <div class="work-result">
+            <div class="result-label">Result</div>
+            <div class="result-val result-multi">Full portfolio view<br>Dependencies flagged<br>Delivered: 3 weeks</div>
+          </div>
+        </div>
+
+        <div class="work-item reveal reveal-d3">
+          <div>
+            <div class="work-client-label done">Completed</div>
+            <div class="work-industry">3PL logistics operations</div>
+            <div class="work-location">Singapore · Last-mile delivery</div>
+          </div>
+          <div class="work-desc">
+            <strong>Multi-retailer BI dashboard with AI analysis agent</strong>
+            Unified data from four retailers — previously scattered across Excel files — into a single
+            browser-accessible dashboard. Year-on-year, month-on-month, store-vs-store, and SKU-level comparison with
+            custom date ranges and delta indicators. The GM gets an instant view — no more waiting 2–3 days for an
+            analyst to compile and return numbers. Includes an AI agent trained on data analytics and 3PL logistics
+            strategy that surfaces recommendations directly from the live data.
+          </div>
+          <div class="work-result">
+            <div class="result-label">Result</div>
+            <div class="result-val result-multi">Days → instant view<br>AI insights built in<br>Delivered: 5 weeks</div>
+          </div>
+        </div>
+
+        <div class="work-item reveal reveal-d4">
+          <div>
+            <div class="work-client-label done">Completed</div>
+            <div class="work-industry">Education consulting</div>
+            <div class="work-location">Singapore · University admissions</div>
+          </div>
+          <div class="work-desc">
+            <strong>Student management platform with consultant workflow and student portal</strong>
+            Built a full practice management system for an education consulting firm. Consultants manage each student
+            like a deal — academic progress, extracurriculars, milestones, and assigned tasks all tracked in a single
+            view. Each student gets a secure personal portal to complete assigned work and upload documents; everything
+            saves and syncs automatically. Every relevant team member knows exactly where each student stands without
+            asking
+            anyone.
+          </div>
+          <div class="work-result">
+            <div class="result-label">Result</div>
+            <div class="result-val result-multi">Unified student views<br>Structured student journeys<br>Delivered: 6
+              weeks</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="work-also reveal">
+        <strong>Also delivered for:</strong> marketing and SEO agencies (content fulfillment pipelines, campaign
+        performance dashboards, automated client reporting) and law firms (contract automation, file
+        governance, lawyer knowledge base and case library). <a href="#closing">Ask us about these
+          engagements.</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ICP ───────────────────────── -->
+  <section id="icp">
+    <div class="wrap">
+      <div class="icp-grid">
+        <div class="reveal">
+          <div class="section-label">Who we work with</div>
+          <h2 class="icp-heading">Built for founders and ops leads in service businesses.</h2>
+          <p class="icp-sub">Typically 15–35 staff. Complex enough to need real systems. Not large enough to have an
+            internal tech team.</p>
+          <p class="icp-sub" style="margin-top: 12px;">You work directly with the founder — the person who scopes your
+            system is the person who builds it. No account managers. No handoffs.</p>
+        </div>
+        <div class="icp-cards">
+          <div class="icp-card reveal">
+            <div class="icp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              </svg>
+            </div>
+            <div class="icp-card-title">Consulting companies</div>
+            <p class="icp-card-body">Engagement tracking is manual. Client reporting takes hours per client. Consultant
+              knowledge lives in people's heads, not in a system. Utilisation and capacity have no live view.</p>
+            <div class="icp-tags">
+              <span class="icp-tag">Strategy consulting</span>
+              <span class="icp-tag">Management consulting</span>
+              <span class="icp-tag">HR consulting</span>
+              <span class="icp-tag">IT consulting</span>
+            </div>
+          </div>
+          <div class="icp-card reveal reveal-d1">
+            <div class="icp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div class="icp-card-title">Education consulting</div>
+            <p class="icp-card-body">Student progress scattered. Parent reporting is manual and inconsistent. Consultant
+              knowledge lives in people's heads. Scaling means hiring, not systematising.</p>
+            <div class="icp-tags">
+              <span class="icp-tag">Test prep</span>
+              <span class="icp-tag">University admissions</span>
+              <span class="icp-tag">Private schools</span>
+              <span class="icp-tag">Portfolio building</span>
+            </div>
+          </div>
+          <div class="icp-card icp-card-wide reveal reveal-d2">
+            <div class="icp-card-title">Other service businesses</div>
+            <p class="icp-card-body" style="margin-bottom:0">If you run a 15–35 person service business with a critical
+              process that is still manual, data spread across too many tools, or a growth ceiling caused by operational
+              complexity — we should talk. The problems are always variations of the same root: no centralised system,
+              no real data, no leverage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AUDIT ─────────────────────── -->
+  <section id="audit">
+    <div class="wrap">
+      <div class="audit-grid">
+
+        <div>
+          <div class="audit-label reveal">The honest starting point — for everyone</div>
+          <h2 class="audit-h2 reveal reveal-d1">
+            Start with <em>clarity</em>,<br>not commitment.
+          </h2>
+          <p class="audit-sub reveal reveal-d2">
+            Before you commit to a full build, we build you a working prototype. In three weeks, you see exactly what
+            the system does, how your team uses it, and what the full build will cost. Then we confirm together —
+            Foundation Build or Growth Build. No guessing, no surprises.
+          </p>
+          <div class="audit-price-row reveal reveal-d3">
+            <div class="audit-price">SGD 697</div>
+            <div class="audit-price-note">flat fee</div>
+          </div>
+          <div class="audit-credit reveal reveal-d3">Fully credited toward your build if you decide to proceed.</div>
+          <ul class="audit-deliverables reveal reveal-d4">
+            <li>
+              <svg class="audit-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Discovery call — full workflow and tool audit
+            </li>
+            <li>
+              <svg class="audit-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Scoping call — define the system architecture and build sequence
+            </li>
+            <li>
+              <svg class="audit-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Working MVP — a functional prototype of the core system
+            </li>
+            <li>
+              <svg class="audit-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Two iteration rounds — refined based on your team's feedback
+            </li>
+            <li>
+              <svg class="audit-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Final review meeting — full walkthrough and build recommendation
+            </li>
+          </ul>
+          <div class="audit-validity reveal">
+            <strong>60-day quote validity.</strong> Your full-build quote is locked for 60 days from the audit
+            completion — no price changes while you make your decision.
+          </div>
+          <div class="reveal">
+            <a href="#closing" class="btn-dark">Book your Readiness Audit</a>
+          </div>
+        </div>
+
+        <div class="audit-card reveal reveal-d2">
+          <div class="audit-card-label">What happens over three weeks</div>
+          <div class="audit-phases">
+            <div class="audit-phase">
+              <div class="phase-num">W0</div>
+              <div>
+                <div class="phase-title">Discovery and mapping</div>
+                <div class="phase-desc">We go deep on your current tools, data flows, and manual processes. We document
+                  every input and output. Nothing is assumed.</div>
+              </div>
+            </div>
+            <div class="audit-phase">
+              <div class="phase-num">W1</div>
+              <div>
+                <div class="phase-title">Architecture and MVP</div>
+                <div class="phase-desc">We build a working prototype of the highest-leverage component. You interact
+                  with it, your team uses it — not a mockup, an actual running system.</div>
+              </div>
+            </div>
+            <div class="audit-phase">
+              <div class="phase-num">W3</div>
+              <div>
+                <div class="phase-title">Weeks 2–3 · Two complete iterations</div>
+                <div class="phase-desc">We build and refine two full versions based on your team's feedback. Not just
+                  tweaks — each is a meaningful improvement. Final session: full walkthrough, build recommendation,
+                  every question answered.</div>
+              </div>
+            </div>
+          </div>
+          <div class="audit-card-note">
+            <strong>No obligation to proceed.</strong> The audit stands alone — you get a working prototype and a clear
+            recommendation regardless of whether you continue to a full build. If we don't think a full build makes
+            sense for your business, we'll tell you.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PACKAGES ──────────────────── -->
+  <section id="packages">
+    <div class="wrap">
+      <div class="packages-header reveal">
+        <div class="section-label">Services</div>
+        <h2 class="packages-h2">Two ways to build</h2>
+        <p class="packages-intro">Choose based on how deeply integrated the system needs to be in your operation — and
+          how much ongoing development your business requires.</p>
+      </div>
+      <div class="packages-grid">
+
+        <!-- Foundation Build -->
+        <div class="pkg-foundation reveal">
+          <div class="pkg-tier-label">Foundation Build</div>
+          <div class="pkg-name">Internal Operating System</div>
+          <div class="pkg-price">SGD 13,800</div>
+          <div class="pkg-price-note">Fixed scope · 6–8 week build · 6 months support included · You own the code</div>
+          <div class="pkg-comparison">What a development agency in Singapore quotes at $80,000+ and 4–6 months.</div>
+          <p class="pkg-desc">
+            A custom-built internal system that replaces scattered tools and manual ops with one environment where your
+            data lives, your workflows run, and your team knows what to do next.
+          </p>
+          <ul class="pkg-features">
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Central operations hub — all your data, workflows, and team in one place
+            </li>
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              One high-leverage automation — we identify the manual process costing your team the most time and automate
+              it completely
+            </li>
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Connected data stack — GA4, GSC, Xero, and your existing tools, unified
+            </li>
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              Executive dashboard — live view of the whole operation
+            </li>
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              AI assistant — queryable by anyone on your team
+            </li>
+            <li>
+              <svg class="feat-check" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              6 months post-launch support included
+            </li>
+          </ul>
+          <div class="pkg-maint">
+            <div class="pkg-maint-top">
+              First 6 months of support included in your build price. From month 7: <strong>SGD 2,400/year</strong> —
+              hosting, maintenance, and support. You own the codebase. We keep it running.
+            </div>
+            <div class="pkg-maint-saas">
+              <strong>Why SGD 2,400/year makes sense:</strong> A 25-person service business typically spends
+              $600–1,000/month ($7,200–12,000/year) across CRM, project management, and reporting tools — most of which
+              don't talk to each other. Your custom system replaces the entire stack for SGD 2,400/year. Purpose-built
+              for your operation, and it does what those tools never could.
+            </div>
+          </div>
+          <a href="#closing" class="btn-primary">Book a discovery call</a>
+        </div>
+
+        <!-- Growth Build -->
+        <div class="pkg-intelligence reveal reveal-d1">
+          <div class="pkg-tier-label">Growth Build</div>
+          <div class="pkg-name">Ongoing AI Development Partner</div>
+          <div class="pkg-price">Custom scope from SGD 15,000</div>
+          <div class="pkg-price-note">Starts with the Readiness Audit · Ongoing engagement · Per-sprint pricing</div>
+          <div class="pkg-comparison-dark">What a development agency quotes at $100,000+ for equivalent scope.
+          </div>
+          <p class="pkg-desc">
+            For systems directly tied to your revenue, compliance, or service delivery. We scope it properly, build in
+            stages, and stay on as your tech partner as the business grows.
+          </p>
+          <div class="pkg-audit-entry">
+            <div class="pkg-audit-entry-label">How it starts</div>
+            <div class="pkg-audit-entry-text">Every engagement begins with the <strong>AI Readiness Audit
+                ($697)</strong> — a 3-week scoping process with a working prototype. After the MVP, we confirm together
+              which build track fits your business. The $697 is credited toward the full build.</div>
+          </div>
+          <div class="pkg-slas">
+            <div class="pkg-sla-label">Service commitments</div>
+            <div class="pkg-sla-item">
+              <div class="sla-dot"></div>
+              <div class="sla-text"><strong>Scoping document in 24 hours</strong> — written, exact, no ambiguity</div>
+            </div>
+            <div class="pkg-sla-item">
+              <div class="sla-dot"></div>
+              <div class="sla-text"><strong>Meeting confirmed within 72 hours</strong> of request</div>
+            </div>
+            <div class="pkg-sla-item">
+              <div class="sla-dot"></div>
+              <div class="sla-text"><strong>Functional build in 6–8 weeks</strong> from approved scope</div>
+            </div>
+            <div class="pkg-sla-item">
+              <div class="sla-dot"></div>
+              <div class="sla-text"><strong>Feedback loop every 48 hours</strong> during active build</div>
+            </div>
+            <div class="pkg-sla-item">
+              <div class="sla-dot"></div>
+              <div class="sla-text"><strong>Unlimited iterations</strong> within agreed scope</div>
+            </div>
+          </div>
+          <div class="pkg-penalty">
+            <strong>We put money on it.</strong> If we miss any SLA commitment or misses the deadline we promised, we credit $200/day until it's resolved.
+            These aren't aspirational targets — they are written into the agreement.
+          </div>
+          <a href="#audit" class="btn-dark">Start with the Readiness Audit</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLOSING ───────────────────── -->
+  <section id="closing">
+    <div class="wrap">
+      <div class="closing-inner">
+        <div class="closing-eyebrow reveal">Get started</div>
+        <h2 class="closing-h2 reveal reveal-d1">Book a 30-minute call. It's free.</h2>
+        <p class="closing-sub reveal reveal-d2">
+          No pitch, no proposal, no obligation. We talk about your business, identify where the leverage is, and tell
+          you honestly whether we can help.
+        </p>
+
+        <div class="form-error-msg reveal reveal-d3" data-fs-error style="display:none"></div>
+        <form class="discovery-form reveal reveal-d3" id="discovery-form" action="https://formspree.io/f/xzdyljay"
+          method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">Your name</label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" required
+                data-fs-field>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Work email</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="you@company.com" required
+                data-fs-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="business">What kind of business do you run?</label>
+              <input class="form-input" type="text" id="business" name="business"
+                placeholder="e.g. Financial advisory, 22 staff" required data-fs-field>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="size">Team size</label>
+              <select class="form-select" id="size" name="size" required data-fs-field>
+                <option value="" disabled selected>Select…</option>
+                <option value="10-15">10–15</option>
+                <option value="15-25">15–25</option>
+                <option value="25-35">25–35</option>
+                <option value="35+">35+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bottleneck">What's the biggest bottleneck in your operation right
+              now?</label>
+            <textarea class="form-textarea" id="bottleneck" name="bottleneck" placeholder="2–3 sentences is enough."
+              required data-fs-field></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="source">How did you find us?</label>
+            <select class="form-select" id="source" name="source" data-fs-field>
+              <option value="" disabled selected>Select…</option>
+              <option value="referral">Referral</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="google">Google</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-white form-submit" data-fs-submit-btn>Book your discovery call →</button>
+          <p class="form-bottom-note">ben@3nm.io &nbsp;·&nbsp; Singapore &nbsp;·&nbsp; No pitch, no proposal.</p>
+        </form>
+
+        <div class="form-success reveal" data-fs-success style="display:none">
+          <div class="form-success-title">We'll be in touch shortly.</div>
+          <div class="form-success-sub">Expect an email from ben@3nm.io within 24 hours to confirm a time.<br>Singapore
+            timezone (SGT, UTC+8).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────── -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <div class="footer-logo">RightClick<span>:AI</span></div>
+        <div style="display:flex;gap:24px;">
+          <a href="about.html" style="font-size:12px;color:rgba(255,255,255,0.3);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.55)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">About</a>
+          <a href="faq.html" style="font-size:12px;color:rgba(255,255,255,0.3);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.55)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">FAQ</a>
+          <a href="blog.html" style="font-size:12px;color:rgba(255,255,255,0.3);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.55)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div>
+        <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#discovery-form', formId: 'xzdyljay' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+
+</html>
