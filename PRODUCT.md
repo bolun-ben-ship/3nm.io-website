@@ -37,7 +37,7 @@ RightClick:AI is a one-person AI development partner (Bolun "Ben" Liu, Singapore
 
 Three words: **direct, grounded, owner-operated.**
 
-**Direct.** First-person reasoning. Plain numbers and dates ("SGD 200 back for every day we're late," "Day 7 MVP," "70% back after scope"). No hedging, no marketing softeners, no performative positivity.
+**Direct.** First-person reasoning. Plain, concrete commitments ("scoped after the audit," "you see the plan before any build," "I build until it's live and doing the job"). No hedging, no marketing softeners, no performative positivity.
 
 **Grounded.** Real client work, real industries, real outcomes (anonymised on request). When something is uncertain, the page says so. The voice rejects hustle-porn and AI-hype tropes. Beliefs are stated as beliefs ("most AI automation failures happen before the first tool is chosen") not as universal truth.
 
@@ -71,13 +71,13 @@ The voice is comfortable being polarising. It assumes the reader is a thinking p
 
 Five principles, derived from how Ben actually works and what the offer requires:
 
-1. **Show the mechanics.** Every promise on the page has a number, a date, or a written commitment behind it. SGD 6,800. Day 7. 70% back. SGD 200/day late. The buyer should be able to do the maths in their head and conclude the offer is real. Vague promises are a tell that the offer isn't real.
+1. **Show the mechanics.** Every promise on the page has a concrete commitment behind it: what gets built, what you own, and the performance guarantee — I build until it's live and doing the job. The buyer should conclude the offer is real. Vague promises are a tell that the offer isn't real.
 
 2. **Process before tools.** The page architecture mirrors Ben's actual delivery method: name the problem (recognition section), pre-empt the wrong solution (pre-hire reframe), reveal what changes (live preview), explain the model (Foundation → Function cycles), commit to terms (commitments section), prove with work (case studies), answer real objections (FAQ). Every section is a step in the buyer's reasoning, not a marketing template.
 
 3. **Earned familiarity is wrong here. Distinctiveness is right.** This is a brand surface — the design IS the product. The look should not match Linear / Notion / Stripe by reflex. Forest green over AI-purple. Warm cream over cool grey. Founder-letter voice over agency voice. A confident visitor should feel "I haven't seen this before" within five seconds.
 
-4. **Accountability is a feature, not a footnote.** SLA commitments, prorated refunds, code ownership, and the named founder are not legal small print — they are the centre of the offer. They get visual weight (the dark price bar, the commitments grid, the comparison table with "What survives if they leave").
+4. **Accountability is a feature, not a footnote.** The performance guarantee (I build until it's live and doing the job), code ownership, and the named founder are not legal small print — they are the centre of the offer. They get visual weight (the dark price bar, the commitments grid, the comparison table with "What survives if they leave").
 
 5. **The page is not the product.** A landing page that overpromises gets punished by the discovery call. Underpromise on tone, deliver on the call. The page should leave the buyer slightly wanting more clarity, not less. That's why the "no pitch, no proposal" framing on the closing CTA matters.
 

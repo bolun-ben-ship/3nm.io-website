@@ -25,7 +25,7 @@ authority:
 
 The voice is **one founder talking to another, not a brand voice**. Direct, grounded, owner-operated. First-person reasoning. Numbers and dates on every claim. Comfortable being polarising. Underpromise on tone, deliver on the call.
 
-The reader is a Singapore service-business founder running a team of 10 to 35 people. They are tired, slightly defensive, sceptical of AI-agency claims. They have seen too many decks promising transformation and delivering Zapier flows. The copy must earn trust before it pitches anything.
+The reader is a Singapore service-business founder running a team of 5 to 35 people. They are tired, slightly defensive, sceptical of AI-agency claims. They have seen too many decks promising transformation and delivering Zapier flows. The copy must earn trust before it pitches anything.
 
 ## 2. The Front-Facing Output Rule
 
@@ -56,7 +56,7 @@ Internal-process language belongs in: `projects/<name>/scoping.md`, internal mem
 ### Do
 
 - **Use first-person reasoning.** "I think", "I've thought through", "Here's why." The page is one founder talking, not a brand voice. Avoid "we believe" / "our team" theatre.
-- **Show numbers and dates on every claim.** SGD 12,000. Day 7. 6 weeks. 95% back. SGD 200 per day late. The buyer does the maths and concludes the offer is real. Vague promises are a tell that the offer is not.
+- **Show concrete commitments on every claim.** What gets built, what you own, the performance guarantee — I build until it's live and doing the job. The buyer concludes the offer is real. Vague promises are a tell that the offer is not.
 - **Name the buyer's actual problem before the pitch.** "Late reports. Fuzzy forecasts. Stalled handoffs. Work that never gets done." Recognition before sales.
 - **State beliefs as beliefs, not as universal truth.** "Most AI automation failures happen before the first tool is chosen" reads as a position. "AI is transforming everything" reads as marketing.
 - **Be comfortable being polarising.** Filters work. The no-grant FAQ is a filter, not a hedge. Right buyers self-select.
@@ -149,8 +149,8 @@ A sentence fails if:
 - **Smart quotes ("" '') and apostrophes (' '):** use these, not straight quotes, in body copy.
 - **Title case:** sentence case for body headings ("How it works"). Title Case only for proper-noun product names ("Foundation Build", "Function Cycle").
 - **Numbers in body copy:** spell out one to nine; use digits for 10 and above; always use digits for prices, percentages, dates, durations.
-- **Currency:** "SGD 12,000" not "$12,000" or "S$12,000". Comma thousands. No decimals on whole-amount prices.
-- **Time:** "Day 7", "Week 3", "6 weeks", "48 hours". Hyphens used sparingly.
+- **Currency:** "SGD 80,000" not "$80,000" or "S$80,000". Comma thousands. No decimals on whole-amount figures. Do not publish a fixed RightClick:AI price — builds are scoped per client after the audit.
+- **Time:** avoid fixed delivery timelines in copy — every build is scoped per client. Where a duration is unavoidable (e.g. a call length), use "30-minute", "1-hour". Hyphens used sparingly.
 - **Brand:** "RightClick:AI" with the colon. "Bolun (Ben) Liu" first reference, "Ben" thereafter. Never "Founder &amp; CEO".
 
 ## 6. Anti-References (avoid imitating these voices)
@@ -181,7 +181,7 @@ A clean run usually takes 10 to 15 minutes per page. Skip it and the artefact bl
 
 ### Good (RightClick:AI voice)
 
-> You're the system holding it all together. That's the problem. We build the operating layer your team runs on so you stop being the bottleneck. Foundation Build is SGD 9,500, six weeks, four functions live on real data by Day 7. You own the code on delivery.
+> You're the system holding it all together. That's the problem. We build the operating layer your team runs on so you stop being the bottleneck. Foundation Build is four functions live on your real data, scoped per client after the audit. I build until it's live and doing the job. You own the code on delivery.
 
 What changed: every banned verb cut, every claim now has a number or a specific commitment, the buyer's actual problem is named in the first sentence, the offer mechanic is visible, no triadic stack, no "comprehensive solution", no "we've got you covered".
 
