@@ -7,7 +7,7 @@
 
 This document records the offer redesign for RightClick:AI. The shift is from a fixed-project model (single large engagement) to a function-based build model — inspired by Design Joy's subscription approach but adapted for software, where delivery has natural completion points.
 
-**Target buyer:** Founders and ops leads of 15–35 person service businesses in Singapore who are already problem-aware. They know their systems are broken. They have tried duct-tape solutions (Zapier, Make, n8n). They've been quoted SGD 80,000+ by agencies. They want something properly built but don't know how to access it.
+**Target buyer:** Founders and ops leads of 5–35 person service businesses in Singapore who are already problem-aware. They know their systems are broken. They have tried duct-tape solutions (Zapier, Make, n8n). They've been quoted SGD 80,000+ by agencies. They want something properly built but don't know how to access it.
 
 **Positioning:** Speed is the brand and moat. Not the cheapest. Not the biggest. The fastest legitimate option in Singapore for custom AI systems at SME scale.
 
@@ -18,29 +18,26 @@ This document records the offer redesign for RightClick:AI. The shift is from a 
 ### Three stages
 
 **Stage 1 — Foundation Build**
-The starting point for every client. Four functions bundled. Delivered in 6–8 weeks.
+The starting point for every client. Four functions bundled. Scoped per client after the audit.
 
 **Stage 2 — Function Cycles**
-Individual capability additions after the Foundation. One function per cycle. SGD 2,400 each.
+Individual capability additions after the Foundation. One function per cycle. Scoped per cycle.
 
 **Stage 3 — Maintain Mode**
-After the active build phase is complete (typically 6 months). Hosting, maintenance, support, and AI model refresh. SGD 2,400/year.
+After the active build phase is complete (typically 6 months). Hosting, maintenance, support, and AI model refresh. Annual subscription.
 
 ---
 
 ## Pricing
 
-| Product | Price | Notes |
-|---|---|---|
-| Foundation Build | SGD 9,500 | 4 functions fixed scope, 6 weeks |
-| Custom Build | RFQ | Final number locked within 48 hours of workflow audit |
-| Per function cycle | SGD 2,400 | |
-| Pre-buy 3 function cycles | SGD 6,600 | SGD 2,200 each, save SGD 600 |
-| Maintain Mode | Annual subscription | Opt-in |
-| Enhancement (Maintain Mode, beyond free allowance) | SGD 300 | Per request |
+Every build is scoped and quoted per client after the paid audit. No fixed price is published. The live site at 3nm.io is canonical. Previous fixed-price iterations (SGD 6,800 bundle, SGD 9,500 Foundation, SGD 12,000 sample, SGD 2,400 function cycle) are all deprecated and must not be reused.
 
-### Foundation Build pricing
-SGD 9,500 fixed scope. Live site at 3nm.io is canonical. Previous pricing iterations (SGD 6,800 bundle, SGD 12,000 sample) are deprecated.
+| Product | Pricing | Notes |
+|---|---|---|
+| Foundation Build | Scoped per client after the audit | 4 functions |
+| Custom Build | Scoped per project after the audit | For existing systems to rebuild or larger scope |
+| Function Cycle | Scoped per cycle | One capability at a time |
+| Maintain Mode | Annual subscription | Opt-in |
 
 ---
 
@@ -81,9 +78,9 @@ Each function cycle follows the same sequence:
 
 | Step | Timing | Description |
 |---|---|---|
-| Scope document | 48 hours from start | Architecture, database, features, functions — in writing. Can be taken anywhere. |
-| Working MVP | Day 7 from scope approval | Actual running system, not a mockup. 2 sessions included. |
-| Full build | Week 4 from scope approval | Fully deployable. Client uses it from this point. |
+| Scope document | Before any build | Architecture, database, features, functions — in writing. Can be taken anywhere. |
+| Working MVP | On real data | Actual running system, not a mockup. 2 sessions included. |
+| Full build | Scoped per client | Fully deployable. Client uses it from this point. |
 
 ---
 
@@ -91,7 +88,7 @@ Each function cycle follows the same sequence:
 
 - Hosting and infrastructure
 - Security and dependency updates
-- 24-hour async support for bugs
+- Async support for bugs
 - AI model refresh as underlying models evolve (Claude/GPT version updates, prompt degradation review)
 - 1x quarterly 30-minute review call
 - 2 enhancement requests per quarter at no charge
@@ -132,26 +129,17 @@ An enhancement is ONLY the following (exhaustive list — anything not here is a
 
 ---
 
-## SLAs and Commitments
+## Commitments
 
-### Ben's commitments
-
-| Commitment | Timeline | What client receives if missed |
-|---|---|---|
-| Scope document | 48 hours from cycle start | SGD 200 back for each day late |
-| Working MVP | Day 7 from scope approval | SGD 200 back for each day late |
-| Full build | Week 4 from scope approval | SGD 200 back for each day late |
-| Request classification (function vs enhancement) | 24 hours | SGD 200 back for each day late |
-| Bug response (Maintain Mode) | 24 hours | SGD 200 back for each day late |
-
-Credits applied against the next invoice. Refunded directly if no future invoice exists.
+### Ben's commitment
+I build until it's live and doing the job. You get the result, not a refund. You see the plan before any build starts, and I keep building until the system does what it's supposed to.
 
 ### Client's commitments
-- Attend 2 × 1-hour sessions within the first 10 days of each function cycle
-- Respond to delivered work and feedback requests within 24 hours
-- Approve or reject the scope document within 48 hours of receipt
+- Attend the working sessions during each function cycle
+- Respond to delivered work and feedback requests promptly
+- Approve or reject the scope document before the build starts
 
-Failure to meet client commitments suspends SLA timelines. Deadlines reset from the point client response is received.
+Slow client feedback pauses progress; momentum is two-sided.
 
 ---
 
@@ -167,22 +155,9 @@ Exception: at Ben's sole discretion, if a request takes under 2 hours and poses 
 
 ---
 
-## Cancellation and Refund Policy
+## Cancellation
 
-### During an active function cycle
-
-| Milestone | Refund |
-|---|---|
-| After scope document delivered, before MVP | 70% of current cycle fee |
-| After MVP delivered, before full build | 50% of current cycle fee |
-| After full build delivered | No refund (work is complete) |
-
-### Pre-purchased function credits
-- Unused credits: 100% refundable
-- Active cycle: milestone refund policy applies
-
-### Maintain Mode
-Cancel anytime. Prorated refund of remaining annual fee.
+Stop anytime — no penalty. All work delivered up to that point is the client's, regardless. Code, databases, documentation, and system architecture become the client's sole property on delivery. The guarantee is performance, not money back: I build until it's live and doing the job.
 
 ---
 
@@ -223,11 +198,11 @@ After 6 months, most SMEs have a substantially complete core system. They then t
 | | Design Joy | RightClick:AI |
 |---|---|---|
 | Buyer assumption | Already wants design | Already knows systems are broken |
-| Pricing unit | Monthly subscription | Per function (SGD 2,400) |
-| Risk reversal | Pause/cancel anytime, 75% back in week 1 | Stop anytime, milestone-based refunds (70%/50%) |
-| Speed signal | 48-hour delivery | 48hr scope, 7-day MVP, 4-week build |
+| Pricing unit | Monthly subscription | Per function (scoped per cycle) |
+| Risk reversal | Pause/cancel anytime, 75% back in week 1 | Stop anytime; performance guarantee — I build until it's live |
+| Speed signal | 48-hour delivery | Scoped per client, built fast |
 | Natural completion | None (design is infinite) | Yes (~6 months for SME core build) |
-| Post-completion | Ongoing by nature | Maintain Mode (SGD 2,400/year) |
+| Post-completion | Ongoing by nature | Maintain Mode (annual subscription) |
 | Incentive to go fast | Always a queue | Reputation, referrals, throughput |
 
 Key structural difference: Design Joy works on recurrence because design is genuinely infinite. Software has natural completion points. The Foundation + function model captures the build phase at per-function pricing, then transitions to Maintain Mode for the ongoing relationship. These are two different products, not one subscription stretched.

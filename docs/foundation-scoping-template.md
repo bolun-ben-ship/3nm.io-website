@@ -197,14 +197,7 @@ The following are NOT included and will require a separate function cycle if nee
 
 ## 8. Timeline
 
-| Milestone | Target date | SLA |
-|---|---|---|
-| This scoping document approved by Client | | — |
-| Scope document (architecture + PRD) delivered | [date + 48hrs] | 48hr from approval |
-| Working MVP delivered | [date + 7 days from above] | Day 7 from scope approval |
-| Full Foundation Build delivered | [date + 6-8 weeks from above] | Week 6–8 from scope approval |
-
-**Note:** SLA timelines reset if Client does not provide feedback within 24 hours of a delivered milestone.
+Every build is custom — scoped and sequenced per engagement. You receive a scope document for approval, then a working MVP on real data, then the full build, delivered and reviewed in phases. No fixed calendar timeline is promised.
 
 ---
 
@@ -221,12 +214,9 @@ By approving this document, Client confirms:
 
 ## 10. Pricing Confirmation
 
-**Foundation Build:** SGD 6,800 (fixed)
+**Foundation Build:** [scoped per engagement]
 
-**Refund policy:**
-- Cancel after scope document delivered, before MVP: SGD 4,760 refund (70%)
-- Cancel after MVP delivered, before full build: SGD 3,400 refund (50%)
-- Cancel after full build delivered: No refund
+**Guarantee:** I build until it is live and doing the job in the approved scope — the result, not a refund. **Cancellation:** stop at any phase boundary; all delivered code and assets are yours; no payment is due for unstarted phases.
 
 **Payment terms:** [50% upfront, 50% on full build delivery] / [100% upfront] / [Invoice on completion]
 

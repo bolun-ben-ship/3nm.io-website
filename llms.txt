@@ -1,6 +1,6 @@
 # RightClick:AI
 
-> AI Operating Systems for service businesses in Singapore. Built and run by Bolun (Ben) Liu. The Foundation Build delivers four functions — operational dashboard, workflow automation, AI assistant, and notification centre — scoped per client after a paid audit and built on your real data. You own the code outright. No PSG / EDG grant paperwork.
+> Custom internal software for service businesses in Singapore — the dashboards, automations, and internal apps SaaS won't build. Built and run by Bolun (Ben) Liu. The Foundation Build delivers four functions — operational dashboard, workflow automation, AI assistant, and notification centre — scoped per client after a paid audit and built on your real data. You own the code outright. No PSG / EDG grant paperwork.
 
 ## Key pages
 
@@ -12,7 +12,7 @@
 
 ## What RightClick:AI is
 
-RightClick:AI builds custom AI Operating Systems for service businesses in Singapore with 5 to 35 staff. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing before any build starts, ships a working MVP on real data, and is built around your business. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
+RightClick:AI builds custom internal software for service businesses in Singapore with 5 to 35 staff — the dashboards, automations, and internal apps off-the-shelf SaaS won't build. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing before any build starts, ships a working MVP on real data, and is built around your business. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
 
 ## The two engagement paths
 

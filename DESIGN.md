@@ -1,6 +1,6 @@
 ---
 name: RightClick:AI
-description: Custom AI Operating Systems for Singapore service businesses, built function by function.
+description: Custom internal software for Singapore service businesses, built function by function.
 colors:
   bg: "#FAFAF7"
   bg-warm: "#F3F1EB"

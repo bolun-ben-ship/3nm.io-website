@@ -18,7 +18,7 @@ brand
 
 ## Product Purpose
 
-RightClick:AI is a one-person AI development partner (Bolun "Ben" Liu, Singapore) that builds custom AI Operating Systems for service businesses, function by function.
+RightClick:AI is a one-person AI development partner (Bolun "Ben" Liu, Singapore) that builds the custom internal software a service business needs — dashboards, automations, and internal apps — function by function.
 
 **The offer is mechanical and visible:**
 - **Foundation Build** — four functions delivered as one operating system, scoped per client after a paid audit. MVP on real data.
@@ -48,7 +48,7 @@ The voice is comfortable being polarising. It assumes the reader is a thinking p
 ## Anti-references
 
 **Aesthetic anti-references.**
-- **AI-agency default.** Purple-to-blue gradients, glassmorphism, hero metric template ("10x", "saved 1,200 hours"), neon-glow borders, "AI" written in 200pt gradient text. The visual language of every Vercel-clone agency site. We have explicitly chosen forest green over the AI-default purple/blue for this reason.
+- **AI-agency default.** Purple-to-blue gradients, glassmorphism, hero metric template ("10x", "saved 1,200 hours"), neon-glow borders, "AI" written in 200pt gradient text. The visual language of every Vercel-clone agency site. I have explicitly chosen forest green over the AI-default purple/blue for this reason.
 - **Generic SaaS template.** Centered hero, three-card "feature" grid with rounded-corner icons above each heading, identical card grids repeating down the page, FAQ at the bottom because every template has one.
 - **Crypto / AI-maximalist hype.** Acid green on black, terminal-screen typography for non-terminal products, "next-gen" / "AI-powered" copy, animated gradients as background.
 - **Editorial-magazine-by-reflex.** Display-serif italic headlines + ruled separators + tracked-out lowercase metadata. Currently saturated; not the right register for this brand. (RightClick:AI is tech-utility, not magazine.)

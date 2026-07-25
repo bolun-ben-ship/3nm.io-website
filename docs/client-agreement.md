@@ -21,7 +21,7 @@ All work is delivered by Ben directly. No subcontractors, no handoffs.
 
 ## 2. Foundation Build
 
-**Price:** SGD 6,800 (fixed)
+**Price:** [scoped per engagement]
 
 ### What's included
 
@@ -37,10 +37,12 @@ All work is delivered by Ben directly. No subcontractors, no handoffs.
 - Lightweight project and capacity status views
 - User and role management
 
-### Timeline commitments
-- Scope document: within 48 hours of engagement start
-- Working MVP: within 7 days of scope document approval
-- Full build: within 6–8 weeks of scope document approval
+### Delivery sequence
+- A scope document for your approval before any build
+- A working MVP on your real data
+- The full build, delivered and reviewed in phases
+
+Timing is scoped per engagement — every build is custom. No fixed calendar timeline is promised.
 
 ### What is not in the Foundation Build
 The following require separate function cycles and are not included in the Foundation price:
@@ -54,14 +56,16 @@ The following require separate function cycles and are not included in the Found
 
 ## 3. Function Cycles
 
-**Price:** SGD 2,400 per function cycle
+**Price:** [scoped per engagement]
 
-**Pre-purchase option:** 3 function cycles for SGD 6,600 (SGD 2,200 each). Unused credits are fully refundable.
+**Structure:** Each cycle is scoped and quoted per engagement. Work proceeds one cycle at a time — you approve and commit to a cycle before it begins. No pre-payment for future cycles, and no obligation to continue beyond the current one.
 
 ### Each cycle delivers
-- Scope document within 48 hours of cycle start
-- Working MVP within 7 days of scope document approval
-- Full build within 4 weeks of scope document approval
+- A scope document for your approval before any build
+- A working MVP on your real data
+- The full build, delivered and reviewed in phases
+
+Timing is scoped per engagement — every build is custom.
 
 ### What counts as a Function
 A function requires at least one of the following:
@@ -90,7 +94,7 @@ Enhancements are minor additions to existing functions. They do not require a se
 
 ### Enhancement billing
 - During an active function cycle: included at no charge
-- During Maintain Mode: 2 enhancement requests per quarter at no charge; SGD 300 per request thereafter
+- During Maintain Mode: 2 enhancement requests per quarter at no charge; [scoped per engagement] per request thereafter
 
 ### Classification commitment
 Builder will classify any request as Function or Enhancement within 24 hours of receipt.
@@ -99,7 +103,7 @@ Builder will classify any request as Function or Enhancement within 24 hours of 
 
 ## 5. Maintain Mode
 
-**Price:** SGD 2,400 per year (billed annually)
+**Price:** [scoped per engagement]
 
 **Transition:** Maintain Mode typically begins at approximately 6 months from the Foundation Build start, when the core system is substantially complete. Client may continue active function cycles instead of transitioning — this is agreed jointly.
 
@@ -114,19 +118,11 @@ Builder will classify any request as Function or Enhancement within 24 hours of 
 
 ---
 
-## 6. Service Level Agreements
+## 6. Commitments
 
-### Builder's commitments
+### Builder's commitment
 
-| Deliverable | Deadline | What Client receives if missed |
-|---|---|---|
-| Scope document | 48 hours from cycle start | SGD 200 back for each day late |
-| Working MVP | Day 7 from scope approval | SGD 200 back for each day late |
-| Full build | Week 4 from scope approval | SGD 200 back for each day late |
-| Request classification | 24 hours from request | SGD 200 back for each day late |
-| Bug response (Maintain Mode) | 24 hours | SGD 200 back for each day late |
-
-SLA credits are applied against the next invoice. If no future invoice exists, the amount is refunded to Client within 14 days.
+I build until it is live and doing the job defined in the approved scope. You get the result — not a service-credit or refund. Work is delivered and reviewed phase by phase, and you can stop at any phase boundary.
 
 ### Client's commitments
 Client agrees to:
@@ -134,7 +130,7 @@ Client agrees to:
 - Provide feedback on delivered work within 24 hours of receipt
 - Approve or reject the scope document within 48 hours of receipt
 
-**Suspension of SLA timelines:** If Client fails to meet any of the above commitments, Builder's SLA timelines are suspended from the point of delay until Client response is received. Build deadlines reset from that point.
+**If the client causes delay:** If Client does not meet the commitments above, delivery timing shifts accordingly from the point of delay until Client responds.
 
 ---
 
@@ -154,28 +150,9 @@ Enhancement requests made during an active build cycle are logged but not added 
 
 ---
 
-## 8. Cancellation and Refund Policy
+## 8. Cancellation
 
-### During an active function cycle
-
-| Point of cancellation | Refund |
-|---|---|
-| After scope document delivered, before MVP delivery | 70% of current cycle fee |
-| After MVP delivered, before full build delivery | 50% of current cycle fee |
-| After full build delivered | No refund (work is complete and owned by Client) |
-
-### Pre-purchased function credits
-- Unused credits (cycles not yet started): 100% refundable within 30 days of cancellation request
-- Active cycle: milestone refund policy above applies
-
-### Foundation Build cancellation
-Same milestone policy:
-- After scope delivered, before MVP: SGD 4,760 refund (70% of SGD 6,800)
-- After MVP delivered, before full build: SGD 3,400 refund (50% of SGD 6,800)
-- After full build delivered: No refund
-
-### Maintain Mode
-Cancel anytime. Builder will refund the prorated portion of the annual fee for the unused period, calculated to the nearest month.
+**Stop anytime, no penalty.** You may end this engagement at any phase boundary. All code, databases, and assets delivered up to that point are yours (see §9). No further payment is due for phases not yet started. There is no money-back component — the guarantee is that I build until the agreed scope is live and doing the job.
 
 ---
 
