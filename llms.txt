@@ -1,29 +1,29 @@
 # RightClick:AI
 
-> AI Operating Systems for service businesses in Singapore. Built and run by Bolun (Ben) Liu. The Foundation Build is SGD 9,500 fixed scope — operational dashboard, workflow automation, AI assistant, and notification centre delivered in 6 weeks on your real data. Day 7 working MVP. SGD 200 back per day late. You own the code outright. No PSG / EDG grant paperwork.
+> AI Operating Systems for service businesses in Singapore. Built and run by Bolun (Ben) Liu. The Foundation Build delivers four functions — operational dashboard, workflow automation, AI assistant, and notification centre — scoped per client after a paid audit and built on your real data. You own the code outright. No PSG / EDG grant paperwork.
 
 ## Key pages
 
 - [Homepage](https://3nm.io): Foundation Build, Custom Build, process, case studies, booking
 - [About](https://3nm.io/about): Manifesto, method, and engagement terms behind every build
-- [How it works](https://3nm.io/how-it-works): The exact engagement sequence — discovery, audit, scope, Day 7 MVP, 6-week build, handover. Refund tiers. Vs hire / DIY / agency comparison.
-- [FAQ](https://3nm.io/faq): Pricing, ownership, refund structure, grant policy, fit assessment
+- [How it works](https://3nm.io/how-it-works): The exact engagement sequence — discovery, audit, scope, MVP, build, handover. Vs hire / DIY / agency comparison.
+- [FAQ](https://3nm.io/faq): Pricing, ownership, grant policy, fit assessment
 - [Blog](https://3nm.io/blog): Operational visibility, the cost of manual workflows, why most AI automation projects fail
 
 ## What RightClick:AI is
 
-RightClick:AI builds custom AI Operating Systems for service businesses in Singapore with 10 to 35 staff. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing within 48 hours of the workflow session, ships a working MVP at Day 7 on real data, and is fully functional within 6 weeks. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
+RightClick:AI builds custom AI Operating Systems for service businesses in Singapore with 5 to 35 staff. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing before any build starts, ships a working MVP on real data, and is built around your business. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
 
 ## The two engagement paths
 
-**Foundation Build — SGD 9,500 fixed.**
-For businesses building from scratch or with light existing tooling. Four functions delivered in 6 weeks: operational dashboard with role-based access, one workflow automation chosen during scoping, AI assistant grounded on live business data, and notification centre. Day 7 MVP. SGD 200 back per day late on any committed milestone. The 30-minute discovery call and 1-hour workflow audit are free; pricing kicks in only once the client commits to proceed. Cancel after scope: 95% back. Cancel after MVP: 70% back. All code delivered up to cancellation is the client's regardless.
+**Foundation Build — scoped per client after the audit.**
+For businesses building from scratch or with light existing tooling. Four functions: operational dashboard with role-based access, one workflow automation chosen during scoping, AI assistant grounded on live business data, and notification centre. Scoped per client after the audit and built on real data. The 30-minute discovery call is free; the full scope comes before any build. I build until it's live and doing the job. Stop anytime — all code delivered is the client's regardless.
 
 **Custom Build — RFQ.**
-For clients with an existing system to rebuild (Notion CRM, custom app, spreadsheets that quietly became operations), scope larger than the four Foundation functions, or a system that needs to live inside an existing product. Same process. Same commitments. Same refund clauses. Final number locked in writing within 48 hours of the workflow audit. Scoped per project — Foundation+ rebuilds anchor lower, product-embedded or multi-workflow builds anchor higher. No fixed Custom price is published because no build of this shape can be honestly quoted without an audit.
+For clients with an existing system to rebuild (Notion CRM, custom app, spreadsheets that quietly became operations), scope larger than the four Foundation functions, or a system that needs to live inside an existing product. Same process. Same commitments. I build until it's live and doing the job. Scoped per project after the audit. No fixed Custom price is published because no build of this shape can be honestly quoted without an audit.
 
-**Function Cycles — SGD 2,400 each.**
-After Foundation, the system extends one capability per cycle. 48-hour scope, Day 7 MVP, 6-week delivery, SGD 200 back per day late. Pay-as-you-go. No annual contract. Stop and restart anytime.
+**Function Cycles — scoped per cycle.**
+After Foundation, the system extends one capability per cycle, scoped after the audit. Pay-as-you-go. No annual contract. Stop and restart anytime.
 
 **Maintain Mode — annual subscription, opt-in.**
 Hosting, updates, AI model refresh, async support. Optional. Far cheaper than the SaaS stack the system replaces.
@@ -36,7 +36,7 @@ Hosting, updates, AI model refresh, async support. Optional. Far cheaper than th
 
 ## Why no grants
 
-RightClick:AI does not work with PSG or EDG grants. Grant routes add 3 to 6 months of approval time before any code is written and freeze scope during the wait — the system delivered is the one specced months earlier with less information. Clients pay out of cashflow because they want the system live in 6 weeks, not next quarter. If grant cost-recovery is the top priority, RightClick:AI is not the right fit. If speed and clarity are, this is built for them.
+RightClick:AI does not work with PSG or EDG grants. Grant routes add 3 to 6 months of approval time before any code is written and freeze scope during the wait — the system delivered is the one specced months earlier with less information. Clients pay out of cashflow because they want the system live fast, not next quarter. If grant cost-recovery is the top priority, RightClick:AI is not the right fit. If speed and clarity are, this is built for them.
 
 ## The Data Process Thinking Method
 
@@ -57,12 +57,12 @@ Email: ben@3nm.io
 Location: Singapore (SGT, UTC+8)
 Response: Within 24 hours
 
-## SLA commitments
+## Commitments
 
-- Free 30-minute discovery call and free 1-hour workflow audit
-- Written scope within 48 hours of commitment to proceed
-- Day 7 working MVP on real business data
-- Full Foundation Build delivered within 6 weeks of approved scope
-- 48-hour feedback loop expected from client during active build (SLA pauses if longer)
-- SGD 200 per day credit on any missed committed milestone, written into the agreement
-- Refund tiers: 95% after scope, 70% after MVP, no penalty after any Function Cycle
+- Free 30-minute discovery call, then a workflow audit
+- Written scope before any build starts
+- Working MVP on real business data
+- Full Foundation Build scoped and delivered around your business
+- Fast feedback expected from client during active build
+- Performance guarantee: I build until it's live and doing the job. You get the result, not a refund.
+- Stop anytime — all code delivered is yours regardless

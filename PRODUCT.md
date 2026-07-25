@@ -6,7 +6,7 @@ brand
 
 ## Users
 
-**Singapore-based service-business founders running teams of 10–35 people.** Industries served to date: healthcare consulting, financial services, family offices, 3PL logistics, education consulting.
+**Singapore-based service-business founders running teams of 5–35 people.** Industries served to date: healthcare consulting, financial services, family offices, 3PL logistics, education consulting.
 
 **Their context.** They are the operating system of their own business. Status updates flow through them. Reports compile only when they push. Forecasts live in their head. Half the team can't move forward without their sign-off — not because the team needs permission, but because the context lives in their head.
 
@@ -14,20 +14,20 @@ brand
 
 **Emotional state on landing.** Tired, slightly defensive, sceptical of AI agency claims. They have seen too many decks promising transformation and delivering Zapier flows. The page must earn trust before pitching anything.
 
-**What they should feel by the closing CTA.** Recognised (someone has named their problem accurately), oriented (they understand exactly what gets built and what it costs), and unhurried (they know they can stop any time and own everything delivered to that point).
+**What they should feel by the closing CTA.** Recognised (someone has named their problem accurately), oriented (they understand exactly what gets built and how it's scoped), and unhurried (they know they can stop any time and own everything delivered to that point).
 
 ## Product Purpose
 
 RightClick:AI is a one-person AI development partner (Bolun "Ben" Liu, Singapore) that builds custom AI Operating Systems for service businesses, function by function.
 
 **The offer is mechanical and visible:**
-- **Foundation Build** — SGD 9,500 fixed scope, 6 weeks, 4 functions delivered as one operating system. Day 7 MVP on real data.
-- **Custom Build** — RFQ alternative path for clients with an existing system to rebuild, scope larger than the four Foundation functions, or product-embedded builds. Final number locked in writing within 48 hours of the workflow audit. Same process, same commitments, same refund clauses.
-- **Function Cycles** — SGD 2,400 each, after the Foundation. 48hr scope, day-7 MVP, 4-week full build.
+- **Foundation Build** — four functions delivered as one operating system, scoped per client after a paid audit. MVP on real data.
+- **Custom Build** — alternative path for clients with an existing system to rebuild, scope larger than the four Foundation functions, or product-embedded builds. Scoped per project after the audit. Same process, same commitments.
+- **Function Cycles** — after the Foundation, one capability at a time, scoped per cycle.
 - **Maintain Mode** — annual subscription, opt-in. Hosting, security updates, async support, AI model refresh.
-- **SLA commitment** — SGD 200 back per day late, written into the agreement.
+- **Performance guarantee** — I build until it's live and doing the job. You get the result, not a refund.
 - **Ownership** — every line of code, database, and piece of infrastructure becomes the client's sole property on delivery.
-- **Cancellation** — prorated refunds tied to milestones (95% back after scope doc, 70% after MVP). Code delivered to that point is theirs regardless.
+- **Stop anytime** — no penalty. Code delivered to that point is theirs regardless.
 
 **Strategic position.** The site is positioned against four alternatives: hire an ops manager, DIY no-code, agency/dev shop, RightClick:AI. The pricing and ownership model is the wedge — most agencies don't transfer code; most SaaS doesn't transfer data; most hires don't transfer knowledge. RightClick:AI is the only option that hands the client a working operational asset they fully own.
 
