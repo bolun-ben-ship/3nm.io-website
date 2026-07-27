@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stage 1 Before Stage 2: Why Operational Visibility Has to Come First — RightClick:AI</title>
-  <meta name="description" content="Automation built on top of fragmented, invisible operations fails in ways that are hard to diagnose and expensive to fix. Operational visibility is not a nice-to-have before automation — it is the prerequisite. By Bolun (Ben) Liu.">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TW8DK7YTJG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TW8DK7YTJG');
-  </script>
-
-  <script type="application/ld+json">
-  {
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Stage 1 Before Stage 2: Why Operational Visibility Has to Come First — RightClick:AI</title><meta name="description" content="Automation built on top of fragmented, invisible operations fails in ways that are hard to diagnose and expensive to fix. Operational visibility is not a nice-to-have before automation — it is the prerequisite. By Bolun (Ben) Liu."><meta name="theme-color" content="#FAFAF7"><link rel="canonical" href="https://3nm.io/operational-visibility-first"><meta property="og:type" content="article"><meta property="og:url" content="https://3nm.io/operational-visibility-first"><meta property="og:site_name" content="RightClick:AI"><meta property="og:title" content="Operational Visibility First — Stage 1 of a Custom Internal System"><meta property="og:description" content="Why every custom build starts with operational visibility, not automation. RightClick:AI's three-stage method."><meta property="og:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg"><meta property="og:locale" content="en_SG"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Operational Visibility First — RightClick:AI"><meta name="twitter:description" content="Why every custom build starts with operational visibility, not automation."><meta name="twitter:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg"><link rel="icon" type="image/svg+xml" href="/assets/logo/rightclickai-mark.svg"><link rel="alternate icon" href="/assets/logo/rightclickai-mark.svg"><link rel="preconnect" href="https://api.fontshare.com"><link rel="preconnect" href="https://api.fontshare.com" crossorigin><link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/site.css"><!-- Google tag --><script async src="https://www.googletagmanager.com/gtag/js?id=G-TW8DK7YTJG"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-TW8DK7YTJG');
+    </script> <script type="application/ld+json">{
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "Stage 1 Before Stage 2: Why Operational Visibility Has to Come First",
@@ -34,333 +21,65 @@
     "dateModified": "2026-04-28",
     "url": "https://3nm.io/operational-visibility-first",
     "keywords": ["operational visibility", "business automation", "custom internal software", "SME Singapore", "process mapping", "business intelligence"]
-  }
-  </script>
+  }</script> <link rel="stylesheet" href="/_astro/operational-visibility-first.BbcPBv9P.css"></head> <body class=""> <a class="skip-link" href="#main">Skip to content</a> <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div> <nav class="site-nav" id="main-nav" aria-label="Main"> <div class="wrap"> <div class="nav-inner"> <a href="/" class="nav-logo" aria-label="RightClick AI home"> <svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"> <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z" fill="currentColor"></path> <circle cx="24" cy="18" r="1.6" fill="currentColor" opacity="0.45"></circle> <circle cx="24" cy="23" r="1.6" fill="currentColor" opacity="0.45"></circle> <circle cx="24" cy="28" r="1.6" fill="currentColor" opacity="0.45"></circle> </svg>
+RightClick<span>:AI</span> </a> <ul class="nav-links"> <li><a href="/#build">What I build</a></li><li><a href="/how-it-works">How it works</a></li><li><a href="/case-studies">My work</a></li><li><a href="/faq">FAQ</a></li><li><a href="/about">About</a></li> </ul> <a href="/#closing" data-modal-open="discovery" class="nav-cta">Book a call</a> <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"> <span class="nav-toggle-line" aria-hidden="true"></span> </button> </div> </div> </nav> <div class="mobile-menu" id="mobile-menu"> <ul> <li><a href="/#build">What I build</a></li><li><a href="/how-it-works">How it works</a></li><li><a href="/case-studies">My work</a></li><li><a href="/faq">FAQ</a></li><li><a href="/about">About</a></li> </ul> <a href="/#closing" data-modal-open="discovery" class="nav-cta">Book a call</a> </div> <main id="main">   <div class="article-header"> <div class="wrap"> <div class="article-category">Methodology · Process</div> <h1 class="article-h1">Stage 1 Before Stage 2: Why Operational Visibility Has to Come First</h1> <div class="article-meta"> <div class="author-chip"> <div class="author-chip-avatar">BL</div> <div> <div class="author-chip-name">Bolun (Ben) Liu</div> <div class="author-chip-role">Founder, RightClick:AI</div> </div> </div> <div class="meta-sep"></div> <div class="meta-item">April 28, 2026</div> <div class="meta-sep"></div> <div class="meta-item">6 min read</div> </div> </div> </div> <div class="wrap"> <div class="article-layout"> <article class="article-body"> <p>Operational visibility is the ability to know what is happening across your entire business, at any moment, without asking anyone, opening multiple systems, or waiting for a weekly update. One centralised environment. One real-time view. Every client, every project, every financial position, every capacity signal, live and consolidated. At RightClick:AI, this is Stage 1. I will not begin building Stage 2 (automation) until it is in place. Not as a philosophical preference. As a practical constraint: automation built on top of fragmented, invisible operations fails in ways that are hard to diagnose and expensive to fix. Visibility first is not a conservative approach. It is the prerequisite that makes everything after it possible.</p> <p>This article explains why, and what operational visibility actually looks like in a 5 to 35 person service business.</p> <h2 id="why-skip">Why Founders Go Straight to Automation</h2> <p>Most founders who contact me want automation. Completely understandable. Automation has a clear, legible value proposition. It saves staff time, removes repetitive work, and scales capacity without adding headcount. The return is visible and measurable.</p> <p>Visibility is harder to sell because its output is not a saved hour. It is understanding. And understanding is easy to undervalue, right up until the moment you realise you have been making decisions without it.</p> <div class="callout"><p><strong>Most service business founders are operating on assumptions, not data.</strong> They believe they know their client status, pipeline position, and team capacity. In most cases, they know yesterday's version of each, filtered through whoever they last spoke to.</p></div> <p>The reason founders go straight to automation is that the cost of poor visibility is invisible. If you have never had a single live view of your business, you have no reference point for what you are missing. You fill the gap with meetings, status requests, and manual compilation. Eventually this becomes the background operating cost of running the business. It feels normal. It is not.</p> <h2 id="what-it-is">What Operational Visibility Actually Is</h2> <p>Operational visibility, as I define it, is not a dashboard bolted on top of existing tools. It is a single environment where all business data (clients, projects, financials, pipelines, team capacity) is centralised, continuously updated, and accessible in one place. The founder opens it once in the morning and knows everything that matters that day. No asking. No compiling. No waiting.</p> <p>This is different from reporting. Most businesses have some reporting: a weekly revenue number, a monthly client summary, a project status deck. These are snapshots, already stale by the time they are produced. They answer the question "what happened?" rather than "what is happening?" Operational visibility answers the latter, continuously, in real time.</p> <p>It is also different from a BI tool or analytics platform. Those tools require someone to query them, interpret the output, and share the result. Operational visibility is built specifically for how the founder of this business needs to see their business: what data they care about, in what format, at what cadence. It is purpose-built, not generic.</p> <h2 id="three-questions">The Three Questions Visibility Must Answer</h2> <p>For a service business, operational visibility has to answer three questions, instantly, at any time. If any one of them requires more than thirty seconds to answer, the visibility system is incomplete.</p> <div class="three-questions"> <div class="question-row"> <div class="question-num">01</div> <div> <div class="question-text">What is the current status of every client?</div> <div class="question-body">Which clients are healthy. Which are at risk. Which have outstanding actions. Which are approaching renewal, escalation, or churn. The full client picture, not from memory, from data.</div> </div> </div> <div class="question-row"> <div class="question-num">02</div> <div> <div class="question-text">What is the financial position of the business right now?</div> <div class="question-body">Revenue collected and outstanding. Projected revenue against current pipeline. Burn rate. Cash position. Not last month's numbers, current numbers, continuously updated as invoices are raised, paid, and converted.</div> </div> </div> <div class="question-row"> <div class="question-num">03</div> <div> <div class="question-text">What is happening in operations today?</div> <div class="question-body">Team capacity and current load. Projects on track versus slipping. Blockers that need attention. Deadlines approaching. The operational picture required to make staffing, priority, and delivery decisions.</div> </div> </div> </div> <p>In a business running on disconnected SaaS tools, answering all three questions simultaneously requires pulling data from five to eight different systems, compiling it manually, and hoping nothing is stale by the time it reaches the founder. Most businesses can answer each question individually, slowly, imprecisely, and only by asking someone. None of them can answer all three in real time.</p> <h2 id="without-visibility">What Happens When You Automate Without Visibility</h2> <p>I have seen this pattern enough times to predict the outcome. A business identifies a high-value workflow to automate: client onboarding, reporting, proposal generation. The automation is built. It runs. A few weeks in, something is off. The founder notices a drop in conversion, a delay in delivery, an anomaly in revenue. Is it the automation? Is it the underlying process? Is it a capacity issue? They do not know, because they have no consolidated view of the business to diagnose against.</p> <p>They pull the data manually, which takes time and is inevitably incomplete. By the time they understand what is happening, the problem has compounded. The fix requires changes to both the automation and the processes around it. What should have been a quick correction becomes a multi-week investigation.</p> <div class="stat-row"> <div class="stat-item"> <div class="stat-value">4–8<span>×</span></div> <div class="stat-label">More expensive to fix an automation post-build than during scoping, when the process context is no longer fresh</div> </div> <div class="stat-item"> <div class="stat-value">~70<span>%</span></div> <div class="stat-label">Of AI automation problems trace back to unclear process definition or missing data, not to technical failures</div> </div> <div class="stat-item"> <div class="stat-value">3–5<span>wks</span></div> <div class="stat-label">Typical time lost investigating automation failures in businesses with no unified operational view</div> </div> </div> <p class="stat-source">Estimates from RightClick:AI engagements with 15–35 person service businesses, 2024–2026.</p> <p>Automation without visibility is building a faster machine without instruments. You move faster. You also have less warning when something goes wrong, and less ability to diagnose it when it does.</p> <div class="mid-cta"> <div class="mid-cta-text"><strong>Worth doing visibility first?</strong> A 30-minute discovery call. I audit your current data environment and show you what a single live view of your business would actually surface.</div> <a href="#" data-modal-open="discovery" class="mid-cta-link">Book a discovery call →</a> </div> <h2 id="how-we-build">How I Build Operational Visibility</h2> <p>The build starts with a data audit. I map every source of information the business currently runs on: what data exists, where it lives, in what format, how reliably it is maintained, and how often it updates. Most businesses are surprised by two findings: how much useful data they already have, and how inconsistently it is being used.</p> <p>From the audit, I identify what goes into the centralised environment: which data sources to pull, how to normalise them, and what the founder actually needs to see. This is not a generic dashboard template. It is designed around the decisions this specific founder needs to make: the things they currently ask their team for, the things they wish they could see without asking.</p> <p>The build itself, for a 5 to 35 person service business, is scoped per client after the audit. A working MVP comes up first (the operational dashboard live on real data), and the remaining work is iteration sprints that build out the rest of the system, phase by phase. The output is a single operational environment, not a reporting layer on top of existing tools, but a purpose-built system that consolidates all business data into one accessible place. After that, the founder has the reference point they need to make automation decisions based on evidence rather than intuition.</p> <h2 id="why-first">Why This Must Come Before Automation</h2> <p>Here is the practical reason automation must come second. Every workflow I automate needs to be precisely defined: input, output, decision criteria, exception handling, data requirements. To define it precisely, I need to see it running in context, within the full operational picture of the business. Without visibility, I am automating a described version of a process. With visibility, I am automating the actual version.</p> <p>There is also a diagnostic reason. Once automation is running, the visibility layer is how the founder monitors it. They can see whether the automated workflow is producing the expected outputs, whether volume is within normal bounds, whether anything requires human attention. Without visibility, the only way to know if an automation is working correctly is to manually check its output, which undermines the point of automating it.</p> <p>Stage 1 is not setup work for Stage 2. It is the foundation that makes Stage 2 reliable, diagnosable, and improvable over time. The sequence exists for a reason. I do not skip it.</p> <div class="article-cta"> <div class="article-cta-label">Next step</div> <div class="article-cta-h">Want to see what your operational visibility could look like?</div> <div class="article-cta-sub">Book a 30-minute discovery call. I audit your current data environment and show you exactly what a consolidated view of your business would surface.</div> <a href="#" data-modal-open="discovery" class="btn-white">Book a discovery call →</a> </div> </article> <aside class="article-sidebar"> <div class="sidebar-toc-label">In this article</div> <div class="sidebar-toc"> <a href="#why-skip">Why Founders Skip Visibility</a> <a href="#what-it-is">What Operational Visibility Is</a> <a href="#three-questions">The Three Questions It Must Answer</a> <a href="#without-visibility">Automation Without Visibility</a> <a href="#how-we-build">How I Build It</a> <a href="#why-first">Why It Comes First</a> </div> <div class="sidebar-author"> <div class="sidebar-author-name">Bolun (Ben) Liu</div> <div class="sidebar-author-role">Founder, RightClick:AI · Singapore</div> <div class="sidebar-author-bio">Marketer and AI operator. Builds custom AI systems for service businesses in Singapore. All writing from direct experience, no borrowed frameworks.</div> <a href="/about" class="sidebar-author-link">Read full bio →</a> </div> </aside> </div> </div> <div class="wrap"> <div class="related-posts"> <div class="related-label">Related reading</div> <div class="related-grid"> <a href="/why-ai-automation-projects-fail" class="related-card"> <div class="related-cat">AI Automation · Process</div> <div class="related-title">Why Most AI Automation Projects Fail Before the First Line of Code</div> </a> <a href="/what-is-an-ai-operating-system" class="related-card"> <div class="related-cat">AI Systems · Strategy</div> <div class="related-title">What Is an AI Operating System? How SMEs Are Replacing Entire SaaS Stacks</div> </a> <a href="/cost-of-manual-workflows" class="related-card"> <div class="related-cat">Operations · SME</div> <div class="related-title">The Real Cost of Running a 25-Person Service Business on Manual Workflows</div> </a> </div> </div> </div>   </main> <footer class="site-footer"> <div class="wrap"> <div class="footer-row"> <div class="footer-logo">RightClick<span>:AI</span></div> <div class="footer-links"> <a href="/about">About</a> <a href="/faq">FAQ</a> <a href="/blog">Blog</a> </div> <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div> <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a> </div> </div> </footer> <div class="modal" id="discovery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title"> <div class="modal-backdrop" data-modal-close></div> <div class="modal-panel" role="document"> <button class="modal-close" type="button" aria-label="Close" data-modal-close> <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"> <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path> </svg> </button> <div class="modal-eyebrow">Get started</div> <h2 class="modal-title" id="modal-title">Book a 30-minute call.<br>It's free.</h2> <p class="modal-sub">No pitch. No proposal. Just me looking at your business, finding the bottleneck, and telling you honestly whether I can help.</p> <form class="discovery-form" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate> <div class="form-row"> <div class="form-group"> <label class="form-label" for="modal-name">Your name</label> <input class="form-input" type="text" id="modal-name" name="name" placeholder="Jane Smith" required autocomplete="name"> </div> <div class="form-group"> <label class="form-label" for="modal-email">Work email</label> <input class="form-input" type="email" id="modal-email" name="email" placeholder="you@company.com" required autocomplete="email"> </div> </div> <div class="form-group"> <label class="form-label" for="modal-bottleneck">Not ready to book? Tell me the one thing eating your week <span style="opacity:0.6;font-weight:400">(optional)</span></label> <textarea class="form-textarea" id="modal-bottleneck" name="bottleneck" placeholder="2 to 3 sentences is enough."></textarea> </div> <button type="submit" class="btn btn-white">Book my free call <span class="btn-arrow" aria-hidden="true">→</span></button> <p class="form-bottom-note">ben@3nm.io · Singapore · No pitch, no proposal.</p> <div class="form-error" id="modal-form-error" role="alert">Something went wrong. Email <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try again.</div> </form> <div class="form-success" id="modal-form-success" role="status" aria-live="polite"> <div class="form-success-title">I'll be in touch shortly.</div> <div class="form-success-sub">Expect an email from ben@3nm.io within 24 hours.<br>Singapore timezone (SGT, UTC+8).</div> </div> </div> </div> <!-- Shared UI behaviour: nav scroll/toggle, scroll-reveal, FAQ accordion. --> <script>
+      (function () {
+        var nav = document.getElementById('main-nav');
+        var progress = document.getElementById('scroll-progress');
+        var setNav = function () { if (nav) nav.classList.toggle('scrolled', window.scrollY > 24); };
+        var setProgress = function () {
+          if (!progress) return;
+          var h = document.documentElement;
+          var max = h.scrollHeight - h.clientHeight;
+          progress.style.transform = 'scaleX(' + (max > 0 ? (window.scrollY / max) : 0) + ')';
+        };
+        var onScroll = function () { setNav(); setProgress(); };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', setProgress, { passive: true });
 
-  <link rel="canonical" href="https://3nm.io/operational-visibility-first">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://3nm.io/operational-visibility-first">
-  <meta property="og:site_name" content="RightClick:AI">
-  <meta property="og:title" content="Operational Visibility First — Stage 1 of a Custom Internal System">
-  <meta property="og:description" content="Why every custom build starts with operational visibility, not automation. RightClick:AI's three-stage method.">
-  <meta property="og:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg">
-  <meta property="og:locale" content="en_SG">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Operational Visibility First — RightClick:AI">
-  <meta name="twitter:description" content="Why every custom build starts with operational visibility, not automation.">
-  <meta name="twitter:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg">
-  <link rel="icon" type="image/svg+xml" href="assets/logo/rightclickai-mark.svg">
-  <link rel="alternate icon" href="assets/logo/rightclickai-mark.svg">
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
-  <link href="assets/site.css" rel="stylesheet">
-  <style>
-    /* Tokens come from assets/site.css */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%;}body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}a{color:inherit;text-decoration:none;}.wrap{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);}
-    .mid-cta{margin:36px 0;padding:22px 28px;background:rgba(21,128,61,0.05);border:1px solid rgba(21,128,61,0.18);border-left:3px solid var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
-    .mid-cta-text{font-size:14.5px;color:var(--ink-mid);line-height:1.55;flex:1;min-width:240px;}
-    .mid-cta-text strong{color:var(--ink);font-weight:700;}
-    .mid-cta-link{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--accent);white-space:nowrap;border-bottom:1.5px solid rgba(21,128,61,0.3);padding-bottom:2px;transition:gap 0.2s,border-bottom-color 0.2s;}
-    .mid-cta-link:hover{gap:10px;border-bottom-color:var(--accent);}
-    .stat-source{font-size:11.5px;color:var(--ink-faint);margin-top:-12px;margin-bottom:24px;letter-spacing:0.005em;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:90;transition:background 0.3s,box-shadow 0.3s;}nav.scrolled{background:rgba(250,250,247,0.92);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border);}.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}.nav-logo{font-size:15px;font-weight:700;letter-spacing:-0.02em;color:var(--ink);}.nav-logo span{color:var(--accent);}.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink-muted);transition:color 0.2s;}.nav-links a:hover,.nav-links a.active{color:var(--ink);}.nav-cta{font-size:13px;font-weight:600;color:var(--accent);border:1px solid rgba(26,92,58,0.28);padding:8px 20px;border-radius:6px;transition:background 0.2s,color 0.2s;}.nav-cta:hover{background:var(--accent);color:#fff;}@media(max-width:640px){.nav-links{display:none;}}
-    footer{background:var(--bg-dark);border-top:1px solid rgba(255,255,255,0.06);padding:28px 0;}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}.footer-logo{font-size:14px;font-weight:700;color:rgba(255,255,255,0.5);}.footer-logo span{color:rgba(255,255,255,0.25);}.footer-copy{font-size:12px;color:rgba(255,255,255,0.22);}.footer-links{display:flex;gap:24px;}.footer-links a,.footer-email{font-size:12px;color:rgba(255,255,255,0.3);transition:color 0.2s;}.footer-links a:hover,.footer-email:hover{color:rgba(255,255,255,0.55);}
-    .article-header{padding-top:clamp(100px,14vw,140px);padding-bottom:clamp(40px,5vw,64px);border-bottom:1px solid var(--border-mid);}.article-category{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}.article-h1{font-size:clamp(28px,3.8vw,48px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);max-width:800px;margin-bottom:24px;}.article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}.author-chip{display:flex;align-items:center;gap:10px;}.author-chip-avatar{width:34px;height:34px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}.author-chip-name{font-size:13.5px;font-weight:600;color:var(--ink-mid);}.author-chip-role{font-size:12px;color:var(--ink-faint);}.meta-sep{width:3px;height:3px;border-radius:50%;background:var(--ink-faint);}.meta-item{font-size:13px;color:var(--ink-faint);}
-    .article-layout{display:grid;grid-template-columns:1fr 260px;gap:72px;padding:clamp(48px,6vw,80px) 0 clamp(72px,9vw,120px);align-items:start;}@media(max-width:900px){.article-layout{grid-template-columns:1fr;}.article-sidebar{display:none;}}
-    .article-body{max-width:720px;}.article-body h2{font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-0.02em;line-height:1.25;color:var(--ink);margin:44px 0 16px;}.article-body h3{font-size:17px;font-weight:700;letter-spacing:-0.01em;color:var(--ink);margin:28px 0 10px;}.article-body p{font-size:16px;color:var(--ink-mid);line-height:1.85;margin-bottom:20px;}.article-body p:first-child{font-size:17px;color:var(--ink);}.article-body strong{color:var(--ink);font-weight:600;}.article-body ul,.article-body ol{margin:0 0 20px 22px;display:flex;flex-direction:column;gap:8px;}.article-body li{font-size:15.5px;color:var(--ink-mid);line-height:1.7;}.article-body a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(26,92,58,0.3);}.article-body a:hover{text-decoration-color:var(--accent);}
-    .callout{background:var(--bg-warm);border-left:2px solid var(--accent);border-radius:0 6px 6px 0;padding:18px 22px;margin:28px 0;}.callout p{font-size:15px;font-style:italic;color:var(--ink-muted);line-height:1.75;margin:0;}.callout p strong{font-style:normal;color:var(--ink-mid);}
-    .three-questions{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border-mid);margin:28px 0;}.question-row{display:grid;grid-template-columns:36px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);align-items:start;}.question-num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:0.05em;padding-top:2px;}.question-text{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;line-height:1.4;margin-bottom:6px;}.question-body{font-size:13.5px;color:var(--ink-muted);line-height:1.65;}
-    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border-mid);border-bottom:1px solid var(--border-mid);margin:28px 0;}@media(max-width:640px){.stat-row{grid-template-columns:1fr;}}.stat-item{padding:24px 28px;border-right:1px solid var(--border);}.stat-item:last-child{border-right:none;}.stat-value{font-size:32px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);line-height:1;margin-bottom:8px;}.stat-value span{font-size:18px;color:var(--accent);}.stat-label{font-size:12.5px;color:var(--ink-muted);line-height:1.5;}
-    .article-cta{background:var(--bg-dark);border-radius:10px;padding:32px;margin-top:48px;}.article-cta-label{font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:10px;}.article-cta-h{font-size:20px;font-weight:700;letter-spacing:-0.02em;color:#fff;margin-bottom:8px;}.article-cta-sub{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:20px;}.btn-white{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);font-family:var(--font);font-size:13.5px;font-weight:700;padding:12px 24px;border-radius:6px;border:none;cursor:pointer;transition:opacity 0.2s;}.btn-white:hover{opacity:0.9;}
-    .article-sidebar{position:sticky;top:88px;}.sidebar-toc-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;}.sidebar-toc{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border-mid);}.sidebar-toc a{font-size:13px;color:var(--ink-muted);padding:10px 0;border-bottom:1px solid var(--border);transition:color 0.2s;}.sidebar-toc a:hover{color:var(--accent);}.sidebar-author{margin-top:32px;padding:20px;background:var(--bg-warm);border-radius:8px;}.sidebar-author-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;}.sidebar-author-role{font-size:12px;color:var(--ink-muted);margin-bottom:12px;}.sidebar-author-bio{font-size:13px;color:var(--ink-mid);line-height:1.65;}.sidebar-author-link{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--accent);}
-    .related-posts{padding:clamp(40px,5vw,64px) 0;border-top:1px solid var(--border-mid);}.related-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:24px;}.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}@media(max-width:768px){.related-grid{grid-template-columns:1fr;}}.related-card{display:block;background:#fff;border:1px solid var(--border-mid);border-radius:8px;padding:20px;transition:box-shadow 0.2s;text-decoration:none;color:inherit;}.related-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.07);}.related-cat{font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}.related-title{font-size:14.5px;font-weight:700;letter-spacing:-0.01em;color:var(--ink);line-height:1.35;}
-  </style>
-</head>
-<body>
-  <nav class="site-nav" id="main-nav" aria-label="Main">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a href="/" class="nav-logo" aria-label="RightClick AI home">
-          <svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z" fill="currentColor"/>
-            <circle cx="24" cy="18" r="1.6" fill="currentColor" opacity="0.45"/>
-            <circle cx="24" cy="23" r="1.6" fill="currentColor" opacity="0.45"/>
-            <circle cx="24" cy="28" r="1.6" fill="currentColor" opacity="0.45"/>
-          </svg>
-          RightClick<span>:AI</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="/#build">What I build</a></li>
-          <li><a href="how-it-works">How it works</a></li>
-          <li><a href="case-studies">My work</a></li>
-          <li><a href="faq">FAQ</a></li>
-          <li><a href="about">About</a></li>
-        </ul>
-        <a href="#" data-modal-open="discovery" class="nav-cta">Book a call</a>
-        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-          <span class="nav-toggle-line" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </nav>
+        var navToggle = document.getElementById('nav-toggle');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (navToggle && mobileMenu) {
+          navToggle.addEventListener('click', function () {
+            var open = mobileMenu.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.classList.toggle('menu-open', open);
+          });
+          mobileMenu.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () {
+              mobileMenu.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('menu-open');
+            });
+          });
+        }
 
-  <div class="mobile-menu" id="mobile-menu">
-    <ul>
-      <li><a href="/#build">What I build</a></li>
-      <li><a href="how-it-works">How it works</a></li>
-      <li><a href="case-studies">My work</a></li>
-      <li><a href="faq">FAQ</a></li>
-      <li><a href="about">About</a></li>
-    </ul>
-    <a href="#" data-modal-open="discovery" class="nav-cta">Book a call</a>
-  </div>
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if ('IntersectionObserver' in window && !reduce) {
+          var revealObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+          document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+        } else {
+          document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+        }
 
-  <div class="article-header">
-    <div class="wrap">
-      <div class="article-category">Methodology · Process</div>
-      <h1 class="article-h1">Stage 1 Before Stage 2: Why Operational Visibility Has to Come First</h1>
-      <div class="article-meta">
-        <div class="author-chip">
-          <div class="author-chip-avatar">BL</div>
-          <div>
-            <div class="author-chip-name">Bolun (Ben) Liu</div>
-            <div class="author-chip-role">Founder, RightClick:AI</div>
-          </div>
-        </div>
-        <div class="meta-sep"></div>
-        <div class="meta-item">April 28, 2026</div>
-        <div class="meta-sep"></div>
-        <div class="meta-item">6 min read</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="article-layout">
-      <article class="article-body">
-
-        <p>Operational visibility is the ability to know what is happening across your entire business, at any moment, without asking anyone, opening multiple systems, or waiting for a weekly update. One centralised environment. One real-time view. Every client, every project, every financial position, every capacity signal, live and consolidated. At RightClick:AI, this is Stage 1. I will not begin building Stage 2 (automation) until it is in place. Not as a philosophical preference. As a practical constraint: automation built on top of fragmented, invisible operations fails in ways that are hard to diagnose and expensive to fix. Visibility first is not a conservative approach. It is the prerequisite that makes everything after it possible.</p>
-
-        <p>This article explains why, and what operational visibility actually looks like in a 5 to 35 person service business.</p>
-
-        <h2 id="why-skip">Why Founders Go Straight to Automation</h2>
-
-        <p>Most founders who contact me want automation. Completely understandable. Automation has a clear, legible value proposition. It saves staff time, removes repetitive work, and scales capacity without adding headcount. The return is visible and measurable.</p>
-
-        <p>Visibility is harder to sell because its output is not a saved hour. It is understanding. And understanding is easy to undervalue, right up until the moment you realise you have been making decisions without it.</p>
-
-        <div class="callout"><p><strong>Most service business founders are operating on assumptions, not data.</strong> They believe they know their client status, pipeline position, and team capacity. In most cases, they know yesterday's version of each, filtered through whoever they last spoke to.</p></div>
-
-        <p>The reason founders go straight to automation is that the cost of poor visibility is invisible. If you have never had a single live view of your business, you have no reference point for what you are missing. You fill the gap with meetings, status requests, and manual compilation. Eventually this becomes the background operating cost of running the business. It feels normal. It is not.</p>
-
-        <h2 id="what-it-is">What Operational Visibility Actually Is</h2>
-
-        <p>Operational visibility, as I define it, is not a dashboard bolted on top of existing tools. It is a single environment where all business data (clients, projects, financials, pipelines, team capacity) is centralised, continuously updated, and accessible in one place. The founder opens it once in the morning and knows everything that matters that day. No asking. No compiling. No waiting.</p>
-
-        <p>This is different from reporting. Most businesses have some reporting: a weekly revenue number, a monthly client summary, a project status deck. These are snapshots, already stale by the time they are produced. They answer the question "what happened?" rather than "what is happening?" Operational visibility answers the latter, continuously, in real time.</p>
-
-        <p>It is also different from a BI tool or analytics platform. Those tools require someone to query them, interpret the output, and share the result. Operational visibility is built specifically for how the founder of this business needs to see their business: what data they care about, in what format, at what cadence. It is purpose-built, not generic.</p>
-
-        <h2 id="three-questions">The Three Questions Visibility Must Answer</h2>
-
-        <p>For a service business, operational visibility has to answer three questions, instantly, at any time. If any one of them requires more than thirty seconds to answer, the visibility system is incomplete.</p>
-
-        <div class="three-questions">
-          <div class="question-row">
-            <div class="question-num">01</div>
-            <div>
-              <div class="question-text">What is the current status of every client?</div>
-              <div class="question-body">Which clients are healthy. Which are at risk. Which have outstanding actions. Which are approaching renewal, escalation, or churn. The full client picture, not from memory, from data.</div>
-            </div>
-          </div>
-          <div class="question-row">
-            <div class="question-num">02</div>
-            <div>
-              <div class="question-text">What is the financial position of the business right now?</div>
-              <div class="question-body">Revenue collected and outstanding. Projected revenue against current pipeline. Burn rate. Cash position. Not last month's numbers, current numbers, continuously updated as invoices are raised, paid, and converted.</div>
-            </div>
-          </div>
-          <div class="question-row">
-            <div class="question-num">03</div>
-            <div>
-              <div class="question-text">What is happening in operations today?</div>
-              <div class="question-body">Team capacity and current load. Projects on track versus slipping. Blockers that need attention. Deadlines approaching. The operational picture required to make staffing, priority, and delivery decisions.</div>
-            </div>
-          </div>
-        </div>
-
-        <p>In a business running on disconnected SaaS tools, answering all three questions simultaneously requires pulling data from five to eight different systems, compiling it manually, and hoping nothing is stale by the time it reaches the founder. Most businesses can answer each question individually, slowly, imprecisely, and only by asking someone. None of them can answer all three in real time.</p>
-
-        <h2 id="without-visibility">What Happens When You Automate Without Visibility</h2>
-
-        <p>I have seen this pattern enough times to predict the outcome. A business identifies a high-value workflow to automate: client onboarding, reporting, proposal generation. The automation is built. It runs. A few weeks in, something is off. The founder notices a drop in conversion, a delay in delivery, an anomaly in revenue. Is it the automation? Is it the underlying process? Is it a capacity issue? They do not know, because they have no consolidated view of the business to diagnose against.</p>
-
-        <p>They pull the data manually, which takes time and is inevitably incomplete. By the time they understand what is happening, the problem has compounded. The fix requires changes to both the automation and the processes around it. What should have been a quick correction becomes a multi-week investigation.</p>
-
-        <div class="stat-row">
-          <div class="stat-item">
-            <div class="stat-value">4–8<span>×</span></div>
-            <div class="stat-label">More expensive to fix an automation post-build than during scoping, when the process context is no longer fresh</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">~70<span>%</span></div>
-            <div class="stat-label">Of AI automation problems trace back to unclear process definition or missing data, not to technical failures</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">3–5<span>wks</span></div>
-            <div class="stat-label">Typical time lost investigating automation failures in businesses with no unified operational view</div>
-          </div>
-        </div>
-
-        <p class="stat-source">Estimates from RightClick:AI engagements with 15–35 person service businesses, 2024–2026.</p>
-
-        <p>Automation without visibility is building a faster machine without instruments. You move faster. You also have less warning when something goes wrong, and less ability to diagnose it when it does.</p>
-
-        <div class="mid-cta">
-          <div class="mid-cta-text"><strong>Worth doing visibility first?</strong> A 30-minute discovery call. I audit your current data environment and show you what a single live view of your business would actually surface.</div>
-          <a href="#" data-modal-open="discovery" class="mid-cta-link">Book a discovery call →</a>
-        </div>
-
-        <h2 id="how-we-build">How I Build Operational Visibility</h2>
-
-        <p>The build starts with a data audit. I map every source of information the business currently runs on: what data exists, where it lives, in what format, how reliably it is maintained, and how often it updates. Most businesses are surprised by two findings: how much useful data they already have, and how inconsistently it is being used.</p>
-
-        <p>From the audit, I identify what goes into the centralised environment: which data sources to pull, how to normalise them, and what the founder actually needs to see. This is not a generic dashboard template. It is designed around the decisions this specific founder needs to make: the things they currently ask their team for, the things they wish they could see without asking.</p>
-
-        <p>The build itself, for a 5 to 35 person service business, is scoped per client after the audit. A working MVP comes up first (the operational dashboard live on real data), and the remaining work is iteration sprints that build out the rest of the system, phase by phase. The output is a single operational environment, not a reporting layer on top of existing tools, but a purpose-built system that consolidates all business data into one accessible place. After that, the founder has the reference point they need to make automation decisions based on evidence rather than intuition.</p>
-
-        <h2 id="why-first">Why This Must Come Before Automation</h2>
-
-        <p>Here is the practical reason automation must come second. Every workflow I automate needs to be precisely defined: input, output, decision criteria, exception handling, data requirements. To define it precisely, I need to see it running in context, within the full operational picture of the business. Without visibility, I am automating a described version of a process. With visibility, I am automating the actual version.</p>
-
-        <p>There is also a diagnostic reason. Once automation is running, the visibility layer is how the founder monitors it. They can see whether the automated workflow is producing the expected outputs, whether volume is within normal bounds, whether anything requires human attention. Without visibility, the only way to know if an automation is working correctly is to manually check its output, which undermines the point of automating it.</p>
-
-        <p>Stage 1 is not setup work for Stage 2. It is the foundation that makes Stage 2 reliable, diagnosable, and improvable over time. The sequence exists for a reason. I do not skip it.</p>
-
-        <div class="article-cta">
-          <div class="article-cta-label">Next step</div>
-          <div class="article-cta-h">Want to see what your operational visibility could look like?</div>
-          <div class="article-cta-sub">Book a 30-minute discovery call. I audit your current data environment and show you exactly what a consolidated view of your business would surface.</div>
-          <a href="#" data-modal-open="discovery" class="btn-white">Book a discovery call →</a>
-        </div>
-
-      </article>
-
-      <aside class="article-sidebar">
-        <div class="sidebar-toc-label">In this article</div>
-        <div class="sidebar-toc">
-          <a href="#why-skip">Why Founders Skip Visibility</a>
-          <a href="#what-it-is">What Operational Visibility Is</a>
-          <a href="#three-questions">The Three Questions It Must Answer</a>
-          <a href="#without-visibility">Automation Without Visibility</a>
-          <a href="#how-we-build">How I Build It</a>
-          <a href="#why-first">Why It Comes First</a>
-        </div>
-        <div class="sidebar-author">
-          <div class="sidebar-author-name">Bolun (Ben) Liu</div>
-          <div class="sidebar-author-role">Founder, RightClick:AI · Singapore</div>
-          <div class="sidebar-author-bio">Marketer and AI operator. Builds custom AI systems for service businesses in Singapore. All writing from direct experience, no borrowed frameworks.</div>
-          <a href="about" class="sidebar-author-link">Read full bio →</a>
-        </div>
-      </aside>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="related-posts">
-      <div class="related-label">Related reading</div>
-      <div class="related-grid">
-        <a href="why-ai-automation-projects-fail" class="related-card">
-          <div class="related-cat">AI Automation · Process</div>
-          <div class="related-title">Why Most AI Automation Projects Fail Before the First Line of Code</div>
-        </a>
-        <a href="what-is-an-ai-operating-system" class="related-card">
-          <div class="related-cat">AI Systems · Strategy</div>
-          <div class="related-title">What Is an AI Operating System? How SMEs Are Replacing Entire SaaS Stacks</div>
-        </a>
-        <a href="cost-of-manual-workflows" class="related-card">
-          <div class="related-cat">Operations · SME</div>
-          <div class="related-title">The Real Cost of Running a 25-Person Service Business on Manual Workflows</div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="wrap">
-      <div class="footer-row">
-        <div class="footer-logo">RightClick<span>:AI</span></div>
-        <div class="footer-links">
-          <a href="about">About</a>
-          <a href="faq">FAQ</a>
-          <a href="blog">Blog</a>
-        </div>
-        <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div>
-        <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 24);
-    }, { passive: true });
-    const navToggle = document.getElementById('nav-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (navToggle && mobileMenu) {
-      navToggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('menu-open');
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-        navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-      });
-      mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          nav.classList.remove('menu-open');
-          navToggle.setAttribute('aria-expanded', 'false');
+        document.querySelectorAll('.faq-item').forEach(function (item) {
+          // index/self-improving use a .faq-q button; the faq page uses a .faq-question div. Both toggle .faq-item.open.
+          var q = item.querySelector('.faq-q, .faq-question');
+          if (!q) return;
+          q.addEventListener('click', function () {
+            var isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function (o) {
+              o.classList.remove('open');
+              var b = o.querySelector('.faq-q');
+              if (b) b.setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
+          });
         });
-      });
-    }
-  </script>
-
-  <!-- ── DISCOVERY MODAL ──────────────────── -->
-  <div class="modal" id="discovery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-panel" role="document">
-      <button class="modal-close" type="button" aria-label="Close" data-modal-close>
-        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
-          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="modal-eyebrow">Get started</div>
-      <h2 class="modal-title" id="modal-title">Book a 30-minute call.<br>It's free.</h2>
-      <p class="modal-sub">No pitch. No proposal. I talk through your business, identify the bottleneck, and tell you honestly whether I can help.</p>
-      <form class="discovery-form" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="modal-name">Your name</label>
-            <input class="form-input" type="text" id="modal-name" name="name" placeholder="Jane Smith" required autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="modal-email">Work email</label>
-            <input class="form-input" type="email" id="modal-email" name="email" placeholder="you@company.com" required autocomplete="email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="modal-bottleneck">Biggest bottleneck right now?</label>
-          <textarea class="form-textarea" id="modal-bottleneck" name="bottleneck" placeholder="2 to 3 sentences is enough." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-white">Book your discovery call <span class="btn-arrow" aria-hidden="true">→</span></button>
-        <p class="form-bottom-note">ben@3nm.io · Singapore · No pitch, no proposal.</p>
-        <div class="form-error" id="modal-form-error" role="alert">Something went wrong. Email <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try again.</div>
-      </form>
-      <div class="form-success" id="modal-form-success" role="status" aria-live="polite">
-        <div class="form-success-title">I'll be in touch shortly.</div>
-        <div class="form-success-sub">Expect an email from ben@3nm.io within 24 hours.<br>Singapore timezone (SGT, UTC+8).</div>
-      </div>
-    </div>
-  </div>
-  <script src="assets/modal.js" defer></script>
-</body>
-</html>
+      })();
+    </script> <script src="/assets/modal.js" defer></script>  </body></html>

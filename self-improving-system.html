@@ -1,1784 +1,246 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>The Self-Improving System: knowledge that compounds overnight | RightClick:AI</title>
-  <meta name="description"
-    content="A knowledge system that reads across everything your firm knows and gets smarter every night on its own. Built on Claude Code and plain files. Yours to own. Get the free blueprint.">
-  <link rel="canonical" href="https://3nm.io/self-improving-system">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://3nm.io/self-improving-system">
-  <meta property="og:title" content="Your firm's knowledge, finally compounding — while you sleep.">
-  <meta property="og:description"
-    content="A self-improving knowledge system that connects everything your firm knows, overnight. Built on Claude Code + plain files. Yours to own. Get the free blueprint.">
-  <meta property="og:site_name" content="RightClick:AI">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Your firm's knowledge, finally compounding — while you sleep.">
-  <meta name="twitter:description"
-    content="A self-improving knowledge system that connects everything your firm knows, overnight. Built on Claude Code + plain files. Yours to own.">
-
-  <!-- Fonts + shared stylesheet (harvest head setup) -->
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
-  <link href="assets/site.css" rel="stylesheet">
-
-  <style>
-    /* ═══════════════════════════════════════════════════════════
-       PAGE-SPECIFIC CSS — self-improving-system.html
-       Reuses assets/site.css for tokens, nav, buttons, footer,
-       forms, eyebrows, wrap, reveal. Only ports + authors below.
-    ═══════════════════════════════════════════════════════════ */
-
-    /* [BEN: confirm] highlight so unresolved facts stay visible */
-    .ben-confirm {
-      background: var(--state-warn-tint);
-      color: var(--state-warn-text);
-      border: 1px dashed rgba(146, 64, 14, 0.4);
-      border-radius: var(--r-sm);
-      padding: 1px 6px;
-      font-size: 0.86em;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      white-space: normal;
-    }
-    .ben-confirm.on-dark {
-      background: rgba(251, 191, 36, 0.14);
-      color: #FBCF73;
-      border-color: rgba(251, 191, 36, 0.4);
-    }
-
-    /* ── ATTENTION BAR ─────────────────────────── */
-    .attn-bar {
-      background: var(--bg-dark);
-      color: var(--on-dark-mute);
-      text-align: center;
-      font-size: 12.5px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      line-height: 1.5;
-      padding: 9px 20px;
-      border-bottom: 1px solid var(--border-on-dark);
-    }
-    .attn-bar strong { color: var(--accent-on-dark); font-weight: 700; }
-
-    /* Nav sits just under the attention bar; keep logo quiet so headline owns the fold */
-    nav.site-nav { top: 0; }
-
-    /* ── HERO ──────────────────────────────────── */
-    #hero {
-      padding: clamp(56px, 8vw, 96px) 0 clamp(72px, 10vw, 120px);
-      overflow: hidden;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: center;
-    }
-    @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 56px; }
-    }
-    .hero-h1 {
-      font-size: clamp(34px, 5.4vw, 62px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.04;
-      color: var(--ink);
-      margin: 18px 0 22px;
-      max-width: 15ch;
-    }
-    .hero-h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: clamp(15px, 1.7vw, 18px);
-      color: var(--ink-mid);
-      line-height: 1.65;
-      max-width: 52ch;
-      margin-bottom: 30px;
-    }
-    .hero-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin: 0 0 34px;
-      max-width: 54ch;
-    }
-    .hero-bullets li {
-      display: grid;
-      grid-template-columns: 22px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-    .hero-bullet-mark {
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: var(--accent-tint-14);
-      color: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .hero-bullet-mark svg { width: 12px; height: 12px; }
-    .hero-bullet-t {
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.4;
-    }
-    .hero-bullet-d {
-      display: block;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--ink-muted);
-      line-height: 1.55;
-      margin-top: 3px;
-    }
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px 22px;
-    }
-    .hero-cta-note {
-      font-size: 12.5px;
-      color: var(--ink-faint);
-      letter-spacing: 0.01em;
-    }
-    /* big loud CTA a touch larger than default btn */
-    .cta-loud {
-      font-size: 16px;
-      padding: 16px 26px;
-    }
-
-    /* ── HERO CHAOS VISUAL — interrupt pile (PORTED verbatim) ── */
-    .chaos-stage {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      height: 460px;
-      margin: 0 auto;
-    }
-    .chaos-card {
-      position: absolute;
-      background: #fff;
-      border: 1px solid var(--border-mid);
-      border-radius: var(--r-md);
-      padding: 12px 14px;
-      box-shadow: 0 6px 18px rgba(13, 18, 15, 0.08), 0 1px 3px rgba(13, 18, 15, 0.05);
-      width: 280px;
-      will-change: transform;
-      transition: transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .chaos-card:hover {
-        transform: rotate(0) translateY(-3px) !important;
-        z-index: 20 !important;
-        box-shadow: 0 14px 34px rgba(13, 18, 15, 0.14), 0 2px 6px rgba(13, 18, 15, 0.06);
-      }
-    }
-    .chaos-c1 { top: 0; left: 24px; transform: rotate(-3.8deg); z-index: 5; }
-    .chaos-c2 { top: 96px; right: -8px; transform: rotate(3.2deg); z-index: 4; width: 268px; }
-    .chaos-c3 { top: 192px; left: -10px; transform: rotate(-4.5deg); z-index: 3; }
-    .chaos-c4 { top: 290px; right: 12px; transform: rotate(3.5deg); z-index: 2; }
-    .chaos-c5 { top: 380px; left: 36px; transform: rotate(-2.4deg); z-index: 1; }
-    @media (prefers-reduced-motion: no-preference) {
-      @keyframes chaos-drift {
-        0%, 100% { transform: var(--rest); }
-        50% { transform: var(--drift); }
-      }
-      .chaos-c1 { --rest: rotate(-3.8deg); --drift: rotate(-3.8deg) translateY(-3px); animation: chaos-drift 5.6s ease-in-out infinite; }
-      .chaos-c2 { --rest: rotate(3.2deg); --drift: rotate(3.2deg) translateY(-2px); animation: chaos-drift 6.4s ease-in-out infinite 0.6s; }
-      .chaos-c3 { --rest: rotate(-4.5deg); --drift: rotate(-4.5deg) translateY(-4px); animation: chaos-drift 7.2s ease-in-out infinite 0.2s; }
-      .chaos-c4 { --rest: rotate(3.5deg); --drift: rotate(3.5deg) translateY(-2px); animation: chaos-drift 5.8s ease-in-out infinite 1.1s; }
-      .chaos-c5 { --rest: rotate(-2.4deg); --drift: rotate(-2.4deg) translateY(-3px); animation: chaos-drift 6.8s ease-in-out infinite 0.4s; }
-    }
-    .chaos-app {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px;
-    }
-    .chaos-app-icon {
-      width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 7px; font-weight: 800;
-    }
-    .chaos-app-icon.slack { background: linear-gradient(135deg, #ECB22E 0 50%, #E01E5A 50% 100%); }
-    .chaos-app-icon.gmail { background: #EA4335; }
-    .chaos-app-icon.alert { background: var(--state-error); }
-    .chaos-app-icon.cal { background: var(--accent); }
-    .chaos-app-icon.dm { background: var(--ink); }
-    .chaos-app-meta {
-      margin-left: auto; font-weight: 500; color: var(--ink-faint);
-      letter-spacing: 0.02em; text-transform: none; font-size: 10px;
-    }
-    .chaos-msg { font-size: 13px; color: var(--ink); line-height: 1.4; font-weight: 500; }
-    .chaos-msg-mention { color: var(--accent); font-weight: 700; }
-    .chaos-from { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 1px; }
-    .chaos-subj { font-size: 12.5px; color: var(--ink-mid); line-height: 1.4; }
-    .chaos-amount {
-      font-size: 11px; color: var(--state-error); font-weight: 700;
-      margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;
-    }
-    .chaos-amount-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--state-error); }
-    .chaos-floater {
-      position: absolute; top: 60px; right: -14px;
-      background: var(--state-error); color: #fff; border-radius: 50%;
-      width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800;
-      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.32);
-      transform: rotate(8deg); z-index: 6; border: 2.5px solid var(--bg);
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      @keyframes chaos-pulse {
-        0%, 100% { transform: rotate(8deg) scale(1); }
-        50% { transform: rotate(8deg) scale(1.08); }
-      }
-      .chaos-floater { animation: chaos-pulse 2.2s ease-in-out infinite; }
-    }
-    .chaos-caption {
-      position: absolute; bottom: -40px; left: 0; right: 0;
-      text-align: center; font-size: 10px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
-    }
-    @media (max-width: 960px) {
-      .chaos-stage { max-width: 380px; height: 440px; }
-      .chaos-card { width: 260px; }
-      .chaos-c2 { width: 248px; }
-    }
-
-    /* ── VSL SLOT ──────────────────────────────── */
-    #vsl { background: var(--bg-warm); border-top: 1px solid var(--border); }
-    .vsl-inner { max-width: 860px; margin: 0 auto; text-align: center; }
-    .vsl-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-on-dark);
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      margin: 28px auto 20px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 24px 64px rgba(8, 16, 10, 0.18);
-    }
-    .vsl-frame::before {
-      content: "";
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(120% 90% at 50% 42%, rgba(111, 191, 142, 0.10), transparent 60%);
-      pointer-events: none;
-    }
-    .vsl-play {
-      position: relative;
-      width: 74px; height: 74px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 30px var(--accent-glow);
-      margin-bottom: 22px;
-      cursor: default;
-    }
-    .vsl-play svg { width: 26px; height: 26px; margin-left: 4px; }
-    .vsl-poster {
-      position: relative;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 0 28px;
-      max-width: 620px;
-    }
-    .vsl-poster-line {
-      color: var(--on-dark-strong);
-      font-size: clamp(15px, 2.2vw, 19px);
-      font-weight: 700;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-    }
-    .vsl-badge {
-      position: absolute; top: 16px; left: 16px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--on-dark-faint);
-      border: 1px solid var(--border-on-dark-mid);
-      border-radius: var(--r-pill);
-      padding: 5px 11px;
-      background: rgba(255, 255, 255, 0.03);
-    }
-    .vsl-caption {
-      font-size: 14.5px;
-      color: var(--ink-mid);
-      line-height: 1.65;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    /* ── OPT-IN (light, above-the-fold-adjacent) ── */
-    #optin { border-top: 1px solid var(--border); }
-    .optin-inner { max-width: 560px; margin: 0 auto; }
-    .optin-card {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-on-dark);
-      border-radius: var(--r-xl);
-      padding: clamp(28px, 5vw, 44px);
-      box-shadow: 0 24px 64px rgba(8, 16, 10, 0.16);
-    }
-    .optin-h2 {
-      font-size: clamp(24px, 3.2vw, 34px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.14;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .optin-sub {
-      font-size: 15px;
-      color: var(--on-dark-mute);
-      line-height: 1.6;
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    /* select styled to match site.css dark form inputs (no .form-select exists) */
-    .discovery-form .form-select {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: var(--r-sm);
-      color: var(--on-dark-strong);
-      font-family: var(--font);
-      font-size: 15px;
-      padding: 12px 14px;
-      width: 100%;
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236FBF8E' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      transition: border-color var(--dur-hover) var(--ease-snap), background-color var(--dur-hover) var(--ease-snap);
-    }
-    .discovery-form .form-select:focus {
-      outline: none;
-      border-color: rgba(111, 191, 142, 0.6);
-    }
-    .discovery-form .form-select option { color: #0D120F; }
-
-    /* ── MECHANISM (3-step strip) ──────────────── */
-    .h-section {
-      font-size: clamp(28px, 3.6vw, 44px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.12;
-      color: var(--ink);
-    }
-    .mech-head { max-width: 720px; margin-bottom: 44px; }
-    .mech-head .lead { margin-top: 14px; font-size: 16px; color: var(--ink-mid); line-height: 1.6; }
-    .mech-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 44px;
-    }
-    @media (max-width: 820px) { .mech-steps { grid-template-columns: 1fr; } }
-    .mech-step {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 26px 24px 28px;
-    }
-    .mech-step-n {
-      font-size: 13px; font-weight: 800; color: var(--accent);
-      letter-spacing: 0.04em;
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-bottom: 12px;
-    }
-    .mech-step-n::before {
-      content: ""; width: 26px; height: 1px; background: var(--accent); opacity: 0.5;
-    }
-    .mech-step-t {
-      font-size: 18px; font-weight: 700; color: var(--ink);
-      letter-spacing: -0.015em; margin-bottom: 8px; line-height: 1.25;
-    }
-    .mech-step-d { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
-    .mech-example {
-      background: var(--bg-warm);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: var(--r-lg);
-      padding: 26px clamp(22px, 4vw, 34px);
-      max-width: 820px;
-    }
-    .mech-example-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .mech-example p { font-size: 15.5px; color: var(--ink); line-height: 1.72; }
-    .mech-example .confirm-note { margin-top: 14px; font-size: 13px; line-height: 1.55; }
-
-    /* ── BEFORE → AFTER ────────────────────────── */
-    #beforeafter { background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .ba-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: clamp(20px, 4vw, 44px);
-      align-items: center;
-    }
-    @media (max-width: 900px) {
-      .ba-grid { grid-template-columns: 1fr; gap: 28px; }
-      .ba-arrow { transform: rotate(90deg); margin: 0 auto; }
-    }
-    .ba-col-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .ba-col-label.before { color: var(--state-error); }
-    .ba-col-label.after { color: var(--accent); }
-    .ba-col-title {
-      font-size: 19px; font-weight: 700; color: var(--ink); letter-spacing: -0.015em;
-      line-height: 1.25; margin-bottom: 10px;
-    }
-    .ba-col-sub { font-size: 14px; color: var(--ink-mid); line-height: 1.62; }
-    .ba-visual {
-      margin-top: 22px;
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      border: 1px solid var(--border-mid);
-    }
-    .ba-visual.dark {
-      background: var(--bg-dark);
-      border-color: var(--border-on-dark);
-    }
-    .ba-scatter {
-      background: #fff;
-      padding: 24px 18px;
-      min-height: 220px;
-      position: relative;
-    }
-    .ba-chip {
-      display: inline-block;
-      background: var(--bg-warm);
-      border: 1px solid var(--border-mid);
-      border-radius: var(--r-sm);
-      padding: 6px 11px;
-      font-size: 11.5px;
-      color: var(--ink-muted);
-      font-weight: 600;
-      margin: 4px;
-      transform: rotate(var(--rot, 0deg));
-    }
-    .ba-mini-graph { padding: 18px; }
-    .ba-mini-graph svg { width: 100%; height: auto; display: block; }
-    .ba-arrow {
-      color: var(--accent);
-      width: 34px; height: 34px;
-      flex-shrink: 0;
-    }
-
-    /* ── PAIN (predigest) ──────────────────────── */
-    .pain-head { max-width: 720px; margin-bottom: 44px; }
-    .pain-head .lead { margin-top: 14px; font-size: 16px; color: var(--ink-mid); line-height: 1.6; }
-    .pain-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 760px) { .pain-list { grid-template-columns: 1fr; } }
-    .pain-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 22px 24px;
-      display: grid;
-      grid-template-columns: 26px 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-    .pain-card.wide { grid-column: 1 / -1; }
-    @media (max-width: 760px) { .pain-card.wide { grid-column: auto; } }
-    .pain-mark {
-      width: 26px; height: 26px; border-radius: 7px;
-      background: rgba(220, 38, 38, 0.08);
-      color: var(--state-error);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .pain-mark svg { width: 14px; height: 14px; }
-    .pain-text { font-size: 14.5px; color: var(--ink-mid); line-height: 1.62; }
-    .pain-text strong { color: var(--ink); font-weight: 700; }
-
-    /* ── PROOF ─────────────────────────────────── */
-    .proof-head { max-width: 780px; margin-bottom: 44px; }
-    .proof-head .lead { margin-top: 14px; font-size: 16px; color: var(--ink-mid); line-height: 1.6; }
-    .proof-lead-card {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-on-dark);
-      border-radius: var(--r-xl);
-      padding: clamp(28px, 4vw, 40px);
-      margin-bottom: 28px;
-    }
-    .proof-lead-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent-on-dark); margin-bottom: 12px;
-    }
-    .proof-lead-title {
-      font-size: clamp(20px, 2.6vw, 27px); font-weight: 700; color: #fff;
-      letter-spacing: -0.02em; margin-bottom: 14px; line-height: 1.2;
-    }
-    .proof-lead-body { font-size: 15px; color: var(--on-dark); line-height: 1.72; }
-    .proof-lead-body .confirm-note { margin-top: 12px; font-size: 13px; }
-    .proof-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 820px) { .proof-grid { grid-template-columns: 1fr; } }
-    .proof-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 28px 26px;
-      display: flex; flex-direction: column;
-    }
-    .proof-card-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--ink-faint); margin-bottom: 14px;
-    }
-    .proof-card-title {
-      font-size: 18.5px; font-weight: 700; color: var(--ink);
-      letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 12px;
-    }
-    .proof-card-body { font-size: 14px; color: var(--ink-mid); line-height: 1.64; flex-grow: 1; }
-    .proof-metrics {
-      margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
-      font-size: 12.5px; font-weight: 700; color: var(--accent);
-      letter-spacing: 0.01em; line-height: 1.5;
-    }
-
-    /* ── KNOWLEDGE WIKI (PORTED verbatim from index.html) ── */
-    #wiki {
-      background: var(--bg-warm);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .wiki-head { margin-bottom: 40px; max-width: 720px; }
-    .wiki-head .lead {
-      margin-top: 14px; font-size: 16px; color: var(--ink-mid); line-height: 1.6;
-    }
-    .wiki-graph-card {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-on-dark);
-      border-radius: var(--r-xl);
-      padding: 24px 24px 28px;
-      margin-bottom: 36px;
-      max-width: 920px;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: hidden;
-    }
-    .wiki-graph-topbar {
-      display: flex; align-items: center; gap: 7px;
-      margin-bottom: 18px;
-    }
-    .wiki-graph-topbar-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255, 255, 255, 0.10);
-    }
-    .wiki-graph-topbar-dot:nth-child(2) { background: rgba(255, 255, 255, 0.07); }
-    .wiki-graph-topbar-dot:nth-child(3) { background: rgba(255, 255, 255, 0.05); }
-    .wiki-graph-title {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--on-dark-faint);
-      margin-left: 6px;
-    }
-    .wiki-graph-meta {
-      margin-left: auto; font-size: 9.5px; color: var(--on-dark-faint);
-      letter-spacing: 0.04em; text-transform: uppercase;
-    }
-    .wiki-graph-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-      max-height: 520px;
-    }
-    .wiki-line { stroke: rgba(255, 255, 255, 0.20); stroke-width: 0.95; fill: none; }
-    .wiki-line.bright { stroke: rgba(111, 191, 142, 0.42); stroke-width: 1.3; }
-    .wiki-node { fill: rgba(255, 255, 255, 0.55); }
-    .wiki-cluster { fill: rgba(255, 255, 255, 0.92); }
-    .wiki-hub { fill: var(--accent-on-dark); }
-    @media (prefers-reduced-motion: no-preference) {
-      .wiki-hub-pulse {
-        fill: var(--accent-on-dark);
-        opacity: 0.35;
-        transform-origin: center;
-        transform-box: fill-box;
-        animation: wiki-hub-pulse 2.6s ease-out infinite;
-      }
-      @keyframes wiki-hub-pulse {
-        0% { transform: scale(1); opacity: 0.5; }
-        100% { transform: scale(2.4); opacity: 0; }
-      }
-    }
-    .wiki-label {
-      fill: rgba(255, 255, 255, 0.55);
-      font-family: var(--font);
-      font-size: 11px;
-      font-weight: 500;
-    }
-    .wiki-label.cluster {
-      fill: rgba(255, 255, 255, 0.92);
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .wiki-label.hub {
-      fill: var(--accent-on-dark);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-    }
-    /* Mobile: SVG renders at ~0.34 scale. Boost in-viewBox sizes so labels stay readable on small screens. */
-    @media (max-width: 700px) {
-      .wiki-label { font-size: 30px; font-weight: 600; }
-      .wiki-label.cluster { font-size: 36px; }
-      .wiki-label.hub { font-size: 30px; }
-      .wiki-line { stroke-width: 2.4; }
-      .wiki-line.bright { stroke-width: 3.4; }
-      .wiki-node { r: 6.5; }
-      .wiki-cluster { r: 11; }
-      .wiki-hub { r: 16; }
-    }
-    .wiki-body {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 36px 64px;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-    @media (max-width: 700px) {
-      .wiki-body { grid-template-columns: 1fr; gap: 28px; }
-      .wiki-graph-card { padding: 20px 16px; }
-    }
-    .wiki-cat-heading {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .wiki-cat-list {
-      list-style: none; display: flex; flex-direction: column;
-      gap: 9px;
-    }
-    .wiki-cat-list li {
-      font-size: 14px; color: var(--ink-mid); line-height: 1.55;
-      display: flex; align-items: flex-start; gap: 10px;
-    }
-    .wiki-cat-list-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0; margin-top: 7px;
-    }
-
-    /* ── COMPARISON TABLE (PORTED verbatim) ────── */
-    .vs-section { padding: clamp(96px, 14vw, 152px) 0; border-top: 1px solid var(--border); }
-    .vs-head { max-width: 760px; margin-bottom: 56px; }
-    .vs-h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink); margin-bottom: 18px; }
-    .vs-intro { font-size: 16px; color: var(--ink-mid); line-height: 1.75; max-width: 700px; }
-    .vs-table {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 200px repeat(4, 1fr);
-      border-top: 1px solid var(--border-mid);
-    }
-    .vs-h-cell {
-      padding: 18px 14px;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--ink-mid);
-      border-bottom: 1px solid var(--border-mid);
-      border-right: 1px solid var(--border);
-      background: var(--bg-warm);
-    }
-    .vs-h-cell.us { background: rgba(21,128,61,0.06); color: var(--accent); }
-    .vs-h-cell:last-child { border-right: none; }
-    .vs-h-cell-sub {
-      display: block;
-      margin-top: 4px;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--ink-faint);
-      letter-spacing: 0;
-    }
-    .vs-h-cell.us .vs-h-cell-sub { color: var(--accent); opacity: 0.75; }
-    .vs-row-label {
-      padding: 18px 14px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      border-bottom: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      background: var(--bg-warm);
-    }
-    .vs-cell {
-      padding: 18px 14px;
-      font-size: 13.5px;
-      color: var(--ink-mid);
-      line-height: 1.55;
-      border-bottom: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-    }
-    .vs-cell:nth-child(5n) { border-right: none; }
-    .vs-cell.us { background: rgba(21,128,61,0.04); color: var(--ink); font-weight: 500; }
-    .vs-cell.us strong { color: var(--accent); font-weight: 700; }
-    @media (max-width: 900px) {
-      .vs-table { display: block; overflow-x: auto; white-space: nowrap; }
-      .vs-table > * { white-space: normal; }
-    }
-
-    /* ── GUARANTEE ─────────────────────────────── */
-    #guarantee { border-top: 1px solid var(--border); }
-    .guar-inner {
-      max-width: 760px; margin: 0 auto; text-align: center;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .guar-seal {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: var(--accent-light);
-      border: 1.5px solid rgba(21, 128, 61, 0.25);
-      color: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
-    }
-    .guar-seal svg { width: 28px; height: 28px; }
-    .guar-h2 {
-      font-size: clamp(23px, 3vw, 34px);
-      font-weight: 700; letter-spacing: -0.025em; line-height: 1.22;
-      color: var(--ink); max-width: 20ch;
-    }
-    .guar-h2 em { font-style: normal; color: var(--accent); }
-    .guar-sub {
-      margin-top: 18px; font-size: 16px; color: var(--ink-mid);
-      line-height: 1.7; max-width: 60ch;
-    }
-
-    /* ── FAQ (PORTED pattern) ──────────────────── */
-    #faq { border-top: 1px solid var(--border); }
-    .faq-wrap {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 56px;
-      align-items: start;
-    }
-    @media (max-width: 768px) { .faq-wrap { grid-template-columns: 1fr; gap: 32px; } }
-    .faq-sidebar-h2 {
-      font-size: clamp(24px, 3vw, 36px);
-      font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink);
-    }
-    .faq-sidebar-sub {
-      font-size: 14px; color: var(--ink-mid); line-height: 1.6; margin-top: 12px;
-    }
-    .faq-list { display: flex; flex-direction: column; }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:first-child { border-top: 1px solid var(--border); }
-    .faq-q {
-      width: 100%; background: none; border: none; text-align: left;
-      padding: 18px 0; display: flex; justify-content: space-between; align-items: center;
-      font-family: var(--font); font-size: 15px; font-weight: 700; color: var(--ink);
-      cursor: pointer; gap: 16px; min-height: 56px;
-      transition: color var(--dur-hover) var(--ease-snap);
-    }
-    @media (hover: hover) and (pointer: fine) { .faq-q:hover { color: var(--accent); } }
-    .faq-q:active { color: var(--accent-hover); }
-    .faq-icon {
-      width: 18px; height: 18px; flex-shrink: 0; color: var(--ink-muted);
-      transition: transform 320ms var(--ease-out), color 320ms var(--ease-out);
-    }
-    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
-    .faq-item.open .faq-q { color: var(--accent); }
-    .faq-a {
-      font-size: 14.5px; color: var(--ink-mid); line-height: 1.7;
-      max-height: 0; overflow: hidden; padding: 0;
-      transition: max-height 250ms var(--ease-out), padding-bottom 250ms var(--ease-out);
-    }
-    .faq-item.open .faq-a {
-      max-height: 640px; padding-bottom: 22px;
-      transition: max-height 400ms var(--ease-out), padding-bottom 400ms var(--ease-out);
-    }
-    .faq-a .confirm-note { margin-top: 10px; font-size: 13px; }
-
-    /* ── CLOSING (PORTED shell) ────────────────── */
-    #closing { background: var(--bg-dark); padding: var(--section-y) 0; }
-    .closing-inner { max-width: 520px; margin: 0 auto; text-align: center; }
-    .closing-h2 {
-      font-size: clamp(30px, 4vw, 46px);
-      font-weight: 700; letter-spacing: -0.03em; line-height: 1.08;
-      color: #fff; margin-bottom: 16px;
-    }
-    .closing-sub {
-      font-size: 16px; color: var(--on-dark-mute); line-height: 1.65; margin-bottom: 36px;
-    }
-    .closing-longterm {
-      margin-top: 28px; padding-top: 26px;
-      border-top: 1px solid var(--border-on-dark);
-      font-size: 13.5px; color: var(--on-dark-faint); line-height: 1.7;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- ── [0] ATTENTION BAR ─────────────────── -->
-  <div class="attn-bar">
-    For service firms <strong>7+ years in</strong>, with a decade of hard-won knowledge trapped in a few people's
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>The Self-Improving System: knowledge that compounds overnight | RightClick:AI</title><meta name="description" content="A knowledge system that reads across everything your firm knows and gets smarter every night on its own. Built on Claude Code and plain files. Yours to own. Get the free blueprint."><meta name="theme-color" content="#FAFAF7"><link rel="canonical" href="https://3nm.io/self-improving-system"><meta property="og:type" content="website"><meta property="og:url" content="https://3nm.io/self-improving-system"><meta property="og:site_name" content="RightClick:AI"><meta property="og:title" content="Your firm's knowledge, finally compounding — while you sleep."><meta property="og:description" content="A self-improving knowledge system that connects everything your firm knows, overnight. Built on Claude Code + plain files. Yours to own. Get the free blueprint."><meta property="og:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg"><meta property="og:locale" content="en_SG"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Your firm's knowledge, finally compounding — while you sleep."><meta name="twitter:description" content="A self-improving knowledge system that connects everything your firm knows, overnight. Built on Claude Code + plain files. Yours to own."><meta name="twitter:image" content="https://3nm.io/assets/logo/rightclickai-logo.svg"><link rel="icon" type="image/svg+xml" href="/assets/logo/rightclickai-mark.svg"><link rel="alternate icon" href="/assets/logo/rightclickai-mark.svg"><link rel="preconnect" href="https://api.fontshare.com"><link rel="preconnect" href="https://api.fontshare.com" crossorigin><link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/site.css"><!-- Google tag --><script async src="https://www.googletagmanager.com/gtag/js?id=G-TW8DK7YTJG"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-TW8DK7YTJG');
+    </script><link rel="stylesheet" href="/_astro/self-improving-system.CV4d_SAo.css"></head> <body class=""> <a class="skip-link" href="#main">Skip to content</a> <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div> <nav class="site-nav" id="main-nav" aria-label="Main"> <div class="wrap"> <div class="nav-inner"> <a href="/" class="nav-logo" aria-label="RightClick AI home"> <svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"> <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z" fill="currentColor"></path> <circle cx="24" cy="18" r="1.6" fill="currentColor" opacity="0.45"></circle> <circle cx="24" cy="23" r="1.6" fill="currentColor" opacity="0.45"></circle> <circle cx="24" cy="28" r="1.6" fill="currentColor" opacity="0.45"></circle> </svg>
+RightClick<span>:AI</span> </a> <ul class="nav-links"> <li><a href="/#build">What I build</a></li><li><a href="/how-it-works">How it works</a></li><li><a href="/case-studies">My work</a></li><li><a href="/faq">FAQ</a></li><li><a href="/about">About</a></li> </ul> <a href="/#closing" data-modal-open="discovery" class="nav-cta">Book a call</a> <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"> <span class="nav-toggle-line" aria-hidden="true"></span> </button> </div> </div> </nav> <div class="mobile-menu" id="mobile-menu"> <ul> <li><a href="/#build">What I build</a></li><li><a href="/how-it-works">How it works</a></li><li><a href="/case-studies">My work</a></li><li><a href="/faq">FAQ</a></li><li><a href="/about">About</a></li> </ul> <a href="/#closing" data-modal-open="discovery" class="nav-cta">Book a call</a> </div> <main id="main">    <div class="attn-bar">
+For service firms <strong>7+ years in</strong>, with a decade of hard-won knowledge trapped in a few people's
     heads.
-  </div>
-
-  <!-- ── NAV ───────────────────────────────── -->
-  <nav class="site-nav" id="main-nav" aria-label="Main">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a href="#hero" class="nav-logo" aria-label="RightClick AI home">
-          <svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z" fill="currentColor" />
-            <circle cx="24" cy="18" r="1.6" fill="currentColor" opacity="0.45" />
-            <circle cx="24" cy="23" r="1.6" fill="currentColor" opacity="0.45" />
-            <circle cx="24" cy="28" r="1.6" fill="currentColor" opacity="0.45" />
-          </svg>
-          RightClick<span>:AI</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="#how">How it works</a></li>
-          <li><a href="#proof">Proof</a></li>
-          <li><a href="#vs">Comparison</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-        <a href="#optin" class="nav-cta">Get the blueprint</a>
-        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu"
-          aria-label="Open menu">
-          <span class="nav-toggle-line" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="mobile-menu" id="mobile-menu">
-    <ul>
-      <li><a href="#how">How it works</a></li>
-      <li><a href="#proof">Proof</a></li>
-      <li><a href="#vs">Comparison</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <a href="#optin" class="nav-cta">Get the blueprint</a>
-  </div>
-
-  <!-- ── [1–4] HERO ────────────────────────── -->
-  <section id="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow reveal">The self-improving system</div>
-          <h1 class="hero-h1 reveal reveal-d1">
-            Your firm's <span class="ben-confirm" title="Swap the number to match your video hook">7</span> years of
+</div>  <section id="hero"> <div class="wrap"> <div class="hero-grid"> <div class="hero-copy"> <div class="eyebrow reveal">The self-improving system</div> <h1 class="hero-h1 reveal reveal-d1">
+Your firm's <span class="ben-confirm" title="Swap the number to match your video hook">7</span> years of
             knowledge, finally <em>compounding</em>, while you sleep.
-          </h1>
-          <p class="hero-sub reveal reveal-d2">
-            A knowledge base that reads across everything your firm knows (client history, playbooks, the judgment
+</h1> <p class="hero-sub reveal reveal-d2">
+A knowledge base that reads across everything your firm knows (client history, playbooks, the judgment
             calls nobody wrote down) and connects it overnight. Built on Claude Code and plain files. Yours to own
             outright.
-          </p>
-
-          <ul class="hero-bullets reveal reveal-d3">
-            <li>
-              <span class="hero-bullet-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-              </span>
-              <span class="hero-bullet-t">It improves itself overnight. You don't feed it.
-                <span class="hero-bullet-d">Every night it re-reads what you've added and finds connections you didn't
-                  ask for. You wake up to what you'd have missed.</span></span>
-            </li>
-            <li>
-              <span class="hero-bullet-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-              </span>
-              <span class="hero-bullet-t">Built on tools you can get today, not exotic tech.
-                <span class="hero-bullet-d">Claude Code and plain text files. Nothing that hasn't shipped, nothing
-                  you've never heard of, nothing locked behind a vendor.</span></span>
-            </li>
-            <li>
-              <span class="hero-bullet-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-              </span>
-              <span class="hero-bullet-t">You own the whole compounding asset: code, files, all of it.
-                <span class="hero-bullet-d">It appreciates as your firm learns. A SaaS subscription depreciates the day
-                  you stop paying. This is yours.</span></span>
-            </li>
-          </ul>
-
-          <div class="hero-cta-row reveal reveal-d4">
-            <a href="#optin" class="btn btn-primary cta-loud">Get the self-improving system blueprint
-              <span class="btn-arrow" aria-hidden="true">→</span></a>
-            <span class="hero-cta-note">Free. The exact setup I run for my own firm.</span>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal reveal-d2">
-          <div class="chaos-stage" role="figure"
-            aria-label="An ordinary week of knowledge scattered across a founder's tools">
-            <div class="chaos-card chaos-c1">
-              <div class="chaos-app">
-                <span class="chaos-app-icon slack" aria-hidden="true">#</span>
-                Slack · Sarah
-                <span class="chaos-app-meta">2m ago</span>
-              </div>
-              <div class="chaos-msg"><span class="chaos-msg-mention">@you</span> how did we price the SkyBridge job
-                last year? Client's asking again.</div>
-            </div>
-            <div class="chaos-card chaos-c2">
-              <div class="chaos-app">
-                <span class="chaos-app-icon gmail" aria-hidden="true">M</span>
-                Email · Junior
-                <span class="chaos-app-meta">Tue, 3 days</span>
-              </div>
-              <div class="chaos-from">Re: The Hartwell workaround</div>
-              <div class="chaos-subj">Did we ever document how we solved this? Can't find it anywhere.</div>
-            </div>
-            <div class="chaos-card chaos-c3">
-              <div class="chaos-app">
-                <span class="chaos-app-icon alert" aria-hidden="true">!</span>
-                Notion · Wiki
-                <span class="chaos-app-meta">Stale</span>
-              </div>
-              <div class="chaos-msg">Last edited 2023. Nobody owns this folder.</div>
-              <div class="chaos-amount"><span class="chaos-amount-dot"></span>412 docs · nobody trusts them</div>
-            </div>
-            <div class="chaos-card chaos-c4">
-              <div class="chaos-app">
-                <span class="chaos-app-icon cal" aria-hidden="true">C</span>
-                Calendar
-                <span class="chaos-app-meta">In 12 min</span>
-              </div>
-              <div class="chaos-msg">Handover call · the partner on leave knew this, not you</div>
-            </div>
-            <div class="chaos-card chaos-c5">
-              <div class="chaos-app">
-                <span class="chaos-app-icon dm" aria-hidden="true">D</span>
-                DM · You
-                <span class="chaos-app-meta">9:42 AM</span>
-              </div>
-              <div class="chaos-msg">"I know we solved this before. I just can't remember where."</div>
-            </div>
-            <div class="chaos-floater" aria-label="47 things only you remember">47</div>
-            <div class="chaos-caption">Everything you know: scattered, and only in a few heads</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [5] VSL SLOT ──────────────────────── -->
-  <section id="vsl">
-    <div class="wrap">
-      <div class="vsl-inner">
-        <div class="eyebrow reveal">Watch first</div>
-        <h2 class="h-section reveal reveal-d1" style="margin-top:12px;">See it find a connection overnight.</h2>
-        <div class="vsl-frame reveal reveal-d2" role="img"
-          aria-label="Video coming soon: how the system found a connection overnight">
-          <span class="vsl-badge">Video coming</span>
-          <div class="vsl-poster">
-            <div class="vsl-play" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z" /></svg>
-            </div>
-            <p class="vsl-poster-line">
-              Watch: how the system found a connection overnight that I'd have missed for months. (4 min)
-            </p>
-          </div>
-        </div>
-        <p class="vsl-caption reveal reveal-d3">
-          I walk through my own setup on real data. No slides, no theory. If the overnight claim sounds like hype,
+</p> <ul class="hero-bullets reveal reveal-d3"> <li> <span class="hero-bullet-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> </span> <span class="hero-bullet-t">It improves itself overnight. You don't feed it.
+<span class="hero-bullet-d">Every night it re-reads what you've added and finds connections you didn't
+                  ask for. You wake up to what you'd have missed.</span></span> </li> <li> <span class="hero-bullet-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> </span> <span class="hero-bullet-t">Built on tools you can get today, not exotic tech.
+<span class="hero-bullet-d">Claude Code and plain text files. Nothing that hasn't shipped, nothing
+                  you've never heard of, nothing locked behind a vendor.</span></span> </li> <li> <span class="hero-bullet-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> </span> <span class="hero-bullet-t">You own the whole compounding asset: code, files, all of it.
+<span class="hero-bullet-d">It appreciates as your firm learns. A SaaS subscription depreciates the day
+                  you stop paying. This is yours.</span></span> </li> </ul> <div class="hero-cta-row reveal reveal-d4"> <a href="#optin" class="btn btn-primary cta-loud">Get the self-improving system blueprint
+<span class="btn-arrow" aria-hidden="true">→</span></a> <span class="hero-cta-note">Free. The exact setup I run for my own firm.</span> </div> </div> <div class="hero-visual reveal reveal-d2"> <div class="chaos-stage" role="figure" aria-label="An ordinary week of knowledge scattered across a founder's tools"> <div class="chaos-card chaos-c1"> <div class="chaos-app"> <span class="chaos-app-icon slack" aria-hidden="true">#</span>
+Slack · Sarah
+<span class="chaos-app-meta">2m ago</span> </div> <div class="chaos-msg"><span class="chaos-msg-mention">@you</span> how did we price the SkyBridge job
+                last year? Client's asking again.</div> </div> <div class="chaos-card chaos-c2"> <div class="chaos-app"> <span class="chaos-app-icon gmail" aria-hidden="true">M</span>
+Email · Junior
+<span class="chaos-app-meta">Tue, 3 days</span> </div> <div class="chaos-from">Re: The Hartwell workaround</div> <div class="chaos-subj">Did we ever document how we solved this? Can't find it anywhere.</div> </div> <div class="chaos-card chaos-c3"> <div class="chaos-app"> <span class="chaos-app-icon alert" aria-hidden="true">!</span>
+Notion · Wiki
+<span class="chaos-app-meta">Stale</span> </div> <div class="chaos-msg">Last edited 2023. Nobody owns this folder.</div> <div class="chaos-amount"><span class="chaos-amount-dot"></span>412 docs · nobody trusts them</div> </div> <div class="chaos-card chaos-c4"> <div class="chaos-app"> <span class="chaos-app-icon cal" aria-hidden="true">C</span>
+Calendar
+<span class="chaos-app-meta">In 12 min</span> </div> <div class="chaos-msg">Handover call · the partner on leave knew this, not you</div> </div> <div class="chaos-card chaos-c5"> <div class="chaos-app"> <span class="chaos-app-icon dm" aria-hidden="true">D</span>
+DM · You
+<span class="chaos-app-meta">9:42 AM</span> </div> <div class="chaos-msg">"I know we solved this before. I just can't remember where."</div> </div> <div class="chaos-floater" aria-label="47 things only you remember">47</div> <div class="chaos-caption">Everything you know: scattered, and only in a few heads</div> </div> </div> </div> </div> </section>  <section id="vsl"> <div class="wrap"> <div class="vsl-inner"> <div class="eyebrow reveal">Watch first</div> <h2 class="h-section reveal reveal-d1" style="margin-top:12px;">See it find a connection overnight.</h2> <div class="vsl-frame reveal reveal-d2" role="img" aria-label="Video coming soon: how the system found a connection overnight"> <span class="vsl-badge">Video coming</span> <div class="vsl-poster"> <div class="vsl-play" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg> </div> <p class="vsl-poster-line">
+Watch: how the system found a connection overnight that I'd have missed for months. (4 min)
+</p> </div> </div> <p class="vsl-caption reveal reveal-d3">
+I walk through my own setup on real data. No slides, no theory. If the overnight claim sounds like hype,
           this is where it stops sounding like hype.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [6-form] OPT-IN FORM (qualifying, no price) ── -->
-  <section id="optin">
-    <div class="wrap">
-      <div class="optin-inner">
-        <div class="optin-card">
-          <h2 class="optin-h2 reveal">Get the exact blueprint I run for my own firm. Free.</h2>
-          <p class="optin-sub reveal reveal-d1">
-            The real setup, not a teaser: how the system reads, connects, and surfaces overnight. The same one running
+</p> </div> </div> </section>  <section id="optin"> <div class="wrap"> <div class="optin-inner"> <div class="optin-card"> <h2 class="optin-h2 reveal">Get the exact blueprint I run for my own firm. Free.</h2> <p class="optin-sub reveal reveal-d1">
+The real setup, not a teaser: how the system reads, connects, and surfaces overnight. The same one running
             behind this page.
-          </p>
-          <form class="discovery-form reveal reveal-d2" id="discovery-form"
-            action="https://formspree.io/f/xzdyljay" method="POST" novalidate>
-            <div class="form-group">
-              <label class="form-label" for="email">Work email</label>
-              <input class="form-input" type="email" id="email" name="email" placeholder="you@yourfirm.com" required
-                autocomplete="email">
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="staff">How many staff?</label>
-                <select class="form-select" id="staff" name="staff" required>
-                  <option value="" disabled selected>Select</option>
-                  <option value="1-4">1–4</option>
-                  <option value="5-9">5–9</option>
-                  <option value="10-15">10–15</option>
-                  <option value="15+">15+</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="years">Years in business</label>
-                <select class="form-select" id="years" name="years" required>
-                  <option value="" disabled selected>Select</option>
-                  <option value="under-3">Under 3</option>
-                  <option value="3-6">3–6</option>
-                  <option value="7-10">7–10</option>
-                  <option value="10+">10+</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="onehead">The one thing that lives in one person's head
-                (optional)</label>
-              <input class="form-input" type="text" id="onehead" name="one_thing_in_one_head"
-                placeholder="e.g. how we price a custom job">
-            </div>
-            <button type="submit" class="btn btn-white">Send me the blueprint
-              <span class="btn-arrow" aria-hidden="true">→</span></button>
-            <p class="form-bottom-note">
-              No spam, no drip-machine. The blueprint, then the occasional note when I ship something worth your time.
+</p> <form class="discovery-form reveal reveal-d2" id="discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate> <div class="form-group"> <label class="form-label" for="email">Work email</label> <input class="form-input" type="email" id="email" name="email" placeholder="you@yourfirm.com" required autocomplete="email"> </div> <div class="form-row"> <div class="form-group"> <label class="form-label" for="staff">How many staff?</label> <select class="form-select" id="staff" name="staff" required> <option value="" disabled selected>Select</option> <option value="1-4">1–4</option> <option value="5-9">5–9</option> <option value="10-15">10–15</option> <option value="15+">15+</option> </select> </div> <div class="form-group"> <label class="form-label" for="years">Years in business</label> <select class="form-select" id="years" name="years" required> <option value="" disabled selected>Select</option> <option value="under-3">Under 3</option> <option value="3-6">3–6</option> <option value="7-10">7–10</option> <option value="10+">10+</option> </select> </div> </div> <div class="form-group"> <label class="form-label" for="onehead">The one thing that lives in one person's head
+                (optional)</label> <input class="form-input" type="text" id="onehead" name="one_thing_in_one_head" placeholder="e.g. how we price a custom job"> </div> <button type="submit" class="btn btn-white">Send me the blueprint
+<span class="btn-arrow" aria-hidden="true">→</span></button> <p class="form-bottom-note">
+No spam, no drip-machine. The blueprint, then the occasional note when I ship something worth your time.
               Unsubscribe in one click.
-            </p>
-            <div class="form-error" id="form-error" role="alert">Something went wrong. Email
-              <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or
-              try again.</div>
-          </form>
-          <div class="form-success" id="form-success" role="status" aria-live="polite">
-            <div class="form-success-title">Blueprint's on its way.</div>
-            <div class="form-success-sub">Check your inbox for an email from ben@3nm.io.<br>Singapore timezone (SGT,
-              UTC+8).</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [6] MECHANISM — how it works ──────── -->
-  <section id="how">
-    <div class="wrap">
-      <div class="mech-head reveal">
-        <div class="section-label">How it actually works</div>
-        <h2 class="h-section" style="margin-top:14px;">How it gets smarter without you touching it.</h2>
-        <p class="lead">For a claim like "it compounds overnight," the <em>how</em> is the proof. Here's the whole
-          mechanism: three steps, nothing hidden.</p>
-      </div>
-
-      <div class="mech-steps">
-        <div class="mech-step reveal reveal-d1">
-          <div class="mech-step-n">Step 1</div>
-          <div class="mech-step-t">Reads across everything.</div>
-          <p class="mech-step-d">It ingests your client history, past projects, playbooks, notes, decisions: plain
-            files it can read end to end, not folders it dumps and forgets.</p>
-        </div>
-        <div class="mech-step reveal reveal-d2">
-          <div class="mech-step-n">Step 2</div>
-          <div class="mech-step-t">Connects it overnight.</div>
-          <p class="mech-step-d">While you sleep, it re-reads the whole base and looks for links between things filed
-            months and clients apart. New knowledge you add tonight gets connected to everything already there.</p>
-        </div>
-        <div class="mech-step reveal reveal-d3">
-          <div class="mech-step-n">Step 3</div>
-          <div class="mech-step-t">Surfaces what you'd have missed.</div>
-          <p class="mech-step-d">In the morning you get the connections worth acting on: the "this client's problem is
-            the one we solved for someone else two years ago" moment, handed to you instead of lost.</p>
-        </div>
-      </div>
-
-      <div class="mech-example reveal reveal-d2">
-        <div class="mech-example-label">A concrete one</div>
-        <p>
-          On 12 June 2026, a prospect asked me a pricing question I was sure I'd never handled. Overnight, my own
+</p> <div class="form-error" id="form-error" role="alert">Something went wrong. Email
+<a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or
+              try again.</div> </form> <div class="form-success" id="form-success" role="status" aria-live="polite"> <div class="form-success-title">Blueprint's on its way.</div> <div class="form-success-sub">Check your inbox for an email from ben@3nm.io.<br>Singapore timezone (SGT,
+              UTC+8).</div> </div> </div> </div> </div> </section>  <section id="how"> <div class="wrap"> <div class="mech-head reveal"> <div class="section-label">How it actually works</div> <h2 class="h-section" style="margin-top:14px;">How it gets smarter without you touching it.</h2> <p class="lead">For a claim like "it compounds overnight," the <em>how</em> is the proof. Here's the whole
+          mechanism: three steps, nothing hidden.</p> </div> <div class="mech-steps"> <div class="mech-step reveal reveal-d1"> <div class="mech-step-n">Step 1</div> <div class="mech-step-t">Reads across everything.</div> <p class="mech-step-d">It ingests your client history, past projects, playbooks, notes, decisions: plain
+            files it can read end to end, not folders it dumps and forgets.</p> </div> <div class="mech-step reveal reveal-d2"> <div class="mech-step-n">Step 2</div> <div class="mech-step-t">Connects it overnight.</div> <p class="mech-step-d">While you sleep, it re-reads the whole base and looks for links between things filed
+            months and clients apart. New knowledge you add tonight gets connected to everything already there.</p> </div> <div class="mech-step reveal reveal-d3"> <div class="mech-step-n">Step 3</div> <div class="mech-step-t">Surfaces what you'd have missed.</div> <p class="mech-step-d">In the morning you get the connections worth acting on: the "this client's problem is
+            the one we solved for someone else two years ago" moment, handed to you instead of lost.</p> </div> </div> <div class="mech-example reveal reveal-d2"> <div class="mech-example-label">A concrete one</div> <p>
+On 12 June 2026, a prospect asked me a pricing question I was sure I'd never handled. Overnight, my own
           system connected it to a scoping call from November 2025 (a different industry, a different client, but the
           same underlying constraint) and surfaced the exact number I'd landed on back then and why. I hadn't tagged
           either. I hadn't linked them. I'd have spent an afternoon re-deriving it, or worse, guessed. The system had
           already done the work while I slept. That's the entire product: not a place to store what you know, but
           something that keeps finding what you already knew and forgot.
-        </p>
-        <p class="confirm-note">
-          <span class="ben-confirm">[BEN: confirm or replace with your real overnight example. Keep the exact date,
+</p> <p class="confirm-note"> <span class="ben-confirm">[BEN: confirm or replace with your real overnight example. Keep the exact date,
             the two things it connected, and what you'd have lost without it. The specificity IS the proof; a vague
-            version reads as hype.]</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [7] BEFORE → AFTER ────────────────── -->
-  <section id="beforeafter">
-    <div class="wrap">
-      <div class="ba-grid">
-        <div class="ba-col reveal">
-          <div class="ba-col-label before">Today</div>
-          <div class="ba-col-title">Everything you know, scattered.</div>
-          <p class="ba-col-sub">In your head. In two other people's heads. In an inbox nobody owns, a drive nobody
-            trusts, a doc last touched in 2023.</p>
-          <div class="ba-visual">
-            <div class="ba-scatter" aria-hidden="true">
-              <span class="ba-chip" style="--rot:-3deg">Client history</span>
-              <span class="ba-chip" style="--rot:2deg">Pricing calls</span>
-              <span class="ba-chip" style="--rot:-2deg">Playbooks</span>
-              <span class="ba-chip" style="--rot:4deg">Call notes</span>
-              <span class="ba-chip" style="--rot:-4deg">The workaround</span>
-              <span class="ba-chip" style="--rot:1deg">Old proposals</span>
-              <span class="ba-chip" style="--rot:3deg">Decisions</span>
-              <span class="ba-chip" style="--rot:-1deg">"Ask Sarah"</span>
-              <span class="ba-chip" style="--rot:2deg">Dead Notion</span>
-              <span class="ba-chip" style="--rot:-3deg">Someone's inbox</span>
-            </div>
-          </div>
-        </div>
-
-        <svg class="ba-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
-
-        <div class="ba-col reveal reveal-d1">
-          <div class="ba-col-label after">After</div>
-          <div class="ba-col-title">Everything you know, connected, and compounding every night.</div>
-          <p class="ba-col-sub">One base the whole firm can query. Every new piece linked to everything already there.
-            The green node pulses because the connections keep forming while you're not looking.</p>
-          <div class="ba-visual dark">
-            <div class="ba-mini-graph" aria-hidden="true">
-              <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-                <line class="wiki-line bright" x1="60" y1="50" x2="160" y2="100" />
-                <line class="wiki-line bright" x1="260" y1="46" x2="160" y2="100" />
-                <line class="wiki-line bright" x1="54" y1="150" x2="160" y2="100" />
-                <line class="wiki-line bright" x1="266" y1="156" x2="160" y2="100" />
-                <line class="wiki-line" x1="60" y1="50" x2="260" y2="46" />
-                <line class="wiki-line" x1="54" y1="150" x2="266" y2="156" />
-                <circle class="wiki-cluster" cx="60" cy="50" r="5" />
-                <circle class="wiki-cluster" cx="260" cy="46" r="5" />
-                <circle class="wiki-cluster" cx="54" cy="150" r="5" />
-                <circle class="wiki-cluster" cx="266" cy="156" r="5" />
-                <circle class="wiki-node" cx="120" cy="30" r="3" />
-                <circle class="wiki-node" cx="200" cy="170" r="3" />
-                <circle class="wiki-hub-pulse" cx="160" cy="100" r="10" />
-                <circle class="wiki-hub" cx="160" cy="100" r="8" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [6-graph] THE MECHANISM MADE VISIBLE — Knowledge graph ── -->
-  <section id="wiki">
-    <div class="wrap">
-      <div class="wiki-head reveal">
-        <div class="section-label">The mechanism, made visible</div>
-        <h2 class="h-section">One base. Every night, the connections multiply.</h2>
-        <p class="lead">This is what "compounding" looks like: everything your firm knows, pulled into one place,
-          then re-read and re-linked every night into a single brain that gets smarter on its own.</p>
-      </div>
-
-      <div class="wiki-graph-card reveal reveal-d1">
-        <div class="wiki-graph-topbar">
-          <span class="wiki-graph-topbar-dot"></span>
-          <span class="wiki-graph-topbar-dot"></span>
-          <span class="wiki-graph-topbar-dot"></span>
-          <span class="wiki-graph-title">Knowledge graph</span>
-          <span class="wiki-graph-meta">live · re-connected 03:14 SGT</span>
-        </div>
-
-        <!-- AUTHORED FROM SCRATCH — knowledge compounding into one brain -->
-        <svg class="wiki-graph-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img"
-          aria-label="A knowledge graph: client history, playbooks, decisions and call notes all connecting into one central hub that gets smarter nightly">
-
-          <!-- faint scatter connectors between outer nodes -->
-          <path class="wiki-line" d="M120,90 C220,60 320,70 420,60" />
-          <path class="wiki-line" d="M760,120 C820,180 830,260 800,330" />
-          <path class="wiki-line" d="M110,300 C90,360 120,420 190,450" />
-          <path class="wiki-line" d="M690,430 C600,460 500,455 430,470" />
-          <path class="wiki-line" d="M175,140 C140,210 130,260 150,300" />
-          <path class="wiki-line" d="M735,175 C770,240 760,300 735,345" />
-          <path class="wiki-line" d="M300,105 C260,150 240,200 250,250" />
-          <path class="wiki-line" d="M610,110 C660,160 665,210 645,255" />
-
-          <!-- cluster nodes tie into scattered leaf nodes -->
-          <path class="wiki-line" d="M175,140 L95,95" />
-          <path class="wiki-line" d="M175,140 L275,80" />
-          <path class="wiki-line" d="M735,175 L820,120" />
-          <path class="wiki-line" d="M735,175 L640,105" />
-          <path class="wiki-line" d="M150,370 L80,330" />
-          <path class="wiki-line" d="M150,370 L110,445" />
-          <path class="wiki-line" d="M720,375 L810,340" />
-          <path class="wiki-line" d="M720,375 L790,445" />
-
-          <!-- BRIGHT green links: everything converges on the central hub -->
-          <path class="wiki-line bright" d="M175,140 C310,190 380,220 450,260" />
-          <path class="wiki-line bright" d="M735,175 C600,205 530,225 450,260" />
-          <path class="wiki-line bright" d="M150,370 C270,335 360,300 450,260" />
-          <path class="wiki-line bright" d="M720,375 C600,345 530,300 450,260" />
-          <path class="wiki-line bright" d="M250,250 C330,255 390,258 450,260" />
-          <path class="wiki-line bright" d="M645,255 C570,258 510,259 450,260" />
-          <path class="wiki-line bright" d="M420,60 C430,140 440,200 450,260" />
-          <path class="wiki-line bright" d="M430,470 C438,390 444,320 450,260" />
-
-          <!-- scattered leaf nodes -->
-          <circle class="wiki-node" cx="95" cy="95" r="3.4" />
-          <circle class="wiki-node" cx="275" cy="80" r="3.4" />
-          <circle class="wiki-node" cx="420" cy="60" r="4" />
-          <circle class="wiki-node" cx="640" cy="105" r="3.4" />
-          <circle class="wiki-node" cx="820" cy="120" r="3.4" />
-          <circle class="wiki-node" cx="80" cy="330" r="3.4" />
-          <circle class="wiki-node" cx="110" cy="445" r="3.4" />
-          <circle class="wiki-node" cx="250" cy="250" r="3.8" />
-          <circle class="wiki-node" cx="645" cy="255" r="3.8" />
-          <circle class="wiki-node" cx="430" cy="470" r="4" />
-          <circle class="wiki-node" cx="810" cy="340" r="3.4" />
-          <circle class="wiki-node" cx="790" cy="445" r="3.4" />
-          <circle class="wiki-node" cx="330" cy="330" r="3" />
-          <circle class="wiki-node" cx="560" cy="345" r="3" />
-          <circle class="wiki-node" cx="360" cy="175" r="3" />
-          <circle class="wiki-node" cx="545" cy="170" r="3" />
-
-          <!-- labelled cluster nodes -->
-          <circle class="wiki-cluster" cx="175" cy="140" r="6" />
-          <text class="wiki-label cluster" x="175" y="120" text-anchor="middle">Client history</text>
-
-          <circle class="wiki-cluster" cx="735" cy="175" r="6" />
-          <text class="wiki-label cluster" x="735" y="155" text-anchor="middle">Playbooks</text>
-
-          <circle class="wiki-cluster" cx="150" cy="370" r="6" />
-          <text class="wiki-label cluster" x="150" y="400" text-anchor="middle">Call notes</text>
-
-          <circle class="wiki-cluster" cx="720" cy="375" r="6" />
-          <text class="wiki-label cluster" x="720" y="405" text-anchor="middle">Decisions</text>
-
-          <!-- pulsing central hub — the compounding brain -->
-          <circle class="wiki-hub-pulse" cx="450" cy="260" r="16" />
-          <circle class="wiki-hub" cx="450" cy="260" r="13" />
-          <text class="wiki-label hub" x="450" y="310" text-anchor="middle">Gets smarter nightly</text>
-        </svg>
-      </div>
-
-      <div class="wiki-body reveal reveal-d2">
-        <div>
-          <div class="wiki-cat-heading">What goes in</div>
-          <ul class="wiki-cat-list">
-            <li><span class="wiki-cat-list-dot"></span>Client history: every account, every past engagement, every
-              thread</li>
-            <li><span class="wiki-cat-list-dot"></span>Playbooks and SOPs: the way you actually do the work</li>
-            <li><span class="wiki-cat-list-dot"></span>Past projects and proposals: what you scoped, priced, shipped
-            </li>
-            <li><span class="wiki-cat-list-dot"></span>Call notes and decisions: the judgment calls nobody wrote down
-            </li>
-          </ul>
-        </div>
-        <div>
-          <div class="wiki-cat-heading">What comes back out</div>
-          <ul class="wiki-cat-list">
-            <li><span class="wiki-cat-list-dot"></span>Connections between things filed months and clients apart</li>
-            <li><span class="wiki-cat-list-dot"></span>"We solved this before," surfaced before you re-solve it</li>
-            <li><span class="wiki-cat-list-dot"></span>A plain-language answer to anything the firm has ever known</li>
-            <li><span class="wiki-cat-list-dot"></span>A record that stays, even when the person who knew it leaves</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [8] PREDIGEST PAIN ────────────────── -->
-  <section id="pain">
-    <div class="wrap">
-      <div class="pain-head reveal">
-        <div class="section-label">Sound familiar?</div>
-        <h2 class="h-section" style="margin-top:14px;">Where does everything your firm knows actually live?</h2>
-        <p class="lead">Seven years in, the answer is almost always the same, and it's the answer that keeps you up at
-          night.</p>
-      </div>
-
-      <div class="pain-list">
-        <div class="pain-card reveal reveal-d1">
-          <span class="pain-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4M12 16h.01" /></svg>
-          </span>
-          <p class="pain-text"><strong>It's in your head.</strong> You're the search engine. Every "how did we handle
-            X" routes through you, and it always will until you write it all down, which you never will.</p>
-        </div>
-        <div class="pain-card reveal reveal-d2">
-          <span class="pain-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4M12 16h.01" /></svg>
-          </span>
-          <p class="pain-text"><strong>It's in one other person's head.</strong> If they take two weeks off (or
-            leave), a chunk of how your firm actually works walks out the door with them.</p>
-        </div>
-        <div class="pain-card reveal reveal-d1">
-          <span class="pain-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4M12 16h.01" /></svg>
-          </span>
-          <p class="pain-text"><strong>You tried Notion. It rotted.</strong> It became another folder nobody updates,
-            because keeping a wiki alive is a job, and nobody has that job.</p>
-        </div>
-        <div class="pain-card reveal reveal-d2">
-          <span class="pain-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4M12 16h.01" /></svg>
-          </span>
-          <p class="pain-text"><strong>The same problem gets solved from scratch, twice.</strong> Something you cracked
-            for a client in 2024 gets re-figured-out in 2026 because nobody remembered it existed.</p>
-        </div>
-        <div class="pain-card wide reveal reveal-d3">
-          <span class="pain-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v4M12 16h.01" /></svg>
-          </span>
-          <p class="pain-text"><strong>Your best judgment never gets written down.</strong> The pricing calls, the
+            version reads as hype.]</span> </p> </div> </div> </section>  <section id="beforeafter"> <div class="wrap"> <div class="ba-grid"> <div class="ba-col reveal"> <div class="ba-col-label before">Today</div> <div class="ba-col-title">Everything you know, scattered.</div> <p class="ba-col-sub">In your head. In two other people's heads. In an inbox nobody owns, a drive nobody
+            trusts, a doc last touched in 2023.</p> <div class="ba-visual"> <div class="ba-scatter" aria-hidden="true"> <span class="ba-chip" style="--rot:-3deg">Client history</span> <span class="ba-chip" style="--rot:2deg">Pricing calls</span> <span class="ba-chip" style="--rot:-2deg">Playbooks</span> <span class="ba-chip" style="--rot:4deg">Call notes</span> <span class="ba-chip" style="--rot:-4deg">The workaround</span> <span class="ba-chip" style="--rot:1deg">Old proposals</span> <span class="ba-chip" style="--rot:3deg">Decisions</span> <span class="ba-chip" style="--rot:-1deg">"Ask Sarah"</span> <span class="ba-chip" style="--rot:2deg">Dead Notion</span> <span class="ba-chip" style="--rot:-3deg">Someone's inbox</span> </div> </div> </div> <svg class="ba-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M5 12h14M13 6l6 6-6 6"></path> </svg> <div class="ba-col reveal reveal-d1"> <div class="ba-col-label after">After</div> <div class="ba-col-title">Everything you know, connected, and compounding every night.</div> <p class="ba-col-sub">One base the whole firm can query. Every new piece linked to everything already there.
+            The green node pulses because the connections keep forming while you're not looking.</p> <div class="ba-visual dark"> <div class="ba-mini-graph" aria-hidden="true"> <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"> <line class="wiki-line bright" x1="60" y1="50" x2="160" y2="100"></line> <line class="wiki-line bright" x1="260" y1="46" x2="160" y2="100"></line> <line class="wiki-line bright" x1="54" y1="150" x2="160" y2="100"></line> <line class="wiki-line bright" x1="266" y1="156" x2="160" y2="100"></line> <line class="wiki-line" x1="60" y1="50" x2="260" y2="46"></line> <line class="wiki-line" x1="54" y1="150" x2="266" y2="156"></line> <circle class="wiki-cluster" cx="60" cy="50" r="5"></circle> <circle class="wiki-cluster" cx="260" cy="46" r="5"></circle> <circle class="wiki-cluster" cx="54" cy="150" r="5"></circle> <circle class="wiki-cluster" cx="266" cy="156" r="5"></circle> <circle class="wiki-node" cx="120" cy="30" r="3"></circle> <circle class="wiki-node" cx="200" cy="170" r="3"></circle> <circle class="wiki-hub-pulse" cx="160" cy="100" r="10"></circle> <circle class="wiki-hub" cx="160" cy="100" r="8"></circle> </svg> </div> </div> </div> </div> </div> </section>  <section id="wiki"> <div class="wrap"> <div class="wiki-head reveal"> <div class="section-label">The mechanism, made visible</div> <h2 class="h-section">One base. Every night, the connections multiply.</h2> <p class="lead">This is what "compounding" looks like: everything your firm knows, pulled into one place,
+          then re-read and re-linked every night into a single brain that gets smarter on its own.</p> </div> <div class="wiki-graph-card reveal reveal-d1"> <div class="wiki-graph-topbar"> <span class="wiki-graph-topbar-dot"></span> <span class="wiki-graph-topbar-dot"></span> <span class="wiki-graph-topbar-dot"></span> <span class="wiki-graph-title">Knowledge graph</span> <span class="wiki-graph-meta">live · re-connected 03:14 SGT</span> </div> <!-- AUTHORED FROM SCRATCH — knowledge compounding into one brain --> <svg class="wiki-graph-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A knowledge graph: client history, playbooks, decisions and call notes all connecting into one central hub that gets smarter nightly"> <!-- faint scatter connectors between outer nodes --> <path class="wiki-line" d="M120,90 C220,60 320,70 420,60"></path> <path class="wiki-line" d="M760,120 C820,180 830,260 800,330"></path> <path class="wiki-line" d="M110,300 C90,360 120,420 190,450"></path> <path class="wiki-line" d="M690,430 C600,460 500,455 430,470"></path> <path class="wiki-line" d="M175,140 C140,210 130,260 150,300"></path> <path class="wiki-line" d="M735,175 C770,240 760,300 735,345"></path> <path class="wiki-line" d="M300,105 C260,150 240,200 250,250"></path> <path class="wiki-line" d="M610,110 C660,160 665,210 645,255"></path> <!-- cluster nodes tie into scattered leaf nodes --> <path class="wiki-line" d="M175,140 L95,95"></path> <path class="wiki-line" d="M175,140 L275,80"></path> <path class="wiki-line" d="M735,175 L820,120"></path> <path class="wiki-line" d="M735,175 L640,105"></path> <path class="wiki-line" d="M150,370 L80,330"></path> <path class="wiki-line" d="M150,370 L110,445"></path> <path class="wiki-line" d="M720,375 L810,340"></path> <path class="wiki-line" d="M720,375 L790,445"></path> <!-- BRIGHT green links: everything converges on the central hub --> <path class="wiki-line bright" d="M175,140 C310,190 380,220 450,260"></path> <path class="wiki-line bright" d="M735,175 C600,205 530,225 450,260"></path> <path class="wiki-line bright" d="M150,370 C270,335 360,300 450,260"></path> <path class="wiki-line bright" d="M720,375 C600,345 530,300 450,260"></path> <path class="wiki-line bright" d="M250,250 C330,255 390,258 450,260"></path> <path class="wiki-line bright" d="M645,255 C570,258 510,259 450,260"></path> <path class="wiki-line bright" d="M420,60 C430,140 440,200 450,260"></path> <path class="wiki-line bright" d="M430,470 C438,390 444,320 450,260"></path> <!-- scattered leaf nodes --> <circle class="wiki-node" cx="95" cy="95" r="3.4"></circle> <circle class="wiki-node" cx="275" cy="80" r="3.4"></circle> <circle class="wiki-node" cx="420" cy="60" r="4"></circle> <circle class="wiki-node" cx="640" cy="105" r="3.4"></circle> <circle class="wiki-node" cx="820" cy="120" r="3.4"></circle> <circle class="wiki-node" cx="80" cy="330" r="3.4"></circle> <circle class="wiki-node" cx="110" cy="445" r="3.4"></circle> <circle class="wiki-node" cx="250" cy="250" r="3.8"></circle> <circle class="wiki-node" cx="645" cy="255" r="3.8"></circle> <circle class="wiki-node" cx="430" cy="470" r="4"></circle> <circle class="wiki-node" cx="810" cy="340" r="3.4"></circle> <circle class="wiki-node" cx="790" cy="445" r="3.4"></circle> <circle class="wiki-node" cx="330" cy="330" r="3"></circle> <circle class="wiki-node" cx="560" cy="345" r="3"></circle> <circle class="wiki-node" cx="360" cy="175" r="3"></circle> <circle class="wiki-node" cx="545" cy="170" r="3"></circle> <!-- labelled cluster nodes --> <circle class="wiki-cluster" cx="175" cy="140" r="6"></circle> <text class="wiki-label cluster" x="175" y="120" text-anchor="middle">Client history</text> <circle class="wiki-cluster" cx="735" cy="175" r="6"></circle> <text class="wiki-label cluster" x="735" y="155" text-anchor="middle">Playbooks</text> <circle class="wiki-cluster" cx="150" cy="370" r="6"></circle> <text class="wiki-label cluster" x="150" y="400" text-anchor="middle">Call notes</text> <circle class="wiki-cluster" cx="720" cy="375" r="6"></circle> <text class="wiki-label cluster" x="720" y="405" text-anchor="middle">Decisions</text> <!-- pulsing central hub — the compounding brain --> <circle class="wiki-hub-pulse" cx="450" cy="260" r="16"></circle> <circle class="wiki-hub" cx="450" cy="260" r="13"></circle> <text class="wiki-label hub" x="450" y="310" text-anchor="middle">Gets smarter nightly</text> </svg> </div> <div class="wiki-body reveal reveal-d2"> <div> <div class="wiki-cat-heading">What goes in</div> <ul class="wiki-cat-list"> <li><span class="wiki-cat-list-dot"></span>Client history: every account, every past engagement, every
+              thread</li> <li><span class="wiki-cat-list-dot"></span>Playbooks and SOPs: the way you actually do the work</li> <li><span class="wiki-cat-list-dot"></span>Past projects and proposals: what you scoped, priced, shipped
+</li> <li><span class="wiki-cat-list-dot"></span>Call notes and decisions: the judgment calls nobody wrote down
+</li> </ul> </div> <div> <div class="wiki-cat-heading">What comes back out</div> <ul class="wiki-cat-list"> <li><span class="wiki-cat-list-dot"></span>Connections between things filed months and clients apart</li> <li><span class="wiki-cat-list-dot"></span>"We solved this before," surfaced before you re-solve it</li> <li><span class="wiki-cat-list-dot"></span>A plain-language answer to anything the firm has ever known</li> <li><span class="wiki-cat-list-dot"></span>A record that stays, even when the person who knew it leaves</li> </ul> </div> </div> </div> </section>  <section id="pain"> <div class="wrap"> <div class="pain-head reveal"> <div class="section-label">Sound familiar?</div> <h2 class="h-section" style="margin-top:14px;">Where does everything your firm knows actually live?</h2> <p class="lead">Seven years in, the answer is almost always the same, and it's the answer that keeps you up at
+          night.</p> </div> <div class="pain-list"> <div class="pain-card reveal reveal-d1"> <span class="pain-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg> </span> <p class="pain-text"><strong>It's in your head.</strong> You're the search engine. Every "how did we handle
+            X" routes through you, and it always will until you write it all down, which you never will.</p> </div> <div class="pain-card reveal reveal-d2"> <span class="pain-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg> </span> <p class="pain-text"><strong>It's in one other person's head.</strong> If they take two weeks off (or
+            leave), a chunk of how your firm actually works walks out the door with them.</p> </div> <div class="pain-card reveal reveal-d1"> <span class="pain-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg> </span> <p class="pain-text"><strong>You tried Notion. It rotted.</strong> It became another folder nobody updates,
+            because keeping a wiki alive is a job, and nobody has that job.</p> </div> <div class="pain-card reveal reveal-d2"> <span class="pain-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg> </span> <p class="pain-text"><strong>The same problem gets solved from scratch, twice.</strong> Something you cracked
+            for a client in 2024 gets re-figured-out in 2026 because nobody remembered it existed.</p> </div> <div class="pain-card wide reveal reveal-d3"> <span class="pain-mark" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg> </span> <p class="pain-text"><strong>Your best judgment never gets written down.</strong> The pricing calls, the
             "don't take this kind of client," the workaround that saved a project. The most valuable knowledge you
-            have is the least documented.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [9] PROOF ─────────────────────────── -->
-  <section id="proof">
-    <div class="wrap">
-      <div class="proof-head reveal">
-        <div class="section-label">The proof</div>
-        <h2 class="h-section">The proof is that I run this myself, and it's already saved my own firm work.</h2>
-        <p class="lead">The blueprint you're opting in for isn't a concept. It's the system behind this page. Below it:
-          four builds I've shipped, each one turning trapped knowledge into something the firm keeps.</p>
-      </div>
-
-      <div class="proof-lead-card reveal reveal-d1">
-        <div class="proof-lead-eyebrow">Lead exhibit · my own system</div>
-        <div class="proof-lead-title">My own system.</div>
-        <p class="proof-lead-body">
-          It reads across every scoping call, every proposal, every build I've done since I started. It runs overnight
+            have is the least documented.</p> </div> </div> </div> </section>  <section id="proof"> <div class="wrap"> <div class="proof-head reveal"> <div class="section-label">The proof</div> <h2 class="h-section">The proof is that I run this myself, and it's already saved my own firm work.</h2> <p class="lead">The blueprint you're opting in for isn't a concept. It's the system behind this page. Below it:
+          four builds I've shipped, each one turning trapped knowledge into something the firm keeps.</p> </div> <div class="proof-lead-card reveal reveal-d1"> <div class="proof-lead-eyebrow">Lead exhibit · my own system</div> <div class="proof-lead-title">My own system.</div> <p class="proof-lead-body">
+It reads across every scoping call, every proposal, every build I've done since I started. It runs overnight
           and hands me connections in the morning. The 12 June example above is one of dozens. I didn't build this to
           sell it. I built it because I was the bottleneck in my own firm, and I got tired of being the only place my
           knowledge lived. The blueprint is exactly this, documented so you can see how it's put together.
-        </p>
-        <p class="proof-lead-body confirm-note">
-          <span class="ben-confirm on-dark">[BEN: confirm the "since I started" scope and the "dozens" count. Keep it
-            to what's literally true.]</span>
-        </p>
-      </div>
-
-      <div class="proof-grid">
-        <div class="proof-card reveal reveal-d1">
-          <div class="proof-card-tag">Executive recruitment</div>
-          <div class="proof-card-title">Past searches, finally compounding.</div>
-          <p class="proof-card-body">
-            A Singapore senior-placements firm did 8 hours of manual market mapping per candidate, much of it
+</p> <p class="proof-lead-body confirm-note"> <span class="ben-confirm on-dark">[BEN: confirm the "since I started" scope and the "dozens" count. Keep it
+            to what's literally true.]</span> </p> </div> <div class="proof-grid"> <div class="proof-card reveal reveal-d1"> <div class="proof-card-tag">Executive recruitment</div> <div class="proof-card-title">Past searches, finally compounding.</div> <p class="proof-card-body">
+A Singapore senior-placements firm did 8 hours of manual market mapping per candidate, much of it
             repeating work done six months earlier on a similar search. I built an automated sourcing pipeline.
             The pool grew 2–3×. And the part that compounds: every past search is now searchable, so the firm
             stops re-doing work it already did. The knowledge accumulates instead of evaporating.
-          </p>
-          <div class="proof-metrics">−8h per candidate · 2–3× pool · custom build</div>
-        </div>
-
-        <div class="proof-card reveal reveal-d2">
-          <div class="proof-card-tag">Family office</div>
-          <div class="proof-card-title">A decade of statements, one live view. And it stays.</div>
-          <p class="proof-card-body">
-            A Singapore family office held positions across multiple private banks, each statement a different PDF
+</p> <div class="proof-metrics">−8h per candidate · 2–3× pool · custom build</div> </div> <div class="proof-card reveal reveal-d2"> <div class="proof-card-tag">Family office</div> <div class="proof-card-title">A decade of statements, one live view. And it stays.</div> <p class="proof-card-body">
+A Singapore family office held positions across multiple private banks, each statement a different PDF
             format, consolidated by hand every week. I built an OCR + consolidation + risk-flagging system.
             The director sees the full portfolio live, without asking anyone. Every statement the system parses stays
             parsed. The historical record builds itself instead of living in a stack of PDFs nobody can query.
-          </p>
-          <div class="proof-metrics">multi-bank OCR · live portfolio view · custom build</div>
-        </div>
-
-        <div class="proof-card reveal reveal-d1">
-          <div class="proof-card-tag">3PL logistics</div>
-          <div class="proof-card-title">Four retailers' data, unified. And every month retained.</div>
-          <p class="proof-card-body">
-            A Singapore last-mile 3PL ran performance analysis across four retailer accounts, each in a different Excel
+</p> <div class="proof-metrics">multi-bank OCR · live portfolio view · custom build</div> </div> <div class="proof-card reveal reveal-d1"> <div class="proof-card-tag">3PL logistics</div> <div class="proof-card-title">Four retailers' data, unified. And every month retained.</div> <p class="proof-card-body">
+A Singapore last-mile 3PL ran performance analysis across four retailer accounts, each in a different Excel
             format on a different cadence. Days of manual compilation. I rebuilt the pipeline and dashboard:
             four feeds into one, year-on-year and SKU-level, answered in seconds. Every period that flows in is kept
             and comparable. The operating history compounds instead of resetting each month.
-          </p>
-          <div class="proof-metrics">4 feeds → 1 · SKU-level live view · custom build</div>
-        </div>
-
-        <div class="proof-card reveal reveal-d2">
-          <div class="proof-card-tag">Education consulting</div>
-          <div class="proof-card-title">The knowledge left the weekly meeting and moved into the system.</div>
-          <p class="proof-card-body">
-            A Singapore education consulting firm ran a 3-hour weekly sync just so everyone could update everyone: the
+</p> <div class="proof-metrics">4 feeds → 1 · SKU-level live view · custom build</div> </div> <div class="proof-card reveal reveal-d2"> <div class="proof-card-tag">Education consulting</div> <div class="proof-card-title">The knowledge left the weekly meeting and moved into the system.</div> <p class="proof-card-body">
+A Singapore education consulting firm ran a 3-hour weekly sync just so everyone could update everyone: the
             only time anyone had a complete picture, and it was wrong by Wednesday. I unified the work into one platform. The 3-hour sync is gone. No new admin hire. Student count per consultant went from 12 to 18.
             What used to live in one meeting a week now lives in a system the whole firm can query any day.
-          </p>
-          <div class="proof-metrics">3h weekly sync killed · 0 new hires · 12 → 18 per consultant</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [10] COMPARISON TABLE ─────────────── -->
-  <section class="vs-section" id="vs">
-    <div class="wrap">
-      <div class="vs-head reveal">
-        <div class="section-label">The honest comparison</div>
-        <h2 class="vs-h2">The honest comparison.</h2>
-        <p class="vs-intro">Five ways to deal with what your firm knows. Four of them you've already tried.</p>
-      </div>
-
-      <div class="vs-table reveal reveal-d1" role="table"
-        aria-label="Comparison: static wiki vs knowledge in heads vs generic ChatGPT vs off-the-shelf AI tool vs a self-improving system you own">
-        <div class="vs-h-cell">Comparing</div>
-        <div class="vs-h-cell">Static wiki<span class="vs-h-cell-sub">Notion / Confluence</span></div>
-        <div class="vs-h-cell">Knowledge in heads<span class="vs-h-cell-sub">You and two other people</span></div>
-        <div class="vs-h-cell">Generic ChatGPT<span class="vs-h-cell-sub">Cheap seats, no memory of you</span></div>
-        <div class="vs-h-cell us">A self-improving system you own<span class="vs-h-cell-sub">Built by Ben · yours
-            outright</span></div>
-
-        <div class="vs-row-label">Year-one cost</div>
-        <div class="vs-cell">Low subscription, plus the unpaid job of keeping it updated</div>
-        <div class="vs-cell">"Free," until someone leaves and takes it with them</div>
-        <div class="vs-cell">Cheap seats, plus your data pasted into someone else's model</div>
-        <div class="vs-cell us"><strong>One build. Then it's yours, no subscription.</strong> <span
-            class="ben-confirm">[BEN: confirm no price shown, routes to the call]</span></div>
-
-        <div class="vs-row-label">Gets smarter on its own?</div>
-        <div class="vs-cell">No. It rots the day you stop feeding it</div>
-        <div class="vs-cell">No. It only knows what today's people remember</div>
-        <div class="vs-cell">No. It forgets you the moment the chat closes</div>
-        <div class="vs-cell us"><strong>Yes.</strong> It re-reads and re-connects every night</div>
-
-        <div class="vs-row-label">If a key person leaves</div>
-        <div class="vs-cell">You lose whatever they never wrote down</div>
-        <div class="vs-cell">You lose a chunk of how the firm works</div>
-        <div class="vs-cell">Nothing was ever captured to lose or keep</div>
-        <div class="vs-cell us"><strong>Their knowledge is already in the base</strong>, connected and searchable</div>
-
-        <div class="vs-row-label">Who owns it</div>
-        <div class="vs-cell">The vendor. You rent access</div>
-        <div class="vs-cell">Whoever's head it's in</div>
-        <div class="vs-cell">The vendor. And they train on the industry, not on you</div>
-        <div class="vs-cell us"><strong>You.</strong> Code, files, the whole asset</div>
-
-        <div class="vs-row-label">What you're left with</div>
-        <div class="vs-cell">A dead folder nobody trusts</div>
-        <div class="vs-cell">A bottleneck named you</div>
-        <div class="vs-cell">Generic answers with no memory of your firm</div>
-        <div class="vs-cell us"><strong>A proprietary asset that appreciates</strong> as your firm learns</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [11] GUARANTEE ────────────────────── -->
-  <section id="guarantee">
-    <div class="wrap">
-      <div class="guar-inner">
-        <div class="guar-seal reveal" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round"><path d="M12 2l7 3v6c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5z" /><path
-              d="M9 12l2 2 4-4" /></svg>
-        </div>
-        <h2 class="guar-h2 reveal reveal-d1">If it hasn't surfaced a connection you'd have missed within
-          <em>30 days</em>, I rebuild it, or that cycle is free.</h2>
-        <p class="guar-sub reveal reveal-d2">The whole claim is that it finds things you'd have lost. If it doesn't do
-          that inside a month, I haven't delivered, and I don't get to keep pretending I did.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [12] FAQ ──────────────────────────── -->
-  <section id="faq">
-    <div class="wrap">
-      <div class="faq-wrap">
-        <div class="faq-sidebar reveal">
-          <div class="section-label" style="margin-bottom:14px;">Questions</div>
-          <h2 class="faq-sidebar-h2">The things founders ask before they opt in.</h2>
-          <p class="faq-sidebar-sub">Straight answers. If yours isn't here, email
-            <a href="mailto:ben@3nm.io" style="color:var(--accent);text-decoration:none;">ben@3nm.io</a>.</p>
-        </div>
-
-        <div class="faq-list reveal reveal-d1">
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Is my data safe?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">Yes, and it never leaves your control. The system is built on plain files that sit in
+</p> <div class="proof-metrics">3h weekly sync killed · 0 new hires · 12 → 18 per consultant</div> </div> </div> </div> </section>  <section class="vs-section" id="vs"> <div class="wrap"> <div class="vs-head reveal"> <div class="section-label">The honest comparison</div> <h2 class="vs-h2">The honest comparison.</h2> <p class="vs-intro">Five ways to deal with what your firm knows. Four of them you've already tried.</p> </div> <div class="vs-table reveal reveal-d1" role="table" aria-label="Comparison: static wiki vs knowledge in heads vs generic ChatGPT vs off-the-shelf AI tool vs a self-improving system you own"> <div class="vs-h-cell">Comparing</div> <div class="vs-h-cell">Static wiki<span class="vs-h-cell-sub">Notion / Confluence</span></div> <div class="vs-h-cell">Knowledge in heads<span class="vs-h-cell-sub">You and two other people</span></div> <div class="vs-h-cell">Generic ChatGPT<span class="vs-h-cell-sub">Cheap seats, no memory of you</span></div> <div class="vs-h-cell us">A self-improving system you own<span class="vs-h-cell-sub">Built by Ben · yours
+            outright</span></div> <div class="vs-row-label">Year-one cost</div> <div class="vs-cell">Low subscription, plus the unpaid job of keeping it updated</div> <div class="vs-cell">"Free," until someone leaves and takes it with them</div> <div class="vs-cell">Cheap seats, plus your data pasted into someone else's model</div> <div class="vs-cell us"><strong>One build. Then it's yours, no subscription.</strong> <span class="ben-confirm">[BEN: confirm no price shown, routes to the call]</span></div> <div class="vs-row-label">Gets smarter on its own?</div> <div class="vs-cell">No. It rots the day you stop feeding it</div> <div class="vs-cell">No. It only knows what today's people remember</div> <div class="vs-cell">No. It forgets you the moment the chat closes</div> <div class="vs-cell us"><strong>Yes.</strong> It re-reads and re-connects every night</div> <div class="vs-row-label">If a key person leaves</div> <div class="vs-cell">You lose whatever they never wrote down</div> <div class="vs-cell">You lose a chunk of how the firm works</div> <div class="vs-cell">Nothing was ever captured to lose or keep</div> <div class="vs-cell us"><strong>Their knowledge is already in the base</strong>, connected and searchable</div> <div class="vs-row-label">Who owns it</div> <div class="vs-cell">The vendor. You rent access</div> <div class="vs-cell">Whoever's head it's in</div> <div class="vs-cell">The vendor. And they train on the industry, not on you</div> <div class="vs-cell us"><strong>You.</strong> Code, files, the whole asset</div> <div class="vs-row-label">What you're left with</div> <div class="vs-cell">A dead folder nobody trusts</div> <div class="vs-cell">A bottleneck named you</div> <div class="vs-cell">Generic answers with no memory of your firm</div> <div class="vs-cell us"><strong>A proprietary asset that appreciates</strong> as your firm learns</div> </div> </div> </section>  <section id="guarantee"> <div class="wrap"> <div class="guar-inner"> <div class="guar-seal reveal" aria-hidden="true"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v6c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5z"></path><path d="M9 12l2 2 4-4"></path></svg> </div> <h2 class="guar-h2 reveal reveal-d1">If it hasn't surfaced a connection you'd have missed within
+<em>30 days</em>, I rebuild it, or that cycle is free.</h2> <p class="guar-sub reveal reveal-d2">The whole claim is that it finds things you'd have lost. If it doesn't do
+          that inside a month, I haven't delivered, and I don't get to keep pretending I did.</p> </div> </div> </section>  <section id="faq"> <div class="wrap"> <div class="faq-wrap"> <div class="faq-sidebar reveal"> <div class="section-label" style="margin-bottom:14px;">Questions</div> <h2 class="faq-sidebar-h2">The things founders ask before they opt in.</h2> <p class="faq-sidebar-sub">Straight answers. If yours isn't here, email
+<a href="mailto:ben@3nm.io" style="color:var(--accent);text-decoration:none;">ben@3nm.io</a>.</p> </div> <div class="faq-list reveal reveal-d1"> <div class="faq-item"> <button class="faq-q" aria-expanded="false">Is my data safe?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">Yes, and it never leaves your control. The system is built on plain files that sit in
               your own storage, on infrastructure you own. Nothing is pooled into a shared model, and nothing trains
               anyone else's product on your firm's knowledge. On delivery, the whole thing is yours to host wherever you
               want.
-              <span class="ben-confirm confirm-note">[BEN: confirm hosting posture (self-hosted vs your managed infra)
-                and state it plainly.]</span>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">What if I'm not technical?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">You don't touch the code. I build it, hand it over documented, and it runs on its own
+<span class="ben-confirm confirm-note">[BEN: confirm hosting posture (self-hosted vs your managed infra)
+                and state it plainly.]</span> </div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">What if I'm not technical?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">You don't touch the code. I build it, hand it over documented, and it runs on its own
               overnight without you managing it. Using it is asking it questions in plain language. Notion asked you to
-              become a librarian; this doesn't.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Do I own it?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">Completely. Every line of code, every file, the whole system becomes yours on delivery.
+              become a librarian; this doesn't.</div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">Do I own it?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">Completely. Every line of code, every file, the whole system becomes yours on delivery.
               No SaaS seat, no lock-in, no "cancel and lose it." It's an asset on your side of the table, and it
-              appreciates as your firm adds to it.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">How is this not just Notion?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">Notion is a place you put things and then have to maintain. This reads across everything
+              appreciates as your firm adds to it.</div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">How is this not just Notion?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">Notion is a place you put things and then have to maintain. This reads across everything
               on its own and connects it overnight. The part where a human keeps it alive is exactly the part I
-              removed. Notion stores. This one thinks about what you stored while you sleep.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">What's actually delivered?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">The self-improving knowledge system built on your firm's real data: the ingestion
+              removed. Notion stores. This one thinks about what you stored while you sleep.</div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">What's actually delivered?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">The self-improving knowledge system built on your firm's real data: the ingestion
               setup, the overnight connection engine, a plain-language way to query it, and the plain files underneath,
               all documented and handed over as yours.
-              <span class="ben-confirm confirm-note">[BEN: confirm the exact deliverable list before this ships:
-                ingestion, nightly job, query interface, docs, ownership handover.]</span>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">How long does it take?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">A working version on your real data early, then the full build inside a fixed window,
+<span class="ben-confirm confirm-note">[BEN: confirm the exact deliverable list before this ships:
+                ingestion, nightly job, query interface, docs, ownership handover.]</span> </div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">How long does it take?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">A working version on your real data early, then the full build inside a fixed window,
               same cadence as every build on my case-study page: scoped in writing within 48 hours, something real by
               day 7.
-              <span class="ben-confirm confirm-note">[BEN: confirm the exact timeline you'll commit to for this
-                offer.]</span>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">What does it cost?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">No number on this page on purpose: the build scales with what your firm knows and how
+<span class="ben-confirm confirm-note">[BEN: confirm the exact timeline you'll commit to for this
+                offer.]</span> </div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">What does it cost?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">No number on this page on purpose: the build scales with what your firm knows and how
               it's stored, and I won't quote you blind. We settle it on the call, in writing, before anything starts.
               Start with the free blueprint; the cost conversation only happens if the blueprint makes sense to you.
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Who builds it?
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-            </button>
-            <div class="faq-a">I do. Ben: one operator, direct, no agency layer and no handoff to a junior. The system
-              running behind this page is mine; the one I build for you is built the same way.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── [13] CLOSING OPT-IN ───────────────── -->
-  <section id="closing">
-    <div class="wrap">
-      <div class="closing-inner">
-        <div class="eyebrow eyebrow-on-dark reveal">Get started</div>
-        <h2 class="closing-h2 reveal reveal-d1">Start with the blueprint.<br>It's the same system running behind this
-          page.</h2>
-        <p class="closing-sub reveal reveal-d2">
-          Get the exact setup: how it reads, connects overnight, and surfaces what you'd have missed. Then decide if
+</div> </div> <div class="faq-item"> <button class="faq-q" aria-expanded="false">Who builds it?
+<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> </button> <div class="faq-a">I do. Ben: one operator, direct, no agency layer and no handoff to a junior. The system
+              running behind this page is mine; the one I build for you is built the same way.</div> </div> </div> </div> </div> </section>  <section id="closing"> <div class="wrap"> <div class="closing-inner"> <div class="eyebrow eyebrow-on-dark reveal">Get started</div> <h2 class="closing-h2 reveal reveal-d1">Start with the blueprint.<br>It's the same system running behind this
+          page.</h2> <p class="closing-sub reveal reveal-d2">
+Get the exact setup: how it reads, connects overnight, and surfaces what you'd have missed. Then decide if
           you want me to build yours.
-        </p>
-        <form class="discovery-form reveal reveal-d3" id="discovery-form-2" action="https://formspree.io/f/xzdyljay"
-          method="POST" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="email2">Work email</label>
-            <input class="form-input" type="email" id="email2" name="email" placeholder="you@yourfirm.com" required
-              autocomplete="email">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="staff2">How many staff?</label>
-              <select class="form-select" id="staff2" name="staff" required>
-                <option value="" disabled selected>Select</option>
-                <option value="1-4">1–4</option>
-                <option value="5-9">5–9</option>
-                <option value="10-15">10–15</option>
-                <option value="15+">15+</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="years2">Years in business</label>
-              <select class="form-select" id="years2" name="years" required>
-                <option value="" disabled selected>Select</option>
-                <option value="under-3">Under 3</option>
-                <option value="3-6">3–6</option>
-                <option value="7-10">7–10</option>
-                <option value="10+">10+</option>
-              </select>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-white">Get the self-improving system blueprint
-            <span class="btn-arrow" aria-hidden="true">→</span></button>
-          <p class="form-bottom-note">No spam. Unsubscribe in one click. ben@3nm.io</p>
-          <div class="form-error" id="form-error-2" role="alert">Something went wrong. Email
-            <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try
-            again.</div>
-        </form>
-        <div class="form-success" id="form-success-2" role="status" aria-live="polite">
-          <div class="form-success-title">Blueprint's on its way.</div>
-          <div class="form-success-sub">Check your inbox for an email from ben@3nm.io.<br>Singapore timezone (SGT,
-            UTC+8).</div>
-        </div>
-        <p class="closing-longterm reveal reveal-d3">
-          Not ready to build? Leave your email anyway. I send one note when I ship something worth your time, no drip
+</p> <form class="discovery-form reveal reveal-d3" id="discovery-form-2" action="https://formspree.io/f/xzdyljay" method="POST" novalidate> <div class="form-group"> <label class="form-label" for="email2">Work email</label> <input class="form-input" type="email" id="email2" name="email" placeholder="you@yourfirm.com" required autocomplete="email"> </div> <div class="form-row"> <div class="form-group"> <label class="form-label" for="staff2">How many staff?</label> <select class="form-select" id="staff2" name="staff" required> <option value="" disabled selected>Select</option> <option value="1-4">1–4</option> <option value="5-9">5–9</option> <option value="10-15">10–15</option> <option value="15+">15+</option> </select> </div> <div class="form-group"> <label class="form-label" for="years2">Years in business</label> <select class="form-select" id="years2" name="years" required> <option value="" disabled selected>Select</option> <option value="under-3">Under 3</option> <option value="3-6">3–6</option> <option value="7-10">7–10</option> <option value="10+">10+</option> </select> </div> </div> <button type="submit" class="btn btn-white">Get the self-improving system blueprint
+<span class="btn-arrow" aria-hidden="true">→</span></button> <p class="form-bottom-note">No spam. Unsubscribe in one click. ben@3nm.io</p> <div class="form-error" id="form-error-2" role="alert">Something went wrong. Email
+<a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try
+            again.</div> </form> <div class="form-success" id="form-success-2" role="status" aria-live="polite"> <div class="form-success-title">Blueprint's on its way.</div> <div class="form-success-sub">Check your inbox for an email from ben@3nm.io.<br>Singapore timezone (SGT,
+            UTC+8).</div> </div> <p class="closing-longterm reveal reveal-d3">
+Not ready to build? Leave your email anyway. I send one note when I ship something worth your time, no drip
           machine, no chasing. When your firm's knowledge finally becomes the thing you can't afford to lose, you'll
           know where to find me.
-        </p>
-      </div>
-    </div>
-  </section>
+</p> </div> </div> </section>   </main> <footer class="site-footer"> <div class="wrap"> <div class="footer-row"> <div class="footer-logo">RightClick<span>:AI</span></div> <div class="footer-links"> <a href="/about">About</a> <a href="/faq">FAQ</a> <a href="/blog">Blog</a> </div> <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div> <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a> </div> </div> </footer> <div class="modal" id="discovery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title"> <div class="modal-backdrop" data-modal-close></div> <div class="modal-panel" role="document"> <button class="modal-close" type="button" aria-label="Close" data-modal-close> <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"> <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path> </svg> </button> <div class="modal-eyebrow">Get started</div> <h2 class="modal-title" id="modal-title">Book a 30-minute call.<br>It's free.</h2> <p class="modal-sub">No pitch. No proposal. Just me looking at your business, finding the bottleneck, and telling you honestly whether I can help.</p> <form class="discovery-form" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate> <div class="form-row"> <div class="form-group"> <label class="form-label" for="modal-name">Your name</label> <input class="form-input" type="text" id="modal-name" name="name" placeholder="Jane Smith" required autocomplete="name"> </div> <div class="form-group"> <label class="form-label" for="modal-email">Work email</label> <input class="form-input" type="email" id="modal-email" name="email" placeholder="you@company.com" required autocomplete="email"> </div> </div> <div class="form-group"> <label class="form-label" for="modal-bottleneck">Not ready to book? Tell me the one thing eating your week <span style="opacity:0.6;font-weight:400">(optional)</span></label> <textarea class="form-textarea" id="modal-bottleneck" name="bottleneck" placeholder="2 to 3 sentences is enough."></textarea> </div> <button type="submit" class="btn btn-white">Book my free call <span class="btn-arrow" aria-hidden="true">→</span></button> <p class="form-bottom-note">ben@3nm.io · Singapore · No pitch, no proposal.</p> <div class="form-error" id="modal-form-error" role="alert">Something went wrong. Email <a href="mailto:ben@3nm.io" style="color:#FCA5A5;text-decoration:underline">ben@3nm.io</a> directly, or try again.</div> </form> <div class="form-success" id="modal-form-success" role="status" aria-live="polite"> <div class="form-success-title">I'll be in touch shortly.</div> <div class="form-success-sub">Expect an email from ben@3nm.io within 24 hours.<br>Singapore timezone (SGT, UTC+8).</div> </div> </div> </div> <!-- Shared UI behaviour: nav scroll/toggle, scroll-reveal, FAQ accordion. --> <script>
+      (function () {
+        var nav = document.getElementById('main-nav');
+        var progress = document.getElementById('scroll-progress');
+        var setNav = function () { if (nav) nav.classList.toggle('scrolled', window.scrollY > 24); };
+        var setProgress = function () {
+          if (!progress) return;
+          var h = document.documentElement;
+          var max = h.scrollHeight - h.clientHeight;
+          progress.style.transform = 'scaleX(' + (max > 0 ? (window.scrollY / max) : 0) + ')';
+        };
+        var onScroll = function () { setNav(); setProgress(); };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', setProgress, { passive: true });
 
-  <!-- ── FOOTER ────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-row">
-        <div class="footer-logo">RightClick<span>:AI</span></div>
-        <div class="footer-links">
-          <a href="about">About</a>
-          <a href="faq">FAQ</a>
-          <a href="blog">Blog</a>
-        </div>
-        <div class="footer-copy">© 2026 RightClick:AI. All rights reserved.</div>
-        <a href="mailto:ben@3nm.io" class="footer-email">ben@3nm.io</a>
-      </div>
-    </div>
-  </footer>
+        var navToggle = document.getElementById('nav-toggle');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (navToggle && mobileMenu) {
+          navToggle.addEventListener('click', function () {
+            var open = mobileMenu.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.classList.toggle('menu-open', open);
+          });
+          mobileMenu.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () {
+              mobileMenu.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+              document.body.classList.remove('menu-open');
+            });
+          });
+        }
 
-  <script>
-    (function () {
-      'use strict';
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if ('IntersectionObserver' in window && !reduce) {
+          var revealObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+          document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+        } else {
+          document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+        }
 
-      // 1. Nav scroll state
-      var nav = document.getElementById('main-nav');
-      var setNav = function () { if (nav) nav.classList.toggle('scrolled', window.scrollY > 24); };
-      setNav();
-      window.addEventListener('scroll', setNav, { passive: true });
-
-      // 2. Mobile menu toggle
-      var navToggle = document.getElementById('nav-toggle');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (navToggle && mobileMenu) {
-        navToggle.addEventListener('click', function () {
-          var isOpen = nav.classList.toggle('menu-open');
-          navToggle.setAttribute('aria-expanded', String(isOpen));
-          navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        });
-        mobileMenu.querySelectorAll('a').forEach(function (a) {
-          a.addEventListener('click', function () {
-            nav.classList.remove('menu-open');
-            navToggle.setAttribute('aria-expanded', 'false');
+        document.querySelectorAll('.faq-item').forEach(function (item) {
+          // index/self-improving use a .faq-q button; the faq page uses a .faq-question div. Both toggle .faq-item.open.
+          var q = item.querySelector('.faq-q, .faq-question');
+          if (!q) return;
+          q.addEventListener('click', function () {
+            var isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function (o) {
+              o.classList.remove('open');
+              var b = o.querySelector('.faq-q');
+              if (b) b.setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
           });
         });
-      }
+      })();
+    </script> <script src="/assets/modal.js" defer></script>  <script>
+      (function () {
+        'use strict';
 
-      // 3. Reveal-on-scroll (IntersectionObserver) — .reveal stays invisible without this
-      if ('IntersectionObserver' in window) {
-        var revealObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              revealObs.unobserve(e.target);
-            }
+        // Formspree-style submit handler (both opt-in forms)
+        function wireForm(formId, successId, errorId) {
+          var form = document.getElementById(formId);
+          var success = document.getElementById(successId);
+          var error = document.getElementById(errorId);
+          if (!form) return;
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (error) error.classList.remove('visible');
+            var btn = form.querySelector('button[type="submit"]');
+            var label = btn ? btn.innerHTML : '';
+            if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+            fetch(form.action, {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            }).then(function (res) {
+              if (res.ok) {
+                form.style.display = 'none';
+                if (success) success.classList.add('visible');
+              } else {
+                throw new Error('submit failed');
+              }
+            }).catch(function () {
+              if (btn) { btn.disabled = false; btn.innerHTML = label; }
+              if (error) error.classList.add('visible');
+            });
           });
-        }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
-        document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
-      } else {
-        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
-      }
-
-      // 4. FAQ accordion
-      document.querySelectorAll('.faq-item').forEach(function (item) {
-        var q = item.querySelector('.faq-q');
-        if (!q) return;
-        q.addEventListener('click', function () {
-          var isOpen = item.classList.contains('open');
-          document.querySelectorAll('.faq-item.open').forEach(function (o) {
-            o.classList.remove('open');
-            var ob = o.querySelector('.faq-q');
-            if (ob) ob.setAttribute('aria-expanded', 'false');
-          });
-          if (!isOpen) {
-            item.classList.add('open');
-            q.setAttribute('aria-expanded', 'true');
-          }
-        });
-      });
-
-      // 5. Formspree-style submit handler (both opt-in forms)
-      function wireForm(formId, successId, errorId) {
-        var form = document.getElementById(formId);
-        var success = document.getElementById(successId);
-        var error = document.getElementById(errorId);
-        if (!form) return;
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (error) error.classList.remove('visible');
-          var btn = form.querySelector('button[type="submit"]');
-          var label = btn ? btn.innerHTML : '';
-          if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-          fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          }).then(function (res) {
-            if (res.ok) {
-              form.style.display = 'none';
-              if (success) success.classList.add('visible');
-            } else {
-              throw new Error('submit failed');
-            }
-          }).catch(function () {
-            if (btn) { btn.disabled = false; btn.innerHTML = label; }
-            if (error) error.classList.add('visible');
-          });
-        });
-      }
-      wireForm('discovery-form', 'form-success', 'form-error');
-      wireForm('discovery-form-2', 'form-success-2', 'form-error-2');
-    })();
-  </script>
-
-</body>
-
-</html>
+        }
+        wireForm('discovery-form', 'form-success', 'form-error');
+        wireForm('discovery-form-2', 'form-success-2', 'form-error-2');
+      })();
+    </script>  </body></html>
