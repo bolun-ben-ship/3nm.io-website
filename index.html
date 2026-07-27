@@ -2662,10 +2662,13 @@
     }
 
     .fpb-tl-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+      /* was flex+space-between → ragged wrap + disconnected pairs in the squeezed
+         1fr middle column. Fixed 84px label col + left-aligned value keeps each
+         label→value as one readable unit. */
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      align-items: baseline;
+      gap: 14px;
       padding: 7px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
@@ -2675,15 +2678,16 @@
     }
 
     .fpb-tl-label {
-      font-size: 12.5px;
+      font-size: 12px;
+      letter-spacing: 0.02em;
       color: var(--on-dark-mute);
+      white-space: nowrap;
     }
 
     .fpb-tl-val {
       font-size: 12.5px;
       font-weight: 600;
       color: var(--on-dark-strong);
-      white-space: nowrap;
     }
 
     .fpb-cta {
@@ -3545,9 +3549,16 @@
     .vs-cell:nth-child(5n) { border-right: none; }
     .vs-cell.us { background: rgba(21,128,61,0.04); color: var(--ink); font-weight: 500; }
     .vs-cell.us strong { color: var(--accent); font-weight: 700; }
-    @media (max-width: 900px) {
-      .vs-table { display: block; overflow-x: auto; white-space: nowrap; }
-      .vs-table > * { white-space: normal; }
+    @media (max-width: 760px) {
+      /* Collapse the 5-col flat grid to 2 cols: [Comparing | RightClick:AI].
+         Hide the 3 alternative columns (cells 2,3,4 of every 5-cell group).
+         Prior rule set display:block which stripped the grid and stacked all
+         35 cells vertically (~2,600px). */
+      .vs-table { grid-template-columns: minmax(82px, 0.85fr) 1.3fr; }
+      .vs-table > *:nth-child(5n + 2),
+      .vs-table > *:nth-child(5n + 3),
+      .vs-table > *:nth-child(5n + 4) { display: none; }
+      .vs-h-cell, .vs-row-label, .vs-cell { padding: 13px 12px; }
     }
 
     /* TOOLS TICKER */
@@ -4039,6 +4050,72 @@
     @media (max-width: 800px) {
       .fv-grid { grid-template-columns: 1fr; gap: 36px; }
     }
+    .see-all-m {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       MOBILE COMPACTION (≤600px) — cut page length toward −50%.
+       Hides decorative visuals (radial diagram, edu mock — approved),
+       tightens global section padding + section-head margins + proof
+       cards + the #build strip. Desktop layout untouched.
+       ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      :root { --section-y: 42px; }
+      .vs-section { padding-top: 42px; padding-bottom: 42px; }   /* was clamp→96px */
+      #hero { min-height: 0; padding-bottom: 32px; }
+
+      /* Approved: hide decorative visuals on small screens */
+      .foundation-arch { display: none; }
+      .edu-card { display: none; }
+
+      /* Tighten oversized section-head bottom margins (were 48–64px) */
+      .vs-head, .work-header, .recognition-head { margin-bottom: 24px; }
+      .case-grid { gap: 20px; }
+
+      /* Proof cards: shorter covers, tighter body */
+      .proof-card-visual { min-height: 108px; padding: 20px 18px 16px; }
+      .proof-cards { gap: 16px; }
+
+      /* #build: tighter strip + section rhythm */
+      .foundation-price-bar { padding: 24px 22px; gap: 20px; }
+      .foundation-price-large { font-size: 38px; }
+      .foundation-fn-grid { margin-bottom: 20px; }
+      .fn-item { padding: 16px 16px; }
+      .stage-banner { padding: 18px 20px; margin-bottom: 18px; }
+
+      /* recognition dashboard mock — decorative, same class as edu/arch → hide */
+      .rec-visual-card { display: none; }
+
+      /* tighter proof + FAQ internals */
+      .proof-card-body { padding: 18px 18px; }
+      .faq-q { padding: 14px 0; }
+      .faq-a { padding-bottom: 12px; }
+
+      /* ── Mobile content compaction (approved) ──
+         Show a subset on mobile, link to the full list. Desktop unchanged. */
+      .proof-cards > .proof-card:nth-of-type(n + 2) { display: none; }   /* 1 of 3 + see-all */
+      .faq-list > .faq-item:nth-of-type(n + 6) { display: none; }         /* top 5 + see-all */
+      .fn-grid-lead, .foundation-fn-grid { display: none; }               /* cap-strip lists the 4 already */
+      .see-all-m { display: inline-flex; }
+      #hero { padding-top: 84px; }                                        /* light trim; cards untouched */
+
+      /* final safe tightening — text-block spacing only, no card shrinking */
+      .hero-grid { gap: 26px; }
+      .hero-h1 { margin-bottom: 16px; }
+      .hero-sub { margin-bottom: 18px; }
+      .hero-ctas { margin-bottom: 16px; }
+      .fv-grid { gap: 18px; }
+      .closing-sub { margin-bottom: 18px; }
+      .foundation-h2, .h-section, .vs-h2, .faq-sidebar-h2 { margin-bottom: 12px; }
+    }
   </style>
 </head>
 
@@ -4306,11 +4383,6 @@
       <aside class="hire-callout reveal reveal-d5" aria-label="Before you write the job description">
         <div class="hire-callout-eyebrow">Before you write the job description</div>
         <p class="hire-callout-stmt"><em>Skip the hire.</em> Build the system.</p>
-        <div class="hire-stats">
-          <div class="hire-stat"><span class="hire-stat-val">SGD 80–120K</span><span class="hire-stat-lbl">a year</span></div>
-          <div class="hire-stat"><span class="hire-stat-val">6 months</span><span class="hire-stat-lbl">onboarding</span></div>
-          <div class="hire-stat"><span class="hire-stat-val">In your head</span><span class="hire-stat-lbl">operating manual</span></div>
-        </div>
         <p class="hire-callout-body"><strong>Some clients haven't hired the role they were planning. They built it instead.</strong></p>
       </aside>
 
@@ -4555,6 +4627,8 @@
 
       </div>
 
+      <a href="case-studies" class="see-all-m">See all five case studies <span aria-hidden="true">→</span></a>
+
       <div class="section-cta reveal">
         <p class="section-cta-pre">Yours could be the next one.</p>
         <a href="#closing" class="btn btn-primary">Book a free 30-min call <span class="btn-arrow" aria-hidden="true">→</span></a>
@@ -4668,7 +4742,7 @@
           </div>
         </div>
 
-        <p class="foundation-sub reveal reveal-d3" style="margin-bottom:20px">A few of the things founders have had me build:</p>
+        <p class="foundation-sub fn-grid-lead reveal reveal-d3" style="margin-bottom:20px">A few of the things founders have had me build:</p>
 
         <div class="foundation-fn-grid reveal reveal-d3">
           <div class="fn-item">
@@ -4727,7 +4801,7 @@
             <div class="foundation-bundle">Every line of code and all your data, yours outright. No subscription. No lock-in.</div>
           </div>
           <div class="fpb-timeline">
-            <div class="fpb-tl-row"><span class="fpb-tl-label">We start with</span><span class="fpb-tl-val">A paid audit, your scope + quote</span></div>
+            <div class="fpb-tl-row"><span class="fpb-tl-label">First</span><span class="fpb-tl-val">A paid audit, your scope + quote</span></div>
             <div class="fpb-tl-row"><span class="fpb-tl-label">You own</span><span class="fpb-tl-val">Each phase as it ships</span></div>
             <div class="fpb-tl-row"><span class="fpb-tl-label">Your team</span><span class="fpb-tl-val">Talks to me, touches one board</span></div>
             <div class="fpb-tl-row"><span class="fpb-tl-label">Capacity</span><span class="fpb-tl-val">3 a month, I build each one</span></div>
@@ -4939,6 +5013,8 @@
 
         </div>
       </div>
+
+      <a href="faq" class="see-all-m">See all questions <span aria-hidden="true">→</span></a>
 
       <div class="section-cta reveal">
         <p class="section-cta-pre">Still have questions? Bring them.</p>
