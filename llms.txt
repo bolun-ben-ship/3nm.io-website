@@ -1,10 +1,10 @@
 # RightClick:AI
 
-> Custom internal software for service businesses in Singapore — the dashboards, automations, and internal apps SaaS won't build. Built and run by Bolun (Ben) Liu. The Foundation Build delivers four functions — operational dashboard, workflow automation, AI assistant, and notification centre — scoped per client after a paid audit and built on your real data. You own the code outright. No PSG / EDG grant paperwork.
+> Custom internal software for service businesses in Singapore — the BI dashboards, automations, and internal apps off-the-shelf SaaS won't build. Built and run by Bolun (Ben) Liu. Every build is scoped per client after a paid audit and built on your real data, in phases. You own the code outright. No PSG / EDG grant paperwork.
 
 ## Key pages
 
-- [Homepage](https://3nm.io): Foundation Build, Custom Build, process, case studies, booking
+- [Homepage](https://3nm.io): What I build, process, case studies, booking
 - [About](https://3nm.io/about): Manifesto, method, and engagement terms behind every build
 - [How it works](https://3nm.io/how-it-works): The exact engagement sequence — discovery, audit, scope, MVP, build, handover. Vs hire / DIY / agency comparison.
 - [FAQ](https://3nm.io/faq): Pricing, ownership, grant policy, fit assessment
@@ -14,25 +14,24 @@
 
 RightClick:AI builds custom internal software for service businesses in Singapore with 5 to 35 staff — the dashboards, automations, and internal apps off-the-shelf SaaS won't build. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing before any build starts, ships a working MVP on real data, and is built around your business. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
 
-## The two engagement paths
+## What I build
 
-**Foundation Build — scoped per client after the audit.**
-For businesses building from scratch or with light existing tooling. Four functions: operational dashboard with role-based access, one workflow automation chosen during scoping, AI assistant grounded on live business data, and notification centre. Scoped per client after the audit and built on real data. The 30-minute discovery call is free; the full scope comes before any build. I build until it's live and doing the job. Stop anytime — all code delivered is the client's regardless.
+Custom internal software, scoped to each business. Common shapes:
 
-**Custom Build — RFQ.**
-For clients with an existing system to rebuild (Notion CRM, custom app, spreadsheets that quietly became operations), scope larger than the four Foundation functions, or a system that needs to live inside an existing product. Same process. Same commitments. I build until it's live and doing the job. Scoped per project after the audit. No fixed Custom price is published because no build of this shape can be honestly quoted without an audit.
+- **BI dashboards** — sales and ops data in one live view: revenue, pipeline, capacity, client health.
+- **Admin automation** — report generation, deck creation, client onboarding, and the calculations buried across spreadsheets.
+- **Custom internal apps** — the tool no SaaS sells: CV scoring, delivery ops, review boards, intake pipelines. Built to the client's process.
+- **AI workshops** — getting a team using AI day to day, so the system gets used.
 
-**Function Cycles — scoped per cycle.**
-After Foundation, the system extends one capability per cycle, scoped after the audit. Pay-as-you-go. No annual contract. Stop and restart anytime.
+Every build is scoped and quoted per client after the audit — there is no fixed price and no fixed package. What a client pays depends on what is being built and how much of it. The system is built on real data, in phases, and the client owns each phase as it ships. The 30-minute discovery call is free; the workflow audit is paid; and the client sees the full scope and quote before any build. I build until it's live and doing the job. Stop anytime — all code delivered is the client's regardless.
 
-**Maintain Mode — annual subscription, opt-in.**
-Hosting, updates, AI model refresh, async support. Optional. Far cheaper than the SaaS stack the system replaces.
+After the first build, the system can keep growing one phase at a time, scoped like the last, or simply be kept running under an opt-in annual maintenance arrangement (hosting, updates, AI model refresh, async support). Both are optional; neither is a contract.
 
 ## Stage philosophy
 
-**Stage 1 — Operational Visibility.** Centralise the business's data into a single environment so the founder understands what is happening across the entire business without asking anyone, opening multiple systems, or waiting on a status update. The Foundation Build delivers Stage 1 end-to-end.
+**Stage 1 — Operational Visibility.** Centralise the business's data into a single environment so the founder understands what is happening across the entire business without asking anyone, opening multiple systems, or waiting on a status update. The first build delivers Stage 1.
 
-**Stage 2 — Growth Automation.** Automate operational workflows so operations become faster and less dependent on manual effort. The business scales without proportional headcount growth. Function Cycles deliver Stage 2 capability by capability.
+**Stage 2 — Growth Automation.** Automate operational workflows so operations become faster and less dependent on manual effort. The business scales without proportional headcount growth. Later phases deliver Stage 2 capability by capability.
 
 ## Why no grants
 
@@ -62,7 +61,7 @@ Response: Within 24 hours
 - Free 30-minute discovery call, then a workflow audit
 - Written scope before any build starts
 - Working MVP on real business data
-- Full Foundation Build scoped and delivered around your business
+- The full build scoped and delivered around your business, phase by phase
 - Fast feedback expected from client during active build
 - Performance guarantee: I build until it's live and doing the job. You get the result, not a refund.
 - Stop anytime — all code delivered is yours regardless

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>From 13% Error Rate to Near Zero: Rebuilding a Compliance Workflow for a 22-Person Finance Firm — RightClick:AI</title>
+  <title>From 13% Error Rate to Near Zero: Rebuilding a Compliance Workflow for a 22-Person Finance Firm · RightClick:AI</title>
   <meta name="description" content="A 22-person finance firm was running compliance approvals across email and spreadsheets with a 13% error rate. I rebuilt the entire process with automated routing, escalation, and audit trails. Results: 1.2% error rate, approval cycle time cut from 4.3 to 1.8 days. By Bolun (Ben) Liu.">
 
   <!-- Google tag (gtag.js) -->
@@ -87,7 +87,7 @@
           RightClick<span>:AI</span>
         </a>
         <ul class="nav-links">
-          <li><a href="/#foundation">Foundation</a></li>
+          <li><a href="/#build">What I build</a></li>
           <li><a href="how-it-works">How it works</a></li>
           <li><a href="case-studies" class="active" aria-current="page">My work</a></li>
           <li><a href="faq">FAQ</a></li>
@@ -103,7 +103,7 @@
 
   <div class="mobile-menu" id="mobile-menu">
     <ul>
-      <li><a href="/#foundation">Foundation</a></li>
+      <li><a href="/#build">What I build</a></li>
       <li><a href="how-it-works">How it works</a></li>
       <li><a href="case-studies">My work</a></li>
       <li><a href="faq">FAQ</a></li>
@@ -136,36 +136,36 @@
     <div class="article-layout">
       <article class="article-body">
 
-        <p>In 2025, a 22-person financial services firm came to me with a problem that sounded procedural but was costing them materially. Their compliance approval workflow — a chain of document checks, supervisory sign-offs, and regulatory cross-references — ran across email threads and shared spreadsheets. The error rate on submissions was approximately 13%. For every eight compliant submissions, one had a defect that required follow-up, correction, or resubmission. In a regulated environment, each error carries a cost beyond the correction time: it affects client confidence, creates regulatory exposure, and in some cases triggers formal review processes. Thirteen percent is not a rounding error. It is a structural problem.</p>
+        <p>In 2025, a 22-person financial services firm came to me with a problem that sounded procedural but was costing them materially. Their compliance approval workflow (a chain of document checks, supervisory sign-offs, and regulatory cross-references) ran across email threads and shared spreadsheets. The error rate on submissions was approximately 13%. For every eight compliant submissions, one had a defect that required follow-up, correction, or resubmission. In a regulated environment, each error carries a cost beyond the correction time: it affects client confidence, creates regulatory exposure, and in some cases triggers formal review processes. Thirteen percent is not a rounding error. It is a structural problem.</p>
 
         <p>This is how I identified what was actually wrong, what I built, and what changed.</p>
 
         <h2>The Situation</h2>
 
-        <p>Twenty-two staff. Compliance work as a core operational function. Every submission required five distinct sign-offs — each from a different person, in sequence. Version control was managed manually: document shared by email, comments appended inline, document versions named by initials and date in the filename. When a step was missed, it was discovered either at the next stage of the chain or — in the worst cases — at submission to the regulator.</p>
+        <p>Twenty-two staff. Compliance work as a core operational function. Every submission required five distinct sign-offs, each from a different person, in sequence. Version control was managed manually: document shared by email, comments appended inline, document versions named by initials and date in the filename. When a step was missed, it was discovered either at the next stage of the chain or, in the worst cases, at submission to the regulator.</p>
 
         <p>The firm had tried to address this with better training and more explicit checklists. Neither made a significant difference. The error rate improved slightly for a few weeks after each intervention, then drifted back. The compliance director told me: "We kept thinking we needed people to be more careful. We were focused on the wrong thing."</p>
 
-        <div class="callout"><p><strong>The mistake was assuming the errors were caused by carelessness.</strong> Carelessness is a symptom. Structural problems look like human error until you map the process — then you see that the errors were almost inevitable given how the process was designed.</p></div>
+        <div class="callout"><p><strong>The mistake was assuming the errors were caused by carelessness.</strong> Carelessness is a symptom. Structural problems look like human error until you map the process. Then you see that the errors were almost inevitable given how the process was designed.</p></div>
 
         <h2>The Problem Behind the Problem</h2>
 
-        <p>When I ran the process mapping session — two hours, two members of the operations team plus the compliance director — I was looking for the structural failures, not the human ones. They surfaced quickly.</p>
+        <p>When I ran the process mapping session (two hours, two members of the operations team plus the compliance director), I was looking for the structural failures, not the human ones. They surfaced quickly.</p>
 
-        <p>There was no single point of truth for submission status. No one person in the approval chain knew the complete state of any given submission without asking someone else. The person at step three did not know whether step two's review had been completed — they assumed it had because the document was in their inbox. Sometimes it had not been. The routing was entirely manual, which meant submissions sat in email inboxes between steps, sometimes for days, with no escalation mechanism when they were not actioned.</p>
+        <p>There was no single point of truth for submission status. No one person in the approval chain knew the complete state of any given submission without asking someone else. The person at step three did not know whether step two's review had been completed. They assumed it had because the document was in their inbox. Sometimes it had not been. The routing was entirely manual, which meant submissions sat in email inboxes between steps, sometimes for days, with no escalation mechanism when they were not actioned.</p>
 
-        <p>The coordination work — tracking where each submission was in the chain, chasing sign-offs, reconciling document versions, identifying what still needed action — was consuming approximately two full-time equivalent hours per day across the team. Not dedicated roles. Distributed attention, constant context-switching, and administrative overhead spread across five people who also had substantive compliance work to do.</p>
+        <p>The coordination work (tracking where each submission was in the chain, chasing sign-offs, reconciling document versions, identifying what still needed action) was consuming approximately two full-time equivalent hours per day across the team. Not dedicated roles. Distributed attention, constant context-switching, and administrative overhead spread across five people who also had substantive compliance work to do.</p>
 
         <p>The mapping session also surfaced three specific structural failures the team had not fully articulated:</p>
 
         <div class="findings-list">
           <div class="finding-item">
             <div class="finding-num">01</div>
-            <div class="finding-text"><strong>Two of the five sign-off steps had overlapping scope.</strong> Reviewers at steps two and four were both checking regulatory classification, with slightly different emphasis. Neither knew what the other was checking. This created both redundancy and gaps — each assumed the other was handling the edge cases.</div>
+            <div class="finding-text"><strong>Two of the five sign-off steps had overlapping scope.</strong> Reviewers at steps two and four were both checking regulatory classification, with slightly different emphasis. Neither knew what the other was checking. This created both redundancy and gaps. Each assumed the other was handling the edge cases.</div>
           </div>
           <div class="finding-item">
             <div class="finding-num">02</div>
-            <div class="finding-text"><strong>The most common error class originated at step two but was not caught until step four.</strong> A required cross-reference check was technically assigned to step two, but the document format made it easy to miss. By the time it was caught at step four, correction required looping back through steps two and three — adding two to four days and resetting several sign-offs.</div>
+            <div class="finding-text"><strong>The most common error class originated at step two but was not caught until step four.</strong> A required cross-reference check was technically assigned to step two, but the document format made it easy to miss. By the time it was caught at step four, correction required looping back through steps two and three, adding two to four days and resetting several sign-offs.</div>
           </div>
           <div class="finding-item">
             <div class="finding-num">03</div>
@@ -173,7 +173,7 @@
           </div>
         </div>
 
-        <p>These were not secrets. Everyone in the room, to varying degrees, was aware of each of these issues. But they had never been written down as structural failures in the process specification — which meant they had never been addressable as such. You cannot fix a process problem by telling people to try harder. You fix it by redesigning the process.</p>
+        <p>These were not secrets. Everyone in the room, to varying degrees, was aware of each of these issues. But they had never been written down as structural failures in the process specification, which meant they had never been addressable as such. You cannot fix a process problem by telling people to try harder. You fix it by redesigning the process.</p>
 
         <h2>What I Built</h2>
 
@@ -182,15 +182,15 @@
         <div class="system-components">
           <div class="component-card">
             <div class="component-name">Structured Intake</div>
-            <div class="component-desc">A validation layer at submission entry. All required documents are attached via a structured form — not email. Required fields are checked programmatically. The cross-reference check identified at step two was moved to intake: the system validates it against the regulatory database before the submission enters the review chain. Any submission missing required elements or failing the cross-reference is flagged and returned to the submitter before it reaches the first reviewer. This eliminated the entire class of errors that originated from incomplete submissions reaching the chain.</div>
+            <div class="component-desc">A validation layer at submission entry. All required documents are attached via a structured form, not email. Required fields are checked programmatically. The cross-reference check identified at step two was moved to intake: the system validates it against the regulatory database before the submission enters the review chain. Any submission missing required elements or failing the cross-reference is flagged and returned to the submitter before it reaches the first reviewer. This eliminated the entire class of errors that originated from incomplete submissions reaching the chain.</div>
           </div>
           <div class="component-card">
             <div class="component-name">Automated Routing and Escalation</div>
-            <div class="component-desc">Each sign-off request is routed automatically to the correct reviewer with a defined deadline. The routing logic encodes the revised approval chain — the two overlapping steps were consolidated into one, with explicit scope defined. Status is tracked in a central dashboard visible to all parties in real time. If a review is not completed within the defined window, an escalation is triggered: a direct notification to the reviewer, then to their manager if still not actioned within a further defined period. No email chasing. No manual tracking.</div>
+            <div class="component-desc">Each sign-off request is routed automatically to the correct reviewer with a defined deadline. The routing logic encodes the revised approval chain. The two overlapping steps were consolidated into one, with explicit scope defined. Status is tracked in a central dashboard visible to all parties in real time. If a review is not completed within the defined window, an escalation is triggered: a direct notification to the reviewer, then to their manager if still not actioned within a further defined period. No email chasing. No manual tracking.</div>
           </div>
           <div class="component-card">
             <div class="component-name">Audit Trail</div>
-            <div class="component-desc">Every action in the workflow — document submitted, review completed, comment added, classification changed, approval given — is logged with timestamp, user, and action type. The compliance director can pull a complete audit history for any submission in under two minutes. This resolved the regulatory exposure concern: the firm now has full, reliable documentation of its compliance process for any submission, retrievable on demand.</div>
+            <div class="component-desc">Every action in the workflow (document submitted, review completed, comment added, classification changed, approval given) is logged with timestamp, user, and action type. The compliance director can pull a complete audit history for any submission in under two minutes. This resolved the regulatory exposure concern: the firm now has full, reliable documentation of its compliance process for any submission, retrievable on demand.</div>
           </div>
         </div>
 
@@ -230,31 +230,31 @@
           </tbody>
         </table>
 
-        <p>The 1.2% remaining error rate represents genuine edge cases — unusual submission types requiring human judgment on classification that falls outside standard parameters. These were anticipated. The goal was never zero errors; that would require removing human judgment from decisions where it belongs. The goal was to eliminate the structural errors — the ones that were happening not because of complexity, but because the process gave people no structure to work within. Those are gone.</p>
+        <p>The 1.2% remaining error rate represents genuine edge cases: unusual submission types requiring human judgment on classification that falls outside standard parameters. These were anticipated. The goal was never zero errors; that would require removing human judgment from decisions where it belongs. The goal was to eliminate the structural errors: the ones that were happening not because of complexity, but because the process gave people no structure to work within. Those are gone.</p>
 
         <h2>What the Compliance Director Said</h2>
 
         <div class="quote-block">
           <div class="quote-text">"We kept thinking we needed to train people better. The problem was not the people. It was that the process gave them no structure to work within. Once there was structure, the errors stopped."</div>
-          <div class="quote-attr">— Compliance Director, 22-person financial services firm</div>
+          <div class="quote-attr">Compliance Director, 22-person financial services firm</div>
         </div>
 
-        <p>This is the most consistent finding across every process rebuild I have done. The human beings in the workflow are not the problem. The architecture around them is. Give people a clear, structured process with defined steps, automated routing, and real-time status visibility — and performance changes without any change to the people doing the work.</p>
+        <p>This is the most consistent finding across every process rebuild I have done. The human beings in the workflow are not the problem. The architecture around them is. Give people a clear, structured process with defined steps, automated routing, and real-time status visibility, and performance changes without any change to the people doing the work.</p>
 
         <h2>What Made This Work</h2>
 
-        <p>The technology in this build is not complex. A structured intake form with programmatic validation. An automated routing and escalation system. A dashboard. An audit log. None of these are technically ambitious — a competent developer can build all of them. The technology was not the hard part.</p>
+        <p>The technology in this build is not complex. A structured intake form with programmatic validation. An automated routing and escalation system. A dashboard. An audit log. None of these are technically ambitious. A competent developer can build all of them. The technology was not the hard part.</p>
 
-        <p>What made this work was the process mapping that came before the build. By the time I began technical design, I had a precise specification: exactly what the system needed to do, in what order, under what conditions, with what data, and what the exceptions looked like. The three structural failures identified in the mapping session were all addressed in the design — before a single line of code was written. The build scope was accurate. There were no mid-build discoveries that required redesign.</p>
+        <p>What made this work was the process mapping that came before the build. By the time I began technical design, I had a precise specification: exactly what the system needed to do, in what order, under what conditions, with what data, and what the exceptions looked like. The three structural failures identified in the mapping session were all addressed in the design, before a single line of code was written. The build scope was accurate. There were no mid-build discoveries that required redesign.</p>
 
-        <p>This sequence — map first, then design, then build — is what separates successful workflow automation from the pattern most AI automation projects follow: build first, discover problems in production, iterate in crisis. That pattern is expensive. It is also avoidable. The information you need to build correctly is always available before you start. You just have to surface it through the mapping process before you start building against it.</p>
+        <p>This sequence (map first, then design, then build) is what separates successful workflow automation from the pattern most AI automation projects follow: build first, discover problems in production, iterate in crisis. That pattern is expensive. It is also avoidable. The information you need to build correctly is always available before you start. You just have to surface it through the mapping process before you start building against it.</p>
 
-        <p>For this firm, the mapping session took two hours. The written specification followed within 24 hours. The working prototype was delivered in three weeks. The full system was live and being used by the team within six weeks of our first conversation. Thirteen percent to 1.2% — at the process level, that is a solved problem.</p>
+        <p>For this firm, the mapping session took two hours. The written specification followed within 24 hours. The working prototype followed quickly, and the full system was live and being used by the team within weeks of our first conversation. Thirteen percent to 1.2%: at the process level, that is a solved problem.</p>
 
         <div class="article-cta">
           <div class="article-cta-label">Next step</div>
           <div class="article-cta-h">Have a workflow with a structural problem you keep trying to fix?</div>
-          <div class="article-cta-sub">Book a 30-minute discovery call. I map the process, identify where the structural failures are, and tell you honestly whether rebuilding it is the right answer — and what that rebuild would look like.</div>
+          <div class="article-cta-sub">Book a 30-minute discovery call. I map the process, identify where the structural failures are, and tell you honestly whether rebuilding it is the right answer, and what that rebuild would look like.</div>
           <a href="#" data-modal-open="discovery" class="btn-white">Book a discovery call →</a>
         </div>
 
@@ -273,7 +273,7 @@
         <div class="sidebar-author">
           <div class="sidebar-author-name">Bolun (Ben) Liu</div>
           <div class="sidebar-author-role">Founder, RightClick:AI · Singapore</div>
-          <div class="sidebar-author-bio">Marketer and AI operator. Builds custom AI systems for service businesses in Singapore. All writing from direct experience — no borrowed frameworks.</div>
+          <div class="sidebar-author-bio">Marketer and AI operator. Builds custom AI systems for service businesses in Singapore. All writing from direct experience. No borrowed frameworks.</div>
           <a href="about" class="sidebar-author-link">Full bio →</a>
         </div>
       </aside>
@@ -333,7 +333,7 @@
       </button>
       <div class="modal-eyebrow">Get started</div>
       <h2 class="modal-title" id="modal-title">Book a 30-minute call.<br>It's free.</h2>
-      <p class="modal-sub">No pitch. No proposal. I talk through your business, identify the leverage, and tell you honestly whether I can help.</p>
+      <p class="modal-sub">No pitch. No proposal. I talk through your business, identify the bottleneck, and tell you honestly whether I can help.</p>
       <form class="discovery-form" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate>
         <div class="form-row">
           <div class="form-group">
