@@ -17,7 +17,6 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Hero wheel fan angles (deg, relative to base 180°). Declared here so top-level init calls can read them.
 // +angle = higher on screen. Card 0 (Meeting) sits at TOP, matching zig's fan.
-const FAN_FULL = [16.5, 5.5, -5.5, -16.5];// 4 cards fanned open — wide enough to stay visually separate
 const REVEAL_DROP = 46;                    // deg below FAN_FULL → cards start off the bottom edge and rise in
 
 /* ---- interactive bits always run (accessible without motion) ------------- */
@@ -38,8 +37,7 @@ if (!REDUCE) {
   initHeroLoop();
   initBento();
   initStats();
-  initGapCircle();
-  initWinCircles();
+  initWinMorph();
   initStepWheel();
   initTimeline();
   initBodyBg();
@@ -146,6 +144,14 @@ function buildHero() {
     geom.w = w; geom.h = h;
     geom.hubX = w * 1.3; geom.hubY = h * 0.5; geom.R = w * 1.04;
     geom.padX = w * 0.06;   // shift the whole scene right so card shadows clear the left clip edge
+    // Pixel-based fan: derive each card angle from a FIXED vertical gap (card height + 16px),
+    // so the 4 cards never overlap however narrow the illustration column gets.
+    const ch = (cardEls[0] && cardEls[0].offsetHeight) || 100;
+    const step = ch + 16;
+    geom.fan = [1.5, 0.5, -0.5, -1.5].map((m) =>
+      (Math.asin(gsap.utils.clamp(-0.72, 0.72, (m * step) / geom.R)) * 180) / Math.PI);
+    // angle for the two summary cards, ±half a (card + 26px) apart → fixed vertical gap
+    geom.pairAng = (Math.asin(gsap.utils.clamp(-0.7, 0.7, (0.5 * (ch + 26)) / geom.R)) * 180) / Math.PI;
   }
   function place() {
     const hubY = geom.hubY, hubX = geom.hubX + geom.padX;
@@ -171,7 +177,7 @@ function initHeroStatic() {
   if (innerWidth <= 767) { stage.classList.add('is-static'); return; }   // stacked poster on mobile
   const H = buildHero();
   if (!H) return;
-  H.task.forEach((c, i) => { c.ang = FAN_FULL[i]; c.r = H.geom.R; c.op = 1; });
+  H.task.forEach((c, i) => { c.ang = H.geom.fan[i]; c.r = H.geom.R; c.op = 1; });
   H.we.op = 0; H.you.op = 0;
   H.place();
 }
@@ -184,7 +190,7 @@ function initHeroLoop() {
   const { task, we, you, geom } = H;
 
   const reset = () => {
-    task.forEach((c, i) => { c.ang = FAN_FULL[i] - REVEAL_DROP; c.r = geom.R; c.op = 0; c.sc = 1; }); // start below the frame
+    task.forEach((c, i) => { c.ang = geom.fan[i] - REVEAL_DROP; c.r = geom.R; c.op = 0; c.sc = 1; }); // start below the frame
     we.ang = 0; we.r = geom.R; we.op = 0; we.sc = 0.9;   // parked at the merge spot, ready to morph up
     you.ang = 0; you.r = geom.R; you.op = 0; you.sc = 1; // emerges from the same spot on the split
     H.place();
@@ -199,7 +205,7 @@ function initHeroLoop() {
     // ── segA 0–2.2s (f0–48) — wheel rotates up: cards rise IN FROM THE BOTTOM, one by one ──
     task.forEach((c, i) => {
       const at = i * 0.24;
-      tl.to(c, { ang: FAN_FULL[i], duration: 1.6, ease: 'power3.out' }, at);   // arc up into the fan
+      tl.to(c, { ang: geom.fan[i], duration: 1.6, ease: 'power3.out' }, at);   // arc up into the fan
       tl.to(c, { op: 1, duration: 0.4, ease: 'power1.out' }, at + 0.05);       // become visible while still low
     });
     // ── HOLD 1s (read the 4 cards) → t=3.0 ──
@@ -210,8 +216,8 @@ function initHeroLoop() {
     tl.to(task, { sc: 0.9, op: 0, duration: 0.55, ease: 'power1.inOut' }, 4.5);        // the one card shrinks + dissolves
     tl.to(we,   { sc: 1,   op: 1, duration: 0.55, ease: 'power1.inOut' }, 4.5);        // "We did" grows in on top of it → morph
     // split into TWO: "We did" rises, "You did" separates out of the same card and drops below (f100–125)
-    tl.to(we, { ang: 5, duration: 0.6, ease: 'power2.out' }, 5.3);
-    tl.fromTo(you, { ang: 0, r: geom.R, op: 0 }, { ang: -7, r: geom.R * 0.95, op: 1, duration: 0.6, ease: 'power2.out' }, 5.3);
+    tl.to(we, { ang: geom.pairAng, duration: 0.6, ease: 'power2.out' }, 5.3);
+    tl.fromTo(you, { ang: 0, r: geom.R, op: 0 }, { ang: -geom.pairAng, r: geom.R, op: 1, duration: 0.6, ease: 'power2.out' }, 5.3);
     // ── HOLD 1s (read the comparison) → t=7.2 ──
     // ── segC 7.2–10.0s (f132–191) — BIG clockwise sweep: both cards rotate COMPLETELY out of frame ──
     tl.to([we, you], { ang: '+=88', duration: 2.3, ease: 'power2.in' }, 7.2);          // wheel +124°-equivalent: both cards exit past the top edge
@@ -256,46 +262,44 @@ function initStats() {
 }
 
 /* ---- GAP CIRCLE — grows to fill, wipes paper→dark (§6, IX2 a-23) ---------- */
-function initGapCircle() {
-  const circle = document.querySelector('[data-gap-circle]');
-  const caption = document.querySelector('.gap-caption');
-  if (!circle) return;
-  gsap.set(circle, { width: 0, opacity: 0 });
-  ScrollTrigger.create({
-    trigger: '[data-gap]', start: 'top 60%', once: true,
-    onEnter: () => {
-      gsap.to(circle, { opacity: 1, duration: 1.0 });
-      gsap.to(circle, { width: 'min(150vw, 1900px)', duration: 3.5, ease: 'power2.out' });
-      if (caption) gsap.to(caption, { color: '#fff', duration: 1.6, delay: 0.6 });
-    },
-  });
-}
-
-/* ---- WIN CIRCLES — reveal + staggered SVG line-draw (§7, script_15) ------- */
-/* Placeholder rebuild of the effect (mask reveal + line-draw); gated ≥992, off <480. */
-function initWinCircles() {
-  if (innerWidth < 480) return;
-  const wrap = document.querySelector('[data-venn]');
-  if (!wrap) return;
-  const circles = gsap.utils.toArray('[data-venn-circle]');
-  const groups = gsap.utils.toArray('.win-tooltips');
-  const paths = gsap.utils.toArray('.win-svg-overlay path');
+/* ---- WIN MORPH — green circle grows to fill, then morphs into the Venn (§6+7 merged) ----
+ * Pinned scroll-scrub: grow → fill → cross-morph to the two Venn circles → draw lines + tooltips.
+ * Disabled ≤767 (CSS falls back to a static stacked Venn). */
+function initWinMorph() {
+  const sec = document.querySelector('[data-winmorph]');
+  if (!sec || innerWidth <= 767) return;
+  const scroller = sec.querySelector('.wm-scroll');
+  const grow = sec.querySelector('[data-wm-grow]');
+  const cap = sec.querySelector('[data-wm-caption]');
+  const venn = sec.querySelector('[data-wm-venn]');
+  const circles = gsap.utils.toArray('[data-venn-circle]', sec);
+  const paths = gsap.utils.toArray('.win-svg-overlay path', sec);
+  const groups = gsap.utils.toArray('.win-tooltips', sec);
   const full = () => innerWidth >= 992;
+  const clamp = gsap.utils.clamp, mr = gsap.utils.mapRange;
+
+  gsap.set(venn, { autoAlpha: 0 });
+  gsap.set(cap, { autoAlpha: 0 });
 
   ScrollTrigger.create({
-    trigger: wrap, start: 'top 70%', once: true,
-    onEnter: () => {
-      circles.forEach((c) => c.classList.add('is-in'));
-      gsap.fromTo(circles, { opacity: 0, scale: 0.85, transformOrigin: '50% 50%' },
-        { opacity: 0.9, scale: 1, duration: 0.8, ease: 'power2.out', stagger: 0.12 });
-      setTimeout(() => groups.forEach((g) => g.classList.add('is-in')), 300);
-      if (full()) {
-        paths.forEach((p, i) => {
-          gsap.to(p, { strokeDashoffset: 0, duration: 0.5, delay: 0.5 + (i % 3) * 0.15, ease: 'power2.out' });
-        });
-      } else {
-        gsap.set(paths, { strokeDashoffset: 0 });
-      }
+    trigger: scroller, start: 'top top', end: 'bottom bottom', scrub: true,
+    onUpdate: (self) => {
+      const p = self.progress;
+      // phase 1 — circle grows to fill (p 0 → 0.42)
+      const g = clamp(0, 1, mr(0, 0.42, 0, 1, p));
+      const growAlpha = p < 0.5 ? 1 : clamp(0, 1, mr(0.66, 0.5, 0, 1, p)); // fade as venn takes over
+      gsap.set(grow, { scale: 0.02 + g * 0.9, autoAlpha: growAlpha });
+      // caption — in while filling, out before the morph
+      gsap.set(cap, { autoAlpha: clamp(0, 1, Math.min(mr(0.03, 0.12, 0, 1, p), mr(0.46, 0.36, 0, 1, p))) });
+      // phase 2 — Venn scene cross-fades/scales in (p 0.48 → 0.66)
+      const v = clamp(0, 1, mr(0.48, 0.66, 0, 1, p));
+      gsap.set(venn, { autoAlpha: v, scale: 0.94 + 0.06 * v });
+      circles.forEach((c) => (c.style.opacity = String(0.9 * v)));
+      // phase 3 — annotation lines draw + tooltips reveal (p 0.66 → 0.86)
+      const r = clamp(0, 1, mr(0.66, 0.86, 0, 1, p));
+      if (full()) paths.forEach((pa) => (pa.style.strokeDashoffset = String(1 - r)));
+      else paths.forEach((pa) => (pa.style.strokeDashoffset = '0'));
+      groups.forEach((gr) => gr.classList.toggle('is-in', p > 0.72));
     },
   });
 }

@@ -1,28 +1,45 @@
 ---
-/* Section 3 — Statement + Trusted-by.  Slots S3.1–S3.3.  Motion: ANIMATION-SPEC §3 (word-reveal + logo marquee). */
-const logos = ['Northwind', 'Selliora', 'Ketch', 'Velociti', 'Farmount', 'Cksium']; /* S3.3 ×6 placeholder wordmarks */
+/* Section 3 — Statement + integration marquee.  Slots S3.1–S3.3.  Motion: ANIMATION-SPEC §3 (word-reveal + logo marquee).
+   Logo bar mirrors zig.ai: a static label + divider on the left, logos scroll right and fade in from behind it. */
+const logos = ['hubspot', 'notion', 'airtable', 'asana', 'clickup', 'googlesheets', 'quickbooks', 'xero', 'trello', 'zapier']; /* S3.3 */
 ---
 <section class="section statement" id="statement">
-  <div class="wrap">
-    <h2 class="st-h2 animate-text_opacity">We don't speed up the busywork. <span class="accent">We give your team a crew that runs it.</span></h2> <!-- S3.1 ≤66 -->
+  <div class="wrap st-top">
+    <p class="eyebrow reveal">It starts with your data.</p>              <!-- S3 eyebrow -->
+    <h2 class="st-h2 animate-text_opacity">One view across <span class="accent">the tools your data already lives in.</span></h2> <!-- S3.1 -->
   </div>
 
-  <div class="st-trusted">
-    <p class="st-label">Trusted by</p>                                    <!-- S3.2 -->
-    <div class="marquee" data-marquee>
+  <div class="wrap st-trust">
+    <span class="st-tb">Works with</span>                                 <!-- S3.2 (was "Trusted by") -->
+    <span class="st-div" aria-hidden="true"></span>
+    <div class="st-marquee" data-marquee aria-label="Integrations">
       <div class="marquee-track">
-        {logos.concat(logos).map((name) => (<span class="st-logo">{name}</span>))}
+        {logos.concat(logos).map((l) => (
+          <img src={`/assets/logos/${l}.svg`} alt="" class="st-logo" loading="lazy" />
+        ))}
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .st-h2 { font-size: var(--title-l); font-weight: 500; text-align: center; max-width: 20ch; margin-inline: auto; letter-spacing: -0.03em; }
-  .st-trusted { margin-top: clamp(48px, 7vw, 88px); }
-  .st-label { font-family: var(--font-mono); font-size: var(--text-s); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); text-align: center; margin-bottom: 22px; }
+  .st-top { text-align: center; max-width: 42rem; margin-inline: auto; }
+  .st-h2 { font-size: var(--title-l); font-weight: 500; margin-top: 16px; letter-spacing: -0.03em; text-wrap: balance; }
 
-  .marquee { position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-  .marquee-track { display: flex; gap: clamp(40px, 6vw, 80px); width: max-content; will-change: transform; }
-  .st-logo { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; color: var(--ink-faint); letter-spacing: -0.02em; white-space: nowrap; }
+  .st-trust { display: flex; align-items: center; margin-top: clamp(48px, 7vw, 88px); }
+  .st-tb { flex: none; font-family: var(--font-mono); font-size: 0.95rem; font-weight: 500; color: var(--ink-muted); white-space: nowrap; padding-right: 22px; }
+  .st-div { flex: none; width: 1px; height: 34px; background: var(--line-2); margin-right: 26px; }
+
+  .st-marquee { position: relative; flex: 1; min-width: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 92%, transparent); }
+  .marquee-track { display: flex; align-items: center; gap: clamp(46px, 5vw, 84px); width: max-content; will-change: transform; }
+  .st-logo { height: 30px; width: auto; flex: none; filter: grayscale(1) opacity(0.5); transition: filter var(--dur) var(--ease-quint); }
+  .st-logo:hover { filter: grayscale(0) opacity(1); }
+
+  @media (max-width: 767px) {
+    .st-tb { font-size: 0.85rem; padding-right: 16px; }
+    .st-div { margin-right: 18px; height: 28px; }
+    .st-logo { height: 24px; }
+  }
 </style>

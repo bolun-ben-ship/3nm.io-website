@@ -1,41 +1,97 @@
 ---
 /* Section 4 — "Why different" bento.  Slots S4.1–S4.7.  Motion: ANIMATION-SPEC §4 (card scale-in + badge orbit). */
+/* content/index.md §8 — the four functions (verbatim), plus the ownership + no-grant-paperwork
+   claims (verbatim from the §8 ownership strip and the §9 comparison / FAQ 11).
+   Each card carries a bespoke illustration (zig-style rich elements, recoloured to brand). */
 const cards = [
-  { variant: '',      title: 'One motion, end to end',        body: 'From first touch to closed deal — research, outreach, meetings, follow-ups, and sync, all connected and talking to each other.', cta: false },
-  { variant: 'red',   title: 'Built for the field, first',    body: 'Score a badge, a business card, or a handwritten name. Instantly enrich it, log it, and put the next move in your pocket before the room clears.', cta: false },
-  { variant: 'green', title: 'Always working. Never waiting.', body: "It doesn't wait to be opened. It's a teammate that runs before the next call, between calls, and after the last one — automatically.", cta: false },
-  { variant: '',      title: 'The rep stays in control',      body: 'Complete actions need approval. Simple ones just happen. Every action is visible, reversible, and one tap from undone.', cta: true },
-  { variant: '',      title: 'Your agent on the phone',       body: 'Ask it anything mid-drive. "Send the follow-up. Log the call. Update the next step." It answers and does it — no laptop required.', cta: false },
-  { variant: 'dark',  title: 'Intelligence trained on you',   body: 'Not generic AI. It reads your actual pipeline, your real signals, and gets sharper on your motion with every single week.', cta: false },
+  { variant: '',      viz: 'dash',  title: 'BI dashboards',           body: 'Your sales and ops data in one live view: revenue, pipeline, capacity, client health. Stop chasing status updates. See it.', cta: false },
+  { variant: 'red',   viz: 'app',   title: 'Custom internal apps',    body: 'The tool no SaaS sells you: CV scoring, delivery ops, review boards, intake pipelines. Built to your process, not someone else’s template.', cta: false },
+  { variant: 'green', viz: 'flow',  title: 'Admin automation',        body: 'Report generation, deck creation, client onboarding, the calculation buried across five spreadsheets. The work that eats your week, handled.', cta: false },
+  { variant: '',      viz: 'team',  title: 'Team adoption, built in', body: 'Your whole team using the system day to day, not just you. Sessions and guardrails so it gets used, not admired.', cta: true },
+  { variant: '',      viz: 'grant', title: 'No grant paperwork',      body: 'No PSG or EDG route, and no 3 to 6 months of approval before a line of code is written. Cashflow-only. Scope starts right after you commit.', cta: false },
+  { variant: 'dark',  viz: 'own',   title: 'You own it. All of it.',  body: 'Every line of code and all your data, yours outright. No subscription. No lock-in. Source, infrastructure, every SOP.', cta: false },
 ];
 ---
-<section class="section bento" id="bento">
+<section class="section bento" id="build">
   <div class="wrap">
     <header class="section-head left">
-      <p class="eyebrow reveal">Built different</p>                       <!-- S4.1 ≤18 -->
-      <h2 class="bento-h2 animate-text_opacity">Why this beats everything you've tried</h2> <!-- S4.2 ≤54 -->
-      <p class="bento-intro reveal">Most tools wait to be opened. This one is the teammate that never stops working.</p> <!-- S4.3 ≤82 -->
+      <p class="eyebrow reveal">What I actually build</p>                 <!-- S4.1 -->
+      <h2 class="bento-h2 animate-text_opacity">Custom software SaaS won't build.</h2> <!-- S4.2 -->
+      <p class="bento-intro reveal">The exact internal system your business runs on, built to your real workflow and your real data. Off-the-shelf tools can't fit it and won't price for a team your size. I build it. You own it.</p> <!-- S4.3 -->
     </header>
 
     <div class="bento-grid">
       {cards.map((c, i) => (
         <article class={`bento-card b${i + 1} ${c.variant} ${c.variant === 'dark' ? 'on-dark' : ''} ${c.variant === 'green' || c.variant === 'red' ? 'on-flood' : ''} reveal-card`}>
-          <span class="bento-idx">/ 0{i + 1}</span>                       <!-- S4.4 ×6 -->
-          <div class="bento-body-wrap">
-            <h3 class="bento-title">{c.title}</h3>                         <!-- S4.5 ×6 ≤34 -->
-            <p class="bento-copy">{c.body}</p>                            <!-- S4.6 ×6 ≤200 -->
-            {c.cta && <a href="#steps" class="bento-cta">Learn more <span class="arrow">→</span></a>} <!-- S4.7 -->
+          <div class="bento-head">
+            <span class="bento-idx">/ 0{i + 1}</span>                     <!-- S4.4 ×6 -->
+            <h3 class="bento-title">{c.title}</h3>                         <!-- S4.5 ×6 -->
+            <p class="bento-copy">{c.body}</p>                            <!-- S4.6 ×6 -->
+            {c.cta && <a href="/how-it-works" class="bento-cta">See how it works <span class="arrow">→</span></a>} <!-- S4.7 -->
           </div>
-          {c.variant === 'red' && (
-            <div class="bento-phone" aria-hidden="true">
-              <div class="phone">
-                <span class="phone-badge" data-orbit>
-                  <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg>
-                </span>
-                <span class="phone-line w1"></span><span class="phone-line w2"></span><span class="phone-line w3"></span>
+
+          <div class="bento-viz" aria-hidden="true">
+            {c.viz === 'dash' && (
+              <div class="viz viz-dash">
+                <div class="vd-tiles">
+                  <div class="vd-tile"><span>Revenue</span><b>$142k</b><i class="up">↑ 12%</i></div>
+                  <div class="vd-tile"><span>Pipeline</span><b>38</b><i class="up">↑ 5</i></div>
+                  <div class="vd-tile"><span>Capacity</span><b>82%</b></div>
+                </div>
+                <div class="vd-chart">
+                  {[38,54,44,68,60,82,74].map((h, j) => (<i style={`--h:${h}%`} class={j > 4 ? 'hot' : ''}></i>))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {c.viz === 'app' && (
+              <div class="viz viz-app">
+                <span class="va-orbit" data-orbit></span>
+                <div class="phone">
+                  <span class="phone-badge" data-orbit>
+                    <svg width="17" height="17" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg>
+                  </span>
+                  <div class="pa-bar"><i></i><b>CV Scoring</b></div>
+                  <div class="pa-row"><span>A. Rahman</span><em class="ok">92</em></div>
+                  <div class="pa-row"><span>M. Tan</span><em>78</em></div>
+                  <div class="pa-row"><span>W. Lin</span><em>85</em></div>
+                </div>
+              </div>
+            )}
+
+            {c.viz === 'flow' && (
+              <div class="viz viz-flow">
+                <div class="vf-node"><span class="vf-dot s1"></span>5 spreadsheets</div>
+                <span class="vf-link"></span>
+                <div class="vf-core"><svg width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg></div>
+                <span class="vf-link"></span>
+                <div class="vf-node out"><span class="vf-tick">✓</span>Report, sent</div>
+              </div>
+            )}
+
+            {c.viz === 'team' && (
+              <div class="viz viz-team">
+                <div class="vt-avatars"><i></i><i></i><i></i><i></i><i></i><b>+3</b></div>
+                <div class="vt-bar"><span>Seats active</span><span class="vt-track"><span class="vt-fill"></span></span><b>8 / 8</b></div>
+              </div>
+            )}
+
+            {c.viz === 'grant' && (
+              <div class="viz viz-grant">
+                <div class="vg-row muted"><span class="vg-lbl">Grant route</span><span class="vg-bar long"></span><em class="no">3–6 mo ✕</em></div>
+                <div class="vg-row go"><span class="vg-lbl">RightClick:AI</span><span class="vg-bar short"></span><em class="yes">Now ✓</em></div>
+              </div>
+            )}
+
+            {c.viz === 'own' && (
+              <div class="viz viz-own">
+                <div class="vo-chips">
+                  {['Source code','Database','Infrastructure','SOPs','Knowledge wiki'].map((t) => (<span class="vo-chip">{t}</span>))}
+                </div>
+                <div class="vo-badge"><span class="vo-lock">🔒</span> 100% yours · no lock-in</div>
+              </div>
+            )}
+          </div>
         </article>
       ))}
     </div>
@@ -46,22 +102,22 @@ const cards = [
   .bento-h2 { font-size: var(--title-m); margin-top: 14px; max-width: 18ch; }
   .bento-intro { font-size: var(--text-xl); color: var(--ink-mid); margin-top: 16px; max-width: 40ch; }
 
-  .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: clamp(40px, 6vw, 72px); grid-auto-rows: minmax(220px, auto); }
-  .bento-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 26px; border-radius: var(--r-lg); overflow: hidden; }
+  .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: clamp(40px, 6vw, 72px); grid-auto-rows: minmax(300px, auto); }
+  .bento-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; padding: 28px; border-radius: var(--r-lg); overflow: hidden; }
   .bento-card:not(.red):not(.green):not(.dark) { background: var(--sand); border: 1px solid var(--hair); }
   .bento-card.red   { background: var(--coral); }
   .bento-card.green { background: var(--green); }
   .bento-card.dark  { background: var(--dark); }
 
   /* asymmetric weave */
-  .b1 { grid-column: span 5; } .b2 { grid-column: span 7; grid-row: span 1; min-height: 340px; }
+  .b1 { grid-column: span 5; } .b2 { grid-column: span 7; grid-row: span 1; min-height: 360px; }
   .b3 { grid-column: span 7; } .b4 { grid-column: span 5; }
   .b5 { grid-column: span 5; } .b6 { grid-column: span 7; }
 
   .bento-idx { font-family: var(--font-mono); font-size: var(--text-s); font-weight: 500; letter-spacing: 0.08em; color: var(--ink-muted); }
   .bento-card.red .bento-idx, .bento-card.green .bento-idx { color: var(--on-flood-mut); }
   .bento-card.dark .bento-idx { color: var(--green-on-dark); }
-  .bento-title { font-size: var(--title-xs); margin-bottom: 10px; }
+  .bento-title { font-size: var(--title-xs); margin: 12px 0 10px; }
   .bento-copy { font-size: var(--text-m); line-height: 1.45; color: var(--ink-mid); max-width: 34ch; }
   .bento-card.red .bento-copy, .bento-card.green .bento-copy { color: var(--on-flood-mut); }
   .bento-card.dark .bento-copy { color: var(--on-dark-mut); }
@@ -69,12 +125,73 @@ const cards = [
   .bento-cta .arrow { transition: transform var(--dur) var(--ease-quint); }
   .bento-cta:hover .arrow { transform: translateX(3px); }
 
-  /* red-card phone mockup + orbiting brand badge */
-  .bento-phone { position: absolute; right: 20px; bottom: -30px; }
-  .phone { position: relative; width: 132px; height: 250px; border-radius: 22px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(3px); padding: 20px 16px; }
-  .phone-line { display: block; height: 9px; border-radius: 5px; background: rgba(255,255,255,0.35); margin-bottom: 12px; }
-  .phone-line.w1 { width: 70%; } .phone-line.w2 { width: 90%; } .phone-line.w3 { width: 55%; }
-  .phone-badge { position: absolute; top: -18px; left: -18px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--coral); display: grid; place-items: center; box-shadow: 0 10px 26px -8px rgba(0,0,0,0.3); }
+  .bento-viz { margin-top: auto; }
+
+  /* ── 1 · BI dashboards ─────────────────────────────── */
+  .viz-dash { display: flex; flex-direction: column; gap: 12px; }
+  .vd-tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .vd-tile { background: var(--paper); border: 1px solid var(--hair); border-radius: 12px; padding: 10px 11px; display: flex; flex-direction: column; gap: 2px; }
+  .vd-tile span { font-size: 0.62rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .vd-tile b { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--ink); }
+  .vd-tile .up { font-size: 0.6rem; color: var(--green); }
+  .vd-chart { display: flex; align-items: flex-end; gap: 7px; height: 68px; padding: 12px 12px 0; background: var(--paper); border: 1px solid var(--hair); border-radius: 12px; }
+  .vd-chart i { flex: 1; height: var(--h); border-radius: 3px 3px 0 0; background: var(--ink-faint); opacity: 0.5; }
+  .vd-chart i.hot { background: var(--green); opacity: 1; }
+
+  /* ── 2 · Custom internal apps (red) — phone + orbit ── */
+  .viz-app { position: relative; display: grid; place-items: center; min-height: 200px; }
+  .va-orbit { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.28); }
+  .va-orbit::after { content: ''; position: absolute; inset: 34px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.18); }
+  .phone { position: relative; width: 208px; border-radius: 20px; background: rgba(255,255,255,0.96); box-shadow: 0 24px 60px -24px rgba(0,0,0,0.45); padding: 16px 15px; z-index: 2; }
+  .phone-badge { position: absolute; top: -16px; right: -16px; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: var(--coral); display: grid; place-items: center; box-shadow: 0 10px 26px -8px rgba(0,0,0,0.35); z-index: 3; }
+  .pa-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .pa-bar i { width: 26px; height: 26px; border-radius: 7px; background: var(--coral-tint); }
+  .pa-bar b { font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; color: var(--ink); }
+  .pa-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--hair); font-size: 0.76rem; color: var(--ink-mid); }
+  .pa-row em { font-family: var(--font-mono); font-weight: 600; font-style: normal; color: var(--ink); }
+  .pa-row em.ok { color: var(--green); }
+
+  /* ── 3 · Admin automation (green) — flow ───────────── */
+  .viz-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .vf-node { display: inline-flex; align-items: center; gap: 8px; padding: 11px 14px; border-radius: 12px; background: rgba(255,255,255,0.12); border: 1px solid var(--line-flood); color: #fff; font-size: 0.82rem; font-weight: 500; }
+  .vf-node.out { background: rgba(255,255,255,0.95); color: var(--green-2); }
+  .vf-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+  .vf-tick { color: var(--green); font-weight: 700; }
+  .vf-link { flex: 1; min-width: 18px; height: 0; border-top: 1.5px dashed rgba(255,255,255,0.4); }
+  .vf-core { flex: none; width: 42px; height: 42px; border-radius: 12px; background: #fff; color: var(--green); display: grid; place-items: center; box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35); }
+
+  /* ── 4 · Team adoption ─────────────────────────────── */
+  .viz-team { display: flex; flex-direction: column; gap: 18px; }
+  .vt-avatars { display: flex; align-items: center; }
+  .vt-avatars i, .vt-avatars b { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--sand); margin-left: -10px; }
+  .vt-avatars i:first-child { margin-left: 0; }
+  .vt-avatars i:nth-child(1){background:linear-gradient(135deg,#8fb89c,#5f9e73)}
+  .vt-avatars i:nth-child(2){background:linear-gradient(135deg,#c9b79a,#a98f6b)}
+  .vt-avatars i:nth-child(3){background:linear-gradient(135deg,#9db3c4,#6f8ea3)}
+  .vt-avatars i:nth-child(4){background:linear-gradient(135deg,#c4a6c0,#9a6f96)}
+  .vt-avatars i:nth-child(5){background:linear-gradient(135deg,#d3a99a,#b47b68)}
+  .vt-avatars b { background: var(--green); color: #fff; font-family: var(--font-mono); font-size: 0.72rem; display: grid; place-items: center; }
+  .vt-bar { display: flex; align-items: center; gap: 10px; font-size: 0.76rem; color: var(--ink-muted); }
+  .vt-track { flex: 1; height: 8px; border-radius: 5px; background: var(--sand-2); overflow: hidden; }
+  .vt-fill { display: block; height: 100%; width: 100%; background: var(--green); border-radius: 5px; }
+  .vt-bar b { color: var(--ink); font-family: var(--font-mono); }
+
+  /* ── 5 · No grant paperwork — timeline compare ─────── */
+  .viz-grant { display: flex; flex-direction: column; gap: 12px; }
+  .vg-row { display: flex; align-items: center; gap: 12px; font-size: 0.76rem; }
+  .vg-lbl { width: 92px; flex: none; color: var(--ink-mid); font-weight: 500; }
+  .vg-bar { height: 10px; border-radius: 6px; }
+  .vg-bar.long { flex: 1; background: repeating-linear-gradient(90deg, var(--ink-faint) 0 8px, transparent 8px 14px); opacity: 0.55; }
+  .vg-bar.short { width: 62px; background: var(--green); }
+  .vg-row em { font-style: normal; font-family: var(--font-mono); font-weight: 600; margin-left: auto; }
+  .vg-row .no { color: var(--ink-faint); } .vg-row .yes { color: var(--green); }
+  .vg-row.go .vg-lbl { color: var(--ink); }
+
+  /* ── 6 · You own it (dark) — ownership chips ────────── */
+  .viz-own { display: flex; flex-direction: column; gap: 16px; }
+  .vo-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .vo-chip { font-size: 0.8rem; font-weight: 500; padding: 8px 14px; border-radius: var(--r-pill); color: var(--on-dark); background: rgba(255,255,255,0.05); border: 1px solid var(--line-dark); }
+  .vo-badge { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; color: var(--green-on-dark); padding: 9px 15px; border-radius: var(--r-pill); background: rgba(95,191,134,0.12); border: 1px solid rgba(95,191,134,0.3); }
 
   .reveal-card { opacity: 0; transform: translateY(28px) scale(0.97); }
   html.no-js .reveal-card { opacity: 1; transform: none; }
@@ -82,12 +199,11 @@ const cards = [
 
   @media (max-width: 991px) {
     .bento-grid { grid-template-columns: 1fr 1fr; }
-    .bento-card { grid-column: auto !important; min-height: 240px; }
-    .b2 { min-height: 300px; }
+    .bento-card { grid-column: auto !important; min-height: 300px; }
+    .b2 { min-height: 340px; }
   }
   @media (max-width: 600px) {
     .bento-grid { grid-template-columns: 1fr; }
-    .bento-phone { position: static; margin-top: 24px; }
-    .phone { margin-inline: auto; }
+    .vd-tiles { grid-template-columns: 1fr 1fr 1fr; }
   }
 </style>

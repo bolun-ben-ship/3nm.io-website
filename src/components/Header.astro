@@ -1,9 +1,11 @@
 ---
 /* Section 0 — Global Nav (zig.ai style: floating centre pill on the hero bg).  Slots S0.1–S0.4.
    Motion: hide on scroll-down, reveal on scroll-up (ANIMATION-SPEC §0). */
+/* Nav copy = content/_shell.md (verbatim labels + routes). */
 const links = [
-  { href: '#steps', label: 'How it works' },   /* S0.2 ×3–4, ≤16ch */
-  { href: '#bento', label: 'Why us' },
+  { href: '#build', label: 'What I build' },   /* S0.2 ×3–4, ≤16ch */
+  { href: '#steps', label: 'How it works' },
+  { href: '#work', label: 'My work' },
   { href: '#faq', label: 'FAQ' },
 ];
 ---
@@ -16,8 +18,7 @@ const links = [
     </nav>
 
     <div class="nav-right">
-      <a href="#steps" class="btn btn-ghost nav-btn">Book a demo</a>
-      <a href="#top" class="btn btn-primary nav-btn">Login</a>          <!-- S0.3 / S0.4 -->
+      <a href="#closing" class="btn btn-primary nav-btn">Book a call <span class="arrow">→</span></a> <!-- S0.3 -->
     </div>
 
     <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -27,8 +28,7 @@ const links = [
 
   <div class="nav-mobile" id="mobileMenu" hidden>
     {links.map((l) => <a href={l.href}>{l.label}</a>)}
-    <a href="#steps" class="btn btn-ghost">Book a demo</a>
-    <a href="#top" class="btn btn-primary">Login</a>
+    <a href="#closing" class="btn btn-primary">Book a call →</a>
   </div>
 </header>
 
@@ -36,6 +36,7 @@ const links = [
   .nav {
     position: fixed; inset: 0 0 auto 0; z-index: 100;
     padding-block: 18px;
+    background: var(--paper);            /* exact hero background colour */
     transform: translateY(0);
     transition: transform 340ms cubic-bezier(0.65,0,0.35,1);
   }

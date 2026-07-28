@@ -47,9 +47,9 @@
   --state-err:    #f44336;   /* form validation only */
 
   /* — type: brand families (LOCKED) — */
-  --font-display: 'Space Grotesk', 'Satoshi', system-ui, sans-serif;
+  --font-display: 'General Sans', 'Satoshi', system-ui, sans-serif; /* premium services grotesk (was Space Grotesk) */
   --font-body:    'Satoshi', system-ui, -apple-system, sans-serif;
-  --font-mono:    'Space Grotesk', ui-monospace, monospace; /* eyebrows / "/ 0N" */
+  --font-mono:    'General Sans', ui-monospace, monospace; /* eyebrows / "/ 0N" */
 
   /* — type scale (px @16 root, from DESIGN §5; fluid clamps preserve the relationships) — */
   --title-xl: clamp(2.6rem, 1.2rem + 5.8vw, 5.4rem);   /* ~86 desktop — hero H1 (upsized to match zig); eased floor for mobile */

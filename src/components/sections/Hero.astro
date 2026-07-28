@@ -3,27 +3,34 @@
    Placeholder for the licensed .lottie, rebuilt to match zig's choreography (verified frame-by-frame
    from references/zig ai analysis/lottie): an off-screen-right WHEEL whose radial arms carry the cards.
    4 scenes + two 1s holds, seamless loop — driven by motion.js → initHeroLoop (NOT a plain loop). */
+/* Copy: content/index.md §1 — the "chaos-stage" notification pile, verbatim.
+   Card shape (1-line title + 1-line sub) is fixed by the merge choreography, so the app line is the
+   title and the message is the sub (visually ellipsized). */
 const tasks = [
-  { icon: 'cam',   tone: 'green',  time: '9:02 AM', title: 'Meeting completed',   sub: 'Product demo with Acme Corp' },
-  { icon: 'mail',  tone: 'blue',   time: '9:03 AM', title: 'Follow-up drafted',   sub: 'Intro email with next steps' },
-  { icon: 'cal',   tone: 'coral',  time: '9:03 AM', title: 'CRM updated',         sub: 'Discovery Call → Pro-Sale' },
-  { icon: 'clock', tone: 'purple', time: '9:04 AM', title: 'Next step scheduled', sub: 'Follow-up call on May 16' },
+  { icon: 'chat',  tone: 'purple', time: '2m ago',     title: 'Slack · Sarah',      sub: '@you can you approve the Q3 forecast deck before 3pm?' },
+  { icon: 'mail',  tone: 'blue',   time: 'Tue, 3 days', title: 'Email · Compliance', sub: 'Re: Trade authorisation — awaiting your sign-off.' },
+  { icon: 'alert', tone: 'coral',  time: 'Just now',    title: 'Alert · Invoicing',  sub: 'Invoice overdue. SGD 8,400 · 14 days late.' },
+  { icon: 'cal',   tone: 'slate',  time: 'In 12 min',   title: 'Calendar',           sub: 'Forecast review · prep needed before call' },
 ];
+const trust = ['You own the code', 'Live in weeks, not quarters', 'Stop anytime', 'Built in Singapore'];
 ---
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow reveal" data-r="1">AI copilots for busy teams</p>              <!-- S1.1 ≤30 -->
-      <h1 class="hero-h1 reveal" data-r="2">Close the deal. <span class="accent">We handle the rest of it.</span></h1> <!-- S1.2 ≤42 -->
-      <p class="hero-sub reveal" data-r="3">Your own crew of assistants — one per task. They research, draft, prep, follow up, and log. You review and ship.</p> <!-- S1.3 ≤135 -->
+      <p class="eyebrow reveal" data-r="1">For founder-run Singapore service firms · 5–35 staff</p> <!-- S1.1 -->
+      <h1 class="hero-h1 reveal" data-r="2">You're the system<br />holding it all together.<br /><span class="accent">That's the problem.</span></h1> <!-- S1.2 -->
+      <p class="hero-sub reveal" data-r="3">You don't have to be. I build you one system to see and run your whole business, the custom internal software off-the-shelf SaaS won't. It stops running through you, so you can <strong>scale without the next hire</strong>. You own every line.</p> <!-- S1.3 -->
       <div class="hero-cta reveal" data-r="4">
-        <a href="#closing" class="btn btn-primary">Start now <span class="arrow">→</span></a>   <!-- S1.4 -->
-        <a href="#steps" class="btn btn-ghost">Book a demo for a team</a>                        <!-- S1.5 -->
+        <a href="#closing" class="btn btn-primary">Book a free 30-min call <span class="arrow">→</span></a> <!-- S1.4 -->
+        <a href="/how-it-works" class="btn btn-ghost">See how it works</a>                       <!-- S1.5 -->
       </div>
+      <ul class="hero-trust reveal" data-r="5">
+        {trust.map((t) => (<li>{t}</li>))}
+      </ul>
     </div>
 
     <!-- S1.6 hero illustration — off-screen wheel + radial-arm cards (placeholder .lottie stand-in) -->
-    <div class="hero-illus" data-hero role="img" aria-label="Assistants completing sales tasks, then a done-for-you summary">
+    <div class="hero-illus" data-hero role="img" aria-label="An ordinary morning of interrupts addressed to the founder">
       <svg class="hero-wheel-arc" viewBox="0 0 600 560" preserveAspectRatio="none" aria-hidden="true">
         <g fill="none" stroke="var(--hair)" stroke-width="1">
           <circle data-arc cx="600" cy="280" r="300"/>
@@ -39,7 +46,7 @@ const tasks = [
           <div class="hx-row">
             <span class={`hx-icon ic-${t.icon}`} aria-hidden="true"></span>
             <div class="hx-txt"><p class="hx-title">{t.title}</p><p class="hx-sub">{t.sub}</p></div>
-            <span class="hx-check" aria-hidden="true">✓</span>
+            <span class="hx-unread" aria-hidden="true"></span>
           </div>
         </article>
       ))}
@@ -49,11 +56,10 @@ const tasks = [
           <span class="hx-brand" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg>
           </span>
-          <p class="hx-title">We did</p>
+          <p class="hx-title">The system did</p>
         </div>
         <div class="hx-foot">
-          <span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">14 tasks</span>
-          <span class="hx-avatars" aria-hidden="true"><i></i><i></i><i></i><b>+12</b></span>
+          <span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">Status, reports, follow-ups</span>
         </div>
       </article>
 
@@ -62,7 +68,7 @@ const tasks = [
           <span class="hx-photo" aria-hidden="true"></span>
           <p class="hx-title">You did</p>
         </div>
-        <div class="hx-foot"><span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">Closed the deal</span></div>
+        <div class="hx-foot"><span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">Made the one call that mattered</span></div>
       </article>
     </div>
   </div>
@@ -70,12 +76,20 @@ const tasks = [
 
 <style>
   .hero { padding-top: clamp(104px, 13vw, 168px); padding-bottom: var(--section-y); }
-  .hero-grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
 
-  .hero-h1 { font-size: var(--title-xl); font-weight: 500; margin: 26px 0 26px; max-width: 15ch; letter-spacing: -0.035em; }
+  /* Real H1 is 3 lines / 47 chars (vs the placeholder's 2 short lines), so it needs a slightly
+     tighter cap + wider measure than --title-xl, or the forced breaks wrap into six lines. */
+  .hero-h1 { font-size: clamp(2.1rem, 1rem + 3.3vw, 3.15rem); font-weight: 500; margin: 26px 0 26px; max-width: 26ch; letter-spacing: -0.035em; }
   .hero-sub { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.375rem); line-height: 1.5; color: var(--ink-mid); max-width: 42ch; }
+  .hero-sub strong { font-weight: 700; color: var(--ink); }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
   .hero-cta .btn { font-size: 1.05rem; padding: 1.05em 1.9em; }
+
+  /* trust row (content §1, 4 items with accent dots) */
+  .hero-trust { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; padding: 0; }
+  .hero-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-s); color: var(--ink-muted); }
+  .hero-trust li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 
   /* — illustration stage: overflow clips the off-screen wheel to an arc;
        a soft left-edge mask dissolves anything at the clip line so there's no hard shadow seam — */
@@ -91,7 +105,7 @@ const tasks = [
     border-radius: var(--r-lg); padding: 16px 18px; box-shadow: 0 20px 50px -22px rgba(10,18,12,0.24);
     transform: translate(-9999px, 0); will-change: transform, opacity; }
   .hx-time { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; }
-  .tone-green  .hx-time { color: var(--green); }  .tone-green  .hx-icon { background: var(--green-tint); color: var(--green); }
+  .tone-slate  .hx-time { color: #5b6b78; }        .tone-slate  .hx-icon { background: #e9edf0; color: #5b6b78; }
   .tone-blue   .hx-time { color: #3f7fb0; }        .tone-blue   .hx-icon { background: #e6eff6; color: #3f7fb0; }
   .tone-coral  .hx-time { color: var(--coral); }  .tone-coral  .hx-icon { background: var(--coral-tint); color: var(--coral); }
   .tone-purple .hx-time { color: #8a52c4; }        .tone-purple .hx-icon { background: #f0e9f8; color: #8a52c4; }
@@ -99,14 +113,20 @@ const tasks = [
   .hx-row { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
   .hx-icon { flex: none; width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; }
   .hx-icon::after { content: ''; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--ic) center/contain no-repeat; mask: var(--ic) center/contain no-repeat; }
-  .ic-cam   { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'); }
+  .ic-chat  { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6.5A8 8 0 0 1 11 4h2a8 8 0 0 1 8 8z"/></svg>'); }
+  .ic-alert { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.2v.1"/></svg>'); }
   .ic-mail  { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>'); }
   .ic-cal   { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'); }
-  .ic-clock { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'); }
   .hx-txt { min-width: 0; }
   .hx-title { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; line-height: 1.15; color: var(--ink); }
   .hx-sub { font-size: 0.8rem; color: var(--ink-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 186px; } /* 1 line → all task cards equal height → 100% overlap on merge */
   .hx-check { margin-left: auto; flex: none; width: 25px; height: 25px; border-radius: 50%; background: var(--green); color: #fff; font-size: 12px; display: grid; place-items: center; }
+  /* unread marker — these are interrupts waiting on the founder, not completed work */
+  .hx-unread { margin-left: auto; flex: none; width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+  .tone-slate  .hx-unread { color: #5b6b78; }
+  .tone-blue   .hx-unread { color: #3f7fb0; }
+  .tone-coral  .hx-unread { color: var(--coral); }
+  .tone-purple .hx-unread { color: #8a52c4; }
 
   /* summary cards */
   .hx-brand { flex: none; width: 36px; height: 36px; border-radius: 9px; background: var(--green); color: #fff; display: grid; place-items: center; }
@@ -115,10 +135,6 @@ const tasks = [
   .hx-foot { display: flex; align-items: center; gap: 8px; margin-top: 13px; }
   .hx-check.sm { width: 17px; height: 17px; font-size: 9px; }
   .hx-meta { font-size: 0.82rem; color: var(--ink-muted); }
-  .hx-avatars { margin-left: auto; display: flex; align-items: center; }
-  .hx-avatars i { width: 21px; height: 21px; border-radius: 50%; border: 1.5px solid var(--paper); margin-left: -6px; background: var(--sand-2); }
-  .hx-avatars i:nth-child(1){background:#cdb89a}.hx-avatars i:nth-child(2){background:#a9b8c4}.hx-avatars i:nth-child(3){background:#b9c9b0}
-  .hx-avatars b { margin-left: -6px; width: 23px; height: 23px; border-radius: 50%; background: var(--green); color: #fff; font-size: 9px; font-weight: 600; display: grid; place-items: center; border: 1.5px solid var(--paper); }
 
   /* no-JS + small-screen fallback = a clean stacked list of the 4 task cards (motion.js adds .is-static ≤767) */
   html.no-js .hx-card,

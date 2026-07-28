@@ -1,5 +1,6 @@
 ---
-/* Section 2 — Before / After.  Slots S2.1–S2.6.  Motion: ANIMATION-SPEC §2 (staggered block appear + word-reveal). */
+/* Section 2 — Before / After.  Slots S2.1–S2.6.  Motion: ANIMATION-SPEC §2 (staggered block appear + word-reveal).
+   Layout mirrors zig.ai: header top-left, two labelled columns (Before dark pill / After green pill) offset right. */
 const before = [                                                        /* S2.4 ×4, ≤78 */
   'You spend forty minutes after every call on work nobody built a tool for.',
   'Your CRM is a to-do list you silently agreed to ignore. The board notices.',
@@ -14,23 +15,23 @@ const after = [                                                         /* S2.6 
 ];
 ---
 <section class="section beforeafter" id="beforeafter">
-  <div class="wrap">
-    <header class="section-head">
+  <div class="wrap ba-outer">
+    <header class="ba-head">
       <p class="eyebrow reveal">The execution gap</p>                    <!-- S2.1 ≤20 -->
-      <h2 class="ba-h2 animate-text_opacity">You didn't sign up for <span class="accent-coral">busywork</span></h2> <!-- S2.2 ≤44 -->
+      <h2 class="ba-h2 animate-text_opacity">You didn't sign up to do <span class="accent">busywork</span></h2> <!-- S2.2 ≤44 -->
     </header>
 
-    <div class="ba-grid">
-      <div class="ba-col">
-        <p class="ba-label">Before</p>                                   <!-- S2.3 -->
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <span class="ba-pill dark">Before <b>RightClick:AI</b></span>   <!-- S2.3 -->
         {before.map((row) => (
-          <div class="ba-row before animate-block_appear"><span class="ba-mark">✕</span><p>{row}</p></div>
+          <div class="ba-row animate-block_appear"><span class="ba-mark x" aria-hidden="true">✕</span><p>{row}</p></div>
         ))}
       </div>
-      <div class="ba-col">
-        <p class="ba-label after">After</p>                             <!-- S2.5 -->
+      <div class="ba-col after">
+        <span class="ba-pill green">After <b>RightClick:AI</b></span>    <!-- S2.5 -->
         {after.map((row) => (
-          <div class="ba-row after animate-block_appear"><span class="ba-mark">✓</span><p>{row}</p></div>
+          <div class="ba-row animate-block_appear"><span class="ba-mark check" aria-hidden="true">✓</span><p>{row}</p></div>
         ))}
       </div>
     </div>
@@ -38,20 +39,32 @@ const after = [                                                         /* S2.6 
 </section>
 
 <style>
-  .ba-h2 { font-size: var(--title-m); margin-top: 14px; }
-  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); margin-top: clamp(40px, 6vw, 72px); }
-  .ba-label { font-family: var(--font-mono); font-size: var(--text-s); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 18px; }
-  .ba-label.after { color: var(--green); }
+  .ba-outer { display: grid; grid-template-columns: 0.95fr 1.55fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .ba-head { position: sticky; top: 120px; }
+  .ba-h2 { font-size: var(--title-l); font-weight: 500; margin-top: 16px; max-width: 12ch; letter-spacing: -0.03em; }
 
-  .ba-row { display: flex; gap: 14px; padding: 20px 0; border-top: 1px solid var(--hair); }
+  .ba-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 56px); padding-top: 6px; }
+
+  .ba-pill { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; padding: 9px 16px; border-radius: var(--r-pill); margin-bottom: 8px; }
+  .ba-pill b { font-weight: 600; }
+  .ba-pill.dark { background: var(--ink); color: var(--paper); }
+  .ba-pill.green { background: var(--green); color: #fff; }
+
+  .ba-row { display: flex; gap: 14px; align-items: flex-start; padding: 20px 2px; border-top: 1px solid var(--hair); }
   .ba-row p { font-size: var(--text-l); line-height: 1.4; }
-  .ba-row.before p { color: var(--ink-mid); }
-  .ba-mark { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; margin-top: 1px; }
-  .ba-row.before .ba-mark { background: var(--coral-tint); color: var(--coral); }
-  .ba-row.after .ba-mark { background: var(--green-tint); color: var(--green); }
+  .ba-col.before .ba-row p { color: var(--ink-mid); }
+  .ba-col.after  .ba-row p { color: var(--green-2); font-weight: 500; }
+  .ba-mark { flex: none; width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; margin-top: 1px; border: 1px solid var(--hair); }
+  .ba-mark.x { color: var(--ink-faint); }
+  .ba-mark.check { color: var(--green); border-color: color-mix(in srgb, var(--green) 35%, var(--hair)); }
 
-  @media (max-width: 767px) {
-    .ba-grid { grid-template-columns: 1fr; gap: 0; }
-    .ba-col:last-child { margin-top: 40px; }
+  @media (max-width: 900px) {
+    .ba-outer { grid-template-columns: 1fr; }
+    .ba-head { position: static; }
+    .ba-h2 { max-width: 20ch; }
+  }
+  @media (max-width: 560px) {
+    .ba-cols { grid-template-columns: 1fr; gap: 8px; }
+    .ba-col.after { margin-top: 32px; }
   }
 </style>

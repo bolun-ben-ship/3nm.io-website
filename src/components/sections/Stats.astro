@@ -1,18 +1,20 @@
 ---
 /* Section 5 — Stat circles.  Slots S5.1–S5.5.  Motion: ANIMATION-SPEC §5 (SCRUBBED — scale 0.2→1 one-by-one, tied to scroll). */
+/* Every number here is a real KPI from content/index.md §6–§7 (the shipped case studies).
+   No invented metrics. */
 const stats = [
-  { value: '60+', label: 'Hours back. Per person. Every month.' },      /* S5.4/5.5 ×4 */
-  { value: '95%', label: 'CRM accuracy. Zero manual entry.' },
-  { value: '30%', label: 'Faster from first touch to close.' },
-  { value: '3x',  label: 'Revenue impact. Measured across deployments.' },
+  { value: '3h', label: 'Weekly sync killed. Education consulting.' },  /* S5.4/5.5 ×4 */
+  { value: '−8h', label: 'Per candidate. Executive recruitment.' },
+  { value: '4→1', label: 'Retailers unified into one live view. 3PL logistics.' },
+  { value: '0', label: 'New admin hires needed after the build.' },
 ];
 ---
 <section class="section stats" id="stats" data-stats>
   <div class="wrap">
     <header class="section-head">
-      <p class="eyebrow reveal">The impact</p>                           <!-- S5.1 ≤14 -->
-      <h2 class="stats-h2 animate-text_opacity">What changes when it runs</h2> <!-- S5.2 ≤30 -->
-      <p class="stats-sub reveal">What happens when the team finally has backup.</p> <!-- S5.3 ≤48 -->
+      <p class="eyebrow reveal">The results</p>                          <!-- S5.1 -->
+      <h2 class="stats-h2 animate-text_opacity">What changed for them.</h2> <!-- S5.2 -->
+      <p class="stats-sub reveal">Four builds, four Singapore service firms. Anonymised on request.</p> <!-- S5.3 -->
     </header>
 
     <div class="stats-track">
