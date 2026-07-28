@@ -1,0 +1,38 @@
+---
+---
+<div class="modal" id="discovery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" type="button" aria-label="Close" data-modal-close>✕</button>
+    <div class="eyebrow" style="margin-bottom:14px"><span class="dot">●</span> Get started</div>
+    <h2 id="modal-title">Book a 30-minute call.<br>It's free.</h2>
+    <p class="modal-sub">No pitch. No proposal. Just me looking at your business, finding the bottleneck, and telling you honestly whether I can help.</p>
+    <form class="dform" id="modal-discovery-form" action="https://formspree.io/f/xzdyljay" method="POST" novalidate>
+      <div class="frow">
+        <label>Your name<input type="text" name="name" placeholder="Jane Smith" required autocomplete="name" /></label>
+        <label>Work email<input type="email" name="email" placeholder="you@company.com" required autocomplete="email" /></label>
+      </div>
+      <label>Not ready to book? Tell me the one thing eating your week <span class="opt">(optional)</span>
+        <textarea name="bottleneck" rows="2" placeholder="2 to 3 sentences is enough."></textarea></label>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Book my free call →</button>
+      <p class="note">ben@3nm.io · Singapore · No pitch, no proposal.</p>
+    </form>
+  </div>
+</div>
+<style>
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal.open { display: flex; }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(10,18,12,0.55); backdrop-filter: blur(3px); }
+  .modal-panel { position: relative; width: 100%; max-width: 460px; background: var(--paper); border: 1px solid var(--line-2); border-radius: var(--r-xl); padding: 34px; box-shadow: 0 30px 80px -20px rgba(10,18,12,0.35); }
+  .modal-close { position: absolute; top: 16px; right: 18px; background: none; border: none; font-size: 18px; color: var(--ink-muted); cursor: pointer; }
+  .modal-panel h2 { font-size: var(--step-2); margin-bottom: 10px; }
+  .modal-sub { color: var(--ink-mid); font-size: var(--step--1); margin-bottom: 20px; }
+  .dform { display: flex; flex-direction: column; gap: 14px; }
+  .dform label { display: flex; flex-direction: column; gap: 6px; font-size: var(--step--1); font-weight: 500; color: var(--ink-mid); }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dform input, .dform textarea { font-family: var(--font-body); font-size: var(--step-0); padding: 11px 13px; border: 1px solid var(--line-2); border-radius: var(--r); background: var(--paper-2); color: var(--ink); }
+  .dform input:focus, .dform textarea:focus { outline: none; border-color: var(--accent); }
+  .opt { color: var(--ink-faint); font-weight: 400; }
+  .note { font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  @media (max-width: 520px) { .frow { grid-template-columns: 1fr; } }
+</style>

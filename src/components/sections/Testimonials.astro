@@ -1,0 +1,56 @@
+---
+/* Section 10 — Testimonials.  Slots S10.1–S10.5.  Motion: ANIMATION-SPEC §10 (Splide loop). */
+const slides = [                                                        /* ×6; S10.3 ≤230 / S10.4 ≤28 / S10.5 ≤44 */
+  { quote: 'This has significantly increased our results. It helps us find the right customers, enrich our data, and reach them through the right channels — all in one place.', name: 'Alex Sample', role: 'Director of Demand Generation, Northwind' },
+  { quote: 'My team stopped losing an hour a day to admin overnight. The follow-ups just happen, and nothing falls through the cracks anymore. It quietly runs in the background.', name: 'Jordan Reyes', role: 'VP Sales, Selliora' },
+  { quote: 'The forecast I take to the board is finally real. Every record is current because no one has to update it by hand. That alone changed how we run the quarter.', name: 'Sam Okafor', role: 'Revenue Lead, Ketch' },
+  { quote: 'It reads our actual pipeline and gets sharper every week. It feels less like a tool and more like a teammate who never forgets a single thing about a deal.', name: 'Priya Nair', role: 'Head of Growth, Velociti' },
+  { quote: 'Our reps are back to selling instead of typing. Approvals take one tap, and everything else is handled before we even think to ask for it. The lift was immediate.', name: 'Chris Lin', role: 'Sales Director, Farmount' },
+  { quote: 'We replaced four separate tools with this and the team barely noticed the switch — because it works through the surfaces they already use every day. Adoption was instant.', name: 'Dana Blume', role: 'COO, Cksium' },
+];
+---
+<section class="section flood-dark testim" id="testimonials" data-testim>
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Testimonials</p>                               <!-- S10.1 ≤16 -->
+      <h2 class="testim-h2 reveal">What our clients say</h2>            <!-- S10.2 ≤24 -->
+    </header>
+
+    <div class="testim_slider splide" data-testim-slider aria-label="Client testimonials">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {slides.map((s) => (
+            <li class="splide__slide">
+              <figure class="testim-card">
+                <blockquote class="testim-quote">"{s.quote}"</blockquote>
+                <figcaption class="testim-cap">
+                  <span class="testim-name">{s.name}</span>
+                  <span class="testim-role">{s.role}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testim { background: var(--dark); }
+  .testim-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .testim_slider { margin-top: clamp(36px, 5vw, 64px); max-width: 820px; margin-inline: auto; }
+  .testim-card { text-align: center; padding: 0 clamp(0px, 4vw, 48px); }
+  .testim-quote { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 1.9rem); line-height: 1.32; letter-spacing: -0.02em; color: var(--on-dark); }
+  .testim-cap { display: flex; flex-direction: column; gap: 3px; margin-top: 28px; }
+  .testim-name { font-family: var(--font-display); font-weight: 600; color: var(--on-dark); }
+  .testim-role { font-size: var(--text-s); color: var(--on-dark-mut); }
+
+  /* Splide arrows/pagination recolor to brand-on-dark */
+  .testim :global(.splide__arrow) { background: transparent; border: 1px solid var(--line-dark); opacity: 1; width: 44px; height: 44px; }
+  .testim :global(.splide__arrow svg) { fill: var(--on-dark); width: 16px; }
+  .testim :global(.splide__arrow:hover:not(:disabled)) { border-color: var(--on-dark); }
+  .testim :global(.splide__pagination__page) { background: var(--on-dark-mut); opacity: 0.5; }
+  .testim :global(.splide__pagination__page.is-active) { background: var(--green-on-dark); opacity: 1; transform: scale(1.1); }
+  .testim :global(.splide__pagination) { bottom: -2.4em; }
+</style>

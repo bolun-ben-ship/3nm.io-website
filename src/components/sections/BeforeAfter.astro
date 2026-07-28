@@ -1,0 +1,57 @@
+---
+/* Section 2 — Before / After.  Slots S2.1–S2.6.  Motion: ANIMATION-SPEC §2 (staggered block appear + word-reveal). */
+const before = [                                                        /* S2.4 ×4, ≤78 */
+  'You spend forty minutes after every call on work nobody built a tool for.',
+  'Your CRM is a to-do list you silently agreed to ignore. The board notices.',
+  'Follow-ups slip the moment the next call starts. Deals go quiet.',
+  'Your best rep is spending half their week not selling at all.',
+];
+const after = [                                                         /* S2.6 ×4, ≤52 */
+  'A pipeline your manager can defend to the board.',
+  'Every record current, without anyone touching it.',
+  'Follow-ups sent before the last call even ends.',
+  'Your best rep back to closing, full-time.',
+];
+---
+<section class="section beforeafter" id="beforeafter">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow reveal">The execution gap</p>                    <!-- S2.1 ≤20 -->
+      <h2 class="ba-h2 animate-text_opacity">You didn't sign up for <span class="accent-coral">busywork</span></h2> <!-- S2.2 ≤44 -->
+    </header>
+
+    <div class="ba-grid">
+      <div class="ba-col">
+        <p class="ba-label">Before</p>                                   <!-- S2.3 -->
+        {before.map((row) => (
+          <div class="ba-row before animate-block_appear"><span class="ba-mark">✕</span><p>{row}</p></div>
+        ))}
+      </div>
+      <div class="ba-col">
+        <p class="ba-label after">After</p>                             <!-- S2.5 -->
+        {after.map((row) => (
+          <div class="ba-row after animate-block_appear"><span class="ba-mark">✓</span><p>{row}</p></div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ba-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); margin-top: clamp(40px, 6vw, 72px); }
+  .ba-label { font-family: var(--font-mono); font-size: var(--text-s); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 18px; }
+  .ba-label.after { color: var(--green); }
+
+  .ba-row { display: flex; gap: 14px; padding: 20px 0; border-top: 1px solid var(--hair); }
+  .ba-row p { font-size: var(--text-l); line-height: 1.4; }
+  .ba-row.before p { color: var(--ink-mid); }
+  .ba-mark { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; margin-top: 1px; }
+  .ba-row.before .ba-mark { background: var(--coral-tint); color: var(--coral); }
+  .ba-row.after .ba-mark { background: var(--green-tint); color: var(--green); }
+
+  @media (max-width: 767px) {
+    .ba-grid { grid-template-columns: 1fr; gap: 0; }
+    .ba-col:last-child { margin-top: 40px; }
+  }
+</style>

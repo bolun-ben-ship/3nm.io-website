@@ -1,0 +1,54 @@
+---
+/* Section 11 — FAQ accordion.  Slots S11.1–S11.4.  Motion: ANIMATION-SPEC §11 (interactive expand/collapse). */
+const faqs = [                                                          /* ×7; S11.3 ≤74 / S11.4 ≤360 */
+  { q: "My team won't adopt another tool — and will they actually be in control?", a: "They don't have to open it, and they never lose control. It works through the surfaces they already use — email, chat, phone. The work happens in the background: drafting, preparing, proposing. One tap to approve before anything goes out. No new interface. Nothing sends without them knowing." },
+  { q: 'How long until it is live and doing real work for us?', a: 'Most teams are live in weeks, not quarters. We scope the first workflow after a short paid audit, ship it against your real data, then add capabilities one at a time. You see it working before you commit to more.' },
+  { q: 'What happens to our data, and who can see it?', a: 'It runs on your infrastructure and reads only the sources you connect. Nothing is shared across accounts. You own the database and every line of code the moment it ships. No lock-in, no hidden retention.' },
+  { q: 'Is this just a wrapper around a generic AI model?', a: 'No. It reads your actual pipeline, your real signals, and your team’s own winning moves — and gets sharper on your motion every week. Generic models start from zero every session. This one compounds.' },
+  { q: 'What if we want to stop, or take it in-house later?', a: 'Stop anytime, no penalty. Everything delivered to that point is yours to keep and run — code, database, infrastructure. There is no subscription holding your operation hostage.' },
+  { q: 'How much does it cost?', a: 'Every build is scoped and quoted per team after a short paid audit — because the right first workflow is different for everyone. You get a fixed number before any build work starts. No surprises mid-project.' },
+  { q: 'Do you build for our specific industry and workflow?', a: 'Yes. The whole point is the custom system off-the-shelf software won’t build. We map your process input to output first, then build the automation layer against how your team actually works — not a generic template.' },
+];
+---
+<section class="section faq" id="faq">
+  <div class="wrap faq-wrap">
+    <header class="faq-head">
+      <h2 class="faq-h2 reveal">Questions</h2>                          <!-- S11.1 ≤20 -->
+      <p class="faq-sub reveal">Something we didn't cover? Talk to us.</p> <!-- S11.2 ≤40 -->
+    </header>
+
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls={`faq-a-${i}`} id={`faq-q-${i}`}>
+            <span>{f.q}</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
+            <p>{f.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-wrap { max-width: 820px; }
+  .faq-head { text-align: center; margin-bottom: clamp(32px, 5vw, 56px); }
+  .faq-h2 { font-size: var(--title-m); }
+  .faq-sub { font-size: var(--text-l); color: var(--ink-muted); margin-top: 10px; }
+
+  .faq-item { border-top: 1px solid var(--hair); }
+  .faq-item:last-child { border-bottom: 1px solid var(--hair); }
+  .faq-q { width: 100%; display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 24px 4px; background: none; border: 0; cursor: pointer; text-align: left; font-family: var(--font-display); font-weight: 500; font-size: var(--text-l); color: var(--ink); }
+  .faq-icon { position: relative; flex: none; width: 18px; height: 18px; }
+  .faq-icon::before, .faq-icon::after { content: ''; position: absolute; top: 50%; left: 0; width: 18px; height: 1.6px; background: var(--ink); transition: transform 260ms var(--ease-quint); }
+  .faq-icon::after { transform: rotate(90deg); }
+  .faq-item.open .faq-icon::after { transform: rotate(0); }
+  .faq-item.open .faq-q { color: var(--green); }
+
+  .faq-a { overflow: hidden; height: 0; transition: height 320ms var(--ease-quint); }
+  .faq-a p { padding: 0 44px 26px 4px; color: var(--ink-mid); font-size: var(--text-m); line-height: 1.55; }
+  html.no-js .faq-a { height: auto; }
+</style>

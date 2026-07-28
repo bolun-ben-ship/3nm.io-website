@@ -1,0 +1,47 @@
+---
+/* Section 5 — Stat circles.  Slots S5.1–S5.5.  Motion: ANIMATION-SPEC §5 (SCRUBBED — scale 0.2→1 one-by-one, tied to scroll). */
+const stats = [
+  { value: '60+', label: 'Hours back. Per person. Every month.' },      /* S5.4/5.5 ×4 */
+  { value: '95%', label: 'CRM accuracy. Zero manual entry.' },
+  { value: '30%', label: 'Faster from first touch to close.' },
+  { value: '3x',  label: 'Revenue impact. Measured across deployments.' },
+];
+---
+<section class="section stats" id="stats" data-stats>
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow reveal">The impact</p>                           <!-- S5.1 ≤14 -->
+      <h2 class="stats-h2 animate-text_opacity">What changes when it runs</h2> <!-- S5.2 ≤30 -->
+      <p class="stats-sub reveal">What happens when the team finally has backup.</p> <!-- S5.3 ≤48 -->
+    </header>
+
+    <div class="stats-track">
+      {stats.map((s) => (
+        <div class="stat-unit">
+          <div class="stat-circle" data-stat-circle><span class="stat-value" data-count-to={s.value}>{s.value}</span></div>
+          <p class="stat-label">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .stats-sub { font-size: var(--text-l); color: var(--ink-muted); margin-top: 12px; }
+
+  .stats-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: clamp(48px, 7vw, 96px); }
+  .stat-unit { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .stat-circle {
+    width: clamp(140px, 15vw, 210px); aspect-ratio: 1; border-radius: 50%;
+    background: var(--green); color: #fff; display: grid; place-items: center; margin-bottom: 22px;
+    transform: scale(0.2); will-change: transform;
+  }
+  html.no-js .stat-circle { transform: scale(1); }
+  @media (prefers-reduced-motion: reduce) { .stat-circle { transform: scale(1); } }
+  .stat-value { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.2rem, 4vw, 3.4rem); letter-spacing: -0.03em; }
+  .stat-label { font-size: var(--text-m); color: var(--ink-mid); max-width: 22ch; }
+
+  @media (max-width: 767px) { .stats-track { grid-template-columns: 1fr 1fr; gap: 40px 20px; } }
+  @media (max-width: 420px) { .stats-track { grid-template-columns: 1fr; } }
+</style>

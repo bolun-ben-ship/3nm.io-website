@@ -1,0 +1,63 @@
+---
+/* Section 9 — Month timeline.  Slots S9.1–S9.9.  Motion: ANIMATION-SPEC §9 (play-once: .built-card scale 0.95→1, staggered). */
+const months = [
+  { label: 'Month 1', title: 'Flags risk before you feel it',  body: 'Stalled work surfaced before it goes quiet.' }, /* S9.4/5/6 ×4 */
+  { label: 'Month 2', title: 'Learns how your team wins',        body: 'The moves that close, repeated on their own.' },
+  { label: 'Month 3', title: 'Drafts the next step for you',     body: 'Every follow-up written before you ask.' },
+  { label: 'Month 6', title: 'Runs a step ahead of the deal',    body: 'The next best action, waiting when you look.' },
+];
+---
+<section class="section timeline" id="timeline" data-timeline>
+  <div class="wrap">
+    <header class="section-head left">
+      <p class="eyebrow reveal">Gets smarter every day</p>              <!-- S9.1 ≤26 -->
+      <h2 class="tl-h2 animate-text_opacity">The only team that gets better the longer it works for you</h2> <!-- S9.2 ≤64 -->
+      <p class="tl-intro reveal">Most tools forget everything the moment you log out. This one remembers every signal and uses it to make the next move sharper.</p> <!-- S9.3 ≤145 -->
+    </header>
+
+    <div class="tl-grid">
+      {months.map((m) => (
+        <article class="built-card">
+          <span class="tl-month">{m.label}</span>
+          <h3 class="tl-title">{m.title}</h3>
+          <p class="tl-body">{m.body}</p>
+        </article>
+      ))}
+
+      <article class="tl-cta-card built-card">
+        <h3 class="tl-cta-h">Start today. In six months, today is what you'll wish you'd done.</h3> <!-- S9.7 ≤70 -->
+        <div class="tl-cta-row">
+          <a href="#closing" class="btn btn-primary">Start now <span class="arrow">→</span></a>  <!-- S9.8 -->
+          <a href="#steps" class="btn btn-ghost">Book a demo for a team</a>                       <!-- S9.9 -->
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline { background: var(--paper); }
+  .tl-h2 { font-size: var(--title-m); margin-top: 14px; max-width: 18ch; }
+  .tl-intro { font-size: var(--text-l); color: var(--ink-mid); margin-top: 16px; max-width: 52ch; }
+
+  .tl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: clamp(40px, 6vw, 72px); }
+  .built-card { opacity: 0; transform: scale(0.95); will-change: transform, opacity; }
+  html.no-js .built-card { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .built-card { opacity: 1; transform: none; } }
+
+  .tl-grid .built-card:not(.tl-cta-card) { background: var(--sand); border: 1px solid var(--hair); border-radius: var(--r-lg); padding: 24px; display: flex; flex-direction: column; }
+  .tl-month { font-family: var(--font-mono); font-size: var(--text-s); font-weight: 600; letter-spacing: 0.08em; color: var(--green); margin-bottom: 20px; }
+  .tl-title { font-size: var(--title-xs); margin-bottom: 8px; }
+  .tl-body { font-size: var(--text-m); color: var(--ink-mid); }
+
+  .tl-cta-card { grid-column: 1 / -1; background: var(--coral); color: #fff; border-radius: var(--r-lg); padding: clamp(28px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; margin-top: 16px; }
+  .tl-cta-h { color: #fff; font-size: var(--title-s); font-weight: 500; max-width: 20ch; }
+  .tl-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tl-cta-card .btn-primary { background: #fff; color: var(--coral); }
+  .tl-cta-card .btn-primary:hover { background: rgba(255,255,255,0.88); }
+  .tl-cta-card .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.5); }
+  .tl-cta-card .btn-ghost:hover { border-color: #fff; }
+
+  @media (max-width: 900px) { .tl-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .tl-grid { grid-template-columns: 1fr; } .tl-cta-card { flex-direction: column; align-items: flex-start; } }
+</style>

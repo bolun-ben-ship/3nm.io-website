@@ -1,0 +1,139 @@
+---
+/* Section 1 — Hero.  Slots S1.1–S1.6.  Motion: ANIMATION-SPEC §1.
+   Placeholder for the licensed .lottie, rebuilt to match zig's choreography (verified frame-by-frame
+   from references/zig ai analysis/lottie): an off-screen-right WHEEL whose radial arms carry the cards.
+   4 scenes + two 1s holds, seamless loop — driven by motion.js → initHeroLoop (NOT a plain loop). */
+const tasks = [
+  { icon: 'cam',   tone: 'green',  time: '9:02 AM', title: 'Meeting completed',   sub: 'Product demo with Acme Corp' },
+  { icon: 'mail',  tone: 'blue',   time: '9:03 AM', title: 'Follow-up drafted',   sub: 'Intro email with next steps' },
+  { icon: 'cal',   tone: 'coral',  time: '9:03 AM', title: 'CRM updated',         sub: 'Discovery Call → Pro-Sale' },
+  { icon: 'clock', tone: 'purple', time: '9:04 AM', title: 'Next step scheduled', sub: 'Follow-up call on May 16' },
+];
+---
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow reveal" data-r="1">AI copilots for busy teams</p>              <!-- S1.1 ≤30 -->
+      <h1 class="hero-h1 reveal" data-r="2">Close the deal. <span class="accent">We handle the rest of it.</span></h1> <!-- S1.2 ≤42 -->
+      <p class="hero-sub reveal" data-r="3">Your own crew of assistants — one per task. They research, draft, prep, follow up, and log. You review and ship.</p> <!-- S1.3 ≤135 -->
+      <div class="hero-cta reveal" data-r="4">
+        <a href="#closing" class="btn btn-primary">Start now <span class="arrow">→</span></a>   <!-- S1.4 -->
+        <a href="#steps" class="btn btn-ghost">Book a demo for a team</a>                        <!-- S1.5 -->
+      </div>
+    </div>
+
+    <!-- S1.6 hero illustration — off-screen wheel + radial-arm cards (placeholder .lottie stand-in) -->
+    <div class="hero-illus" data-hero role="img" aria-label="Assistants completing sales tasks, then a done-for-you summary">
+      <svg class="hero-wheel-arc" viewBox="0 0 600 560" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke="var(--hair)" stroke-width="1">
+          <circle data-arc cx="600" cy="280" r="300"/>
+          <circle data-arc cx="600" cy="280" r="430"/>
+          <circle data-arc cx="600" cy="280" r="540"/>
+        </g>
+      </svg>
+      <svg class="hero-arms" aria-hidden="true"></svg>
+
+      {tasks.map((t, i) => (
+        <article class={`hx-card tcard tone-${t.tone}`} data-card={i} data-role="task">
+          <span class="hx-time">{t.time}</span>
+          <div class="hx-row">
+            <span class={`hx-icon ic-${t.icon}`} aria-hidden="true"></span>
+            <div class="hx-txt"><p class="hx-title">{t.title}</p><p class="hx-sub">{t.sub}</p></div>
+            <span class="hx-check" aria-hidden="true">✓</span>
+          </div>
+        </article>
+      ))}
+
+      <article class="hx-card wecard" data-card="4" data-role="we">
+        <div class="hx-row">
+          <span class="hx-brand" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg>
+          </span>
+          <p class="hx-title">We did</p>
+        </div>
+        <div class="hx-foot">
+          <span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">14 tasks</span>
+          <span class="hx-avatars" aria-hidden="true"><i></i><i></i><i></i><b>+12</b></span>
+        </div>
+      </article>
+
+      <article class="hx-card youcard" data-card="5" data-role="you">
+        <div class="hx-row">
+          <span class="hx-photo" aria-hidden="true"></span>
+          <p class="hx-title">You did</p>
+        </div>
+        <div class="hx-foot"><span class="hx-check sm" aria-hidden="true">✓</span><span class="hx-meta">Closed the deal</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: clamp(104px, 13vw, 168px); padding-bottom: var(--section-y); }
+  .hero-grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+
+  .hero-h1 { font-size: var(--title-xl); font-weight: 500; margin: 26px 0 26px; max-width: 15ch; letter-spacing: -0.035em; }
+  .hero-sub { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.375rem); line-height: 1.5; color: var(--ink-mid); max-width: 42ch; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
+  .hero-cta .btn { font-size: 1.05rem; padding: 1.05em 1.9em; }
+
+  /* — illustration stage: overflow clips the off-screen wheel to an arc;
+       a soft left-edge mask dissolves anything at the clip line so there's no hard shadow seam — */
+  .hero-illus { position: relative; height: 640px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px);
+    mask-image: linear-gradient(to right, transparent 0, #000 36px); }
+  html.no-js .hero-illus, .hero-illus.is-static { -webkit-mask-image: none; mask-image: none; }
+  .hero-wheel-arc { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.7; }
+  .hero-arms { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .hero-arms :global(line) { stroke: var(--hair); stroke-width: 1; }
+
+  .hx-card { position: absolute; top: 0; left: 0; width: 310px; background: var(--paper); border: 1px solid var(--hair);
+    border-radius: var(--r-lg); padding: 16px 18px; box-shadow: 0 20px 50px -22px rgba(10,18,12,0.24);
+    transform: translate(-9999px, 0); will-change: transform, opacity; }
+  .hx-time { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; }
+  .tone-green  .hx-time { color: var(--green); }  .tone-green  .hx-icon { background: var(--green-tint); color: var(--green); }
+  .tone-blue   .hx-time { color: #3f7fb0; }        .tone-blue   .hx-icon { background: #e6eff6; color: #3f7fb0; }
+  .tone-coral  .hx-time { color: var(--coral); }  .tone-coral  .hx-icon { background: var(--coral-tint); color: var(--coral); }
+  .tone-purple .hx-time { color: #8a52c4; }        .tone-purple .hx-icon { background: #f0e9f8; color: #8a52c4; }
+
+  .hx-row { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .hx-icon { flex: none; width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; }
+  .hx-icon::after { content: ''; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--ic) center/contain no-repeat; mask: var(--ic) center/contain no-repeat; }
+  .ic-cam   { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'); }
+  .ic-mail  { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>'); }
+  .ic-cal   { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'); }
+  .ic-clock { --ic: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'); }
+  .hx-txt { min-width: 0; }
+  .hx-title { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; line-height: 1.15; color: var(--ink); }
+  .hx-sub { font-size: 0.8rem; color: var(--ink-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 186px; } /* 1 line → all task cards equal height → 100% overlap on merge */
+  .hx-check { margin-left: auto; flex: none; width: 25px; height: 25px; border-radius: 50%; background: var(--green); color: #fff; font-size: 12px; display: grid; place-items: center; }
+
+  /* summary cards */
+  .hx-brand { flex: none; width: 36px; height: 36px; border-radius: 9px; background: var(--green); color: #fff; display: grid; place-items: center; }
+  .youcard .hx-photo { flex: none; width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg,#2a2f33,#454e4c); }
+  .wecard .hx-title, .youcard .hx-title { font-size: 1.12rem; }
+  .hx-foot { display: flex; align-items: center; gap: 8px; margin-top: 13px; }
+  .hx-check.sm { width: 17px; height: 17px; font-size: 9px; }
+  .hx-meta { font-size: 0.82rem; color: var(--ink-muted); }
+  .hx-avatars { margin-left: auto; display: flex; align-items: center; }
+  .hx-avatars i { width: 21px; height: 21px; border-radius: 50%; border: 1.5px solid var(--paper); margin-left: -6px; background: var(--sand-2); }
+  .hx-avatars i:nth-child(1){background:#cdb89a}.hx-avatars i:nth-child(2){background:#a9b8c4}.hx-avatars i:nth-child(3){background:#b9c9b0}
+  .hx-avatars b { margin-left: -6px; width: 23px; height: 23px; border-radius: 50%; background: var(--green); color: #fff; font-size: 9px; font-weight: 600; display: grid; place-items: center; border: 1.5px solid var(--paper); }
+
+  /* no-JS + small-screen fallback = a clean stacked list of the 4 task cards (motion.js adds .is-static ≤767) */
+  html.no-js .hx-card,
+  .hero-illus.is-static .hx-card { position: static; transform: none !important; opacity: 1 !important; display: block; width: auto; max-width: 340px; margin: 0 auto 12px; }
+  html.no-js .wecard, html.no-js .youcard,
+  .hero-illus.is-static .wecard, .hero-illus.is-static .youcard { display: none; }
+  .hero-illus.is-static { height: auto; overflow: visible; }
+  .hero-illus.is-static .hero-arms, .hero-illus.is-static .hero-wheel-arc { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .hero-arms, html.js .hero-wheel-arc { opacity: 0.5; }
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-illus { height: 540px; margin-top: 8px; }
+  }
+  @media (max-width: 480px) { .hero-illus { height: 480px; } .hx-card { width: 288px; } }
+</style>

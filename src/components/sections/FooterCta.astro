@@ -1,0 +1,62 @@
+---
+/* Section 12 — Footer CTA + Footer.  Slots S12.1–S12.8.  Motion: ANIMATION-SPEC §12 (word-reveal). */
+const footNav = ['How it works', 'Pricing', 'About', 'Blog', 'Privacy', 'Terms', 'Security']; /* S12.5 ×7 */
+const socials = ['in', 'X', '◎', '✎'];                                  /* S12.8 ×4 placeholder icons */
+---
+<section class="flood-green footer-cta" id="closing">
+  <div class="wrap fc-inner">
+    <h2 class="fc-h2 animate-text_opacity">Stop managing tools. Start executing.</h2> <!-- S12.1 ≤40 -->
+    <p class="fc-sub reveal">Every day without this is forty minutes per person you're not getting back.</p> <!-- S12.2 ≤70 -->
+    <div class="fc-cta reveal">
+      <a href="#top" class="btn btn-primary">Start now <span class="arrow">→</span></a>   <!-- S12.3 -->
+      <a href="#steps" class="btn btn-ghost">Book a demo for a team</a>                     <!-- S12.4 -->
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap ft-inner">
+    <div class="ft-brand">
+      <a href="#top" class="ft-logo">RightClick<span>:AI</span></a>
+      <div class="ft-social">
+        {socials.map((s) => (<a href="#top" class="ft-soc" aria-label="Social profile">{s}</a>))}
+      </div>
+    </div>
+    <nav class="ft-nav" aria-label="Footer">
+      {footNav.map((l) => (<a href="#top">{l}</a>))}                    <!-- S12.5 -->
+    </nav>
+    <div class="ft-legal">
+      <span class="ft-copy">© 2026 RightClick:AI. All rights reserved.</span> <!-- S12.6 -->
+      <span class="ft-credit">Website designed by Studio</span>        <!-- S12.7 -->
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-cta { background: var(--green); }
+  .fc-inner { text-align: center; padding-block: clamp(72px, 11vw, 150px); }
+  .fc-h2 { font-size: var(--title-l); font-weight: 500; color: #fff; max-width: 16ch; margin-inline: auto; letter-spacing: -0.03em; }
+  .fc-sub { font-size: var(--text-xl); color: var(--on-flood-mut); margin-top: 18px; max-width: 40ch; margin-inline: auto; }
+  .fc-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+
+  .site-footer { background: var(--dark); color: var(--on-dark); padding-block: clamp(40px, 6vw, 72px); }
+  .ft-inner { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; }
+  .ft-brand { display: flex; flex-direction: column; gap: 16px; }
+  .ft-logo { font-family: var(--font-display); font-weight: 600; font-size: 1.125rem; color: var(--on-dark); }
+  .ft-logo span { color: var(--green-on-dark); }
+  .ft-social { display: flex; gap: 10px; }
+  .ft-soc { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-dark); display: grid; place-items: center; font-size: 0.8rem; color: var(--on-dark-mut); transition: border-color var(--dur) var(--ease-quint), color var(--dur) var(--ease-quint); }
+  .ft-soc:hover { border-color: var(--on-dark); color: var(--on-dark); }
+  .ft-nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .ft-nav a { font-size: var(--text-s); color: var(--on-dark-mut); }
+  .ft-nav a:hover { color: var(--on-dark); }
+  .ft-legal { display: flex; flex-direction: column; gap: 4px; text-align: right; }
+  .ft-copy { font-size: var(--text-s); color: var(--on-dark-mut); }
+  .ft-credit { font-size: var(--text-s); color: var(--on-dark-mut); opacity: 0.7; }
+
+  @media (max-width: 767px) {
+    .ft-inner { grid-template-columns: 1fr; text-align: center; }
+    .ft-brand { align-items: center; }
+    .ft-legal { text-align: center; }
+  }
+</style>

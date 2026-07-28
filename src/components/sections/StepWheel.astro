@@ -1,0 +1,70 @@
+---
+/* Section 8 — Step wheel.  Slots S8.1–S8.6.  Motion: ANIMATION-SPEC §8 (SCRUBBED — cards sweep through center on scroll; disabled ≤767). */
+const steps = [
+  { label: 'Research',  body: 'Every account mapped before you ever reach out.' },   /* S8.4 ≤12 / S8.5 ≤50 ×6 */
+  { label: 'Outreach',  body: 'First touches drafted in your voice, ready to send.' },
+  { label: 'Meetings',  body: 'Prepped going in, captured coming out. Every time.' },
+  { label: 'Follow-up', body: 'Sent before the next call starts. Nothing slips.' },
+  { label: 'CRM Sync',  body: 'Every interaction captured. Records always current.' },
+  { label: 'Pipeline',  body: 'A forecast that reflects reality, not last week.' },
+];
+---
+<section class="section flood-green steps-section" id="steps" data-steps>
+  <div class="wrap steps-head-wrap">
+    <header class="section-head">
+      <p class="eyebrow">Every workflow</p>                             <!-- S8.1 ≤16 -->
+      <h2 class="steps-h2 animate-text_opacity">Every part of the job. Handled.</h2> <!-- S8.2 ≤32 -->
+      <p class="steps-intro reveal">Every workflow in your motion — researched, executed, tracked, and followed through. Automatically.</p> <!-- S8.3 ≤104 -->
+    </header>
+  </div>
+
+  <div class="steps-animation-track">
+    <div class="steps-animation-wrapp" data-steps-wrapp>
+      <div class="steps-viewport" data-steps-viewport>
+        <span class="sales-figure-wheel" data-steps-wheel aria-hidden="true"></span>
+        <div class="sales-cards_track" data-steps-cards>
+          {steps.map((s, i) => (
+            <article class="sales-card">
+              <span class="sales-icon" aria-hidden="true">0{i + 1}</span>
+              <h3 class="sales-label">{s.label}</h3>
+              <p class="sales-body">{s.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <a href="#closing" class="steps-link reveal">Learn more <span class="arrow">→</span></a>  <!-- S8.6 -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps-section { background: var(--green); padding-bottom: 0; }
+  .steps-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .steps-intro { font-size: var(--text-l); color: var(--on-flood-mut); margin-top: 12px; max-width: 48ch; margin-inline: auto; }
+
+  /* desktop: pinned viewport, horizontal scrubbed track */
+  .steps-animation-wrapp { position: relative; height: 320vh; }              /* scroll distance = scrub window */
+  .steps-viewport { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+  .sales-figure-wheel { position: absolute; width: 1px; height: 1px; left: 50%; top: 50%; }
+  .sales-cards_track { display: flex; gap: 28px; padding-inline: 50vw; will-change: transform; }
+
+  .sales-card { flex: 0 0 clamp(300px, 34vw, 420px); background: rgba(255,255,255,0.09); border: 1px solid var(--line-flood); border-radius: var(--r-lg); padding: 34px; backdrop-filter: blur(3px); transition: transform 200ms linear, background 200ms linear; }
+  .sales-card.is-center { background: rgba(255,255,255,0.15); }
+  .sales-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #fff; color: var(--green); font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; margin-bottom: 22px; }
+  .sales-label { font-size: var(--title-s); color: #fff; margin-bottom: 10px; }
+  .sales-body { font-size: var(--text-m); color: var(--on-flood-mut); }
+
+  .steps-link { position: absolute; bottom: 40px; left: 50%; translate: -50% 0; z-index: 3; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-weight: 500; font-size: var(--text-s); color: #fff; }
+  .steps-link .arrow { transition: transform var(--dur) var(--ease-quint); }
+  .steps-link:hover .arrow { transform: translateX(3px); }
+
+  @media (max-width: 767px) {
+    /* wheel disabled — vertical stacked list */
+    .steps-section { padding-bottom: var(--section-y); }
+    .steps-animation-wrapp { height: auto; }
+    .steps-viewport { position: static; height: auto; display: block; overflow: visible; padding-top: 40px; }
+    .sales-cards_track { flex-direction: column; gap: 16px; padding-inline: 0; transform: none !important; }
+    .sales-card { flex: auto; }
+    .steps-link { position: static; translate: none; display: flex; justify-content: center; margin-top: 32px; }
+  }
+</style>

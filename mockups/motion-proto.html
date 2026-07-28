@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion prototype — RightClick:AI</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+  :root{--bg:#FAFAF7;--bg2:#F4F2EC;--ink:#0D120F;--mid:#46524C;--mut:#79857F;--faint:#AEB8B2;--line:rgba(13,18,15,.09);--accent:#15803D;--accent2:#5FBF86;--err:#C2410C;--disp:'Space Grotesk',sans-serif;--body:'Satoshi',sans-serif}
+  *{margin:0;box-sizing:border-box}html{scrollbar-width:none}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+  .wrap{max-width:1180px;margin:auto;padding:0 40px}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;height:64px;display:flex;align-items:center;background:rgba(250,250,247,.7);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+  .nav.on{border-color:var(--line)}
+  .logo{font-family:var(--disp);font-weight:600;letter-spacing:-.02em}.logo b{color:var(--accent)}
+  .nav .links{display:flex;gap:24px;margin-left:auto;font-size:14px;color:var(--mid)}
+  .cta{background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:100px;font-family:var(--disp);font-weight:500;font-size:14px;margin-left:24px}
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding-top:64px}
+  .eyebrow{font-family:var(--disp);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}.eyebrow b{color:var(--accent)}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(3rem,5.5vw,5.4rem);line-height:1.01;letter-spacing:-.035em;margin:22px 0 24px;max-width:15ch}
+  h1 .g{color:var(--accent)}
+  .sub{font-size:20px;color:var(--mid);max-width:34ch;line-height:1.5}.sub b{color:var(--ink);font-weight:600}
+  .btns{display:flex;gap:12px;margin:34px 0 26px}
+  .b1{background:var(--ink);color:var(--bg);padding:14px 22px;border-radius:100px;font-family:var(--disp);font-weight:600;text-decoration:none}
+  .b2{border:1px solid var(--line);padding:14px 22px;border-radius:100px;font-family:var(--disp);font-weight:500;text-decoration:none;color:var(--ink)}
+  .trust{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;font-size:14px;color:var(--mut)}
+  .stage{position:relative;height:460px}
+  .card{position:absolute;width:280px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:15px 17px;box-shadow:0 16px 44px -20px rgba(10,18,12,.22)}
+  .ch{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mut);font-weight:600;margin-bottom:8px}.ch time{margin-left:auto;color:var(--faint);font-weight:400}
+  .d{width:16px;height:16px;border-radius:5px;display:grid;place-items:center;font-size:9px;color:#fff}
+  .card p{font-size:13.5px;line-height:1.4}.amt{color:var(--err);font-weight:600;font-size:12.5px;margin-top:4px}.men{color:var(--accent);font-weight:600}
+  .c1{top:0;right:6%}.c2{top:120px;left:0}.c3{top:236px;right:0}.c4{top:346px;left:8%}
+  .flo{position:absolute;top:-14px;left:24%;width:42px;height:42px;border-radius:50%;background:var(--err);color:#fff;font-family:var(--disp);font-weight:600;display:grid;place-items:center;box-shadow:0 8px 26px -4px rgba(194,65,12,.5)}
+  /* PINNED SCROLL SECTION — the "plays like a video" moment */
+  .build{position:relative}
+  .build-pin{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+  .build h2{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,3.6vw,3.4rem);letter-spacing:-.03em;max-width:16ch;z-index:3}
+  .build h2 .g{color:var(--accent)}
+  .radial{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+  .hub{width:200px;height:200px;border-radius:24px;background:var(--ink);color:var(--bg);display:grid;place-items:center;text-align:center;padding:24px;box-shadow:0 30px 80px -30px rgba(10,18,12,.5);opacity:0;transform:scale(.7)}
+  .hub .k{font-family:var(--disp);font-weight:600;font-size:15px}.hub .s{font-size:11px;color:var(--accent2);margin-top:6px}
+  .src{position:absolute;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-size:13px;font-weight:600;box-shadow:0 12px 30px -16px rgba(10,18,12,.2);opacity:0}
+  .src .lb{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:block}
+  svg.wire{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .wire path{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:6 6;opacity:.5}
+  .filler{height:60vh;display:grid;place-items:center;color:var(--faint);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+  @media(max-width:900px){.hero{grid-template-columns:1fr}.stage{height:400px}}
+</style></head><body>
+<nav class="nav" id="nav"><div class="wrap" style="display:flex;align-items:center;width:100%"><span class="logo">RightClick<b>:AI</b></span><div class="links"><span>What I build</span><span>How it works</span><span>My work</span><span>FAQ</span><span>About</span></div><span class="cta">Book a call</span></div></nav>
+
+<section class="hero wrap">
+  <div>
+    <p class="eyebrow reveal"><b>●</b> For founder-run Singapore service firms · 5–35 staff</p>
+    <h1 class="reveal">You're the system holding it all together. <span class="g">That's the problem.</span></h1>
+    <p class="sub reveal">You don't have to be. I build you one system to see and run your whole business — the custom internal software off-the-shelf SaaS won't. <b>You own every line.</b></p>
+    <div class="btns reveal"><a class="b1">Book a free 30-min call →</a><a class="b2">See how it works</a></div>
+    <ul class="trust reveal"><li>You own the code</li><li>Live in weeks, not quarters</li><li>Stop anytime</li><li>Built in Singapore</li></ul>
+  </div>
+  <div class="stage">
+    <div class="card c1" data-par="0.10"><div class="ch"><span class="d" style="background:#4A154B">#</span>Slack · Sarah<time>2m</time></div><p><span class="men">@you</span> approve the Q3 forecast deck before 3pm?</p></div>
+    <div class="card c2" data-par="0.20"><div class="ch"><span class="d" style="background:#C5221F">M</span>Email · Compliance<time>3d</time></div><p><b>Re: Trade authorisation.</b> Awaiting your sign-off.</p></div>
+    <div class="card c3" data-par="0.05"><div class="ch"><span class="d" style="background:#C2410C">!</span>Alert · Invoicing<time>now</time></div><p>Invoice overdue.</p><p class="amt">SGD 8,400 · 14 days late</p></div>
+    <div class="card c4" data-par="0.16"><div class="ch"><span class="d" style="background:#0D120F">D</span>DM · Team<time>9:42</time></div><p>“Decision on SkyBridge by EOD.”</p></div>
+    <span class="flo">47</span>
+  </div>
+</section>
+
+<div class="filler">scroll ↓</div>
+
+<section class="build" id="build">
+  <div class="build-pin">
+    <svg class="wire" id="wire" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice"></svg>
+    <div class="radial" id="radial">
+      <div class="hub" id="hub"><div><div class="k">One connected system</div><div class="s">Every signal, one place</div></div></div>
+      <div class="src" style="top:14%;left:16%"><span class="lb">Data</span>Finance</div>
+      <div class="src" style="top:12%;right:18%"><span class="lb">Data</span>Sales</div>
+      <div class="src" style="bottom:16%;left:14%"><span class="lb">Data</span>Operations</div>
+      <div class="src" style="bottom:14%;right:16%"><span class="lb">Data</span>Calendar</div>
+    </div>
+    <h2>Your whole business in one view. <span class="g">Built from scratch, owned by you.</span></h2>
+  </div>
+</section>
+<div class="filler">— prototype ends —</div>
+
+<script>
+  const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  window.lenis = lenis;
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  addEventListener('scroll', () => document.getElementById('nav').classList.toggle('on', scrollY > 20), { passive: true });
+
+  // hero staggered reveal on load
+  gsap.set('.reveal', { opacity: 0, y: 18 });
+  gsap.set('.card', { opacity: 0, y: 30, scale: .96 });
+  const tl = gsap.timeline({ delay: .15 });
+  tl.to('.reveal', { opacity: 1, y: 0, duration: .7, ease: 'power3.out', stagger: .09 })
+    .to('.card', { opacity: 1, y: 0, scale: 1, duration: .7, ease: 'power3.out', stagger: .12 }, '-=.5');
+
+  // hero card parallax on scroll
+  document.querySelectorAll('.card').forEach(c => {
+    gsap.to(c, { yPercent: () => -parseFloat(c.dataset.par) * 120, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  });
+
+  // pinned "plays like a video" build moment: sources fly to hub + wires draw
+  const srcs = gsap.utils.toArray('.src');
+  const wire = document.getElementById('wire');
+  srcs.forEach(() => { const p = document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d','M500 350 L500 350'); wire.appendChild(p); });
+  const paths = wire.querySelectorAll('path');
+  const coords = [[220,140],[780,120],[190,560],[810,580]];
+  const bt = gsap.timeline({ scrollTrigger: { trigger: '#build', start: 'top top', end: '+=140%', scrub: .6, pin: '.build-pin' } });
+  bt.to('.hub', { opacity: 1, scale: 1, duration: .3, ease: 'back.out(1.6)' })
+    .to('.src', { opacity: 1, y: 0, duration: .25, stagger: .06 }, '<.05')
+    .fromTo(paths, { opacity: 0 }, { opacity: .5, attr: { d: (i) => `M${coords[i][0]} ${coords[i][1]} L500 350` }, duration: .4, stagger: .05 }, '<')
+    .to('#radial', { scale: .82, opacity: .5, duration: .4 }, '+=.15')
+    .from('.build h2', { opacity: 0, y: 24, duration: .35 }, '<.1');
+</script>
+</body></html>

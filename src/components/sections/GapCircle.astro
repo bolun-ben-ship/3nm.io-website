@@ -1,0 +1,33 @@
+---
+/* Section 6 — Gap-circle transition.  Slot S6.1.  Motion: ANIMATION-SPEC §6 (play-once: circle grows 0→400→covers viewport, outCubic). */
+---
+<section class="gap-transition" id="gap" data-gap>
+  <div class="gap-circle" data-gap-circle aria-hidden="true"></div>
+  <p class="gap-caption animate-text_opacity">The longer it runs, the wider the gap between you and everyone starting fresh.</p> <!-- S6.1 ≤80 -->
+</section>
+
+<style>
+  .gap-transition {
+    position: relative; overflow: hidden;
+    min-height: 78vh; display: grid; place-items: center; text-align: center;
+    background: var(--paper);
+  }
+  .gap-circle {
+    position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+    width: 0; aspect-ratio: 1; border-radius: 50%; background: var(--green);
+    opacity: 0; will-change: width, opacity;
+  }
+  html.no-js .gap-circle { width: min(120vw, 1600px); opacity: 1; }
+  .gap-caption {
+    position: relative; z-index: 2;
+    font-family: var(--font-display); font-weight: 500;
+    font-size: var(--title-s); line-height: 1.25; max-width: 22ch; padding-inline: var(--pad-x);
+    color: var(--ink); mix-blend-mode: normal;
+  }
+  html.no-js .gap-caption { color: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    .gap-circle { width: min(120vw, 1600px); opacity: 1; }
+    .gap-caption { color: #fff; }
+  }
+  @media (max-width: 767px) { .gap-transition { min-height: 60vh; } }
+</style>

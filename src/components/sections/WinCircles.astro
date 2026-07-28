@@ -1,0 +1,106 @@
+---
+/* Section 7 — Win circles / Venn.  Slots S7.1–S7.7.  Motion: ANIMATION-SPEC §7 (clip/mask reveal + staggered line-draw, ≥992 only; disabled <480). */
+const leftTips = [                                                       /* S7.5 3 per circle, ≤66 */
+  'One layer that replaces four separate tools you pay for today.',
+  'Every action logged the moment it happens, without a click.',
+  'The number your manager reports moves, on its own.',
+];
+const rightTips = [
+  'Their rep stops administrating and gets back to selling.',
+  'Nothing ships without a human tap when it matters.',
+  'The forecast they defend to the board is finally real.',
+];
+---
+<section class="section flood-dark wins wins-animation-track" id="wins" data-wins>
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">One platform. Two wins</p>                      <!-- S7.1 ≤24 -->
+      <h2 class="wins-h2 animate-text_opacity">The team closes. <span class="accent">The lead has their back.</span></h2> <!-- S7.2 ≤44 -->
+      <p class="wins-sub reveal">The team stops administrating. The lead stops guessing. The number moves.</p> <!-- S7.3 ≤84 -->
+    </header>
+
+    <div class="win-circles-wrapp" data-venn>
+      <div class="win-stage">
+        <svg class="win-art" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle class="win-circle is--left  illustration" cx="300" cy="280" r="180" data-venn-circle/>
+          <circle class="win-circle is--right"              cx="460" cy="280" r="180" data-venn-circle/>
+          <g class="win-mark"><path d="M366 262L392 282L382 285L378 300L366 262Z" fill="var(--green-on-dark)"/></g>
+        </svg>
+
+        <svg class="win-svg-overlay" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <!-- left circle connectors (green) -->
+          <path d="M150 150 L173 153"   pathLength="1" stroke="var(--green-on-dark)"/>
+          <path d="M120 280 L120 280.1" pathLength="1" stroke="var(--green-on-dark)"/>
+          <path d="M150 410 L173 407"   pathLength="1" stroke="var(--green-on-dark)"/>
+          <!-- right circle connectors (blue) -->
+          <path d="M610 150 L587 153"   pathLength="1" stroke="#87bbd9"/>
+          <path d="M640 280 L640 280.1" pathLength="1" stroke="#87bbd9"/>
+          <path d="M610 410 L587 407"   pathLength="1" stroke="#87bbd9"/>
+        </svg>
+
+        <span class="win-label label-left">For the person doing the closing</span>   <!-- S7.4 ×2 -->
+        <span class="win-label label-right">For the lead who owns the number</span>
+
+        <div class="win-tooltips group-left">
+          {leftTips.map((t) => (<span class="win-tooltip left">{t}</span>))}
+        </div>
+        <div class="win-tooltips group-right">
+          {rightTips.map((t) => (<span class="win-tooltip right">{t}</span>))}
+        </div>
+      </div>
+    </div>
+
+    <div class="wins-cta">
+      <a href="#closing" class="btn btn-primary">Start now <span class="arrow">→</span></a>  <!-- S7.6 -->
+      <a href="#steps" class="btn btn-ghost">Book a demo for a team</a>                       <!-- S7.7 -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .wins { background: var(--dark); }
+  .wins-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .wins-sub { font-size: var(--text-l); color: var(--on-dark-mut); margin-top: 12px; max-width: 46ch; margin-inline: auto; }
+
+  .win-circles-wrapp { margin-top: clamp(32px, 5vw, 64px); }
+  .win-stage { position: relative; max-width: 880px; margin-inline: auto; aspect-ratio: 760 / 560; }
+  .win-art, .win-svg-overlay { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .win-circle { fill: transparent; stroke-width: 1.5; }
+  .win-circle.is--left  { stroke: var(--green-on-dark); }
+  .win-circle.is--right { stroke: #87bbd9; }
+  html.js .win-circle { opacity: 0; }
+  html.no-js .win-circle, html.js .win-circle.is-in { opacity: 0.9; }
+
+  .win-svg-overlay path { fill: none; stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  html.no-js .win-svg-overlay path { stroke-dashoffset: 0; }
+
+  .win-label { position: absolute; top: 12px; font-family: var(--font-mono); font-size: var(--text-s); letter-spacing: 0.06em; color: var(--on-dark-mut); max-width: 16ch; }
+  .label-left  { left: 8%; text-align: left; }
+  .label-right { right: 8%; text-align: right; }
+
+  .win-tooltips { position: absolute; inset: 0; pointer-events: none; }
+  .win-tooltip { position: absolute; width: 168px; font-size: 0.8rem; line-height: 1.3; color: var(--on-dark); background: var(--dark-2); border: 1px solid var(--line-dark); border-radius: 10px; padding: 9px 11px; }
+  html.js .win-tooltip { opacity: 0; transform: translateY(6px); transition: opacity 400ms var(--ease-quint), transform 400ms var(--ease-quint); }
+  html.js .win-tooltips.is-in .win-tooltip { opacity: 1; transform: none; }
+  html.no-js .win-tooltip { opacity: 1; }
+
+  .group-left  .win-tooltip.left  { left: 1%; text-align: left; }
+  .group-left  .win-tooltip:nth-child(1) { top: 12%; }
+  .group-left  .win-tooltip:nth-child(2) { top: 44%; }
+  .group-left  .win-tooltip:nth-child(3) { top: 74%; }
+  .group-right .win-tooltip.right { right: 1%; text-align: left; }
+  .group-right .win-tooltip:nth-child(1) { top: 12%; }
+  .group-right .win-tooltip:nth-child(2) { top: 44%; }
+  .group-right .win-tooltip:nth-child(3) { top: 74%; }
+
+  .wins-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: clamp(40px, 6vw, 72px); }
+
+  @media (max-width: 479px) {
+    /* motion disabled — stack circles as a two-column tooltip list, no line-draw */
+    .win-stage { aspect-ratio: auto; max-width: none; }
+    .win-art, .win-svg-overlay, .win-label { display: none; }
+    .win-tooltips { position: static; }
+    .win-tooltip { position: static !important; width: auto; opacity: 1 !important; transform: none !important; margin-bottom: 10px; }
+    .group-right { margin-top: 10px; }
+  }
+</style>

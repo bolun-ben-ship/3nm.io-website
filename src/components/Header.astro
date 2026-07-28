@@ -1,0 +1,89 @@
+---
+/* Section 0 — Global Nav (zig.ai style: floating centre pill on the hero bg).  Slots S0.1–S0.4.
+   Motion: hide on scroll-down, reveal on scroll-up (ANIMATION-SPEC §0). */
+const links = [
+  { href: '#steps', label: 'How it works' },   /* S0.2 ×3–4, ≤16ch */
+  { href: '#bento', label: 'Why us' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+<header class="nav" id="nav" data-nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="RightClick:AI home">RightClick<span>:AI</span></a>
+
+    <nav class="nav-pill" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav-right">
+      <a href="#steps" class="btn btn-ghost nav-btn">Book a demo</a>
+      <a href="#top" class="btn btn-primary nav-btn">Login</a>          <!-- S0.3 / S0.4 -->
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu" hidden>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a href="#steps" class="btn btn-ghost">Book a demo</a>
+    <a href="#top" class="btn btn-primary">Login</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    padding-block: 18px;
+    transform: translateY(0);
+    transition: transform 340ms cubic-bezier(0.65,0,0.35,1);
+  }
+  .nav.is-hidden { transform: translateY(-140%); }          /* scroll-down → gone */
+  .nav-inner { display: flex; align-items: center; gap: var(--sp-6); }
+
+  .logo { font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; letter-spacing: -0.02em; color: var(--ink); }
+  .logo span { color: var(--green); }
+
+  /* the floating centre pill */
+  .nav-pill {
+    display: flex; gap: 4px; align-items: center;
+    margin-inline: auto;
+    background: color-mix(in srgb, var(--paper) 88%, #fff);
+    border: 1px solid var(--hair);
+    border-radius: var(--r-pill);
+    padding: 7px 10px;
+    box-shadow: 0 8px 28px -18px rgba(10,18,12,0.28);
+  }
+  .nav-pill a { font-size: 0.95rem; font-weight: 500; color: var(--ink-mid); padding: 9px 18px; border-radius: var(--r-pill); transition: color var(--dur) var(--ease-quint), background var(--dur) var(--ease-quint); }
+  .nav-pill a:hover { color: var(--ink); background: color-mix(in srgb, var(--sand) 70%, transparent); }
+
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-btn { padding: 0.72em 1.35em; font-size: 0.95rem; }
+
+  .nav-toggle { display: none; }
+  .nav-mobile { display: none; }
+
+  @media (max-width: 900px) {
+    .nav-pill, .nav-right { display: none; }
+    .nav-toggle {
+      display: inline-flex; margin-left: auto; width: 46px; height: 46px;
+      align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--paper) 88%, #fff); border: 1px solid var(--hair); border-radius: var(--r-pill); cursor: pointer;
+      box-shadow: 0 8px 28px -18px rgba(10,18,12,0.28);
+    }
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+      content: ''; display: block; width: 18px; height: 1.6px; background: var(--ink); position: relative; transition: transform 200ms var(--ease-quint), opacity 200ms;
+    }
+    .nav-toggle span::before { position: absolute; top: -5.5px; }
+    .nav-toggle span::after  { position: absolute; top: 5.5px; }
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { transform: translateY(5.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after  { transform: translateY(-5.5px) rotate(-45deg); }
+
+    .nav-mobile { flex-direction: column; gap: 4px; margin: 10px var(--pad-x) 0; padding: 12px 16px 20px; border: 1px solid var(--hair); border-radius: var(--r-lg); background: var(--paper); box-shadow: 0 18px 44px -22px rgba(10,18,12,0.28); }
+    .nav-mobile:not([hidden]) { display: flex; }
+    .nav-mobile a:not(.btn) { padding: 14px 6px; font-size: var(--text-l); font-weight: 500; border-bottom: 1px solid var(--hair); }
+    .nav-mobile .btn { margin-top: 10px; justify-content: center; }
+  }
+</style>
