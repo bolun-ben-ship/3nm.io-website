@@ -273,33 +273,59 @@ function initWinMorph() {
   const cap = sec.querySelector('[data-wm-caption]');
   const venn = sec.querySelector('[data-wm-venn]');
   const circles = gsap.utils.toArray('[data-venn-circle]', sec);
+  const circleL = circles[0], circleR = circles[1];              // DOM order: is--left, is--right
+  const mark = sec.querySelector('.win-mark');
+  const labels = gsap.utils.toArray('.win-label', sec);
   const paths = gsap.utils.toArray('.win-svg-overlay path', sec);
   const groups = gsap.utils.toArray('.win-tooltips', sec);
   const full = () => innerWidth >= 992;
   const clamp = gsap.utils.clamp, mr = gsap.utils.mapRange;
 
+  // initial: everything hidden, both circles stacked at centre (cx 380), left starts small
   gsap.set(venn, { autoAlpha: 0 });
   gsap.set(cap, { autoAlpha: 0 });
+  gsap.set(circleL, { attr: { cx: 380, r: 60 }, opacity: 0 });
+  gsap.set(circleR, { attr: { cx: 380, r: 180 }, opacity: 0 });
+  gsap.set(mark, { autoAlpha: 0, transformOrigin: '50% 50%' });
+  gsap.set(labels, { autoAlpha: 0 });
 
   ScrollTrigger.create({
     trigger: scroller, start: 'top top', end: 'bottom bottom', scrub: true,
     onUpdate: (self) => {
       const p = self.progress;
-      // phase 1 — circle grows to fill (p 0 → 0.42)
-      const g = clamp(0, 1, mr(0, 0.42, 0, 1, p));
-      const growAlpha = p < 0.5 ? 1 : clamp(0, 1, mr(0.66, 0.5, 0, 1, p)); // fade as venn takes over
+      const seg = (a, b) => clamp(0, 1, mr(a, b, 0, 1, p));
+
+      // phase 1 — green circle grows to fill the screen (0 → 0.38)
+      const g = seg(0, 0.38);
+      const growAlpha = p < 0.44 ? 1 : clamp(0, 1, mr(0.52, 0.44, 0, 1, p)); // fade as venn takes over
       gsap.set(grow, { scale: 0.02 + g * 0.9, autoAlpha: growAlpha });
       // caption — in while filling, out before the morph
-      gsap.set(cap, { autoAlpha: clamp(0, 1, Math.min(mr(0.03, 0.12, 0, 1, p), mr(0.46, 0.36, 0, 1, p))) });
-      // phase 2 — Venn scene cross-fades/scales in (p 0.48 → 0.66)
-      const v = clamp(0, 1, mr(0.48, 0.66, 0, 1, p));
-      gsap.set(venn, { autoAlpha: v, scale: 0.94 + 0.06 * v });
-      circles.forEach((c) => (c.style.opacity = String(0.9 * v)));
-      // phase 3 — annotation lines draw + tooltips reveal (p 0.66 → 0.86)
-      const r = clamp(0, 1, mr(0.66, 0.86, 0, 1, p));
+      gsap.set(cap, { autoAlpha: Math.min(seg(0.03, 0.12), 1 - seg(0.30, 0.40)) });
+
+      // venn container appears as the green fill clears (0.40 → 0.48)
+      gsap.set(venn, { autoAlpha: seg(0.40, 0.48) });
+
+      // beat 1 — a single circle grows in at centre (0.42 → 0.52)
+      const grow1 = seg(0.42, 0.52);
+      gsap.set(circleL, { attr: { r: 60 + 120 * grow1 }, opacity: 0.9 * grow1 });
+
+      // beat 2 — it splits into left + right (0.52 → 0.63)
+      const split = seg(0.52, 0.63);
+      gsap.set(circleL, { attr: { cx: 380 - 80 * split } });
+      gsap.set(circleR, { attr: { cx: 380 + 80 * split }, opacity: 0.9 * split });
+
+      // beat 3 — the logo appears in the middle (0.63 → 0.70)
+      const logo = seg(0.63, 0.70);
+      gsap.set(mark, { autoAlpha: logo, scale: 0.6 + 0.4 * logo });
+
+      // beat 4 — the words fade in together (0.70 → 0.77)
+      gsap.set(labels, { autoAlpha: seg(0.70, 0.77) });
+
+      // beat 5 — annotation lines draw inward to the circumference, then tooltips (0.77 → 0.92)
+      const r = seg(0.77, 0.92);
       if (full()) paths.forEach((pa) => (pa.style.strokeDashoffset = String(1 - r)));
       else paths.forEach((pa) => (pa.style.strokeDashoffset = '0'));
-      groups.forEach((gr) => gr.classList.toggle('is-in', p > 0.72));
+      groups.forEach((gr) => gr.classList.toggle('is-in', p > 0.86));
     },
   });
 }
