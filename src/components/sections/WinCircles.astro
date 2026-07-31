@@ -3,14 +3,14 @@
    content/index.md §5. Grow caption = the "most founders solve this by hiring" intro; Venn = hire-vs-build.
    Motion: motion.js → initWinMorph (pinned scroll-scrub). */
 const leftTips = [                                                       /* S7.5 3 per circle, ≤66 */
-  'They need training. Months before they run it instead of you.',
-  'They take leave. The team routes right back to you.',
-  'They leave for good. The handover is thin. You start the climb again.',
+  'Months of training before they run it, not you.',
+  'They take leave. It all routes back to you.',
+  'They quit. The SOPs leave in their head.',
 ];
 const rightTips = [
-  'Every line of code and all your data, yours outright.',
-  'Nothing leaves. Code, database, SOPs, wiki, all yours.',
-  "Some founders haven't hired the role. They built it instead.",
+  'Every line of code and your data, yours.',
+  'Nothing leaves. Code, database, SOPs, all yours.',
+  "Some founders didn't hire. They built it instead.",
 ];
 ---
 <section class="wins-morph flood-dark" id="ops-trap" data-winmorph data-wins>
@@ -18,13 +18,14 @@ const rightTips = [
     <div class="wm-pin">
       <!-- phase 1: the growing circle -->
       <div class="wm-grow" data-wm-grow aria-hidden="true"></div>
-      <p class="wm-caption" data-wm-caption>Most founders solve this by hiring. First an admin. Then a GM. Then a head of ops. Here's what it hides.</p> <!-- §5 intro -->
+      <p class="wm-caption" data-wm-caption>So you hire. An admin. Then a GM. Then a head of ops. Here's what it hides.</p> <!-- §5 intro -->
 
       <!-- phase 2: the Venn it morphs into -->
       <div class="wm-venn" data-wm-venn>
         <header class="section-head wm-head">
           <p class="eyebrow">Before you write the job description</p>    <!-- S7.1 -->
           <h2 class="wins-h2">An ops hire rents you a fix. <span class="accent">It never becomes yours.</span></h2> <!-- S7.2 -->
+          <p class="wm-salary">An admin runs ~S$2,800 a month. An ops manager ~S$5,500. A GM ~S$11,000. Every month, forever.</p> <!-- salary anchor -->
         </header>
 
         <div class="win-circles-wrapp" data-venn>
@@ -60,7 +61,7 @@ const rightTips = [
   </div>
 
   <div class="wrap wm-outro">
-    <p class="wins-punch reveal"><span class="accent">Skip the ops hire.</span> Build a system that you own.</p>
+    <p class="wins-punch reveal"><span class="accent">Skip the ops hire.</span> Build a system you own.</p>
     <div class="wins-cta reveal">
       <a href="#closing" class="btn btn-primary">Book a free 30-min call <span class="arrow">→</span></a> <!-- S7.6 -->
       <a href="/how-it-works" class="btn btn-ghost">See how it works</a>                       <!-- S7.7 -->
@@ -86,6 +87,7 @@ const rightTips = [
   html.no-js .wm-grow, html.no-js .wm-caption { display: none; }
   .wm-head { max-width: 46rem; }
   .wins-h2 { font-size: var(--title-m); margin-top: 12px; }
+  .wm-salary { font-family: var(--font-mono); font-size: var(--text-s); color: var(--on-dark-mut); margin-top: 12px; max-width: 56ch; margin-inline: auto; }
 
   .win-circles-wrapp { width: 100%; }
   .win-stage { position: relative; width: min(820px, 82vw); max-height: 60vh; aspect-ratio: 760 / 560; margin-inline: auto; }

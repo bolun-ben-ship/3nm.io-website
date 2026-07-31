@@ -2,23 +2,23 @@
 /* Section 2 — Before / After.  Slots S2.1–S2.6.  Motion: ANIMATION-SPEC §2 (staggered block appear + word-reveal).
    Layout mirrors zig.ai: header top-left, two labelled columns (Before dark pill / After green pill) offset right. */
 const before = [                                                        /* S2.4 ×4, ≤78 */
-  'You spend forty minutes after every call on work nobody built a tool for.',
-  'Your CRM is a to-do list you silently agreed to ignore. The board notices.',
-  'Follow-ups slip the moment the next call starts. Deals go quiet.',
-  'Your best rep is spending half their week not selling at all.',
+  'Forty minutes of admin after every call.',
+  'Your CRM is a to-do list you agreed to ignore.',
+  'Follow-ups slip the second the next call starts.',
+  'Your best rep spends half the week not selling.',
 ];
 const after = [                                                         /* S2.6 ×4, ≤52 */
-  'A pipeline your manager can defend to the board.',
-  'Every record current, without anyone touching it.',
-  'Follow-ups sent before the last call even ends.',
+  'A pipeline you can show the board.',
+  'Every record current. Nobody touched it.',
+  'Follow-ups out before the call ends.',
   'Your best rep back to closing, full-time.',
 ];
 ---
 <section class="section beforeafter" id="beforeafter">
   <div class="wrap ba-outer">
     <header class="ba-head">
-      <p class="eyebrow reveal">The execution gap</p>                    <!-- S2.1 ≤20 -->
-      <h2 class="ba-h2 animate-text_opacity">You didn't sign up to do <span class="accent">busywork</span></h2> <!-- S2.2 ≤44 -->
+      <p class="eyebrow reveal">The dirty work</p>                       <!-- S2.1 ≤20 -->
+      <h2 class="ba-h2 animate-text_opacity">You didn't start this to do <span class="accent">admin</span></h2> <!-- S2.2 ≤44 -->
     </header>
 
     <div class="ba-cols">
