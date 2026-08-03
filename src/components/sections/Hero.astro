@@ -13,21 +13,17 @@ const tasks = [
   { icon: 'alert', tone: 'coral',  time: 'Just now',    title: 'Alert · Invoicing',  sub: 'Invoice overdue. SGD 8,400 · 14 days late.' },
   { icon: 'cal',   tone: 'slate',  time: 'In 12 min',   title: 'Calendar',           sub: 'Forecast review · prep needed before call' },
 ];
-const trust = ['You own the code', 'Live in weeks, not quarters', 'Stop anytime', 'Built in Singapore'];
 ---
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <Eyebrow icon="users" class="reveal" data-r="1">For founder-run Singapore service firms · 5–35 staff</Eyebrow> <!-- S1.1 -->
       <h1 class="hero-h1 reveal" data-r="2">Cut the dirty work<br />and your admin costs.<br /><span class="accent">Scale without hiring.</span></h1> <!-- S1.2 -->
-      <p class="hero-sub reveal" data-r="3">I build you an AI operating system that runs the admin, so you stop being the decision bottleneck. Live in weeks. <strong>You own every line.</strong></p> <!-- S1.3 -->
+      <p class="hero-sub reveal" data-r="3">I build you an AI operating system that runs the admin, so you stop being the decision bottleneck.</p> <!-- S1.3 -->
       <div class="hero-cta reveal" data-r="4">
         <a href="#closing" class="btn btn-primary">Book a free 30-min call <span class="arrow">→</span></a> <!-- S1.4 -->
         <a href="/how-it-works" class="btn btn-ghost">See how it works</a>                       <!-- S1.5 -->
       </div>
-      <ul class="hero-trust reveal" data-r="5">
-        {trust.map((t) => (<li>{t}</li>))}
-      </ul>
     </div>
 
     <!-- S1.6 hero illustration — off-screen wheel + radial-arm cards (placeholder .lottie stand-in) -->
@@ -77,7 +73,7 @@ const trust = ['You own the code', 'Live in weeks, not quarters', 'Stop anytime'
 
 <style>
   .hero { padding-top: clamp(104px, 13vw, 168px); padding-bottom: var(--section-y); }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
 
   /* Real H1 is 3 lines / 47 chars (vs the placeholder's 2 short lines), so it needs a slightly
      tighter cap + wider measure than --title-xl, or the forced breaks wrap into six lines. */
@@ -86,11 +82,6 @@ const trust = ['You own the code', 'Live in weeks, not quarters', 'Stop anytime'
   .hero-sub strong { font-weight: 700; color: var(--ink); }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
   .hero-cta .btn { font-size: 1.05rem; padding: 1.05em 1.9em; }
-
-  /* trust row (content §1, 4 items with accent dots) */
-  .hero-trust { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; padding: 0; }
-  .hero-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-s); color: var(--ink-muted); }
-  .hero-trust li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 
   /* — illustration stage: overflow clips the off-screen wheel to an arc;
        a soft left-edge mask dissolves anything at the clip line so there's no hard shadow seam — */
