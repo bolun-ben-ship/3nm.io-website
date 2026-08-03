@@ -69,7 +69,7 @@
 
   --section-y: clamp(64px, 9vw, 140px);
   --pad-x: clamp(24px, 5vw, 40px);
-  --wrap: 1360px;   /* 85rem — SPEC §2 */
+  --wrap: 1160px;   /* integrated with live case-studies (was 1360) */
 
   /* — radius — */
   --r-s: 10px;
