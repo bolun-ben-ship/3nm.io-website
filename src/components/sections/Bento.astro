@@ -218,6 +218,22 @@ const cards = [
   html.no-js .reveal-card { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .reveal-card { opacity: 1; transform: none; } }
 
+  /* ── viz reveals: app phone + orbit ─────────────────── */
+  .viz-app .phone { opacity: 0; transform: scale(0.92); transition: opacity .5s var(--ease-quint), transform .5s var(--ease-quint); }
+  .bento-viz.in .viz-app .phone { opacity: 1; transform: scale(1); }
+  /* flow nodes L→R */
+  .viz-flow .vf-node, .viz-flow .vf-core { opacity: 0; transform: translateY(8px); transition: opacity .45s var(--ease-quint), transform .45s var(--ease-quint); }
+  .bento-viz.in .viz-flow .vf-node:nth-child(1){transition-delay:0s}
+  .bento-viz.in .viz-flow .vf-core{transition-delay:.15s}
+  .bento-viz.in .viz-flow .vf-node.out{transition-delay:.3s}
+  .bento-viz.in .viz-flow .vf-node, .bento-viz.in .viz-flow .vf-core { opacity: 1; transform: none; }
+  /* ownership chips */
+  .viz-own .vo-chip { opacity: 0; transform: translateY(6px); transition: opacity .4s var(--ease-quint), transform .4s var(--ease-quint); }
+  .bento-viz.in .viz-own .vo-chip { opacity: 1; transform: none; }
+  .viz-own .vo-chip:nth-child(2){transition-delay:.06s} .viz-own .vo-chip:nth-child(3){transition-delay:.12s} .viz-own .vo-chip:nth-child(4){transition-delay:.18s} .viz-own .vo-chip:nth-child(5){transition-delay:.24s}
+  html.no-js .viz-app .phone, html.no-js .viz-flow .vf-node, html.no-js .viz-flow .vf-core, html.no-js .viz-own .vo-chip { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .viz-app .phone, .viz-flow .vf-node, .viz-flow .vf-core, .viz-own .vo-chip { opacity: 1; transform: none; transition: none; } }
+
   @media (max-width: 991px) {
     .bento-grid { grid-template-columns: 1fr 1fr; }
     .bento-card { grid-column: auto !important; min-height: 300px; }
