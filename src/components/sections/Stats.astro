@@ -1,30 +1,24 @@
 ---
 import Eyebrow from '../Eyebrow.astro';
-/* Section 5 — Stat circles.  Slots S5.1–S5.5.  Motion: ANIMATION-SPEC §5 (SCRUBBED — scale 0.2→1 one-by-one, tied to scroll). */
-/* Every number here is a real KPI from content/index.md §6–§7 (the shipped case studies).
-   No invented metrics. */
-const stats = [
-  { value: '3h', label: 'Weekly sync killed. Education consulting.' },  /* S5.4/5.5 ×4 */
-  { value: '−8h', label: 'Per candidate. Executive recruitment.' },
-  { value: '4→1', label: 'Four retailers, one live view. 3PL logistics.' },
-  { value: '0', label: 'New admin hires after the build.' },
+import CaseCard from '../CaseCard.astro';
+/* Section 5 — results as case-study cards (spec §4). Real KPIs from content/case-study-*.md. */
+/* Gate 0 D4: visuals only, no href — cards do not link yet. */
+const cases = [
+  { tag: 'Education consulting', chips: ['Ops','Reporting'], title: 'Weekly sync, killed.', summary: 'A recurring 3-hour status meeting replaced by one live view.', kpis: [{val:'3h → 0',label:'Weekly sync'},{val:'Weeks',label:'Not months'}] },
+  { tag: 'Executive recruitment', chips: ['Hiring','Sourcing'], title: 'Eight hours back per candidate.', summary: 'Automated market mapping and intelligent filtering — the sourcing nobody sells you.', kpis: [{val:'−8h',label:'Per candidate'},{val:'2-3×',label:'Pool growth'}] },
+  { tag: '3PL logistics', chips: ['Ops','Dashboards'], title: 'Four retailers, one live view.', summary: 'Delivery status across four systems, consolidated.', kpis: [{val:'4 → 1',label:'Feeds unified'},{val:'Seconds',label:'To an answer'}] },
+  { tag: 'Family office', chips: ['Wealth','OCR'], title: 'Bank statement intelligence.', summary: 'OCR, consolidation and risk flags on statements.', kpis: [{val:'4',label:'Banks consolidated'},{val:'Live',label:'Portfolio view'}] },
 ];
 ---
-<section class="section stats" id="stats" data-stats>
+<section class="section stats" id="stats">
   <div class="wrap">
     <header class="section-head">
-      <Eyebrow icon="trending" class="reveal">The results</Eyebrow>                          <!-- S5.1 -->
-      <h2 class="stats-h2 animate-text_opacity">What changed for them.</h2> <!-- S5.2 -->
-      <p class="stats-sub reveal">Real builds for Singapore service firms. Anonymised on request.</p> <!-- S5.3 -->
+      <Eyebrow icon="trending" class="reveal">The results</Eyebrow>
+      <h2 class="stats-h2 animate-text_opacity">What changed for them.</h2>
+      <p class="stats-sub reveal">Real builds for Singapore service firms. Anonymised on request.</p>
     </header>
-
-    <div class="stats-track">
-      {stats.map((s) => (
-        <div class="stat-unit">
-          <div class="stat-circle" data-stat-circle><span class="stat-value" data-count-to={s.value}>{s.value}</span></div>
-          <p class="stat-label">{s.label}</p>
-        </div>
-      ))}
+    <div class="cc-grid">
+      {cases.map((c) => <CaseCard {...c} />)}
     </div>
   </div>
 </section>
@@ -32,19 +26,6 @@ const stats = [
 <style>
   .stats-h2 { font-size: var(--title-m); margin-top: 14px; }
   .stats-sub { font-size: var(--text-l); color: var(--ink-muted); margin-top: 12px; }
-
-  .stats-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: clamp(48px, 7vw, 96px); }
-  .stat-unit { display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .stat-circle {
-    width: clamp(140px, 15vw, 210px); aspect-ratio: 1; border-radius: 50%;
-    background: var(--green); color: #fff; display: grid; place-items: center; margin-bottom: 22px;
-    transform: scale(0.2); will-change: transform;
-  }
-  html.no-js .stat-circle { transform: scale(1); }
-  @media (prefers-reduced-motion: reduce) { .stat-circle { transform: scale(1); } }
-  .stat-value { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.2rem, 4vw, 3.4rem); letter-spacing: -0.03em; }
-  .stat-label { font-size: var(--text-m); color: var(--ink-mid); max-width: 22ch; }
-
-  @media (max-width: 767px) { .stats-track { grid-template-columns: 1fr 1fr; gap: 40px 20px; } }
-  @media (max-width: 420px) { .stats-track { grid-template-columns: 1fr; } }
+  .cc-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3vw, 32px); margin-top: clamp(40px, 6vw, 72px); }
+  @media (min-width: 720px) { .cc-grid { grid-template-columns: 1fr 1fr; } }
 </style>
