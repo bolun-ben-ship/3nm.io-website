@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 1 — Hero.  Slots S1.1–S1.6.  Motion: ANIMATION-SPEC §1.
    Placeholder for the licensed .lottie, rebuilt to match zig's choreography (verified frame-by-frame
    from references/zig ai analysis/lottie): an off-screen-right WHEEL whose radial arms carry the cards.
@@ -17,7 +18,7 @@ const trust = ['You own the code', 'Live in weeks, not quarters', 'Stop anytime'
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow reveal" data-r="1">For founder-run Singapore service firms · 5–35 staff</p> <!-- S1.1 -->
+      <Eyebrow icon="users" class="reveal" data-r="1">For founder-run Singapore service firms · 5–35 staff</Eyebrow> <!-- S1.1 -->
       <h1 class="hero-h1 reveal" data-r="2">Cut the dirty work<br />and your admin costs.<br /><span class="accent">Scale without hiring.</span></h1> <!-- S1.2 -->
       <p class="hero-sub reveal" data-r="3">I build you an AI operating system that runs the admin, so you stop being the decision bottleneck. Live in weeks. <strong>You own every line.</strong></p> <!-- S1.3 -->
       <div class="hero-cta reveal" data-r="4">

@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 8 — Step wheel.  Slots S8.1–S8.6.  Motion: ANIMATION-SPEC §8 (SCRUBBED — cards sweep through center on scroll; disabled ≤767). */
 /* The engagement, in order — compressed from content/index.md FAQ 1 + the §8 ownership strip.
    Nothing here is invented: every line restates a commitment already on the page. */
@@ -14,7 +15,7 @@ const steps = [
 <section class="section flood-green steps-section" id="steps" data-steps>
   <div class="wrap steps-head-wrap">
     <header class="section-head">
-      <p class="eyebrow">How it works</p>                               <!-- S8.1 -->
+      <Eyebrow icon="route">How it works</Eyebrow>                               <!-- S8.1 -->
       <h2 class="steps-h2 animate-text_opacity">How a build actually runs.</h2> <!-- S8.2 -->
       <p class="steps-intro reveal">Free call, paid audit, then a scope and quote you approve before I build. Three a month, because I build each one myself.</p> <!-- S8.3 -->
     </header>

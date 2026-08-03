@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 10 — Testimonials.  Slots S10.1–S10.5.  Motion: ANIMATION-SPEC §10 (Splide loop). */
 /* content/index.md §10 (founder voice) + FAQ 7 — verbatim.
    There are NO client testimonials in the source copy (case studies are anonymised on request),
@@ -13,7 +14,7 @@ const slides = [                                                        /* ×3 *
 <section class="section flood-dark testim" id="founder-voice" data-testim aria-label="From the founder">
   <div class="wrap">
     <header class="section-head">
-      <p class="eyebrow">From the founder</p>                           <!-- S10.1 -->
+      <Eyebrow icon="quote">From the founder</Eyebrow>                           <!-- S10.1 -->
       <h2 class="testim-h2 reveal">Marketer and AI operator.</h2>       <!-- S10.2 -->
     </header>
 

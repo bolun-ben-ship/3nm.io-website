@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 2 — Before / After.  Slots S2.1–S2.6.  Motion: ANIMATION-SPEC §2 (staggered block appear + word-reveal).
    Layout mirrors zig.ai: header top-left, two labelled columns (Before dark pill / After green pill) offset right. */
 const before = [                                                        /* S2.4 ×4, ≤78 */
@@ -17,7 +18,7 @@ const after = [                                                         /* S2.6 
 <section class="section beforeafter" id="beforeafter">
   <div class="wrap ba-outer">
     <header class="ba-head">
-      <p class="eyebrow reveal">The dirty work</p>                       <!-- S2.1 ≤20 -->
+      <Eyebrow icon="inbox" class="reveal">The dirty work</Eyebrow>                       <!-- S2.1 ≤20 -->
       <h2 class="ba-h2 animate-text_opacity">You didn't start this to do <span class="accent">admin</span></h2> <!-- S2.2 ≤44 -->
     </header>
 

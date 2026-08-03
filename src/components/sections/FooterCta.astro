@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 12 — Closing CTA + Footer.  Motion: ANIMATION-SPEC §12 (word-reveal).
    Copy: content/index.md §12 (verbatim, incl. the Formspree form, note, error and success states)
    + content/_shell.md (footer). */
@@ -10,7 +11,7 @@ const footNav = [
 ---
 <section class="flood-green footer-cta" id="closing">
   <div class="wrap fc-inner">
-    <p class="eyebrow">Get started</p>
+    <Eyebrow icon="arrow">Get started</Eyebrow>
     <h2 class="fc-h2 animate-text_opacity">Book a 30-minute call.<br />It's free.</h2> <!-- S12.1 -->
     <p class="fc-sub reveal">No pitch, no proposal. Book a call, or tell me the one thing eating your week and I'll say if it's worth one. I read every one myself, and take three projects a month.</p> <!-- S12.2 -->
 

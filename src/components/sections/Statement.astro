@@ -1,11 +1,12 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 3 — Statement + integration marquee.  Slots S3.1–S3.3.  Motion: ANIMATION-SPEC §3 (word-reveal + logo marquee).
    Logo bar mirrors zig.ai: a static label + divider on the left, logos scroll right and fade in from behind it. */
 const logos = ['hubspot', 'notion', 'airtable', 'asana', 'clickup', 'googlesheets', 'quickbooks', 'xero', 'trello', 'zapier']; /* S3.3 */
 ---
 <section class="section statement" id="statement">
   <div class="wrap st-top">
-    <p class="eyebrow reveal">It starts with your data.</p>              <!-- S3 eyebrow -->
+    <Eyebrow icon="database" class="reveal">It starts with your data.</Eyebrow>              <!-- S3 eyebrow -->
     <h2 class="st-h2 animate-text_opacity">One view across <span class="accent">every tool your data already lives in.</span></h2> <!-- S3.1 -->
   </div>
 

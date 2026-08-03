@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 6+7 (merged) — Ops-hire trap: a green circle grows to fill the screen, then MORPHS into the Venn.
    content/index.md §5. Grow caption = the "most founders solve this by hiring" intro; Venn = hire-vs-build.
    Motion: motion.js → initWinMorph (pinned scroll-scrub). */
@@ -23,7 +24,7 @@ const rightTips = [
       <!-- phase 2: the Venn it morphs into -->
       <div class="wm-venn" data-wm-venn>
         <header class="section-head wm-head">
-          <p class="eyebrow">Before you write the job description</p>    <!-- S7.1 -->
+          <Eyebrow icon="userplus">Before you write the job description</Eyebrow>    <!-- S7.1 -->
           <h2 class="wins-h2">An ops hire rents you a fix. <span class="accent">It never becomes yours.</span></h2> <!-- S7.2 -->
           <p class="wm-salary">An admin runs ~S$2,800 a month. An ops manager ~S$5,500. A GM ~S$11,000. Every month, forever.</p> <!-- salary anchor -->
         </header>

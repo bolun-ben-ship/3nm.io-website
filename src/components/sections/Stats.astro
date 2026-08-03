@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 5 — Stat circles.  Slots S5.1–S5.5.  Motion: ANIMATION-SPEC §5 (SCRUBBED — scale 0.2→1 one-by-one, tied to scroll). */
 /* Every number here is a real KPI from content/index.md §6–§7 (the shipped case studies).
    No invented metrics. */
@@ -12,7 +13,7 @@ const stats = [
 <section class="section stats" id="stats" data-stats>
   <div class="wrap">
     <header class="section-head">
-      <p class="eyebrow reveal">The results</p>                          <!-- S5.1 -->
+      <Eyebrow icon="trending" class="reveal">The results</Eyebrow>                          <!-- S5.1 -->
       <h2 class="stats-h2 animate-text_opacity">What changed for them.</h2> <!-- S5.2 -->
       <p class="stats-sub reveal">Real builds for Singapore service firms. Anonymised on request.</p> <!-- S5.3 -->
     </header>

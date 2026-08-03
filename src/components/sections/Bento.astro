@@ -1,4 +1,5 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
 /* Section 4 — "Why different" bento.  Slots S4.1–S4.7.  Motion: ANIMATION-SPEC §4 (card scale-in + badge orbit). */
 /* content/index.md §8 — the four functions (verbatim), plus the ownership + no-grant-paperwork
    claims (verbatim from the §8 ownership strip and the §9 comparison / FAQ 11).
@@ -15,7 +16,7 @@ const cards = [
 <section class="section bento" id="build">
   <div class="wrap">
     <header class="section-head left">
-      <p class="eyebrow reveal">What I actually build</p>                 <!-- S4.1 -->
+      <Eyebrow icon="blocks" class="reveal">What I actually build</Eyebrow>                 <!-- S4.1 -->
       <h2 class="bento-h2 animate-text_opacity">Custom software SaaS won't build.</h2> <!-- S4.2 -->
       <p class="bento-intro reveal">The system your business actually runs on. Built to your workflow, your data. Off-the-shelf can't, and won't price for your size. I build it. You own it.</p> <!-- S4.3 -->
     </header>
