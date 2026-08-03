@@ -198,11 +198,15 @@ const cards = [
   .vg-row { display: flex; align-items: center; gap: 12px; font-size: 0.76rem; }
   .vg-lbl { width: 92px; flex: none; color: var(--ink-mid); font-weight: 500; }
   .vg-bar { height: 10px; border-radius: 6px; }
-  .vg-bar.long { flex: 1; background: repeating-linear-gradient(90deg, var(--ink-faint) 0 8px, transparent 8px 14px); opacity: 0.55; }
-  .vg-bar.short { width: 62px; background: var(--green); }
+  .vg-bar.long { flex: 1; background: repeating-linear-gradient(90deg, var(--coral) 0 8px, transparent 8px 14px); opacity: 0.85; transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease-quint); }
+  .vg-bar.short { width: 62px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease-quint) 0.15s; }
+  .bento-viz.in .vg-bar.long, .bento-viz.in .vg-bar.short { transform: scaleX(1); }
   .vg-row em { font-style: normal; font-family: var(--font-mono); font-weight: 600; margin-left: auto; }
-  .vg-row .no { color: var(--ink-faint); } .vg-row .yes { color: var(--green); }
+  .vg-row .no { color: var(--coral); } .vg-row .yes { color: var(--green); }
+  .vg-row.muted .vg-lbl { color: var(--coral); }
   .vg-row.go .vg-lbl { color: var(--ink); }
+  html.no-js .vg-bar.long, html.no-js .vg-bar.short { transform: scaleX(1); }
+  @media (prefers-reduced-motion: reduce) { .vg-bar.long, .vg-bar.short { transform: scaleX(1); transition: none; } }
 
   /* ── 6 · You own it (dark) — ownership chips ────────── */
   .viz-own { display: flex; flex-direction: column; gap: 16px; }
