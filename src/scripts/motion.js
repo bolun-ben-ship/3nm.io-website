@@ -428,3 +428,14 @@ function initBodyBg() {
     },
   });
 }
+
+/* Bento viz reveal (spec §3) — adds .in when a card's viz scrolls into view */
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vizzes = document.querySelectorAll('.bento-viz');
+  if (!vizzes.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.35 });
+  vizzes.forEach((v) => io.observe(v));
+})();
