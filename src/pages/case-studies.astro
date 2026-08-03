@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CaseCard from '../components/CaseCard.astro';
+import FooterCta from '../components/sections/FooterCta.astro';
+
+/* My work — /case-studies.
+   Copy: content/case-studies.md (verbatim). Structure: page-hero (+ stat strip) →
+   .cc-grid of CaseCards → closing CTA (FooterCta).
+   Gate 0 D4: cards are visual-only — no href passed, so CaseCard renders is-static (no cover link). */
+
+const stats = [
+  { val: '5', label: 'Live builds' },
+  { val: 'Weeks', label: 'Not months' },
+  { val: '0', label: 'New ops hires triggered' },
+  { val: '100%', label: 'Owned by client' },
+];
+
+const cases = [
+  {
+    tag: 'Education consulting',
+    chips: ['University admissions', 'Singapore'],
+    title: 'From shared inboxes and PDF folders to one platform. No new admin hire.',
+    summary: 'Dozens of student applications per consultant, tracked across spreadsheets, shared inboxes, and PDF folders. I unified the work into one platform. The 3-hour weekly sync between consultants and the sales/CS manager is gone.',
+    kpis: [
+      { val: '3h → 0', label: 'Weekly sync' },
+      { val: 'Weeks', label: 'Not months' },
+      { val: '1', label: 'Platform replaces 5' },
+    ],
+  },
+  {
+    tag: 'Compliance workflow',
+    chips: ['Financial services', 'Singapore'],
+    title: 'Approval chains, replaced. 13% errors → near zero.',
+    summary: 'Multi-step compliance routing was held together by email and chasing. I rebuilt the chain as a versioned workflow with auto-escalation. Errors collapsed. The compliance officer stopped being a router.',
+    kpis: [
+      { val: '13% → ~0', label: 'Routing errors' },
+      { val: 'Weeks', label: 'Not months' },
+    ],
+  },
+  {
+    tag: 'Family office',
+    chips: ['Wealth · OCR', 'Singapore'],
+    title: 'Bank statement intelligence: OCR, consolidation, risk flags.',
+    summary: 'Hundreds of bank statements per quarter, manually consolidated by analysts. I built a pipeline that ingests, reconciles, flags anomalies, and outputs a portfolio view by Monday morning.',
+    kpis: [
+      { val: '~80%', label: 'Manual prep killed' },
+      { val: 'Weeks', label: 'Not months' },
+    ],
+  },
+  {
+    tag: '3PL logistics',
+    chips: ['Multi-retailer', 'Singapore'],
+    title: 'Multi-retailer BI dashboard with AI analysis agent.',
+    summary: 'Operational data from multiple retailer systems was reconciled by hand each week. I unified it into one BI surface with an AI agent that surfaces what changed and why. No more pivot-table archaeology.',
+    kpis: [
+      { val: '1 view', label: 'Replaces 6+ exports' },
+      { val: 'Weeks', label: 'Not months' },
+    ],
+  },
+  {
+    tag: 'Executive recruitment',
+    chips: ['Senior placements', 'Singapore'],
+    title: 'Pipeline intelligence: no more “where are we with this candidate?”',
+    summary: 'Senior placements lived in inboxes, calendars, and partners’ heads. I built a pipeline view with movement tracking, follow-up alerts, and signal scoring. The Monday catch-up became a 5-minute scan.',
+    kpis: [
+      { val: '5 min', label: 'Monday catch-up' },
+      { val: 'Weeks', label: 'Not months' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Case studies — RightClick:AI | Real Singapore service businesses on custom software"
+  description="Five real Singapore service businesses. Five custom operational systems. Education consulting, financial compliance, family offices, 3PL logistics, executive recruitment. Built to fit, owned by the client."
+  canonical="https://3nm.io/case-studies"
+>
+  <!-- 1. Page hero -->
+  <section class="section cs-hero" id="top">
+    <div class="wrap cs-hero-inner">
+      <Eyebrow icon="briefcase" class="reveal" data-r="1">Case studies &middot; Singapore SMEs</Eyebrow>
+      <h1 class="cs-h1 reveal" data-r="2">Five businesses. Five custom systems.<br /><span class="accent">Built to fit, owned outright.</span></h1>
+      <p class="cs-lede reveal" data-r="3">Real Singapore service businesses I&rsquo;ve built custom systems for. Anonymous on request, but every number, every workflow, every artefact below is real. Pick the one that looks like yours.</p>
+
+      <ul class="cs-stats reveal" data-r="4">
+        {stats.map((s) => (
+          <li class="cs-stat">
+            <span class="cs-stat-val">{s.val}</span>
+            <span class="cs-stat-label">{s.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. The grid of case studies -->
+  <section class="section cs-grid-sec" id="work">
+    <div class="wrap">
+      <div class="cc-grid">
+        {cases.map((c) => <CaseCard {...c} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Closing CTA + footer -->
+  <FooterCta />
+</BaseLayout>
+
+<style>
+  /* ── 1. Page hero ─────────────────────────────────────────── */
+  .cs-hero { padding-top: clamp(120px, 16vw, 200px); }   /* clear the fixed nav */
+  .cs-hero-inner { max-width: 60rem; margin-inline: auto; text-align: center; }
+  .cs-h1 { font-size: var(--title-xl); margin-top: 20px; }
+  .cs-lede { font-size: var(--text-xl); color: var(--ink-mid); margin: 22px auto 0; max-width: 60ch; }
+
+  .cs-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 3vw, 32px);
+    margin: clamp(40px, 6vw, 64px) auto 0;
+    padding-top: clamp(28px, 4vw, 40px);
+    border-top: 1px solid var(--line);
+    text-align: left;
+  }
+  .cs-stat { display: flex; flex-direction: column; gap: 6px; }
+  .cs-stat-val { font-size: var(--title-s); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+  .cs-stat-label { font-family: var(--font-mono); font-size: var(--text-s); color: var(--ink-faint); letter-spacing: 0.02em; }
+
+  /* ── 2. The grid ──────────────────────────────────────────── */
+  .cs-grid-sec { background: var(--sand); }
+  .cc-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 3vw, 32px); }
+  @media (min-width: 720px) { .cc-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* ── responsive ───────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .cs-stats { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+  }
+</style>
+</content>
+</invoke>
