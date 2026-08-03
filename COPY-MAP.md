@@ -29,38 +29,38 @@ Every live copy string on the single-page site, in page order. Reference the **#
 
 ## 1 · Hero — `sections/Hero.astro`
 
-| # | slot | role | copy | chars | limit |
-|---|---|---|---|---|---|
-| 10 | S1.1 | eyebrow | For founder-run Singapore service firms · 5–35 staff | 52 | flex |
-| 11 | S1.2 | h1 | You're the system / holding it all together. / That's the problem. | 62 | 26ch, forced 3-line |
-| 12 | S1.3 | subhead | You don't have to be. I build you one system to see and run your whole business, the custom internal software off-the-shelf SaaS won't. It stops running through you, so you can scale without the next hire. You own every line. | 225 | 42ch measure |
-| 13 | S1.4 | CTA primary | Book a free 30-min call → | 25 | flex |
-| 14 | S1.5 | CTA ghost | See how it works | 16 | flex |
-| 15 | S1.6 | trust | You own the code | 16 | flex |
-| 16 | S1.6 | trust | Live in weeks, not quarters | 27 | flex |
-| 17 | S1.6 | trust | Stop anytime | 12 | flex |
-| 18 | S1.6 | trust | Built in Singapore | 18 | flex |
+| # | slot | role | copy | chars | limit | ✎ |
+|---|---|---|---|---|---|---|
+| 10 | S1.1 | eyebrow | For founder-run Singapore service firms · 5–35 staff | 52 | flex |  |
+| 11 | S1.2 | h1 | Cut the dirty work / and your admin costs. / Scale without hiring. | 62 | 26ch, forced 3-line |  |
+| 12 | S1.3 | subhead | I build you an AI operating system that runs the admin, so you stop being the decision bottleneck. Live in weeks. You own every line. | 133 | 42ch measure |  |
+| 13 | S1.4 | CTA primary | Book a free 30-min call → | 25 | flex |  |
+| 14 | S1.5 | CTA ghost | See how it works | 16 | flex |  |
+| 15 | S1.6 | trust | You own the code | 16 | flex |  |
+| 16 | S1.6 | trust | Live in weeks, not quarters | 27 | flex |  |
+| 17 | S1.6 | trust | Stop anytime | 12 | flex |  |
+| 18 | S1.6 | trust | Built in Singapore | 18 | flex |  |
 
 ### Hero illustration cards (the interrupt pile)
 
-| # | role | copy | chars | limit |
-|---|---|---|---|---|
-| 19 | card time | 2m ago | 6 | flex |
-| 20 | card title | Slack · Sarah | 13 | 1 line, ellipsized |
-| 21 | card body | @you can you approve the Q3 forecast deck before 3pm? | 53 | 1 line, ~186px |
-| 22 | card time | Tue, 3 days | 11 | flex |
-| 23 | card title | Email · Compliance | 18 | 1 line, ellipsized |
-| 24 | card body | Re: Trade authorisation — awaiting your sign-off. | 49 | 1 line, ~186px |
-| 25 | card time | Just now | 8 | flex |
-| 26 | card title | Alert · Invoicing | 17 | 1 line, ellipsized |
-| 27 | card body | Invoice overdue. SGD 8,400 · 14 days late. | 42 | 1 line, ~186px |
-| 28 | card time | In 12 min | 9 | flex |
-| 29 | card title | Calendar | 8 | 1 line, ellipsized |
-| 30 | card body | Forecast review · prep needed before call | 41 | 1 line, ~186px |
-| 31 | summary title | The system did | 14 | card 310px |
-| 32 | summary meta | Status, reports, follow-ups | 27 | card 310px |
-| 33 | summary title | You did | 7 | card 310px |
-| 34 | summary meta | Made the one call that mattered | 31 | card 310px |
+| # | role | copy | chars | limit | ✎ |
+|---|---|---|---|---|---|
+| 19 | card time | 2m ago | 6 | flex |  |
+| 20 | card title | Slack · Sarah | 13 | 1 line, ellipsized |  |
+| 21 | card body | @you can you approve the Q3 forecast deck before 3pm? | 53 | 1 line, ~186px |  |
+| 22 | card time | Tue, 3 days | 11 | flex |  |
+| 23 | card title | Email · Compliance | 18 | 1 line, ellipsized |  |
+| 24 | card body | Re: Trade authorisation — awaiting your sign-off. | 49 | 1 line, ~186px |  |
+| 25 | card time | Just now | 8 | flex |  |
+| 26 | card title | Alert · Invoicing | 17 | 1 line, ellipsized |  |
+| 27 | card body | Invoice overdue. SGD 8,400 · 14 days late. | 42 | 1 line, ~186px |  |
+| 28 | card time | In 12 min | 9 | flex |  |
+| 29 | card title | Calendar | 8 | 1 line, ellipsized |  |
+| 30 | card body | Forecast review · prep needed before call | 41 | 1 line, ~186px |  |
+| 31 | summary title | The system did | 14 | card 310px |  |
+| 32 | summary meta | Status, reports, follow-ups | 27 | card 310px |  |
+| 33 | summary title | You did | 7 | card 310px |  |
+| 34 | summary meta | Made the one call that mattered | 31 | card 310px |  |
 
 ## 2 · BeforeAfter — `sections/BeforeAfter.astro`
 
