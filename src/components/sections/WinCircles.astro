@@ -122,6 +122,18 @@ const rightTips = [
   .wins-punch { font-family: var(--font-display); font-weight: 500; font-size: var(--title-s); line-height: 1.25; max-width: 24ch; margin: 0 auto; color: var(--on-dark); }
   .wins-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: clamp(24px, 4vw, 40px); }
 
+  /* Secondary CTA on the dark surface — scoped so the light-section .btn-ghost (Hero, Bento, StepWheel) is untouched */
+  .wins-cta .btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .wins-cta .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+
   @media (max-width: 767px) {
     .wm-scroll { height: auto; }
     .wm-pin { position: static; height: auto; overflow: visible; padding-block: var(--section-y); }
