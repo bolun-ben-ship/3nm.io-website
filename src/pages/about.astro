@@ -1,0 +1,397 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import FooterCta from '../components/sections/FooterCta.astro';
+
+/* About — /about.
+   Copy: content/about.md + live about.html (verbatim). Structure per REDESIGN-PLAN Task 13:
+   page-hero → intro (bottlenecks) → method (id="method") → manifesto → founder → engagement →
+   invitation (closing letter) → FooterCta (booking form + footer).
+   Live tokens translated to v2 (--accent→--green, --bg-warm→--sand, --border→--line, etc.). */
+
+const bottlenecks = [
+  { n: '01', t: 'Reporting overhead.',
+    b: 'Producing client reports, internal status reports, and management updates absorbs an enormous amount of skilled time. Most of it is manual data assembly the team would never choose to do if the system did it for them.' },
+  { n: '02', t: 'Fragmented client visibility.',
+    b: 'Information about a client lives across email threads, project tools, finance software, and individual heads. Answering a basic question (what stage is this client at, what is outstanding, what is at risk) requires asking three people and opening four systems.' },
+  { n: '03', t: 'Approval and handoff friction.',
+    b: 'Work waits on someone to be notified, to remember, to approve, or to pass it along. Each handoff loses time and context. The slowest part of delivery is usually not the work itself. It is the gap between the work.' },
+];
+
+const mockRows = [
+  { name: 'Client report assembly', sub: '14 hours this week. Same as last week.', badge: 'Manual', kind: 'error' },
+  { name: '"Where are we with Sarah?"', sub: 'Asked 3 times. 4 systems opened.', badge: 'Scattered', kind: 'warn' },
+  { name: 'Approval queue', sub: '6 items waiting. Average idle: 3 days.', badge: 'Stalled', kind: 'warn' },
+  { name: 'Internal status update', sub: 'Slack thread. Tuesday. Still unread.', badge: 'Lost', kind: 'neutral' },
+  { name: 'Cross-team handoff', sub: 'Designer → PM → Client. Two days each gap.', badge: 'Idle', kind: 'neutral' },
+];
+
+const methodSteps = [
+  { n: '01', t: 'Map input → output at every stage',
+    b: 'Every workflow has explicit inputs and outputs. I map them granularly: who, when, with what data, in what format. The map becomes the specification.' },
+  { n: '02', t: 'Surface the invisible micro-processes',
+    b: 'The small decisions people make without thinking are the ones that break automated systems. I name them all before the build, not after.' },
+  { n: '03', t: 'Verify the data behind the decision',
+    b: 'You cannot automate a decision the data cannot support. I check what exists, how reliable it is, and whether it can carry the system. If it cannot, you hear it before the build starts.' },
+  { n: '04', t: 'Only then: design and build',
+    b: 'With the map, the data, and the edge cases clear, the build is straightforward. Fast, with a working prototype early. No surprises, because I eliminated them up front.' },
+];
+
+const manifesto = [
+  { n: '01', stmt: 'I will not pick a tool before I understand the workflow.',
+    body: 'The technology decision is the smallest decision in the project. If the workflow is mapped poorly, no tool (Zapier, Make, n8n, custom build) will save it. Most automation projects skip this and pay for it later, usually at the worst possible moment.' },
+  { n: '02', stmt: 'I will not take a project where the data cannot support the decision.',
+    body: 'You cannot automate what you cannot measure. If the data does not exist, is unreliable, or cannot be cleanly extracted, I say so before the contract is signed. The honest answer is sometimes "fix the data first, then automate."' },
+  { n: '03', stmt: 'I will not bill a client for a system I would not run my own business on.',
+    body: 'Every system I ship, I evaluate against the same standard I evaluate my own internal tools by. If I would not use it, I do not deliver it. The work is too expensive on both sides to be embarrassed by the result.' },
+  { n: '04', stmt: 'I will not promise a fixed timeline I cannot honestly back.',
+    body: "Every build is scoped per client, so I don't sell a date I can't keep. I build until it's live and doing the job. You get the result, not a refund. The commitment exists because soft promises are how trust dies." },
+  { n: '05', stmt: 'I will not hide behind an account manager.',
+    body: 'The person who scopes the work is the person who builds it. No briefing chains. No junior developers interpreting senior promises. You work directly with me at every stage of the engagement: the mapping session, the prototype, the build, the handover.' },
+];
+
+const terms = [
+  { n: '01', t: 'Process before tools',
+    b: 'No technology decision before the workflow is mapped. The tool is the smallest decision in the project, and I treat it that way.' },
+  { n: '02', t: 'Written scope before any build',
+    b: 'After your mapping session, you receive an exact written scope (deliverables, scope, assumptions) before any build starts. No vague statements of work.' },
+  { n: '03', t: "MVP on real data. Built until it's live.",
+    b: 'Your operational dashboard comes up first on real data. The build is scoped per client and I build until it’s live and doing the job, written into the contract.' },
+  { n: '04', t: 'Honest over agreeable',
+    b: 'If your problem has a simpler, cheaper answer (a better process, a different tool, no AI at all), you hear it. I turn down projects where the system will not return its cost many times over.' },
+  { n: '05', t: 'You own the code',
+    b: 'Codebase, architecture, deployment: all transferred to you. No SaaS subscription. No lock-in. Any developer anywhere can pick up the work and continue it.' },
+  { n: '06', t: 'No account managers',
+    b: 'The person who scopes the work is the person who builds it. No handoffs. No briefing chains. You work directly with the founder.' },
+];
+---
+<BaseLayout
+  title="About — RightClick:AI | Built by Ben Liu in Singapore"
+  description="RightClick:AI is built and run by Bolun (Ben) Liu in Singapore. The manifesto, the method, and the engagement terms behind every system I ship for service businesses."
+  canonical="https://3nm.io/about"
+  ogType="profile"
+>
+  <!-- 1. Page hero — the position / manifesto opener -->
+  <section class="section ab-hero" id="top">
+    <div class="wrap ab-hero-inner">
+      <Eyebrow icon="users" class="reveal" data-r="1">A founder&rsquo;s manifesto &middot; Singapore</Eyebrow>
+      <h1 class="ab-h1 reveal" data-r="2">Most AI projects fail <em>before</em> the first line of code.</h1>
+      <p class="ab-lede reveal" data-r="3">I started RightClick:AI because most automation fails for the same reason, and it is not the technology. The work that decides whether a system survives contact with a real business is process design, data mapping, and clarity before tools. Most agencies skip it to ship faster.</p>
+      <p class="ab-lede reveal" data-r="4"><strong>This page is what I do instead, and what I refuse to compromise on.</strong></p>
+      <div class="ab-hero-ctas reveal" data-r="5">
+        <a href="#closing" class="btn btn-primary">Book a discovery call <span class="arrow">&rarr;</span></a>
+        <a href="#method" class="btn btn-ghost">See the method</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Intro — where this matters (bottlenecks) -->
+  <section class="section ab-bn">
+    <div class="wrap">
+      <header class="ab-head reveal">
+        <Eyebrow icon="inbox">Where this matters</Eyebrow>
+        <h2 class="ab-bn-h2 animate-text_opacity">Where growing service businesses get stuck.</h2>
+        <p class="ab-bn-intro">Service businesses between fifteen and thirty-five people tend to hit the same three structural bottlenecks. They are not strategy problems and they are rarely about the team&rsquo;s capability. They are operational frictions that compound quietly until the founder is the slowest part of the system.</p>
+      </header>
+
+      <div class="ab-bn-inner">
+        <div class="ab-card reveal" role="figure" aria-label="A typical service business operation this month — three bottlenecks visible at once">
+          <div class="ab-card-bar">
+            <span class="ab-card-dot"></span><span class="ab-card-dot"></span><span class="ab-card-dot"></span>
+            <span class="ab-card-title">Your operation &middot; This month</span>
+          </div>
+          {mockRows.map((r) => (
+            <div class="ab-card-row">
+              <div class="ab-card-name">{r.name}<span class="ab-card-sub">{r.sub}</span></div>
+              <span class={`ab-badge ${r.kind}`}>{r.badge}</span>
+            </div>
+          ))}
+        </div>
+
+        <ol class="ab-bn-list">
+          {bottlenecks.map((b, i) => (
+            <li class="ab-bn-item reveal" data-r={i % 3}>
+              <span class="ab-bn-num">{b.n}</span>
+              <div>
+                <h3 class="ab-bn-stmt">{b.t}</h3>
+                <p class="ab-bn-body">{b.b}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <p class="ab-bn-bridge reveal">There is a quieter problem underneath all three: the parts of the operation that fall between roles. The reports nobody owns. The approvals nobody chases. The data nobody is responsible for keeping current. Those gaps grow as the business grows, and they are where founders end up spending their attention by default.</p>
+
+      <div class="ab-callout reveal">
+        <p>The conventional answer is to hire. Hire an operations manager, hire an analyst, hire a chief of staff. That works, but it is expensive, slow to onboard, and adds another node that needs to be managed. <strong>I am proposing a different answer.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Method — Data Process Thinking -->
+  <section class="section ab-method" id="method">
+    <div class="wrap">
+      <div class="ab-method-grid">
+        <div class="reveal">
+          <Eyebrow icon="route">The method</Eyebrow>
+          <h2 class="ab-method-h2 animate-text_opacity">Data Process Thinking.</h2>
+          <p class="ab-method-sub">Most automation projects fail not because the technology was insufficient, but because the process was never clearly understood before the build began. The bottleneck is not technology. It is clarity of process.</p>
+          <div class="ab-method-callout">
+            <p><strong>Design before you build. Build before you scale.</strong> The four steps below are non-skippable. The first three are where I do most of the work.</p>
+          </div>
+        </div>
+        <div class="ab-method-steps">
+          {methodSteps.map((s, i) => (
+            <div class="ab-method-step reveal" data-r={i % 2}>
+              <span class="ab-method-step-num">{s.n}</span>
+              <div>
+                <h3 class="ab-method-step-title">{s.t}</h3>
+                <p class="ab-method-step-body">{s.b}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Manifesto — what I refuse -->
+  <section class="section ab-mf">
+    <div class="wrap">
+      <header class="ab-head reveal">
+        <Eyebrow icon="quote">The manifesto</Eyebrow>
+        <h2 class="ab-mf-h2 animate-text_opacity">Five things I refuse to do.</h2>
+        <p class="ab-mf-intro">These are not preferences. They are non-negotiables. I have said no to projects worth more than the cost of this entire website because the engagement would have violated one of them. The list is short, and it is the reason the work stays good.</p>
+      </header>
+
+      <div class="ab-mf-list">
+        {manifesto.map((m, i) => (
+          <div class="ab-mf-item reveal" data-r={i % 2}>
+            <span class="ab-mf-num">{m.n}</span>
+            <div>
+              <h3 class="ab-mf-stmt">{m.stmt}</h3>
+              <p class="ab-mf-body">{m.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Founder — Bolun (Ben) Liu -->
+  <section class="section ab-founder">
+    <div class="wrap">
+      <div class="ab-founder-grid">
+        <div class="reveal">
+          <div class="ab-quote-card">
+            <picture>
+              <source srcset="/assets/ben-portrait.webp" type="image/webp" />
+              <img src="/assets/ben-portrait.jpg" alt="Bolun (Ben) Liu, founder of RightClick:AI" class="ab-photo" width="900" height="1352" loading="lazy" decoding="async" />
+            </picture>
+            <div class="ab-quote-overlay">
+              <div class="ab-quote-mark">&ldquo;</div>
+              <h3 class="ab-quote-text">Clarity <em>before</em> tools.</h3>
+              <div class="ab-quote-sign">&mdash; <strong>Bolun (Ben) Liu</strong>, Founder</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal" data-r="1">
+          <Eyebrow icon="briefcase">The founder</Eyebrow>
+          <h2 class="ab-founder-name">Bolun (Ben) Liu</h2>
+          <div class="ab-founder-role">Founder, RightClick:AI &middot; Singapore</div>
+          <div class="ab-founder-date">Published 2026-05-09</div>
+          <div class="ab-founder-bio">
+            <p>I am a marketer and an AI operator. I run AI workflows inside a service-based SME by day, and I started RightClick:AI because I watched too many service businesses pay for automation that never produced what was promised, not because the technology failed, but because nobody mapped the process before anyone wrote any code.</p>
+            <p>My edge is not code. It is process-first thinking with data discipline. Before I design any system, I map every input and output. I identify what data exists and whether it can support the decision the system is supposed to make. I surface the small invisible micro-processes that nobody consciously tracks. <strong>Only then does the build begin.</strong></p>
+            <p>Everything else on this page (the manifesto, the method, the engagement terms) is the operating system I work by. I have not changed my mind about any of it.</p>
+          </div>
+          <div class="ab-founder-meta">
+            <div class="ab-founder-meta-line"><strong>Sectors delivered:</strong> healthcare consulting &middot; financial services &middot; compliance workflows &middot; family office operations &middot; 3PL logistics &middot; education consulting &middot; marketing agencies &middot; law firms.</div>
+            <div class="ab-founder-meta-line"><strong>Contact:</strong> ben@3nm.io &middot; Singapore (SGT, UTC+8) &middot; 24-hour response.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Engagement terms -->
+  <section class="section ab-eng">
+    <div class="wrap">
+      <header class="ab-head reveal">
+        <Eyebrow icon="blocks">How we work together</Eyebrow>
+        <h2 class="ab-eng-h2 animate-text_opacity">The terms of every engagement.</h2>
+        <p class="ab-eng-intro">These are the same six terms in every contract I sign. They are the operating boundaries of the work: the things you are buying when you buy from me, and the things I will not bend on, regardless of project size.</p>
+      </header>
+
+      <div class="ab-eng-grid">
+        {terms.map((t, i) => (
+          <article class="ab-eng-card reveal" data-r={i % 3}>
+            <div class="ab-eng-card-num">{t.n}</div>
+            <h3 class="ab-eng-card-title">{t.t}</h3>
+            <p class="ab-eng-card-body">{t.b}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="ab-partner reveal">
+        <div class="ab-partner-label">For partners</div>
+        <p class="ab-partner-body">I work with partners who own the client relationship: agencies, consultancies, advisory firms. <strong>The engagement is signed in your name.</strong> Your client never sees a "RightClick:AI" invoice unless you want them to. I am the backend; you stay the brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Invitation — closing letter -->
+  <section class="section ab-inv">
+    <div class="wrap">
+      <div class="ab-letter reveal">
+        <Eyebrow icon="arrow">If you&rsquo;ve read this far</Eyebrow>
+        <p class="ab-inv-line">If this resonates,</p>
+        <p class="ab-inv-line">write to me directly: <a href="mailto:ben@3nm.io">ben@3nm.io</a>.</p>
+        <p class="ab-inv-line muted">I read every email. I reply within 24 hours.</p>
+        <p class="ab-inv-line muted">If it&rsquo;s a fit, we&rsquo;ll talk. If it isn&rsquo;t, I&rsquo;ll tell you why.</p>
+        <div class="ab-inv-sign">&mdash; Ben</div>
+        <div class="ab-inv-sign-meta">Bolun (Ben) Liu &middot; Singapore (SGT, UTC+8)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Closing CTA + footer -->
+  <FooterCta />
+</BaseLayout>
+
+<style>
+  /* shared left-aligned section head (manifesto voice — left, not centered) */
+  .ab-head { max-width: 60rem; margin-bottom: clamp(40px, 6vw, 64px); }
+
+  /* ── 1. Page hero ─────────────────────────────────────────── */
+  .ab-hero { padding-top: clamp(120px, 16vw, 200px); padding-bottom: clamp(56px, 8vw, 104px); border-bottom: 1px solid var(--line); }
+  .ab-hero-inner { max-width: 56rem; }
+  .ab-h1 { font-size: var(--title-l); margin-top: 18px; max-width: 20ch; }
+  .ab-h1 em { font-style: normal; color: var(--green); }
+  .ab-lede { font-size: var(--text-xl); color: var(--ink-mid); margin-top: 20px; max-width: 62ch; }
+  .ab-lede + .ab-lede { margin-top: 14px; }
+  .ab-lede strong { color: var(--ink); font-weight: 600; }
+  .ab-hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: clamp(28px, 4vw, 40px); }
+
+  /* ── 2. Intro / bottlenecks ───────────────────────────────── */
+  .ab-bn-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .ab-bn-intro { font-size: var(--text-l); color: var(--ink-mid); margin-top: 16px; max-width: 64ch; }
+
+  .ab-bn-inner { display: grid; grid-template-columns: 360px 1fr; gap: clamp(40px, 5vw, 64px); align-items: start; margin-bottom: clamp(32px, 5vw, 52px); }
+
+  /* mock operation card */
+  .ab-card { background: #fff; border: 1px solid var(--hair); border-radius: var(--r); overflow: hidden; box-shadow: 0 2px 16px rgba(13,18,15,0.05); }
+  @media (min-width: 801px) { .ab-card { position: sticky; top: 96px; } }
+  .ab-card-bar { background: var(--sand); border-bottom: 1px solid var(--line); padding: 9px 14px; display: flex; align-items: center; gap: 6px; }
+  .ab-card-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .ab-card-dot:nth-child(1) { background: rgba(206,60,43,0.55); }
+  .ab-card-dot:nth-child(2) { background: rgba(251,191,36,0.55); }
+  .ab-card-dot:nth-child(3) { background: rgba(21,128,61,0.30); }
+  .ab-card-title { font-size: 10.5px; color: var(--ink-muted); margin-left: 5px; letter-spacing: 0.03em; font-family: var(--font-mono); }
+  .ab-card-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+  .ab-card-row:last-child { border-bottom: none; }
+  .ab-card-name { font-size: 12.5px; color: var(--ink); font-weight: 500; flex: 1; }
+  .ab-card-sub { display: block; font-size: 10.5px; color: var(--ink-muted); font-weight: 400; margin-top: 2px; }
+  .ab-badge { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: var(--r-pill); white-space: nowrap; flex-shrink: 0; }
+  .ab-badge.error { background: var(--coral-tint); color: var(--coral); }
+  .ab-badge.warn { background: rgba(251,191,36,0.16); color: #8a5a06; }
+  .ab-badge.neutral { background: var(--sand); color: var(--ink-muted); }
+
+  /* numbered bottleneck list */
+  .ab-bn-list { display: flex; flex-direction: column; }
+  .ab-bn-item { display: grid; grid-template-columns: 32px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .ab-bn-item:first-child { border-top: 1px solid var(--line); }
+  .ab-bn-num { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--green); letter-spacing: 0.06em; padding-top: 4px; }
+  .ab-bn-stmt { font-size: clamp(17px, 1.7vw, 20px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 8px; }
+  .ab-bn-body { font-size: 14.5px; color: var(--ink-mid); line-height: 1.7; }
+
+  .ab-bn-bridge { font-size: var(--text-l); color: var(--ink-mid); line-height: 1.7; max-width: 80ch; margin-bottom: 24px; }
+  .ab-callout { background: var(--green-tint); border: 1px solid var(--hair); border-left: 3px solid var(--green); border-radius: var(--r-s); padding: 22px 26px; max-width: 82ch; }
+  .ab-callout p { font-size: var(--text-m); color: var(--ink-mid); line-height: 1.7; }
+  .ab-callout strong { color: var(--ink); font-weight: 700; }
+
+  /* ── 3. Method ────────────────────────────────────────────── */
+  .ab-method { background: var(--sand); }
+  .ab-method-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+  .ab-method-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .ab-method-sub { font-size: 14.5px; color: var(--ink-muted); line-height: 1.75; margin-top: 12px; }
+  .ab-method-callout { margin-top: 24px; padding: 20px 24px; background: var(--paper); border-left: 2px solid var(--green); border-radius: 0 var(--r-s) var(--r-s) 0; }
+  .ab-method-callout p { font-size: 14px; font-style: italic; color: var(--ink-muted); line-height: 1.7; }
+  .ab-method-callout strong { font-style: normal; color: var(--ink-mid); font-weight: 600; }
+  .ab-method-steps { display: flex; flex-direction: column; border-top: 1px solid var(--line-2); }
+  .ab-method-step { display: grid; grid-template-columns: 40px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .ab-method-step:last-child { border-bottom: none; }
+  .ab-method-step-num { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--green); padding-top: 2px; }
+  .ab-method-step-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .ab-method-step-body { font-size: 13.5px; color: var(--ink-muted); line-height: 1.7; }
+
+  /* ── 4. Manifesto ─────────────────────────────────────────── */
+  .ab-mf-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .ab-mf-intro { font-size: var(--text-l); color: var(--ink-mid); margin-top: 16px; max-width: 60ch; }
+  .ab-mf-list { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 56px); max-width: 62rem; }
+  .ab-mf-item { display: grid; grid-template-columns: 64px 1fr; gap: 28px; align-items: start; }
+  .ab-mf-num { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; color: var(--green); padding-top: 14px; letter-spacing: 0.1em; }
+  .ab-mf-stmt { font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.22; color: var(--ink); margin-bottom: 14px; }
+  .ab-mf-body { font-size: 15px; color: var(--ink-mid); line-height: 1.75; max-width: 62ch; }
+
+  /* ── 5. Founder ───────────────────────────────────────────── */
+  .ab-founder-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+  .ab-quote-card { position: relative; aspect-ratio: 3/4; background: var(--sand); border-radius: var(--r); border: 1px solid var(--hair); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+  .ab-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+  .ab-quote-overlay { position: relative; z-index: 1; padding: 32px 30px 28px; background: linear-gradient(to top, rgba(15,18,22,0.92) 0%, rgba(15,18,22,0.78) 45%, rgba(15,18,22,0) 100%); }
+  .ab-quote-mark { font-family: var(--font-display); font-size: 72px; line-height: 0.6; color: var(--green-on-dark); font-weight: 700; opacity: 0.6; }
+  .ab-quote-text { font-size: clamp(26px, 3.2vw, 36px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: #fff; margin-top: 8px; }
+  .ab-quote-text em { font-style: italic; color: var(--green-on-dark); font-weight: 700; }
+  .ab-quote-sign { font-size: 13px; color: rgba(255,255,255,0.72); letter-spacing: 0.02em; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; margin-top: 20px; }
+  .ab-quote-sign strong { color: #fff; font-weight: 600; }
+  .ab-founder-name { font-size: clamp(24px, 2.5vw, 34px); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); margin-top: 12px; margin-bottom: 4px; }
+  .ab-founder-role { font-size: 14px; font-weight: 500; color: var(--green); margin-bottom: 4px; }
+  .ab-founder-date { font-size: 12px; color: var(--ink-faint); margin-bottom: 24px; }
+  .ab-founder-bio { font-size: 15px; color: var(--ink-mid); line-height: 1.8; }
+  .ab-founder-bio p + p { margin-top: 16px; }
+  .ab-founder-bio strong { color: var(--ink); font-weight: 600; }
+  .ab-founder-meta { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+  .ab-founder-meta-line { font-size: 13px; color: var(--ink-muted); line-height: 1.7; }
+  .ab-founder-meta-line strong { color: var(--ink); font-weight: 600; }
+
+  /* ── 6. Engagement ────────────────────────────────────────── */
+  .ab-eng { background: var(--sand); }
+  .ab-eng-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .ab-eng-intro { font-size: var(--text-l); color: var(--ink-mid); margin-top: 16px; max-width: 60ch; }
+  .ab-eng-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: clamp(28px, 4vw, 36px); }
+  .ab-eng-card { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: var(--r-s); padding: 26px 28px; transition: transform var(--dur) var(--ease-quint), box-shadow var(--dur) var(--ease-quint); }
+  @media (hover: hover) and (pointer: fine) {
+    .ab-eng-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(21,128,61,0.10); }
+  }
+  .ab-eng-card-num { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--green); margin-bottom: 12px; }
+  .ab-eng-card-title { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 10px; }
+  .ab-eng-card-body { font-size: 14px; color: var(--ink-mid); line-height: 1.7; }
+  .ab-partner { background: var(--paper); border: 1px solid var(--hair); border-radius: var(--r-s); padding: 22px 26px; max-width: 82ch; }
+  .ab-partner-label { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+  .ab-partner-body { font-size: var(--text-m); color: var(--ink-mid); line-height: 1.75; }
+  .ab-partner-body strong { color: var(--ink); font-weight: 700; }
+
+  /* ── 7. Invitation ────────────────────────────────────────── */
+  .ab-letter { max-width: 40rem; }
+  .ab-letter .eyebrow { margin-bottom: 24px; }
+  .ab-inv-line { font-size: clamp(19px, 2vw, 24px); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; margin-bottom: 12px; font-weight: 500; }
+  .ab-inv-line.muted { color: var(--ink-mid); font-weight: 400; }
+  .ab-inv-line a { color: var(--green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+  .ab-inv-line a:hover { text-decoration-thickness: 2px; }
+  .ab-inv-sign { margin-top: 36px; font-size: 16px; color: var(--ink); font-weight: 500; letter-spacing: -0.005em; }
+  .ab-inv-sign-meta { margin-top: 6px; font-size: 12.5px; color: var(--ink-faint); letter-spacing: 0.04em; }
+
+  /* ── responsive ───────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .ab-bn-inner { grid-template-columns: 1fr; gap: 36px; }
+    .ab-method-grid, .ab-founder-grid { grid-template-columns: 1fr; gap: 36px; }
+    .ab-quote-card { aspect-ratio: auto; min-height: 320px; max-width: 380px; }
+    .ab-eng-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 767px) {
+    .ab-mf-item { grid-template-columns: 1fr; gap: 6px; }
+    .ab-mf-num { padding-top: 0; margin-bottom: 4px; }
+    .ab-mf-list { gap: 44px; }
+  }
+</style>
