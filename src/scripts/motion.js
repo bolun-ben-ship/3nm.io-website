@@ -110,9 +110,15 @@ function initBlockAppear() {
 }
 
 /* ---- marquees (logos, linear infinite — IX2 a) --------------------------- */
+/* Pause-on-hover: hovering the strip freezes the scroll so a logo can be read
+   and colorized (native color on hover is CSS in Statement.astro). */
 function initMarquees() {
-  document.querySelectorAll('[data-marquee] .marquee-track').forEach((track) => {
-    gsap.to(track, { xPercent: -50, duration: 30, ease: 'none', repeat: -1 });
+  document.querySelectorAll('[data-marquee]').forEach((marquee) => {
+    const track = marquee.querySelector('.marquee-track');
+    if (!track) return;
+    const tween = gsap.to(track, { xPercent: -50, duration: 30, ease: 'none', repeat: -1 });
+    marquee.addEventListener('mouseenter', () => tween.pause());
+    marquee.addEventListener('mouseleave', () => tween.resume());
   });
 }
 
