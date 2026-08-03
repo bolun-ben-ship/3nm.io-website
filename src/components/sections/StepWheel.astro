@@ -25,6 +25,7 @@ const steps = [
     <div class="steps-animation-wrapp" data-steps-wrapp>
       <div class="steps-viewport" data-steps-viewport>
         <span class="sales-figure-wheel" data-steps-wheel aria-hidden="true"></span>
+        <span class="steps-flow-line" aria-hidden="true"></span>
         <div class="sales-cards_track" data-steps-cards>
           {steps.map((s, i) => (
             <article class="sales-card">
@@ -49,9 +50,28 @@ const steps = [
   .steps-animation-wrapp { position: relative; height: 320vh; }              /* scroll distance = scrub window */
   .steps-viewport { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
   .sales-figure-wheel { position: absolute; width: 1px; height: 1px; left: 50%; top: 50%; }
-  .sales-cards_track { display: flex; gap: 28px; padding-inline: 50vw; will-change: transform; }
 
-  .sales-card { flex: 0 0 clamp(300px, 34vw, 420px); background: rgba(255,255,255,0.09); border: 1px solid var(--line-flood); border-radius: var(--r-lg); padding: 34px; backdrop-filter: blur(3px); transition: transform 200ms linear, background 200ms linear; }
+  /* dotted connector threading through the card row — flows left→right so the sequence reads as one line */
+  .steps-flow-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    transform: translateY(-50%);
+    z-index: 0;                     /* behind the cards (which sit at z-index 1) */
+    pointer-events: none;
+    background-image: repeating-linear-gradient(to right, rgba(255,255,255,0.4) 0 10px, transparent 10px 24px);
+    background-size: 24px 2px;
+    background-repeat: repeat-x;
+    animation: steps-flow 1.5s linear infinite;
+  }
+  @keyframes steps-flow { to { background-position-x: 24px; } }
+  @media (prefers-reduced-motion: reduce) { .steps-flow-line { animation: none; } }
+
+  .sales-cards_track { display: flex; gap: 28px; padding-inline: 50vw; will-change: transform; position: relative; z-index: 1; }
+
+  .sales-card { position: relative; z-index: 1; flex: 0 0 clamp(300px, 34vw, 420px); background: rgba(255,255,255,0.09); border: 1px solid var(--line-flood); border-radius: var(--r-lg); padding: 34px; backdrop-filter: blur(3px); transition: transform 200ms linear, background 200ms linear; }
   .sales-card.is-center { background: rgba(255,255,255,0.15); }
   .sales-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #fff; color: var(--green); font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; margin-bottom: 22px; }
   .sales-label { font-size: var(--title-s); color: #fff; margin-bottom: 10px; }
@@ -66,6 +86,7 @@ const steps = [
     .steps-section { padding-bottom: var(--section-y); }
     .steps-animation-wrapp { height: auto; }
     .steps-viewport { position: static; height: auto; display: block; overflow: visible; padding-top: 40px; }
+    .steps-flow-line { display: none; }  /* horizontal connector is meaningless in the vertical stack */
     .sales-cards_track { flex-direction: column; gap: 16px; padding-inline: 0; transform: none !important; }
     .sales-card { flex: auto; }
     .steps-link { position: static; translate: none; display: flex; justify-content: center; margin-top: 32px; }
