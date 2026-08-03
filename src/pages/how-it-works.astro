@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import FooterCta from '../components/sections/FooterCta.astro';
+
+/* How it works — /how-it-works.
+   Copy: content/how-it-works.md (verbatim). Structure per REDESIGN-PLAN Task 11:
+   page-hero → the sequence (6 numbered steps) → the agreement (commitments) → closing CTA (FooterCta). */
+
+const steps = [
+  { num: '01', title: 'Discovery call.',
+    body: '30 minutes. Your business, your bottleneck, whether what I build is the right answer. No pitch. If it’s not a fit, you hear it on the call.',
+    tag: '30 min · Free', accent: false },
+  { num: '02', title: 'Workflow audit.',
+    body: 'About an hour, together. Tools, data, manual processes. The audit identifies which workflow becomes the automation, which data feeds the dashboard, where the friction lives. Commit here and scope begins.',
+    tag: '1 hour · Free', accent: false },
+  { num: '03', title: 'Written scope.',
+    body: 'Deliverables, scope, assumptions; every Function and Enhancement bundled. No vague statements of work. We meet to agree. <strong>You see the plan before any build.</strong>',
+    tag: 'Before any build', accent: true },
+  { num: '04', title: 'Working <span class="accent">MVP</span>.',
+    body: 'Operational dashboard live on real data: revenue, pipeline, team capacity, client health. Not a mockup. Not a demo. Two iteration rounds, in your environment, behind authentication. <strong>Stop anytime, no penalty.</strong>',
+    tag: 'On real data', accent: true },
+  { num: '05', title: 'The build.',
+    body: 'Your custom system, built out on real data, in phases. You use each phase as it ships. Hosting, authentication, database, and the data connections agreed in scoping, all included. <strong>I build until it’s live and doing the job.</strong> Written into the agreement.',
+    tag: 'Scoped to you', accent: true },
+  { num: '06', title: 'Handover. You own everything.',
+    body: 'Code, infrastructure, SOPs, knowledge wiki: every artefact yours. No licenses retained. From here, keep going or stop, no penalty either way. Something new to build? Open the next phase, scoped like the last. Want it just kept running? I host it, update it, and refresh the AI as the models improve.',
+    tag: 'Yours · forever', accent: false },
+];
+
+const commitments = [
+  { eyebrow: 'Stop anytime', title: 'No lock-in. No minimums.',
+    body: 'Stop anytime, no penalty. Work delivered is yours. The guarantee is performance: I build until it’s live and doing the job.' },
+  { eyebrow: 'Scope freeze', title: 'Once approved, the scope holds.',
+    body: 'Enhancements bundled before build. New requests after approval go into the next phase. Every request classified before it changes scope.' },
+  { eyebrow: 'Speed is mutual', title: 'Fast feedback. Both sides.',
+    body: 'I move fast on scope and MVP. You give fast feedback. If feedback runs longer, the schedule adjusts, in writing, flagged up front.' },
+  { eyebrow: 'Total ownership', title: 'Code, database, SOPs, wiki.',
+    body: 'Source, infrastructure, deployment, knowledge wiki. All transferred on delivery. No licenses retained. If we part ways, the system keeps working.' },
+];
+---
+<BaseLayout
+  title="How it works — RightClick:AI | From discovery call to system handover"
+  description="The exact engagement sequence: discovery call, paid workflow audit, written scope, MVP on real data, phased build, full handover. The commitments behind every engagement."
+  canonical="https://3nm.io/how-it-works"
+>
+  <!-- 1. Page hero -->
+  <section class="section hiw-hero" id="top">
+    <div class="wrap hiw-hero-inner">
+      <Eyebrow icon="route" class="reveal" data-r="1">How an engagement runs</Eyebrow>
+      <h1 class="hiw-h1 reveal" data-r="2">From discovery call to a system <span class="accent">you own</span>.</h1>
+      <p class="hiw-lede reveal" data-r="3">No vague proposals. No briefing chains. The sequence below is what happens, in the order it happens, with the plan committed in writing before any build. I build until it&rsquo;s live and doing the job.</p>
+      <p class="hiw-lede hiw-lede-2 reveal" data-r="4"><strong>Read it like a contract.</strong> That is roughly what it is.</p>
+      <div class="hiw-cta reveal" data-r="5">
+        <a href="#closing" class="btn btn-primary">Book a discovery call <span class="arrow">&rarr;</span></a>
+        <a href="#sequence" class="btn btn-ghost">See the sequence &darr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The sequence -->
+  <section class="section hiw-seq" id="sequence">
+    <div class="wrap">
+      <header class="section-head">
+        <Eyebrow icon="route" class="reveal">The sequence</Eyebrow>
+        <h2 class="hiw-seq-h2 animate-text_opacity">Six steps. Same order, every time.</h2>
+        <p class="hiw-seq-sub reveal">Every engagement runs the same path. Discovery call free; the workflow audit is paid. After commit, you see the plan before any build, and you can stop anytime with no penalty.</p>
+      </header>
+
+      <ol class="seq-list">
+        {steps.map((s, i) => (
+          <li class="seq-item reveal" data-r={i % 3}>
+            <span class="seq-num">{s.num}</span>
+            <div class="seq-main">
+              <h3 class="seq-title" set:html={s.title} />
+              <p class="seq-body" set:html={s.body} />
+            </div>
+            <span class={`seq-tag${s.accent ? ' accent' : ''}`}>{s.tag}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. The agreement -->
+  <section class="section hiw-agr">
+    <div class="wrap">
+      <header class="section-head">
+        <Eyebrow icon="blocks" class="reveal">The agreement</Eyebrow>
+        <h2 class="hiw-agr-h2 animate-text_opacity">What we each commit to.</h2>
+        <p class="hiw-agr-sub reveal">These aren&rsquo;t aspirations. Every commitment below is in the service agreement, spelled out in writing.</p>
+      </header>
+
+      <div class="agr-grid">
+        {commitments.map((c, i) => (
+          <article class="agr-card reveal" data-r={i % 2}>
+            <span class="agr-eyebrow">{c.eyebrow}</span>
+            <h3 class="agr-title">{c.title}</h3>
+            <p class="agr-body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Closing CTA + footer -->
+  <FooterCta />
+</BaseLayout>
+
+<style>
+  /* ── 1. Page hero ─────────────────────────────────────────── */
+  .hiw-hero { padding-top: clamp(120px, 16vw, 200px); }   /* clear the fixed nav */
+  .hiw-hero-inner { max-width: 60rem; margin-inline: auto; text-align: center; }
+  .hiw-h1 { font-size: var(--title-xl); margin-top: 20px; }
+  .hiw-lede { font-size: var(--text-xl); color: var(--ink-mid); margin: 22px auto 0; max-width: 62ch; }
+  .hiw-lede-2 { margin-top: 14px; }
+  .hiw-lede strong { color: var(--ink); font-weight: 600; }
+  .hiw-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: clamp(28px, 4vw, 40px); }
+
+  /* ── 2. The sequence ──────────────────────────────────────── */
+  .hiw-seq { background: var(--sand); }
+  .hiw-seq-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .hiw-seq-sub { font-size: var(--text-l); color: var(--ink-mid); margin: 16px auto 0; max-width: 56ch; }
+
+  .seq-list { margin-top: clamp(40px, 6vw, 72px); }
+  .seq-item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    gap: clamp(18px, 4vw, 48px);
+    align-items: start;
+    padding-block: clamp(26px, 4vw, 44px);
+    border-top: 1px solid var(--line);
+  }
+  .seq-item:last-child { border-bottom: 1px solid var(--line); }
+  .seq-num { font-family: var(--font-mono); font-size: var(--title-xs); font-weight: 600; color: var(--green); letter-spacing: 0.02em; }
+  .seq-title { font-size: var(--title-s); font-weight: 600; }
+  .seq-body { font-size: var(--text-l); color: var(--ink-mid); margin-top: 10px; max-width: 62ch; }
+  .seq-body strong { color: var(--ink); font-weight: 600; }
+  .seq-tag {
+    font-family: var(--font-mono); font-size: var(--text-s); font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-faint); white-space: nowrap; text-align: right; padding-top: 6px;
+  }
+  .seq-tag.accent { color: var(--green); }
+
+  /* ── 3. The agreement ─────────────────────────────────────── */
+  .hiw-agr { background: var(--paper); }
+  .hiw-agr-h2 { font-size: var(--title-m); margin-top: 14px; }
+  .hiw-agr-sub { font-size: var(--text-l); color: var(--ink-mid); margin: 16px auto 0; max-width: 52ch; }
+
+  .agr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: clamp(40px, 6vw, 64px); }
+  .agr-card {
+    background: var(--sand); border: 1px solid var(--hair); border-left: 3px solid var(--green);
+    border-radius: var(--r-lg); padding: clamp(24px, 3vw, 34px);
+  }
+  .agr-eyebrow { font-family: var(--font-mono); font-size: var(--text-s); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
+  .agr-title { font-size: var(--title-xs); margin-top: 12px; }
+  .agr-body { font-size: var(--text-m); color: var(--ink-mid); margin-top: 12px; }
+
+  /* ── responsive ───────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    .seq-item { grid-template-columns: 44px 1fr; column-gap: 16px; }
+    .seq-tag { grid-column: 2; text-align: left; padding-top: 10px; }
+    .agr-grid { grid-template-columns: 1fr; }
+  }
+</style>
