@@ -72,7 +72,10 @@ const cards = [
 
             {c.viz === 'team' && (
               <div class="viz viz-team">
-                <div class="vt-avatars"><i></i><i></i><i></i><i></i><i></i><b>+3</b></div>
+                <div class="vt-avatars">
+                  {[1,2,3,4,5].map((n) => (<img src={`/assets/avatars/${n}.svg`} alt="" class="vt-face" loading="lazy" />))}
+                  <b>+3</b>
+                </div>
                 <div class="vt-bar"><span>Seats active</span><span class="vt-track"><span class="vt-fill"></span></span><b>8 / 8</b></div>
               </div>
             )}
@@ -174,13 +177,16 @@ const cards = [
   /* ── 4 · Team adoption ─────────────────────────────── */
   .viz-team { display: flex; flex-direction: column; gap: 18px; }
   .vt-avatars { display: flex; align-items: center; }
-  .vt-avatars i, .vt-avatars b { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--sand); margin-left: -10px; }
-  .vt-avatars i:first-child { margin-left: 0; }
-  .vt-avatars i:nth-child(1){background:linear-gradient(135deg,#8fb89c,#5f9e73)}
-  .vt-avatars i:nth-child(2){background:linear-gradient(135deg,#c9b79a,#a98f6b)}
-  .vt-avatars i:nth-child(3){background:linear-gradient(135deg,#9db3c4,#6f8ea3)}
-  .vt-avatars i:nth-child(4){background:linear-gradient(135deg,#c4a6c0,#9a6f96)}
-  .vt-avatars i:nth-child(5){background:linear-gradient(135deg,#d3a99a,#b47b68)}
+  .vt-avatars .vt-face, .vt-avatars b { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--sand); margin-left: -10px; background: var(--paper); object-fit: cover; }
+  .vt-avatars .vt-face:first-child { margin-left: 0; }
+  .bento-viz.in .vt-face { animation: vt-pop 0.4s var(--ease-quint) both; }
+  .vt-avatars .vt-face:nth-child(1){animation-delay:.00s}
+  .vt-avatars .vt-face:nth-child(2){animation-delay:.08s}
+  .vt-avatars .vt-face:nth-child(3){animation-delay:.16s}
+  .vt-avatars .vt-face:nth-child(4){animation-delay:.24s}
+  .vt-avatars .vt-face:nth-child(5){animation-delay:.32s}
+  @keyframes vt-pop { from { opacity:0; transform: scale(0.6); } to { opacity:1; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .vt-face { animation: none !important; } }
   .vt-avatars b { background: var(--green); color: #fff; font-family: var(--font-mono); font-size: 0.72rem; display: grid; place-items: center; }
   .vt-bar { display: flex; align-items: center; gap: 10px; font-size: 0.76rem; color: var(--ink-muted); }
   .vt-track { flex: 1; height: 8px; border-radius: 5px; background: var(--sand-2); overflow: hidden; }
