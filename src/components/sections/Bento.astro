@@ -47,7 +47,7 @@ const cards = [
 
             {c.viz === 'app' && (
               <div class="viz viz-app">
-                <span class="va-orbit" data-orbit></span>
+                <span class="va-orbit"></span>
                 <div class="phone">
                   <span class="phone-badge" data-orbit>
                     <svg width="17" height="17" viewBox="0 0 32 32" fill="none"><path d="M6 3L24 16.5L17 19.4L13.6 28L6 3Z" fill="currentColor"/></svg>
@@ -139,23 +139,26 @@ const cards = [
   .vd-tile b { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--ink); }
   .vd-tile .up { font-size: 0.6rem; color: var(--green); }
   .vd-chart { display: flex; align-items: flex-end; gap: 7px; height: 68px; padding: 12px 12px 0; background: var(--paper); border: 1px solid var(--hair); border-radius: 12px; }
-  .vd-chart i { flex: 1; height: var(--h); border-radius: 3px 3px 0 0; background: var(--ink-faint); opacity: 0.5; transform: scaleY(0); transform-origin: bottom; transition: transform 0.52s var(--ease-quint); }
+  .vd-chart i { flex: 1; height: var(--h); border-radius: 3px 3px 0 0; background: var(--ink-faint); opacity: 0.5; transform-origin: bottom; animation: barGrow 4.5s var(--ease-quint) infinite; }
   .vd-chart i.hot { background: var(--green); opacity: 1; }
-  .bento-viz.in .vd-chart i { transform: scaleY(1); }
-  .bento-viz.in .vd-chart i:nth-child(1){transition-delay:.00s}
-  .bento-viz.in .vd-chart i:nth-child(2){transition-delay:.06s}
-  .bento-viz.in .vd-chart i:nth-child(3){transition-delay:.12s}
-  .bento-viz.in .vd-chart i:nth-child(4){transition-delay:.18s}
-  .bento-viz.in .vd-chart i:nth-child(5){transition-delay:.24s}
-  .bento-viz.in .vd-chart i:nth-child(6){transition-delay:.30s}
-  .bento-viz.in .vd-chart i:nth-child(7){transition-delay:.36s}
-  html.no-js .vd-chart i { transform: scaleY(1); }
-  @media (prefers-reduced-motion: reduce) { .vd-chart i { transform: scaleY(1); transition: none; } }
+  .vd-chart i:nth-child(1){animation-delay:0s}
+  .vd-chart i:nth-child(2){animation-delay:.06s}
+  .vd-chart i:nth-child(3){animation-delay:.12s}
+  .vd-chart i:nth-child(4){animation-delay:.18s}
+  .vd-chart i:nth-child(5){animation-delay:.24s}
+  .vd-chart i:nth-child(6){animation-delay:.30s}
+  .vd-chart i:nth-child(7){animation-delay:.36s}
+  @keyframes barGrow { 0% { transform: scaleY(0); } 22% { transform: scaleY(1); } 82% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+  html.no-js .vd-chart i { transform: scaleY(1); animation: none; }
+  @media (prefers-reduced-motion: reduce) { .vd-chart i { transform: scaleY(1); animation: none; } }
 
   /* ── 2 · Custom internal apps (red) — phone + orbit ── */
   .viz-app { position: relative; display: grid; place-items: center; min-height: 200px; }
-  .va-orbit { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.28); }
+  .va-orbit { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.28); transform-origin: 50% 50%; animation: orbitSpin 24s linear infinite; }
   .va-orbit::after { content: ''; position: absolute; inset: 34px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.18); }
+  @keyframes orbitSpin { to { transform: rotate(360deg); } }
+  html.no-js .va-orbit { animation: none; }
+  @media (prefers-reduced-motion: reduce) { .va-orbit { animation: none; } }
   .phone { position: relative; width: 208px; border-radius: 20px; background: rgba(255,255,255,0.96); box-shadow: 0 24px 60px -24px rgba(0,0,0,0.45); padding: 16px 15px; z-index: 2; }
   .phone-badge { position: absolute; top: -16px; right: -16px; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: var(--coral); display: grid; place-items: center; box-shadow: 0 10px 26px -8px rgba(0,0,0,0.35); z-index: 3; }
   .pa-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
@@ -171,8 +174,12 @@ const cards = [
   .vf-node.out { background: rgba(255,255,255,0.95); color: var(--green-2); }
   .vf-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.6); }
   .vf-tick { color: var(--green); font-weight: 700; }
-  .vf-link { flex: 1; min-width: 18px; height: 0; border-top: 1.5px dashed rgba(255,255,255,0.4); }
-  .vf-core { flex: none; width: 42px; height: 42px; border-radius: 12px; background: #fff; color: var(--green); display: grid; place-items: center; box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35); }
+  .vf-link { flex: 1; min-width: 18px; height: 2px; border: 0; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0 6px, transparent 6px 12px); background-size: 12px 2px; background-repeat: repeat-x; animation: vfFlow 1.2s linear infinite; }
+  @keyframes vfFlow { to { background-position-x: 12px; } }
+  .vf-core { flex: none; width: 42px; height: 42px; border-radius: 12px; background: #fff; color: var(--green); display: grid; place-items: center; box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35); animation: vfGlow 3.2s ease-in-out infinite; }
+  @keyframes vfGlow { 0%, 100% { box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35); } 50% { box-shadow: 0 8px 26px -6px rgba(0,0,0,0.35), 0 0 0 4px rgba(255,255,255,0.10); } }
+  html.no-js .vf-link, html.no-js .vf-core { animation: none; }
+  @media (prefers-reduced-motion: reduce) { .vf-link, .vf-core { animation: none; } }
 
   /* ── 4 · Team adoption ─────────────────────────────── */
   .viz-team { display: flex; flex-direction: column; gap: 18px; }
@@ -190,7 +197,10 @@ const cards = [
   .vt-avatars b { background: var(--green); color: #fff; font-family: var(--font-mono); font-size: 0.72rem; display: grid; place-items: center; }
   .vt-bar { display: flex; align-items: center; gap: 10px; font-size: 0.76rem; color: var(--ink-muted); }
   .vt-track { flex: 1; height: 8px; border-radius: 5px; background: var(--sand-2); overflow: hidden; }
-  .vt-fill { display: block; height: 100%; width: 100%; background: var(--green); border-radius: 5px; }
+  .vt-fill { display: block; height: 100%; width: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--green) 0%, var(--green) 42%, rgba(255,255,255,0.38) 50%, var(--green) 58%, var(--green) 100%); background-size: 220% 100%; animation: vtShimmer 5s linear infinite; }
+  @keyframes vtShimmer { 0% { background-position: 160% 0; } 100% { background-position: -160% 0; } }
+  html.no-js .vt-fill { background: var(--green); animation: none; }
+  @media (prefers-reduced-motion: reduce) { .vt-fill { background: var(--green); animation: none; } }
   .vt-bar b { color: var(--ink); font-family: var(--font-mono); }
 
   /* ── 5 · No grant paperwork — timeline compare ─────── */
@@ -198,15 +208,16 @@ const cards = [
   .vg-row { display: flex; align-items: center; gap: 12px; font-size: 0.76rem; }
   .vg-lbl { width: 92px; flex: none; color: var(--ink-mid); font-weight: 500; }
   .vg-bar { height: 10px; border-radius: 6px; }
-  .vg-bar.long { flex: 1; background: repeating-linear-gradient(90deg, var(--coral) 0 8px, transparent 8px 14px); opacity: 0.85; transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease-quint); }
-  .vg-bar.short { width: 62px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease-quint) 0.15s; }
-  .bento-viz.in .vg-bar.long, .bento-viz.in .vg-bar.short { transform: scaleX(1); }
+  .vg-bar.long { flex: 1; background: repeating-linear-gradient(90deg, var(--coral) 0 8px, transparent 8px 14px); opacity: 0.85; transform-origin: left; animation: vgLong 5s var(--ease-quint) infinite; }
+  .vg-bar.short { width: 62px; background: var(--green); transform-origin: left; animation: vgShort 5s var(--ease-quint) infinite; }
+  @keyframes vgLong { 0% { transform: scaleX(0); } 44% { transform: scaleX(1); } 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+  @keyframes vgShort { 0%, 50% { transform: scaleX(0); } 58% { transform: scaleX(1); } 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
   .vg-row em { font-style: normal; font-family: var(--font-mono); font-weight: 600; margin-left: auto; }
   .vg-row .no { color: var(--coral); } .vg-row .yes { color: var(--green); }
   .vg-row.muted .vg-lbl { color: var(--coral); }
   .vg-row.go .vg-lbl { color: var(--ink); }
-  html.no-js .vg-bar.long, html.no-js .vg-bar.short { transform: scaleX(1); }
-  @media (prefers-reduced-motion: reduce) { .vg-bar.long, .vg-bar.short { transform: scaleX(1); transition: none; } }
+  html.no-js .vg-bar.long, html.no-js .vg-bar.short { transform: scaleX(1); animation: none; }
+  @media (prefers-reduced-motion: reduce) { .vg-bar.long, .vg-bar.short { transform: scaleX(1); animation: none; } }
 
   /* ── 6 · You own it (dark) — ownership chips ────────── */
   .viz-own { display: flex; flex-direction: column; gap: 16px; }
