@@ -1,0 +1,321 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import FooterCta from '../components/sections/FooterCta.astro';
+
+/* FAQ — /faq.
+   Copy: content/faq.md (verbatim). Structure per REDESIGN-PLAN Task 12:
+   page-hero → .faq-layout 2-col (sticky TOC sidebar + accent CTA box | category groups) →
+   native <details>/<summary> accordion (+→× via ::after) → closing CTA (FooterCta).
+   Answers are verbatim HTML strings rendered via set:html. */
+
+const categories = [
+  {
+    id: 'section-about',
+    toc: 'About RightClick:AI',
+    icon: 'briefcase',
+    eyebrow: 'About RightClick:AI',
+    heading: 'What RightClick:AI is and who runs it',
+    items: [
+      {
+        q: 'What is RightClick:AI?',
+        a: `<p>RightClick:AI builds custom internal software for service businesses in Singapore with 5 to 35 staff: the BI dashboards, automations, and internal apps off-the-shelf SaaS won't build. The exact system your business runs on, built on your real data and scoped specifically to how your business works. AI is the mechanism, not the pitch.</p>
+<p>It is built and run by Bolun (Ben) Liu, working solo with a tight specialist network. <strong>Scoped per client after a paid audit. I build until it's live and doing the job. You own the code outright.</strong> No SaaS subscription, no lock-in, no platform you have to learn.</p>`,
+      },
+      {
+        q: 'Who is the founder? What is their background?',
+        a: `<p>Bolun (Ben) Liu is the founder. I am a marketer and an AI operator based in Singapore, non-technical by training. My edge is process-first thinking and data discipline, not code. Before RightClick:AI, I built and ran AI workflows for a service-based SME, developed AI agents for my own company, and shipped automation systems for paying clients.</p>
+<p>Sectors delivered: healthcare consulting &middot; financial services &middot; compliance workflows &middot; family office operations &middot; 3PL logistics &middot; education consulting &middot; marketing agencies &middot; law firms. Contact: ben@3nm.io. Singapore (SGT, UTC+8). 24-hour response.</p>`,
+      },
+      {
+        q: 'I work with my own clients. Can RightClick:AI be my technical backend?',
+        a: `<p>Yes. I work with partners who own the client relationship: agencies, consultancies, advisory firms, and operators with existing books of business. <strong>The engagement is signed in your name.</strong> Your client never sees a "RightClick:AI" invoice unless you want them to. I am the backend; you stay the brand.</p>
+<p>Same offer, same commitments, same performance guarantee as a direct engagement. The build is delivered to whatever brand or entity you specify, with documentation and code handover written for your team. If you want me on the call with your client, I am there. If you want me invisible, I stay invisible.</p>`,
+      },
+    ],
+  },
+  {
+    id: 'section-fit',
+    toc: 'Is this right for my business?',
+    icon: 'users',
+    eyebrow: 'Is this right for my business?',
+    heading: "Who I work with and who I don't",
+    items: [
+      {
+        q: 'Who do you build for?',
+        a: `<p>Service businesses in Singapore with 5 to 35 staff. Consulting firms, education companies, financial services, logistics operators, agencies, law firms, family offices. The common thread: complex enough to need real systems, not large enough to maintain an internal technology team.</p>
+<p>You are a good fit if your workflows are still mostly manual, your data lives across email and spreadsheets and people's heads, you are spending several hundred dollars a month on SaaS tools that do not talk to each other, and growth currently means hiring rather than systematising. <strong>Poor fit:</strong> a business that hasn't started yet, a consumer-product idea, or a team that cannot give timely feedback during the build.</p>`,
+      },
+      {
+        q: "I'm not technical at all. Can I still work with you?",
+        a: `<p>Yes. Most of the founders I work with are non-technical. Being non-technical is not a barrier. It is the default. The discovery call and scoping process extract information from people who run workflows, not engineers who build them.</p>
+<p>What I need from you is knowledge of your business: how your team works, what tools you use, where the friction is, what decisions you need to make faster. I handle everything technical. Every system delivered is built for non-technical teams to use from day one: no new platform to learn, no complex onboarding, no ongoing maintenance burden on your staff.</p>`,
+      },
+      {
+        q: 'Do you work with businesses outside Singapore?',
+        a: `<p>The primary focus is Singapore. The fast feedback loops during the build depend on timezone alignment with Singapore Standard Time (SGT, UTC+8), and the discovery and scoping conversations are most efficient in person or near-real-time.</p>
+<p>For businesses in neighbouring markets (Malaysia, Indonesia, Hong Kong) I assess on a case-by-case basis depending on engagement size and ability to work within SGT. If you are outside Singapore and believe there is a strong fit, email ben@3nm.io with a brief description of your business and the problem you are trying to solve. You will hear back honestly about whether I can serve you well.</p>`,
+      },
+    ],
+  },
+  {
+    id: 'section-process',
+    toc: 'Process and timeline',
+    icon: 'route',
+    eyebrow: 'Process and timeline',
+    heading: 'How an engagement actually works',
+    items: [
+      {
+        q: 'What does the first call look like?',
+        a: `<p>A 30-minute conversation. No pitch, no proposal. I want to understand your business, the bottleneck you are hitting, and whether what I build is the right answer.</p>
+<p>If it's not a fit, you hear it on the call and we move on. If both sides see a fit, I run a <strong>1-hour audit</strong> of your current workflows: tools, data, manual processes. The audit is what the scope is built from.</p>
+<p>If you decide to proceed after the audit, you commit, and the scope work begins. From there:</p>
+<ul>
+<li><strong>Written scope before any build.</strong> Deliverables, scope, assumptions, every Function and Enhancement bundled in. <strong>You see the plan before any build.</strong></li>
+<li><strong>MVP on your real data.</strong> Operational dashboard live, with two iteration rounds.</li>
+<li><strong>The build.</strong> Delivered in phases on your real data, each yours as it ships. Code, infrastructure, and knowledge wiki transferred to you.</li>
+</ul>`,
+      },
+      {
+        q: 'How long does a build take?',
+        a: `<p>Every build is scoped per client, so there's no fixed timeline. Working MVP first: the core view live on your real data. Then iteration sprints, phase by phase, with fast feedback loops between us.</p>
+<p>Momentum depends on fast feedback from your side during the build. If feedback consistently runs longer, the schedule adjusts. The timeline is two-sided, and I will say so up front rather than fail quietly. <strong>I build until it's live and doing the job. You get the result, not a refund.</strong></p>`,
+      },
+      {
+        q: "What if I'm not sure what I need?",
+        a: `<p>Not knowing exactly what you need is the normal starting point. The discovery call qualifies the engagement, and the 1-hour audit afterward is where I map your tools, your team, and your specific friction points. I build the picture from there. You do not need to arrive with a spec. You need to arrive with knowledge of how your business runs and where the friction is.</p>
+<p>After the audit, if both sides want to proceed, you commit and the scope work begins. Before any build: a complete written scope (deliverables, scope, assumptions). If the scope does not feel right at that point, stop, no penalty.</p>`,
+      },
+      {
+        q: 'What do you commit to?',
+        a: `<p>Written into every agreement, not aspirational targets:</p>
+<ul>
+<li>Written scope before any build starts</li>
+<li>Working MVP: operational dashboard live on your real data</li>
+<li>The full build scoped and delivered around your business</li>
+<li>Fast feedback loops from my side during the build (your side is expected to match)</li>
+<li>I build until it's live and doing the job. You get the result, not a refund</li>
+</ul>
+<p>The guarantee is performance, not money back. Momentum is two-sided. If your side's feedback consistently stalls, I will say so up front rather than fail quietly.</p>`,
+      },
+    ],
+  },
+  {
+    id: 'section-pricing',
+    toc: 'Pricing and ownership',
+    icon: 'trending',
+    eyebrow: 'Pricing and ownership',
+    heading: 'What it costs and what you own',
+    items: [
+      {
+        q: 'How much does a build cost?',
+        a: `<p><strong>Every build is scoped and quoted per client after the audit. There's no fixed price and no fixed package.</strong> What you pay depends on what you're having built and how much of it. The 30-minute discovery call is free; the workflow audit is paid; and you see the full scope and quote before any build.</p>
+<p>I don't publish a price because I can't quote your build without seeing your system. Pretending otherwise either underprices (I eat margin and resent the build) or overshoots (you bounce before we get to the real conversation). The audit is where the real number is set, in writing, before any build.</p>
+<p>For reference: hiring an operations manager in Singapore is SGD 80,000 to 120,000 a year plus CPF and tools. A build is a fraction of that, delivered once, with no recurring headcount cost.</p>`,
+      },
+      {
+        q: 'Do you work with PSG or EDG grants?',
+        a: `<p><strong>No, and the reason matters.</strong></p>
+<p>Grant routes add 3 to 6 months of approval time before a single line of code is written, then freeze scope during the wait. So the system you receive is the system you specced before you actually knew what you needed, months earlier, with less information. By the time it ships, your business has moved on and the build is partly stale.</p>
+<p>My clients pay out of cashflow because they want the system live fast, not next quarter. That is the trade. You give up grant cost-recovery; you get a system that reflects what your business actually needs <em>now</em>, scoped against the work in front of you, not the work in front of you eight months ago.</p>
+<p><strong>If grant cost-recovery is your top priority,</strong> this is not the right fit. There are good agencies on the PSG vendor list who optimise for that route. <strong>If speed and clarity are,</strong> this is built for you.</p>`,
+      },
+      {
+        q: 'Can I cancel?',
+        a: `<p>Yes, at any point. Stop anytime, no penalty.</p>
+<p>All work delivered up to that point is yours regardless. No lock-in. The guarantee is performance, not money back: I build until it's live and doing the job.</p>`,
+      },
+      {
+        q: 'Do I own the code?',
+        a: `<p>Yes. You own the codebase, the architecture, and the deployment outright. Every deliverable is yours from the moment it is built. No SaaS subscription. No lock-in. Any developer anywhere can pick up the work and continue it. The system is documented and written to be understood by other engineers, not just by me.</p>
+<p>Ongoing maintenance is opt-in: an annual arrangement covering hosting, updates, AI refresh, and async support. If you prefer to take the codebase and maintain it in-house or with another developer, that is fine. Many founders keep me on for maintenance because it is far cheaper than the SaaS tools the system replaces.</p>`,
+      },
+    ],
+  },
+  {
+    id: 'section-builds',
+    toc: 'What I build',
+    icon: 'blocks',
+    eyebrow: 'What I build',
+    heading: 'The kinds of systems delivered',
+    items: [
+      {
+        q: 'What kinds of AI systems have you built?',
+        a: `<p>Delivered: automated report generation pipelines (healthcare consulting: manual production eliminated; consultants drop a file, receive a formatted PDF). Compliance and approval workflow automation (financial services: 60% reduction in coordination work, error rate from 13% to near zero). OCR and portfolio intelligence layers (family office: parses statements across multiple banks, flags dependencies, generates AI-driven suggestions). Multi-retailer BI dashboards with AI analysis agents (3PL logistics: days-to-instant turnaround on performance data). Student management platforms (education consulting). Content fulfillment pipelines and campaign performance dashboards (marketing agencies). AI knowledge bases (law firms).</p>
+<p>The same custom approach fits all of them. The difference is what data each build runs on, and which workflow gets automated first.</p>`,
+      },
+    ],
+  },
+  {
+    id: 'section-after',
+    toc: 'After the build',
+    icon: 'arrow',
+    eyebrow: 'After the build',
+    heading: 'What happens after the build',
+    items: [
+      {
+        q: 'What happens after the build ships?',
+        a: `<p>You have the full system, and you own it. From there it's entirely opt-in, nothing contractually required:</p>
+<ul>
+<li><strong>Keep building.</strong> One new phase at a time, scoped like the last. For when there's more you want built.</li>
+<li><strong>Just keep it running.</strong> An opt-in annual arrangement: hosting, updates, AI refresh, and async support, for when the system is doing its job and you just need it maintained.</li>
+</ul>
+<p>You can do both, either, or neither. You can stop at any time and take the codebase elsewhere. You can pause for six months and come back. No annual contract, no auto-renewal, no escalating retainer. The economics are pay-as-you-go because that is the model that stays honest.</p>`,
+      },
+      {
+        q: 'Can we expand the system after the initial build?',
+        a: `<p>Yes, that's how it works. Most founders expand their system over time, one new phase at a time. The architecture is built to extend, not a closed box that requires rebuilding when needs change.</p>
+<p>Each new phase follows the same process as the first build: scoped before any build, MVP on real data, and I build until it's live and doing the job. There is no obligation to continue with RightClick:AI for expansions. The system and codebase are yours, and any developer can extend them. Most founders continue because the context is already built and the economics are predictable.</p>`,
+      },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="FAQ — RightClick:AI | Custom Software, Pricing, Process, Singapore"
+  description="Common questions about RightClick:AI: what I build, pricing, process, and ownership. Custom internal software, scoped per client after a paid audit. I build until it's live and doing the job. You own the code."
+  canonical="https://3nm.io/faq"
+>
+  <!-- 1. Page hero -->
+  <section class="section faq-hero" id="top">
+    <div class="wrap faq-hero-inner">
+      <Eyebrow icon="quote" class="reveal" data-r="1">FAQ &middot; Updated May 2026</Eyebrow>
+      <h1 class="faq-h1 reveal" data-r="2">Common questions about what I build, pricing, and how a real engagement works.</h1>
+      <p class="faq-lede reveal" data-r="3">Answers written by Bolun (Ben) Liu, Founder of RightClick:AI. If your question isn&rsquo;t here, email <a href="mailto:ben@3nm.io">ben@3nm.io</a>. You&rsquo;ll hear back within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- 2. FAQ body — sticky TOC sidebar + category groups -->
+  <section class="section faq-body">
+    <div class="wrap faq-layout">
+      <aside class="faq-sidebar">
+        <nav class="faq-toc" aria-label="FAQ categories">
+          <p class="faq-toc-label">In this page</p>
+          <ul>
+            {categories.map((c) => (
+              <li><a href={`#${c.id}`}>{c.toc}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <div class="faq-side-cta">
+          <p class="faq-side-cta-h">Still have questions?</p>
+          <p class="faq-side-cta-b">Book a free 30-minute discovery call. No pitch, no proposal. I just want to hear how your business runs.</p>
+          <a href="#closing" class="btn btn-primary">Book a call <span class="arrow">&rarr;</span></a>
+        </div>
+      </aside>
+
+      <div class="faq-content">
+        {categories.map((c) => (
+          <section class="faq-cat" id={c.id}>
+            <header class="faq-cat-head">
+              <Eyebrow icon={c.icon} class="reveal">{c.eyebrow}</Eyebrow>
+              <h2 class="faq-cat-h2 reveal">{c.heading}</h2>
+            </header>
+            <div class="faq-items">
+              {c.items.map((it) => (
+                <details class="faq-item">
+                  <summary class="faq-q">{it.q}</summary>
+                  <div class="faq-a" set:html={it.a} />
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Closing CTA + footer -->
+  <FooterCta />
+</BaseLayout>
+
+<style>
+  /* ── 1. Page hero ─────────────────────────────────────────── */
+  .faq-hero { padding-top: clamp(120px, 16vw, 200px); padding-bottom: clamp(32px, 5vw, 56px); }
+  .faq-hero-inner { max-width: 54rem; }
+  .faq-h1 { font-size: var(--title-l); margin-top: 18px; }
+  .faq-lede { font-size: var(--text-xl); color: var(--ink-mid); margin-top: 20px; max-width: 60ch; }
+  .faq-lede a { color: var(--green); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ── 2. Two-column layout ─────────────────────────────────── */
+  .faq-body { padding-top: 0; }
+  .faq-layout { display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start; }
+
+  /* sticky sidebar */
+  .faq-sidebar { position: sticky; top: 104px; display: flex; flex-direction: column; gap: 28px; }
+  .faq-toc-label {
+    font-family: var(--font-mono); font-size: var(--text-s); font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 14px;
+  }
+  .faq-toc ul { display: flex; flex-direction: column; gap: 2px; }
+  .faq-toc a {
+    display: block; padding: 8px 12px; margin-left: -12px; border-radius: var(--r-s);
+    font-size: var(--text-m); font-weight: 500; color: var(--ink-mid);
+    transition: color var(--dur) var(--ease-quint), background var(--dur) var(--ease-quint);
+  }
+  .faq-toc a:hover { color: var(--green); background: var(--green-tint); }
+
+  /* accent-tint CTA box */
+  .faq-side-cta {
+    background: var(--green-tint); border: 1px solid var(--hair); border-left: 3px solid var(--green);
+    border-radius: var(--r-lg); padding: 22px 22px 24px;
+  }
+  .faq-side-cta-h { font-family: var(--font-display); font-weight: 600; font-size: var(--title-xs); color: var(--ink); }
+  .faq-side-cta-b { font-size: var(--text-s); color: var(--ink-mid); margin-top: 8px; }
+  .faq-side-cta .btn { margin-top: 16px; }
+
+  /* ── category groups ──────────────────────────────────────── */
+  .faq-cat { scroll-margin-top: 96px; padding-block: clamp(28px, 4vw, 44px); }
+  .faq-cat:first-child { padding-top: clamp(4px, 1vw, 8px); }
+  .faq-cat + .faq-cat { border-top: 1px solid var(--line); }
+  .faq-cat-head { margin-bottom: clamp(16px, 2vw, 24px); }
+  .faq-cat-h2 { font-size: var(--title-s); margin-top: 12px; }
+  .faq-items { display: flex; flex-direction: column; }
+
+  /* ── accordion (native <details>/<summary>) ───────────────── */
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+    padding-block: clamp(18px, 2.4vw, 24px); cursor: pointer; list-style: none;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--title-xs);
+    letter-spacing: -0.02em; color: var(--ink);
+    transition: color var(--dur) var(--ease-quint);
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { color: var(--green); }
+  /* +→× indicator */
+  .faq-q::after {
+    content: ""; flex: none; position: relative; width: 18px; height: 18px; margin-top: 4px;
+    background:
+      linear-gradient(currentColor, currentColor) center / 100% 1.6px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 1.6px 100% no-repeat;
+    color: var(--green);
+    transition: transform var(--dur) var(--ease-quint);
+  }
+  .faq-item[open] .faq-q::after { transform: rotate(135deg); }
+  .faq-item[open] .faq-q { color: var(--green); }
+
+  .faq-a { padding-bottom: clamp(20px, 2.6vw, 28px); max-width: 68ch; }
+  .faq-a :global(p) { font-size: var(--text-l); color: var(--ink-mid); line-height: 1.62; }
+  .faq-a :global(p + p) { margin-top: 14px; }
+  .faq-a :global(strong) { color: var(--ink); font-weight: 600; }
+  .faq-a :global(em) { font-style: italic; }
+  .faq-a :global(ul) { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .faq-a :global(li) {
+    position: relative; padding-left: 22px; font-size: var(--text-l);
+    color: var(--ink-mid); line-height: 1.6;
+  }
+  .faq-a :global(li)::before {
+    content: ""; position: absolute; left: 2px; top: 0.62em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  }
+
+  /* ── responsive: collapse to single column below ~860px ───── */
+  @media (max-width: 860px) {
+    .faq-layout { grid-template-columns: 1fr; gap: 36px; }
+    .faq-sidebar { position: static; top: auto; }
+    .faq-toc ul { flex-flow: row wrap; gap: 8px; }
+    .faq-toc a { margin-left: 0; border: 1px solid var(--line); }
+  }
+</style>
