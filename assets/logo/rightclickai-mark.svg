@@ -1,13 +1,2 @@
-<!-- RightClick:AI — Icon mark only (32×32, for favicon / app icon / small placements) -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="RightClick:AI">
-
-  <!-- Cursor body -->
-  <path d="M5 3L23 16.5L16.4 19.2L13.2 28L5 3Z"
-        fill="#15803D"/>
-
-  <!-- Right-click dots -->
-  <circle cx="24" cy="18" r="1.6" fill="#15803D" opacity="0.50"/>
-  <circle cx="24" cy="23" r="1.6" fill="#15803D" opacity="0.50"/>
-  <circle cx="24" cy="28" r="1.6" fill="#15803D" opacity="0.50"/>
-
-</svg>
+<!-- R:AI premium app icon -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" role="img" aria-label="RightClick:AI"><defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FD3AC"/><stop offset="1" stop-color="#4FA277"/></linearGradient></defs><rect width="64.0" height="64.0" rx="15.4" fill="#0B140D"/><g transform="translate(21.62,16.00) scale(0.43243)"><path d="M6 5 L6 60 L19 49 L29 70 L38 66 L28 45 L44 45 Z" fill="url(#gd)" stroke="url(#gd)" stroke-width="7.0" stroke-linejoin="round" stroke-linecap="round"/></g></svg>
