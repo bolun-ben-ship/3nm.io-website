@@ -1,67 +1,55 @@
 # RightClick:AI
 
-> Custom internal software for service businesses in Singapore — the BI dashboards, automations, and internal apps off-the-shelf SaaS won't build. Built and run by Bolun (Ben) Liu. Every build is scoped per client after a paid audit and built on your real data, in phases. You own the code outright. No PSG / EDG grant paperwork.
+> Your people and your agents. One team. Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so. First build in about 4 weeks. You own the code and the data. For owner-run teams of 5–25. Bolun (Ben) Liu · Founder, RightClick:AI · Singapore.
 
 ## Key pages
 
-- [Homepage](https://3nm.io): What I build, process, case studies, booking
-- [About](https://3nm.io/about): Manifesto, method, and engagement terms behind every build
-- [How it works](https://3nm.io/how-it-works): The exact engagement sequence — discovery, audit, scope, MVP, build, handover. Vs hire / DIY / agency comparison.
-- [FAQ](https://3nm.io/faq): Pricing, ownership, grant policy, fit assessment
-- [Blog](https://3nm.io/blog): Operational visibility, the cost of manual workflows, why most AI automation projects fail
+- [Home](https://www.3nm.io/): Your people and your agents. One team.
+- [Case studies](https://www.3nm.io/case-studies): Built to fit, owned outright.
+- [FAQ](https://www.3nm.io/faq): Common questions about what I build, pricing, and how a real engagement works.
 
-## What RightClick:AI is
+## What it is
 
-RightClick:AI builds custom internal software for service businesses in Singapore with 5 to 35 staff — the dashboards, automations, and internal apps off-the-shelf SaaS won't build. Built and run by Bolun (Ben) Liu, working solo with a tight specialist network — no subcontractors, no handoffs. Clients work directly with the same person from discovery call to deployment. Every system is scoped in writing before any build starts, ships a working MVP on real data, and is built around your business. The client owns the source code, infrastructure, deployment, SOPs, and knowledge wiki outright on delivery. No SaaS lock-in. No platform dependency. Any developer can pick up and extend the system.
+Agentic workspaces. I build the six layers that let AI agents work beside your staff — on your data, on your say-so. Your people set the rules, the agents do the legwork, and every hand-off is on the record.
 
-## What I build
+- **01 Context** — You and your team write down who you are, what you sell and why, who owns what, and how you sound. The agents read it before they touch anything.
+- **02 Operational data** — Shared notes, not a guess. People add to it, agents keep it tidy, and everyone looks it up before they act.
+- **03 AI agents** — One team, two kinds of member: every agent has one job and a person it answers to. A director agent keeps them in step.
+- **04 The workspace** — One shared workspace — a folder for every client and job — where people and agents pick up each other's work, and every change is kept.
+- **05 Ledger** — Who did what, and when: the agent that drafted it, the person who checked it. You can read it, question it and undo it.
+- **06 Admin panel** — One view of how the week is going, and the few decisions only you should make. Nothing goes out in your name that you did not allow.
 
-Custom internal software, scoped to each business. Common shapes:
+I start with the foundation — your context and data — built on your real records in about four weeks. The agents, the workspace, the ledger and your panel follow. You own all of it.
 
-- **BI dashboards** — sales and ops data in one live view: revenue, pipeline, capacity, client health.
-- **Admin automation** — report generation, deck creation, client onboarding, and the calculations buried across spreadsheets.
-- **Custom internal apps** — the tool no SaaS sells: CV scoring, delivery ops, review boards, intake pipelines. Built to the client's process.
-- **AI workshops** — getting a team using AI day to day, so the system gets used.
+About four weeks from scoping call to a working agentic workspace. Call → Scoping call (scope + quote, you approve) → Build (on your accounts, your real data) → Handover (recordings + SOPs) → Monthly (optional, cancel anytime).
 
-Every build is scoped and quoted per client after the audit — there is no fixed price and no fixed package. What a client pays depends on what is being built and how much of it. The system is built on real data, in phases, and the client owns each phase as it ships. The 30-minute discovery call is free; the workflow audit is paid; and the client sees the full scope and quote before any build. I build until it's live and doing the job. Stop anytime — all code delivered is the client's regardless.
+I build until what's in the scope works. Not a refund. The result. If what's in the signed scope isn't working on the day I said it would be, I keep building until it does, at no extra cost. Anything outside the scope is a new scope.
 
-After the first build, the system can keep growing one phase at a time, scoped like the last, or simply be kept running under an opt-in annual maintenance arrangement (hosting, updates, AI model refresh, async support). Both are optional; neither is a contract.
+You own all of it:
 
-## Stage philosophy
+- **Where your data lives** — In your own workspaces, drives and databases, named tool by tool in the scope.
+- **Whose accounts and keys** — Yours. I get scoped access to build and hand it back at handover.
+- **Who changes things** — You, after handover. You never need me to use it.
+- **Getting it out** — Everything exports as files. No format only I can open.
 
-**Stage 1 — Operational Visibility.** Centralise the business's data into a single environment so the founder understands what is happening across the entire business without asking anyone, opening multiple systems, or waiting on a status update. The first build delivers Stage 1.
+No PSG or EDG paperwork. Grant approval takes four to six months; the build takes about four weeks.
 
-**Stage 2 — Growth Automation.** Automate operational workflows so operations become faster and less dependent on manual effort. The business scales without proportional headcount growth. Later phases deliver Stage 2 capability by capability.
+## Proof
 
-## Why no grants
+- 109,000+ agent steps in the last 3 months (measured 2026-06-26 → 2026-09-25).
+- 30 projects live since Mar 2026.
+- A data build for a 3PL logistics firm in Singapore went from signed to live in 13 days: signed 17 June 2026, live 30 June.
+- I've built with AI agents every day since November 2025.
+- Paying clients in healthcare consulting, financial services, family offices, 3PL logistics and education consulting.
 
-RightClick:AI does not work with PSG or EDG grants. Grant routes add 3 to 6 months of approval time before any code is written and freeze scope during the wait — the system delivered is the one specced months earlier with less information. Clients pay out of cashflow because they want the system live fast, not next quarter. If grant cost-recovery is the top priority, RightClick:AI is not the right fit. If speed and clarity are, this is built for them.
+## Who
 
-## The Data Process Thinking Method
+I'm Ben Liu, and RightClick:AI is me. I take the call, scope the build, build it and hand it over. No subcontractors, no account manager in between. You talk to the person doing the work, start to finish.
 
-Before any automation, every workflow is mapped: input → output at every stage, expenditure vs ROI, invisible micro-processes surfaced, and the data audit (does the data exist, can it support the decision) completed. Most AI automation failures happen before the first tool is chosen. The bottleneck is clarity of process, not capability of technology. One overlooked logical detail can break an entire system.
-
-## Sectors served (Singapore)
-
-Healthcare consulting, financial services, compliance and approvals, family office operations, 3PL logistics, education consulting, marketing and SEO agencies, law firms, executive recruitment.
-
-## Founder
-
-**Bolun (Ben) Liu** — Founder, RightClick:AI
-Marketer and AI operator based in Singapore. Process-first thinker. Builds everything himself; no subcontractors. Has shipped a web app, built production AI agents, implemented automation systems for paying clients, and designed AI-assisted content pipelines.
+Bolun (Ben) Liu · Founder, RightClick:AI · Singapore
 
 ## Contact
 
+WhatsApp: +65 9128 8687 (https://wa.me/6591288687)
 Email: ben@3nm.io
-Location: Singapore (SGT, UTC+8)
-Response: Within 24 hours
-
-## Commitments
-
-- Free 30-minute discovery call, then a workflow audit
-- Written scope before any build starts
-- Working MVP on real business data
-- The full build scoped and delivered around your business, phase by phase
-- Fast feedback expected from client during active build
-- Performance guarantee: I build until it's live and doing the job. You get the result, not a refund.
-- Stop anytime — all code delivered is yours regardless
+Book a 30-minute call. It's free: https://www.3nm.io/#book

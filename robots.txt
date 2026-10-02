@@ -19,4 +19,4 @@ Allow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://3nm.io/sitemap.xml
+Sitemap: https://www.3nm.io/sitemap.xml

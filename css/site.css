@@ -1,0 +1,1464 @@
+/* ==========================================================================
+   LENS — page CSS (owner: E-page). Consumes --rc-* from css/tokens.css (L2.5).
+
+   DOM HOOK CONTRACT — js/main.js depends on these exact names:
+   html classes set by JS
+     .js        inline head script (no-js -> js)
+     .rv        main.js arms the reveal observer
+     .stage-on  main.js, after the stage's first frame (grounds turn transparent)
+     .gl/.no-gl WebGL success / failure
+     .rm        reduced motion OR ?static=1
+   .reveal            main.js adds .is-in once (top 80% of the viewport)
+   #nav[data-theme]   main.js flips light<->dark when #night's top passes the
+                      nav's bottom edge (all nav colours are --rc-* only)
+   #rail.is-on        shown while in night
+   .rail__item[data-state=ahead|live|done]  (+ aria-current="step" on live)
+   .system__row[data-state=ahead|live|done] from state.listLive
+   html[data-theme]   main.js sets light/dark: the ROOT ground only (html/body
+                      background and .skip). #hero, #nav and #rail carry their
+                      own data-theme, so the flip changes nothing inside them.
+   #night             its top edge is the day/night cut
+   [data-key] [data-hold] on the ten .sec runways; do not add others.
+   #book              (FIX-R3 P1) inside #night after #close. NOT a runway: no
+                      data-key, no data-hold, so pos stays clamped at 9 over it.
+     #book-h[tabindex=-1]  js/book.js focuses it after the CTA scroll
+     #book-form.book__form > .field (label + .field__input) + p.field__err
+       (empty until invalid); aria-invalid="true" on an invalid control
+     .book__status[role=status] (text + .book__status-alt > a.mono-link)
+     .book__note         the always-visible footnote inside the form
+     .book__fallback     the WhatsApp / email line; shown only under html.no-js
+   .nav__links, .foot__links  (FIX-PLAN-R7 P4) site links; the subpages use
+                      the same nav / footer classes with this stylesheet
+   .proof             (FIX-PLAN-R6) #compare, #how, #proof, #promise: four plain
+                      content sections between #close and #book (#promise is
+                      #book's previous sibling). NOT runways: no data-key, no
+                      data-hold, so pos stays clamped at 9 over them.
+   .guide[data-guide] empty slots (bow, cap, hat, phones, pair), aria-hidden;
+                      STAGE (js/guides.js) draws the guides into their rects.
+                      One element per id; CSS moves it between desktop and
+                      mobile, and hides it under html.no-js / .no-gl / .no-guides
+   .cmp.is-lit        js/proof.js, on the bow guide's 'light' beat (or 4s late)
+   html.guides-on     STAGE, once the guides draw
+   html.no-guides     STAGE, if guides.js fails or ?noguides=1 (slots collapse)
+   #proof .stats[data-t0]  js/proof.js, performance.now() ms at count start
+
+   If main.js never runs the page is fully readable: .reveal hides only under
+   html.js.rv:not(.rm), and grounds are opaque unless html.stage-on.
+   No literal colour in a component rule: tokens only.
+   ========================================================================== */
+
+:root {
+  --f-display: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --f-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --nav-h: 64px;
+}
+
+/* per-ground helpers: dark uses --rc-g-400 so the dark accent stays on CTAs only */
+[data-theme="light"] { --node-fill: var(--rc-g-700); --eyebrow: var(--rc-accent); }
+[data-theme="dark"]  { --node-fill: var(--rc-g-400); --eyebrow: var(--rc-g-400); }
+/* native controls and option lists follow the ground they sit on */
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"]  { color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--rc-e0);
+  overscroll-behavior-y: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+html, body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--rc-e0);
+  color: var(--rc-ink-1);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+#main:focus { outline: none; }
+
+/* ---- canvas ------------------------------------------------------------ */
+#stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
+html.no-js #stage, html.no-gl #stage { display: none; }
+/* the skip veil (main.js jumpFollow): the destination's ground, over the stage and under the page */
+#jumpveil { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; background: var(--rc-e0); }
+html.no-js #jumpveil, html.no-gl #jumpveil { display: none; }
+/* viewport probe (contract 0.5.5): main.js reads vpS / vpL from these; never display:none */
+.vp-probe{position:fixed;top:0;left:0;width:1px;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
+.vp-probe i{position:absolute;top:0;left:0;width:1px}
+.vp-probe__s{height:100vh;height:100svh}
+.vp-probe__l{height:100vh;height:100lvh}
+main { position: relative; z-index: 1; }
+
+/* ---- grounds (BRAND.md construction, L2.5c three-bloom field) ----------- */
+.sec { position: relative; isolation: isolate; }
+.sec--hero::before,
+#night::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  --b-cool: color-mix(in srgb, var(--rc-bloom-cool) calc(var(--rc-bloom-alpha) * 100%), transparent);
+  --b-warm: color-mix(in srgb, var(--rc-bloom-warm) calc(var(--rc-bloom-alpha) * 100%), transparent);
+  background:
+    radial-gradient(58% 58% at -4% -12%, var(--b-cool) 0%, transparent 70%),
+    radial-gradient(50% 50% at 104% 6%,  var(--b-warm) 0%, transparent 70%),
+    radial-gradient(46% 46% at 48% 58%,  var(--b-cool) 0%, transparent 70%),
+    var(--rc-e0);
+}
+/* Night is many runways tall: one viewport-fixed field, so no seam repeats at
+   every section box. (iOS ignores fixed attachment and stretches it; still no seam.) */
+#night { position: relative; isolation: isolate; }
+#night::before { background-attachment: fixed; }
+#night {
+  background: var(--rc-e0);
+  border-top: 1px solid color-mix(in srgb, var(--rc-g-400) 40%, transparent); /* the seam, in fallback */
+}
+html.stage-on .sec--hero::before,
+html.stage-on #night::before { display: none; }
+html.stage-on #night { background: transparent; border-top-color: transparent; }
+
+/* ---- runway geometry (main.js measures these boxes) --------------------- */
+.sec--hero { height: calc(100 * 1vh); height: calc(100 * 1svh); }
+#intro     { height: calc(120 * 1vh); height: calc(120 * 1svh); }
+.sec--layer{ height: calc(170 * 1vh); height: calc(170 * 1svh); }
+#together  { height: calc(240 * 1vh); height: calc(240 * 1svh); }
+#close     { height: calc(110 * 1vh); height: calc(110 * 1svh); }
+
+/* ---- nav ---------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--rc-pad-x);
+  background: var(--rc-e-scrim);
+  border-bottom: 1px solid var(--rc-line-hair);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+/* FIX-R3 m7: over the day hero the nav is type on the ground, no frosted bar. The dark nav (past the cut)
+   keeps the scrim and hairline from the rule above. */
+.nav[data-theme="light"] {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html.no-js .nav { position: absolute; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  text-decoration: none;
+  color: var(--rc-ink-1);
+  transition: transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+.brand__logo { display: block; width: 32px; height: 32px; flex: none; }
+.brand__logo--dark { display: none; }
+/* the cascade cut follows the ground it sits on (brand.json mark: -ondark on a dark ground; 32px is the cascade floor) */
+[data-theme="dark"] .brand__logo--light { display: none; }
+[data-theme="dark"] .brand__logo--dark { display: block; }
+.brand__word {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.024em;
+}
+/* FIX-PLAN-R7 P4: the site links (Case studies, FAQ) between the brand and the Book button. Shared by index and the
+   subpages. Colours are --rc-ink-* only, so they follow the nav's own data-theme: dark ink over the light hero,
+   light ink on the dark scrim past the cut and on the all-dark subpages. */
+.nav__links {
+  margin-left: auto;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav__links a, .foot__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font: 500 15px/1 var(--f-body);
+  color: var(--rc-ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--rc-d-micro) var(--rc-ease-out);
+}
+.nav__links a[aria-current="page"], .foot__links a[aria-current="page"] {
+  color: var(--rc-ink-1);
+  text-decoration: underline 1px;
+  text-underline-offset: 6px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav__links a:hover, .foot__links a:hover { color: var(--rc-ink-1); }
+}
+@media (max-width: 599px) {
+  /* the word mark leaves the bar (it stays in the link's accessible name via aria-label) */
+  .nav .brand__word {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .nav__links { gap: 14px; margin-right: 14px; }
+  .nav__links a { font-size: 14px; }
+}
+
+/* ---- node: mark, rail marker, list marker (one component) --------------- */
+.node {
+  position: relative;
+  flex: none;
+  display: block;
+  width: var(--rc-node-size);
+  height: var(--rc-node-size);
+  border-radius: var(--rc-node-r);
+  box-shadow: inset 0 0 0 var(--rc-node-bw) var(--node-line, var(--rc-line-strong));
+}
+.node::before, .node::after {
+  content: '';
+  position: absolute;
+  opacity: 0;
+  transition: opacity var(--rc-d-enter) var(--rc-ease-out);
+}
+.node::before { inset: 0; border-radius: inherit; background: var(--node-fill); }
+.node::after  { inset: 3px; border-radius: 1px; background: var(--rc-idx-data); }
+[data-state="done"] .node::before { opacity: 1; }
+[data-state="live"] .node { --node-line: var(--node-fill); }
+[data-state="live"] .node::after { opacity: 1; }
+.node--mark {
+  --node-line: var(--node-fill);
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+.node--mark::before, .node--mark::after { opacity: 1; transition: none; }
+.node--mark::after { inset: 4px; }
+
+/* ---- rail (progress) ----------------------------------------------------- */
+.rail {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--rc-d-reveal) var(--rc-ease-out), visibility 0s linear var(--rc-d-reveal);
+}
+.rail.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+html.no-js .rail { display: none; }
+/* FIX-R1 P3: a 64px left-edge wash while the rail is on (it rides the rail's own opacity, so .is-on drives it).
+   .rail's transform makes it the containing block for fixed children, so the scrim is absolute and sized off
+   the rail box, which is centred on the viewport: top 50% - 50vh spans the full height. z -1 stays inside the
+   rail's stacking context (z 15): behind the nodes, above the canvas, under the nav (z 20). */
+@media (min-aspect-ratio: 1/1) {
+  .rail::before {
+    content: "";
+    position: absolute;
+    left: -16px;
+    width: 64px;
+    top: calc(50% - 50vh);
+    top: calc(50% - 50svh);
+    height: 100vh;
+    height: 100svh;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--rc-e0) 78%, transparent), transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+/* FIX-R2 m1: the markers ride a scrim pill, so a lit face never shows through between the squares */
+.rail ol {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--rc-e-scrim);
+  border: 1px solid var(--rc-line-hair);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+/* 44 x 44 hit area; the 11px node sits centred in it, so the pill is even on both sides */
+.rail__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--rc-ink-1);
+  text-decoration: none;
+  transition: transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+/* the label opens outside the pill: item right edge + the ol's 8px padding + its 1px border + 8px air */
+.rail__label {
+  position: absolute;
+  left: calc(100% + 17px);
+  top: 50%;
+  margin-top: -12px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  white-space: nowrap;
+  font: 400 11px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--rc-ink-1);
+  background: var(--rc-e-scrim);
+  border: 1px solid var(--rc-line-hair);
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateX(4px);
+  pointer-events: none;
+  transition: opacity var(--rc-d-micro) var(--rc-ease-out), transform var(--rc-d-micro) var(--rc-ease-out);
+}
+.rail__item:focus-visible .rail__label { opacity: 1; transform: none; transition: none; }
+
+/* ---- type ---------------------------------------------------------------- */
+.eyebrow {
+  margin: 0 0 16px;
+  font: 500 var(--rc-fs-eyebrow)/1.4 var(--f-mono);
+  letter-spacing: var(--rc-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--eyebrow);
+}
+h1, h2 { font-family: var(--f-display); font-weight: 600; color: var(--rc-ink-1); }
+h1 {
+  margin: 0 0 20px;
+  letter-spacing: -0.035em;
+  line-height: 1.0;
+  /* REWORK-01 DIRECTOR 3.3: three one-line sentences owning the upper left; the stage's floor starts at x .48 */
+  font-size: clamp(48px, 5.4vw, 84px);
+  max-width: 7.4em;
+}
+.h1-line { display: block; text-wrap: balance; white-space: nowrap; }
+h2 {
+  margin: 0 0 16px;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-size: clamp(28px, 1.5vw + 14px, 44px);
+  text-wrap: balance;
+}
+.lede, .copy p:not(.eyebrow) {
+  margin: 0 0 24px;
+  max-width: 42ch;
+  font: 400 clamp(16px, 0.35vw + 13.5px, 18px)/1.55 var(--f-body);
+  color: var(--rc-ink-2);
+  text-wrap: pretty;
+}
+.hero__copy .lede { margin-bottom: 28px; }
+
+/* separators sit on each item's LEFT and the list is clipped at its own left edge, so an item that
+   wraps to a new line never carries a dangling divider (the old right-border left one at 1440 and 390) */
+.facts {
+  list-style: none;
+  margin: 0 0 0 -29px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--rc-line-hair);
+  clip-path: inset(0 0 0 29px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 0;
+}
+.facts li {
+  margin-inline-start: 14px;
+  padding-inline-start: 14px;
+  font: 400 13px/1.4 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-2);
+  border-left: 1px solid var(--rc-line);
+}
+.facts--hero { margin: 32px 0 0; clip-path: none; flex-direction: column; gap: 6px; }
+.facts--hero li { margin-inline-start: 0; padding-inline-start: 0; border-left: 0; }
+.mk {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  vertical-align: 1px;
+}
+.mk--data   { background: var(--rc-idx-data); }
+.mk--skills { background: var(--rc-idx-skills); }
+
+/* ---- buttons -------------------------------------------------------------- */
+.btnrow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 24px; }
+.copy .btnrow { margin-bottom: 12px; }   /* the 44px mono-link below carries its own air */
+.hero__copy .btnrow { margin-bottom: 0; }
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--rc-r-pill);
+  font: 500 16px/1 var(--f-body);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--rc-d-hover-x) var(--rc-ease-out);
+}
+.btn__arrow { display: inline-block; transition: transform var(--rc-d-hover-x) var(--rc-ease-out); }
+.btn--primary {
+  background: var(--rc-accent);
+  color: var(--rc-accent-ink);
+  box-shadow: 0 12px 28px -16px var(--rc-accent-glow);   /* FIX-R3 m11 */
+}
+.btn--primary::before { background: var(--rc-accent-hover); }
+.btn--ghost {
+  background: transparent;
+  color: var(--rc-ink-1);
+  box-shadow: inset 0 0 0 1px var(--rc-line-2);
+}
+.btn--ghost::before { background: var(--rc-accent-tint-06); }
+.btn--sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
+
+.mono-link {
+  min-height: 44px;
+  align-items: center;
+  font: 400 14px var(--f-mono);
+  color: var(--rc-ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rc-line-2);
+  text-underline-offset: 4px;
+  display: inline-flex;
+  transition: transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-1px); }
+  .btn:hover::before { opacity: 1; }
+  .btn:hover .btn__arrow { transform: translateX(3px); }
+  .btn:hover .btn__arrow--down { transform: translateY(2px); }
+  .mono-link:hover { text-decoration-color: currentColor; color: var(--rc-ink-1); }
+  .rail:hover .rail__label { opacity: 1; transform: none; }
+}
+/* press: every pressable, after hover so it wins at equal specificity */
+.btn:active, .brand:active, .rail__item:active, .mono-link:active, .skip:active {
+  transform: scale(.97);
+  transition-duration: var(--rc-d-press);
+}
+/* FIX-R2 m13: the nav CTA steps aside while #close (and its own CTA) is in view, so pos 9 carries one CTA.
+   main.js sets #nav[data-cta="off"|"on"]; with no attribute these rules are inert. transform stays in each
+   shorthand so the hover lift keeps its ease; the press rule is restated because these selectors outrank it. */
+.nav[data-cta="off"] .btn {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--rc-d-exit) var(--rc-ease-out), visibility 0s linear var(--rc-d-exit),
+              transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+.nav[data-cta="on"] .btn {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--rc-d-enter) var(--rc-ease-out), visibility 0s linear 0s,
+              transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+.nav[data-cta="on"] .btn:active { transition-duration: var(--rc-d-enter), 0s, var(--rc-d-press); }
+
+/* ---- focus ----------------------------------------------------------------- */
+:focus-visible {
+  outline: var(--rc-focus-w) solid var(--rc-focus-ring);
+  outline-offset: var(--rc-focus-off);
+  box-shadow: 0 0 0 calc(var(--rc-focus-w) + var(--rc-focus-off) + 2px) var(--rc-focus-halo);
+}
+.btn--primary:focus-visible {
+  box-shadow: 0 12px 28px -16px var(--rc-accent-glow), 0 0 0 calc(var(--rc-focus-w) + var(--rc-focus-off) + 2px) var(--rc-focus-halo);
+}
+.btn--ghost:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--rc-line-2), 0 0 0 calc(var(--rc-focus-w) + var(--rc-focus-off) + 2px) var(--rc-focus-halo);
+}
+.skip {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 30;
+  padding: 12px 20px;
+  border-radius: var(--rc-r-pill);
+  background: var(--rc-e3);
+  color: var(--rc-ink-1);
+  font: 500 15px/1 var(--f-body);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip:focus:not(:active), .skip:focus-visible:not(:active) { transform: none; }
+
+/* ---- reveal (INTERACTION §3.2) ---------------------------------------------- */
+html.js.rv:not(.rm) .reveal {
+  opacity: 0;
+  transform: translateY(var(--rc-reveal-rise));
+}
+html.js.rv:not(.rm) .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--rc-d-reveal) var(--rc-ease-out), transform var(--rc-d-reveal) var(--rc-ease-out);
+  transition-delay: calc(var(--i, 0) * var(--rc-stagger-list));
+}
+/* FIX-PLAN-R5 P3 (page manager, REWORK-03 item 7 "no swoop"): under the stage the layer copy is one pinned slot that
+   crossfades with the walls. Layers 01-06 and Together hold their sticky box fixed in the viewport (the place it sticks
+   at the hold, so holds are unchanged), and writeCopy's posSmooth gate is their only fade. Copy and stage then move as
+   one: no copy slides up from the fold while the walls crossfade in place, a flick never streaks copy past, and copy
+   never runs ahead of the lagging stage. Their reveals are shown outright: the scroll-fired reveal could land after
+   the gate had opened (390: 0 -> .96 in one frame) and popped. Intro and Close stay in flow (the cut and the booking
+   form scroll with them). Intro keeps its reveal as an opacity fade, no rise; Close is gated by writeCopy (key 9). */
+html.js.rv.stage-on:not(.rm) .sec--layer .sec__sticky,
+html.js.rv.stage-on:not(.rm) #together .sec__sticky { position: fixed; top: 0; left: 0; right: 0; }
+html.js.rv.stage-on:not(.rm) .sec--layer .copy .reveal,
+html.js.rv.stage-on:not(.rm) #together .copy .reveal,
+html.js.rv.stage-on:not(.rm) #close .copy .reveal { opacity: 1; transform: none; transition: none; }
+html.js.rv.stage-on:not(.rm) #intro .copy .reveal { transform: none; }
+html.js.rv.stage-on:not(.rm) #intro .copy .reveal.is-in { transition: opacity var(--rc-d-reveal) var(--rc-ease-out); transition-delay: calc(var(--i, 0) * var(--rc-stagger-list)); }
+/* hero load rise: payload-first, transform only, opacity stays 1 */
+html.js:not(.rm) .h1-line { animation: rise var(--rc-d-reveal) var(--rc-ease-out) both; }
+html.js:not(.rm) .h1-line:nth-child(2) { animation-delay: var(--rc-stagger-layer); }
+html.js:not(.rm) .h1-line:nth-child(3) { animation-delay: calc(2 * var(--rc-stagger-layer)); }
+@keyframes rise { from { transform: translateY(var(--rc-reveal-rise)); } to { transform: none; } }
+
+/* ---- layout: hero (desktop first) -------------------------------------------- */
+.sec--hero {
+  display: grid;
+  align-content: start;
+  /* eyebrow top at ~24% of the viewport height (vh first, svh where supported) */
+  padding: calc(24 * 1vh) 0 0 var(--rc-pad-x);
+  padding-top: calc(24 * 1svh);
+}
+.hero__copy { width: auto; }
+/* DIRECTOR 3.3: the sub starts at or below y .60. Eyebrow top 24vh + eyebrow line (1.4 x fs) + its 16px
+   margin + the H1 (3 lines x 1em) + this margin >= 60vh + 2px; 3em is the H1's own three lines. */
+.hero__copy h1 {
+  margin-bottom: max(clamp(24px, 6vh, 60px), calc(36vh - 3em - 1.4 * var(--rc-fs-eyebrow) - 14px));
+  margin-bottom: max(clamp(24px, 6svh, 60px), calc(36svh - 3em - 1.4 * var(--rc-fs-eyebrow) - 14px));
+}
+/* below y .60 the stage row reaches x .49: keep the copy under it narrow */
+.hero__copy .lede, .hero__copy .btnrow, .hero__copy .facts--hero { max-width: min(34vw, 30em); }
+
+/* ---- layout: night ------------------------------------------------------------ */
+.sec__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  grid-template-columns: 62fr 38fr;
+  align-items: center;
+  pointer-events: none;
+}
+.sec .copy > :last-child { margin-bottom: 0; }
+.copy {
+  grid-column: 2;
+  pointer-events: auto;
+  max-width: 460px;
+  margin-left: clamp(8px, 1vw, 24px);
+  padding-right: var(--rc-pad-x);
+}
+
+/* ---- posters: the stage's stand-in when it cannot run (FIX-R2 P2.3) --------------
+   Stills of the stage (tools/poster.mjs) so no-JS and no-WebGL readers still see the people at the walls.
+   Hidden unless the html carries .no-js (the inline head script never ran) or .no-gl (main.js, when WebGL
+   fails). display:none keeps the lazy <img> from ever being fetched while the stage runs. */
+.poster { display: none; }
+html.no-js .poster, html.no-gl .poster { display: block; }
+.poster img { display: block; }
+/* hero: the right 57 %, where the stage's object column sits, bottom-aligned, under the copy */
+html.no-js .hero__copy, html.no-gl .hero__copy { position: relative; z-index: 1; }
+.poster--hero {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 57%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.poster--hero img { width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+/* intro: fills the empty column 1 of the sticky box, beside the copy */
+.poster--hold { grid-column: 1; grid-row: 1; align-self: stretch; min-width: 0; min-height: 0; }
+.poster--hold img {
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  max-height: 100svh;
+  object-fit: contain;
+}
+
+/* ---- together list ------------------------------------------------------------- */
+.system { list-style: none; margin: 24px 0 0; padding: 0; }
+.system__row {
+  display: grid;
+  grid-template-columns: 11px 26px 1fr;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  border-top: 1px solid var(--rc-line-hair);
+}
+.system__row:last-child { border-bottom: 1px solid var(--rc-line-hair); }
+.system__idx {
+  font: 400 13px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-3);
+}
+.system__name {
+  font: 500 20px/1.2 var(--f-display);
+  letter-spacing: -0.01em;
+  color: var(--rc-ink-1);
+}
+.system__name { transition: opacity var(--rc-d-enter) var(--rc-ease-out); }
+.system__row[data-state="ahead"] .system__name { opacity: .55; }  /* ink-1 x .55 = 6.0:1 on e0 */
+.system__row[data-state="live"] .system__name,
+.system__row[data-state="done"] .system__name { opacity: 1; }
+/* no-JS: the list's true static end-state is "all done" (brand rule 10) */
+html.no-js .system__row[data-state] .system__name { opacity: 1; }
+html.no-js .system__row .node::before { opacity: 1; }
+
+/* ---- book a call (FIX-R3 P1) ---------------------------------------------------------
+   Not a runway: the K9 frame holds behind it (transparent ground), and the panel sits in the .copy
+   column so the people at the table stay in view to its left. Tokens only. The one accent is the
+   submit (.btn--primary); fields focus on --rc-focus-ring, never --rc-field-line-focus
+   or --rc-field-ring-focus (both resolve to the accent on dark). */
+#book {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: transparent;
+  display: grid;
+  /* 62/38 like .sec__sticky, but the panel column never drops under 420px: on a narrow landscape (or a
+     1440 screen at 200% zoom) the panel moves left of the .copy line rather than crushing the fields */
+  grid-template-columns: minmax(0, 62fr) minmax(min(420px, 100%), 38fr);
+  align-items: center;
+  /* the CTA lands #book's top at the nav's bottom edge (scroll-margin-top), so the top padding is only the
+     air under the nav: nav + 32 here would leave a 96px dead band above the panel on arrival */
+  padding-block: 32px 64px;
+  scroll-margin-top: var(--nav-h);
+}
+.book__panel {
+  grid-column: 2;
+  min-width: 0;
+  width: auto;
+  max-width: 560px;
+  margin-left: clamp(8px, 1vw, 24px);   /* the .copy column's left edge */
+  margin-right: 24px;
+  padding: 28px;
+  background: var(--rc-e1);             /* opaque: reads over a lit wall */
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+#book-h:focus { outline: none; box-shadow: none; }   /* programmatic focus target, like #main */
+.book__panel .eyebrow { margin-bottom: 12px; }
+.book__lede {
+  margin: 0 0 24px;
+  max-width: 42ch;
+  font: 400 clamp(16px, 0.35vw + 13.5px, 18px)/1.55 var(--f-body);
+  color: var(--rc-ink-2);
+  text-wrap: pretty;
+}
+.book__form { margin: 0; }
+
+.field { margin: 0 0 16px; border: 0; padding: 0; min-width: 0; }
+.field > label, .field > legend {
+  display: block;
+  margin: 0 0 6px;
+  padding: 0;
+  font: 500 14px/1.4 var(--f-body);
+  color: var(--rc-field-label);
+}
+.field__input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 14px;
+  font: 400 16px/1.4 var(--f-body);     /* 16px: iOS does not zoom on focus */
+  color: var(--rc-field-ink);
+  background: var(--rc-field-bg);
+  border: 1px solid var(--rc-field-line);
+  border-radius: var(--rc-r-sm);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--rc-d-micro) var(--rc-ease-out);
+}
+.field__input::placeholder { color: var(--rc-field-placeholder); opacity: 1; }
+textarea.field__input { padding: 12px 14px; min-height: 96px; resize: vertical; }
+/* autofill keeps the field's own ink and a token ground instead of the browser's tint */
+.field__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--rc-field-ink);
+  box-shadow: inset 0 0 0 100px var(--rc-e2);
+}
+.field__input:focus-visible {
+  outline: var(--rc-focus-w) solid var(--rc-focus-ring);
+  outline-offset: var(--rc-focus-off);
+  box-shadow: 0 0 0 calc(var(--rc-focus-w) + var(--rc-focus-off) + 2px) var(--rc-focus-halo);
+}
+.field__input:-webkit-autofill:focus-visible {
+  box-shadow: inset 0 0 0 100px var(--rc-e2), 0 0 0 calc(var(--rc-focus-w) + var(--rc-focus-off) + 2px) var(--rc-focus-halo);
+}
+.field__input[aria-invalid="true"] { border-color: var(--rc-field-line-invalid); }
+.field__err {
+  margin: 6px 0 0;
+  font: 400 13px/1.4 var(--f-body);
+  color: var(--rc-danger);
+}
+.field__err:empty { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .field__input:hover { border-color: var(--rc-field-line-hover); }
+  .field__input[aria-invalid="true"]:hover { border-color: var(--rc-field-line-invalid); }
+}
+
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.book__form .btn {
+  max-width: 100%;
+  margin-top: 8px;
+  border: 0;
+  cursor: pointer;
+  white-space: normal;   /* one line at every real width; wraps rather than clips under heavy zoom */
+  text-align: center;
+}
+.book__status {
+  margin: 16px 0 0;
+  font: 400 15px/1.5 var(--f-body);
+  color: var(--rc-ink-1);
+}
+.book__status:empty { display: none; }
+.book__note { margin: 12px 0 0; font: 400 13px/1.5 var(--f-mono); color: var(--rc-ink-3); }
+.opt { color: var(--rc-ink-3); font-weight: 400; }
+.book__status-alt {
+  display: block;
+  margin-top: 4px;
+  font: 400 13px/1.4 var(--f-mono);
+  color: var(--rc-ink-3);
+}
+.book__status-alt .mono-link { font-size: 13px; }
+.book__fallback {
+  margin: 0;
+  font: 400 16px/1.55 var(--f-body);
+  color: var(--rc-ink-2);
+}
+/* in-sentence links: inline, so a wrapped line keeps the paragraph's leading (the inline-flex 44px box
+   opened a 70px gap under "suit" at 390). The 12px block padding keeps a >= 44px hit area without
+   touching the line box. */
+.book__fallback .mono-link, .book__status-alt .mono-link {
+  display: inline;
+  min-height: 0;
+  padding-block: 12px;
+}
+html.no-js .book__form { display: none; }
+html.js .book__fallback { display: none; }
+
+@media (max-aspect-ratio: 999/1000) {
+  #book {
+    grid-template-columns: 1fr;
+    padding-inline: 16px;
+    padding-block: 16px calc(32px + env(safe-area-inset-bottom));
+  }
+  .book__panel { grid-column: 1; margin: 0; max-width: none; padding: 20px; }
+  .book__form .btn { width: 100%; }
+}
+
+/* ---- proof sections (FIX-PLAN-R6 P2) ---------------------------------------------------
+   #compare, #how, #proof, #promise: plain content between #close and #book. NOT runways (no data-key /
+   data-hold). No section fill: the canvas (or #night::before) is the ground, and every box a guide slot
+   sits in is a hairline with no fill (R6 0.2.4), so no film lies over the guides. No solid accent: the
+   .us column rests on --rc-accent-tint-06 and steps to -12 when the bow-tie guide lights it. Tokens only.
+   .guide[data-guide] slots are empty boxes; STAGE draws into their rects. */
+.proof {
+  position: relative;
+  padding-block: clamp(88px, 11vh, 144px);
+}
+#compare { padding-top: clamp(120px, 18vh, 200px); }   /* the close copy clears it during the veil */
+.proof__in {
+  position: relative;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--rc-pad-x, 24px);
+}
+/* the v4 hairline between sections, inset to the text measure (not to the padded box edge) */
+.proof + .proof { padding-top: 0; }
+.proof + .proof > .proof__in { padding-top: clamp(64px, 8vh, 112px); }
+.proof + .proof > .proof__in::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--rc-pad-x, 24px);
+  right: var(--rc-pad-x, 24px);
+  border-top: 1px solid var(--rc-line-hair);
+}
+#promise > .proof__in::before { display: none; }   /* the guarantee panel's own edge is the divider: no double line */
+
+/* type */
+.proof h2:not(.proof__sub) { max-width: 20ch; }
+.proof h3, .proof__sub {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 600;
+  color: var(--rc-ink-1);
+}
+.proof__sub {
+  font: 600 var(--rc-fs-title-2)/1.15 var(--f-display);
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+.proof p { margin: 0; }
+.proof .lead {
+  margin-top: 40px;
+  max-width: 60ch;
+  font: 400 20px/1.55 var(--f-body);
+  color: var(--rc-ink-2);
+  text-wrap: pretty;
+}
+.proof .proofline {
+  margin: 8px 0 0;
+  max-width: 64ch;
+  font: 400 15px/1.55 var(--f-body);
+  color: var(--rc-ink-3);
+}
+.proofline b { color: var(--rc-ink-1); font-weight: 600; }
+.proof .after-note {
+  margin: 28px 0 0;
+  max-width: 56ch;
+  font: 400 16px/1.55 var(--f-body);
+  color: var(--rc-ink-3);
+}
+.proof .num {
+  font-family: var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: .94em;
+  word-spacing: -0.25em;                     /* the mono space is 0.6em: "17 June 2026" reads as one figure */
+}
+
+/* A: the comparison (#compare) */
+.cmp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  grid-template-areas: "h ." "t s";
+  column-gap: 48px;
+}
+.cmp-grid > .proof__sub { grid-area: h; }
+.cmp-grid > .cmp { grid-area: t; }
+.cmp-grid > .guide { grid-area: s; align-self: end; width: 240px; height: 300px; }
+.cmp {
+  width: 100%;
+  margin-top: 40px;
+  border-collapse: collapse;
+  font: 400 15px/1.45 var(--f-body);
+}
+.cmp th, .cmp td {
+  padding: 18px 20px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rc-line-hair);
+}
+.cmp thead th, .cmp th[scope="row"] { font-weight: 500; color: var(--rc-ink-3); }
+.cmp td { color: var(--rc-ink-2); }
+.cmp .us {
+  background: var(--rc-accent-tint-06);
+  box-shadow: inset 1px 0 0 var(--rc-line), inset -1px 0 0 var(--rc-line);
+  color: var(--rc-ink-1);
+  transition: background-color 240ms var(--rc-ease-out);
+  transition-delay: calc(var(--r, 0) * 90ms);
+}
+.cmp thead th.us { font-weight: 600; }
+.cmp.is-lit .us { background: var(--rc-accent-tint-12); }
+
+/* B: the timeline and the split (#how) */
+#how-sub {
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid var(--rc-line-hair);
+  max-width: none;                                   /* the hairline spans the content width (v4) ... */
+  padding-right: max(0px, calc(100% - 22ch));        /* ... while the words keep the 22ch measure */
+}
+.tl {
+  display: grid;
+  grid-template-areas: "bar" "scale" "g";
+  margin-top: 48px;
+}
+.tl + .proofline { margin-top: 32px; }
+.tl-bar {
+  grid-area: bar;
+  display: grid;
+  grid-template-columns: .7fr 1fr 3.2fr 1fr 1.2fr;
+  gap: 8px;
+  min-width: 0;
+}
+.seg {
+  display: block;
+  min-width: 0;
+  padding: 18px 16px 20px;
+  border: 1px solid var(--rc-line-hair);
+  border-radius: var(--rc-r-sm);
+  background: color-mix(in srgb, var(--rc-ink-1) 3.5%, transparent);
+}
+.seg b { display: block; font: 600 15px/1.3 var(--f-display); color: var(--rc-ink-1); }
+.seg em { display: block; margin-top: 8px; font: normal 400 13px/1.45 var(--f-body); color: var(--rc-ink-3); }
+.seg.s-build { background: var(--rc-accent-tint-06); border-color: var(--rc-line); }
+.seg.s-build b { color: var(--rc-g-400); }
+.seg.s-month { background: transparent; border-style: dashed; }
+.tl-scale {
+  grid-area: scale;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  font: 500 12px/1 var(--f-mono);
+  color: var(--rc-ink-3);
+}
+.tl-scale span:nth-child(2) { color: var(--rc-g-400); }
+.tl > .guide { grid-area: g; height: 170px; margin-top: 8px; }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "you me" "g g";
+  gap: 18px;
+  margin-top: 40px;
+}
+.split > .you-side { grid-area: you; }
+.split > .me-side { grid-area: me; }
+.split > .guide { grid-area: g; height: 170px; }
+.side {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--rc-line-hair);
+  border-radius: var(--rc-r-card);
+}
+.you-side { background: var(--rc-accent-tint-06); }
+.side .label {
+  display: block;
+  margin-bottom: 14px;
+  font: 500 15px/1.4 var(--f-body);
+  color: var(--rc-ink-1);
+}
+.you-side ul, .me-side ul, .pts { list-style: none; margin: 0; padding: 0; }
+.you-side ul, .me-side ul { display: grid; gap: 10px; }
+.me-side ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
+.side li {
+  position: relative;
+  padding-left: 18px;
+  font: 400 15px/1.6 var(--f-body);
+  color: var(--rc-ink-2);
+}
+.side li::before {                        /* square state marker, 6 x 6 (brand v1.1), centred on line 1 */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--rc-ink-3);
+}
+.you-side li::before { background: var(--rc-g-400); }
+
+/* C: the numbers (#proof) */
+.proof-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  grid-template-areas: "h ." "stats r" "lead r" "story r";
+  column-gap: 48px;
+}
+.proof-grid > h2 { grid-area: h; }
+.proof-grid > .stats { grid-area: stats; }
+.proof-grid > .lead { grid-area: lead; }
+.proof-grid > .story { grid-area: story; }
+.proof-grid > .guide-rail { grid-area: r; align-self: stretch; min-width: 0; }
+.guide--aside {
+  position: sticky;
+  top: calc(50vh - 160px);
+  top: calc(50svh - 160px);
+  width: 240px;
+  height: 320px;
+}
+.stats { display: flex; flex-wrap: wrap; gap: 64px; margin-top: 48px; }
+.stat { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.stat b.num {
+  font: 500 var(--rc-fs-display-2)/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--rc-ink-1);
+}
+.stat > span { font: 400 15px/1.4 var(--f-body); color: var(--rc-ink-3); }
+/* FIX-PLAN-R7 P1.6: "109,000+" is 8 mono cells; reserving them keeps stat 2 still while stat 1 counts up from "0".
+   Desktop only: on portrait the stats stack, so nothing sits beside it. */
+@media (min-aspect-ratio: 1/1) {
+  .stats .stat:first-child b.num { min-inline-size: 8ch; }
+}
+.story {
+  margin-top: 56px;
+  padding-left: 28px;
+  border-left: 1px solid var(--rc-line);    /* a neutral divider, not a colour rail */
+}
+.story h3 {
+  margin-bottom: 12px;
+  font-size: var(--rc-fs-title-3);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.story p { max-width: 62ch; font: 400 17px/1.6 var(--f-body); color: var(--rc-ink-2); }
+
+/* D: the guarantee and the founder (#promise) */
+.guarantee {
+  margin-top: 0;
+  padding: clamp(28px, 4vw, 56px);
+  border: 1px solid var(--rc-line);          /* no fill (R6 0.2.4): the pair guides stand inside it */
+  border-radius: var(--rc-r-card);
+}
+.guarantee h2.gq { max-width: 18ch; }   /* outranks .proof h2:not(.proof__sub) */
+.guarantee .lead { margin-top: 24px; }
+.guarantee h3.proof__sub { margin-top: 56px; }
+.pts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 40px;
+  margin-top: 32px;
+}
+.pts li {
+  padding-top: 18px;
+  border-top: 1px solid var(--rc-line-hair);
+  font: 400 16px/1.5 var(--f-body);
+  color: var(--rc-ink-2);
+}
+.pts b { display: block; margin-bottom: 6px; font-weight: 600; color: var(--rc-ink-1); }
+.guarantee > .guide { height: 170px; margin-top: 24px; }
+.guarantee .after-note { margin-top: 32px; }
+.founder {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--rc-line-hair);
+}
+.founder picture { display: block; flex: none; }
+.founder img {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;                        /* a photo, not a marker */
+  object-fit: cover;
+}
+.founder p {
+  max-width: 42ch;
+  font: 400 clamp(18px, 1.4vw + 14px, 23px)/1.45 var(--f-body);
+  color: var(--rc-ink-1);
+  text-wrap: pretty;
+}
+.founder .byline { margin-top: 18px; font: 400 14px/1.4 var(--f-body); color: var(--rc-ink-3); }
+
+/* slots, all shapes: empty boxes the stage draws into */
+.guide { display: block; pointer-events: none; }
+
+/* reveals (P3 + the v4 motions). All once, via main.js's .is-in; nothing loops. */
+html.js.rv:not(.rm) .cmp.reveal tbody tr { opacity: 0; transform: translateY(8px); }
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr {
+  opacity: 1;
+  transform: none;
+  transition: opacity 480ms var(--rc-ease-out), transform 480ms var(--rc-ease-out);
+}
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr:nth-child(2) { transition-delay: 90ms; }
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr:nth-child(3) { transition-delay: 180ms; }
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr:nth-child(4) { transition-delay: 270ms; }
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr:nth-child(5) { transition-delay: 360ms; }
+html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr:nth-child(6) { transition-delay: 450ms; }
+html.js.rv:not(.rm) .tl.reveal .seg { opacity: 0; transform: scaleX(.82); transform-origin: left center; }
+html.js.rv:not(.rm) .tl.reveal.is-in .seg {
+  opacity: 1;
+  transform: none;
+  transition: opacity 560ms var(--rc-ease-out), transform 560ms var(--rc-ease-out);
+}
+html.js.rv:not(.rm) .tl.reveal.is-in .seg:nth-child(1) { transition-delay: 60ms; }
+html.js.rv:not(.rm) .tl.reveal.is-in .seg:nth-child(2) { transition-delay: 200ms; }
+html.js.rv:not(.rm) .tl.reveal.is-in .seg:nth-child(3) { transition-delay: 340ms; }
+html.js.rv:not(.rm) .tl.reveal.is-in .seg:nth-child(4) { transition-delay: 520ms; }
+html.js.rv:not(.rm) .tl.reveal.is-in .seg:nth-child(5) { transition-delay: 660ms; }
+html.js.rv:not(.rm) .split.reveal .side { opacity: 0; transform: translateY(var(--rc-reveal-rise)); }
+html.js.rv:not(.rm) .split.reveal.is-in .side {
+  opacity: 1;
+  transform: none;
+  transition: opacity 560ms var(--rc-ease-out), transform 560ms var(--rc-ease-out);
+}
+html.js.rv:not(.rm) .split.reveal.is-in .me-side { transition-delay: 110ms; }
+
+/* the lit column's static end-state (P4 / P6): no JS, no GL, no guides, reduced */
+html.no-js .cmp .us, html.no-gl .cmp .us, html.no-guides .cmp .us, html.rm .cmp .us {
+  background: var(--rc-accent-tint-12);
+  transition: none;
+}
+
+/* fallbacks: no slot, and no empty column or gap where it was */
+html.no-js .guide, html.no-gl .guide, html.no-guides .guide,
+html.no-js .guide-rail, html.no-gl .guide-rail, html.no-guides .guide-rail { display: none; }
+html.no-js .cmp-grid, html.no-gl .cmp-grid, html.no-guides .cmp-grid {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "h" "t";
+}
+html.no-js .proof-grid, html.no-gl .proof-grid, html.no-guides .proof-grid {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "h" "stats" "lead" "story";
+}
+html.no-js .split, html.no-gl .split, html.no-guides .split { grid-template-areas: "you me"; }
+html.no-js .tl, html.no-gl .tl, html.no-guides .tl { grid-template-areas: "bar" "scale"; }
+
+/* mobile / portrait (the stage's framing switch) */
+@media (max-aspect-ratio: 999/1000) {
+  .proof__sub { font-size: var(--rc-fs-title-3); }
+  .stat b.num { font-size: var(--rc-fs-display-3); }
+
+  /* A: the slot beside the heading; the table stacks, one block per row */
+  .cmp-grid {
+    grid-template-columns: minmax(0, 1fr) 110px;
+    grid-template-areas: "h s" "t t";
+    column-gap: 16px;
+  }
+  .cmp-grid > .guide { width: 110px; height: 110px; }
+  .cmp, .cmp tbody, .cmp tr { display: block; }
+  .cmp thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .cmp tbody tr { padding: 16px 0; border-top: 1px solid var(--rc-line-hair); }
+  .cmp tbody tr:last-child { border-bottom: 1px solid var(--rc-line-hair); }
+  .cmp th[scope="row"] {
+    display: block;
+    padding: 0 12px 8px;
+    border: 0;
+    font-weight: 600;
+    color: var(--rc-ink-1);
+  }
+  .cmp td {
+    display: grid;
+    grid-template-columns: 11ch minmax(0, 1fr);
+    gap: 12px;
+    padding: 6px 12px;
+    border: 0;
+  }
+  .cmp td::before { content: attr(data-label); color: var(--rc-ink-3); }
+
+  /* B: the timeline turns vertical beside its track; the split stacks round its strip */
+  .tl {
+    grid-template-columns: minmax(0, 1fr) 88px;
+    grid-template-areas: "bar g" "scale scale";
+    column-gap: 12px;
+  }
+  .tl-bar { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .tl > .guide { width: 88px; height: auto; margin-top: 0; align-self: stretch; }
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "you" "g" "me";
+  }
+  .split > .guide { height: 120px; }
+  .me-side ul { grid-template-columns: minmax(0, 1fr); }
+
+  /* C: the slot sits beside the stacked stats, static */
+  .proof-grid {
+    grid-template-columns: minmax(0, 1fr) 110px;
+    grid-template-areas: "h h" "stats r" "lead lead" "story story";
+    column-gap: 16px;
+  }
+  .stats { flex-direction: column; gap: 20px; container-type: inline-size; }
+  /* FIX-PLAN-R7 P1.6: "109,000+" is 8 mono cells, about 4.64em with the -0.02em tracking. Beside the 110px guide slot
+     the column is 194px at 360 and 209px at 375, under display-3's 227px, so the size follows the column: 21cqi keeps
+     the eight cells inside it (191px at 360) and stops at display-3 where there is room. Both stats share it. */
+  .stats .stat b.num { font-size: min(var(--rc-fs-display-3), 21cqi); }
+  .guide--aside { position: static; width: 110px; height: 220px; }
+
+  /* D */
+  .pts { grid-template-columns: minmax(0, 1fr); }
+  .guarantee > .guide { height: 120px; }
+  .founder { flex-direction: column; gap: 20px; }
+
+  /* fallbacks collapse on mobile too */
+  html.no-js .cmp-grid, html.no-gl .cmp-grid, html.no-guides .cmp-grid,
+  html.no-js .proof-grid, html.no-gl .proof-grid, html.no-guides .proof-grid { grid-template-columns: minmax(0, 1fr); }
+  html.no-js .split, html.no-gl .split, html.no-guides .split { grid-template-areas: "you" "me"; }
+  html.no-js .tl, html.no-gl .tl, html.no-guides .tl {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "bar" "scale";
+  }
+}
+
+/* reduced motion: the true static end-state, the column lit */
+@media (prefers-reduced-motion: reduce) {
+  html.js.rv:not(.rm) .cmp.reveal tbody tr, html.js.rv:not(.rm) .cmp.reveal.is-in tbody tr,
+  html.js.rv:not(.rm) .tl.reveal .seg, html.js.rv:not(.rm) .tl.reveal.is-in .seg,
+  html.js.rv:not(.rm) .split.reveal .side, html.js.rv:not(.rm) .split.reveal.is-in .side {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .cmp .us { background: var(--rc-accent-tint-12); transition: none; }
+}
+
+/* ---- footer ---------------------------------------------------------------------- */
+.foot {
+  position: relative;          /* no fill: the night field (canvas, or #night's ground) runs under it, no band */
+  border-top: 1px solid var(--rc-line-hair);
+  padding: var(--rc-s-5) var(--rc-pad-x);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.foot__links { display: flex; flex-wrap: wrap; gap: 0 24px; }
+.foot__legal {
+  margin: 0;
+  font: 400 12px/1.4 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-3);
+}
+.rail__label, .system__idx, .facts li, .mono-link { font-variant-numeric: tabular-nums; }
+
+/* ---- short landscape ---------------------------------------------------------------- */
+@media (min-aspect-ratio: 1/1) and (max-height: 780px) {   /* 780, not 760: at 1366x768 the 24vh stack left 10px of air */
+  .sec--hero { padding-top: calc(var(--nav-h) + 8vh); padding-top: calc(var(--nav-h) + 8svh); }
+  .hero__copy h1 { margin-bottom: 24px; }
+}
+/* the three proof lines need ~115px; drop them only where the measured stack left < 24px of air:
+   short landscape to 720px tall, wide-and-short (>= 1.7:1) to 830px, and < 1059px wide (the buttons wrap) */
+@media (min-aspect-ratio: 1/1) and (max-height: 720px),
+       (min-aspect-ratio: 17/10) and (max-height: 830px),
+       (min-aspect-ratio: 1/1) and (max-width: 1058px) and (min-height: 781px) and (max-height: 860px) {
+  .facts--hero { display: none; }
+}
+@media (min-aspect-ratio: 1/1) and (max-height: 560px) {
+  .sec--hero { padding-top: calc(var(--nav-h) + 12px); }
+  h1 { font-size: clamp(36px, 10vh, 56px); font-size: clamp(36px, 10svh, 56px); }
+  h2 { font-size: 24px; margin-bottom: 12px; }
+  .lede, .copy p:not(.eyebrow) { font-size: 15px; margin-bottom: 16px; }
+  .eyebrow { margin-bottom: 10px; }
+  .facts--hero { display: none; }
+  .hero__copy h1 { margin-bottom: 14px; }
+  .hero__copy .lede { margin-bottom: 18px; }
+  .system { margin-top: 14px; }
+  .system__row { min-height: 34px; }
+  .system__name { font-size: 17px; }
+  .btn { min-height: 44px; }
+}
+
+/* ---- mobile / portrait (matches the stage's framing switch: aspect < 1) ------------------- */
+@media (max-aspect-ratio: 999/1000) {
+  /* FIX-R3 P2: one stepper, not a pill of six squares. Only the current layer shows, as one mono line
+     top-left under the nav ("02 Operational data"); the node is hidden. */
+  .rail { top: calc(var(--nav-h) + 12px); left: 16px; transform: none; }
+  .rail ol {
+    flex-direction: row;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .rail__item:not([aria-current]) { display: none; }
+  .rail__item { width: auto; height: 24px; justify-content: flex-start; }
+  .rail__item::after { content: ''; position: absolute; inset: -10px -8px; }   /* 44px tall hit area */
+  .rail__item .node { display: none; }
+  .rail__label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    clip-path: none;
+    overflow: visible;
+    opacity: 1;
+    transform: none;
+    background: none;
+    border: 0;
+    font: 400 13px/1.4 var(--f-mono);
+    color: var(--rc-ink-3);
+  }
+  /* no current layer (before L1 and after L6): nothing, not an empty box */
+  .rail.is-on:not(:has([aria-current])) { visibility: hidden; }
+
+  .sec--hero {                           /* copy top, deck bottom: the cut then rises through the deck */
+    align-content: start;
+    padding: calc(var(--nav-h) + 12px) 16px 0;   /* FIX-R1 P2 lever 3 */
+  }
+  .hero__copy { width: auto; }
+  h1 { font-size: clamp(30px, 8.2vw, 44px); letter-spacing: -0.035em; line-height: 1.0; max-width: none; }
+  .hero__copy h1 { margin-bottom: 12px; }     /* FIX-R1 P2 lever 2 */
+  .h1-line { white-space: normal; }
+  .hero__copy .lede, .hero__copy .btnrow, .hero__copy .facts--hero { max-width: none; }
+  .hero__copy .lede { margin-bottom: 16px; }   /* FIX-R1 P2 lever 1 */
+  .hero__copy .btnrow { gap: 8px; flex-wrap: nowrap; }
+  .hero__copy .btn { flex: 1 1 auto; padding: 0 16px; }
+
+  .sec__sticky {
+    grid-template-columns: 1fr;
+    align-items: end;
+    padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+  }
+  .copy {
+    grid-column: 1;
+    max-width: none;
+    margin-left: 0;
+    padding: 20px;
+    background: color-mix(in srgb, var(--rc-e0) 86%, transparent);   /* e-scrim (.72) fails AA over a lit pane */
+    border: 1px solid var(--rc-line-hair);
+    border-radius: var(--rc-r-card);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .copy h2 { font-size: 26px; margin-bottom: 12px; }
+  .copy p:not(.eyebrow) { font-size: 16px; margin-bottom: 16px; max-width: none; }
+  .copy .eyebrow { margin-bottom: 12px; }
+  .copy .btnrow { margin-bottom: 4px; }
+  .system { margin-top: 16px; }
+  .system__row { min-height: 40px; }
+  .system__name { font-size: 17px; }
+  .foot { padding-bottom: calc(var(--rc-s-5) + env(safe-area-inset-bottom)); }
+
+  /* FIX-R2 P3: the intro's sticky box is the lower 48 %, so through the cut the card rises into the empty
+     lower third under the deck (S10), and at the hold it sits where it did. The card stays bottom-aligned.
+     Only while the stage runs: without it the full-height box holds the poster above the card. */
+  html:not(.no-js):not(.no-gl) #intro .sec__sticky { top: 52vh; top: 52svh; height: 48vh; height: 48svh; }
+
+  /* FIX-R2 P2.3, portrait posters. Hero: the copy, then the poster in the band left under it, bottom-
+     aligned and contained in that band so it never pushes the copy or runs past the 100svh section. */
+  html.no-js .sec--hero, html.no-gl .sec--hero { grid-template-rows: auto minmax(0, 1fr); align-content: stretch; }
+  .poster--hero { position: static; width: auto; height: auto; min-height: 0; margin-top: 24px; }
+  /* Intro: one column, the poster in the top band and the card under it, so the card never covers the figures.
+     No-JS: the nav scrolled away with the page (absolute) and the rail is hidden, so 16px of air. No-GL: the
+     fixed nav plus the rail pill under it (nav + 12 + 62) stay on screen, so the band starts below them. */
+  html.no-js #intro .sec__sticky, html.no-gl #intro .sec__sticky {
+    grid-template-rows: minmax(0, 1fr) auto;
+    row-gap: 16px;
+    padding-top: 16px;
+  }
+  html.no-gl #intro .sec__sticky { padding-top: calc(var(--nav-h) + 86px); }
+  html.no-js #intro .copy, html.no-gl #intro .copy { grid-row: 2; }
+  .poster--hold img { object-position: 50% 100%; }
+  /* page manager R5: the R5 portrait hold poster frames wall 04 nearly edge to edge, so its side feathers are only
+     4-6 px and its right edge read as a dark vertical step against the green bloom. Full bleed: the poster's edges
+     sit on the viewport's edges (the box's 16px side padding, undone), so there is no step to see. */
+  html.no-js #intro .poster--hold, html.no-gl #intro .poster--hold { margin-inline: -16px; }
+}
+/* FIX-R2 P4: the three proof lines under the CTAs. .facts li sets its own font shorthand, so size it too.
+   At the eyebrow's mono size (11px) "First build in about 4 weeks" measures 185px, "You own the code and the
+   data" 191px and "For owner-run teams of 5–25" 178px: the neighbour pairs need 388 and 381px with the 12px
+   gap, past the 358px column at 390 (and the 380px one at 412), so on phones the block is 3 rows and visual
+   order is DOM order. */
+@media (max-aspect-ratio: 999/1000) {
+  .facts--hero { flex-direction: row; flex-wrap: wrap; gap: 4px 12px; margin-top: 12px; padding-top: 12px; font-size: var(--rc-fs-eyebrow); clip-path: inset(0); }
+  .facts--hero li { font-size: var(--rc-fs-eyebrow); position: relative; }
+}
+/* the hairline divider only where two lines can share a row. It sits mid-gap; a line that wraps puts its
+   divider left of the list, where the clip-path cuts it. */
+@media (max-aspect-ratio: 999/1000) and (min-width: 400px) {
+  .facts--hero li + li::before {
+    content: ""; position: absolute; left: -6.5px; top: 2px; bottom: 2px;
+    border-left: 1px solid var(--rc-line);
+  }
+}
+/* FIX-R2 P4 height guards, measured at pos 0 with the S9 deck (K0 mob [.58,.68,1.38]). The 3-row block
+   ends at a fixed px depth (the stack is px, not vh): 433px at 390 wide, 429px at 375, while the deck's
+   first drawn row sits at ~.58-.59 of the height.
+     390x844: bottom 433 (.513), deck 497, gap 64.   375x812: bottom 429 (.529), deck 474, gap 44.
+     390x812: bottom .533, gap 39.                   375x800: bottom .537, gap 40.
+   Shown from 811px tall (gap >= 39); hidden at 810 and below while the deck is drawn (at 390x780 the gap is
+   19px, at 390x720 the lines sit 18px into the deck). No-JS / no-GL has no deck, only the poster 24px under them, so they stay from 600px up. */
+@media (max-aspect-ratio: 999/1000) and (max-height: 700px) { .facts--hero { display: none; } }
+@media (max-aspect-ratio: 999/1000) and (max-height: 810px) {
+  html:not(.no-js):not(.no-gl) .facts--hero { display: none; }
+}
+@media (max-aspect-ratio: 999/1000) and (min-height: 600px) and (max-height: 700px) {
+  html.no-js .facts--hero, html.no-gl .facts--hero { display: flex; }   /* no deck at the bottom, so the room is free */
+}
+/* The CTAs' natural pair is 139 + 185 + 8 = 332px, so they share a row down to 375 (343 column) and stack
+   only below 370. */
+@media (max-aspect-ratio: 999/1000) and (max-width: 369px) {
+  .hero__copy .btnrow { flex-wrap: wrap; }
+  .hero__copy .btn { flex: 1 1 100%; }
+}
+/* Below 370px the stacked CTAs (+56px) put the 3-row bottom at 483px: the gap to the deck is 28px at
+   360x860 (.562), 41 at 360x880, 55 at 360x900. Hidden to 860px tall while the deck is drawn (360x780 and
+   360x800 hide); no-JS / no-GL keep them. */
+@media (max-aspect-ratio: 999/1000) and (max-width: 369px) and (max-height: 860px) {
+  html:not(.no-js):not(.no-gl) .facts--hero { display: none; }
+}
+
+/* ---- reduced motion -------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root.js.rv:not(.rm) .reveal, .reveal { opacity: 1; transform: none; transition: none; }
+  :root.js:not(.rm) .h1-line, .h1-line { animation: none; }
+  .btn:hover, .btn:hover .btn__arrow, .btn:hover .btn__arrow--down { transform: none; }
+}
+html.rm .reveal { opacity: 1; transform: none; transition: none; }
+html.rm .h1-line { animation: none; }
+html.rm .btn:hover, html.rm .btn:hover .btn__arrow, html.rm .btn:hover .btn__arrow--down { transform: none; }
+html.rm .btn, html.rm .btn::before, html.rm .btn__arrow, html.rm .brand,
+html.rm .rail__item, html.rm .rail__label, html.rm .mono-link, html.rm .nav .btn,
+html.rm .nav__links a, html.rm .foot__links a { transition: none; }
+/* FIX-R3 P1: #book controls do not animate under reduced motion. !important only to beat tokens.css 4.2,
+   whose global reduced rule leaves a 1ms !important transition on everything. */
+@media (prefers-reduced-motion: reduce) {
+  #book .field__input, #book .field__input::before,
+  #book .btn, #book .btn::before, #book .btn__arrow { transition: none !important; }
+}
+html.rm #book .field__input,
+html.rm #book .field__input::before, html.rm #book .btn, html.rm #book .btn::before, html.rm #book .btn__arrow { transition: none; }
+
+/* Geist Mono gives the thousands comma a full cell; pull it in so 184,578 reads as one number. */
+.sep { margin-left: -0.18em; letter-spacing: -0.18em; }

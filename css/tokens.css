@@ -1,0 +1,1030 @@
+/* ============================================================================
+   RIGHTCLICK:AI — BRAND DESIGN SYSTEM
+   tokens.css — v1.1 (2026-09-26)
+
+   v1.1 appends L2.5 at the foot of this file: the green ground and the motion
+   layer, ratified by Ben 2026-09-26. Read those blocks before changing a hue
+   or a duration here;
+   it overrides L1/L2 colour by cascade order and the values above are the
+   superseded cool-navy identity, kept for provenance.
+
+   Derived from the locked mark (Direction R, variant R2) and extending the
+   house "Motion & Artifact Design System v1.0" (2026-08-21).
+
+   THREE LAYERS. Do not collapse them.
+     L0  --ms-*   parent motion system. Verbatim. NEVER edit or redefine.
+     L1  --rc-*   brand constants. Theme-invariant. Set once.
+     L2  --rc-*   semantic. Theme-dependent. Overridden by [data-theme].
+     L2.5 --rc-*  v1.1 green ground + motion. Wins by cascade order.
+                  Prose, the eight light-ground states and the scroll policy
+                  live in INTERACTION.md — read it before changing a number.
+
+   THEMING
+     :root                 → dark ground (the brand's native ground)
+     [data-theme="light"]  → light ground
+     [data-theme="dark"]   → forces dark on any subtree
+
+   Both are SCOPED, not global-only. A light page flips one section dark with
+   data-theme="dark" on that section. This replaces the old parallel
+   --on-dark-* ladder — there is one ink ladder now, and the theme decides
+   what it resolves to.
+
+   Load order:  tokens.css  →  your page CSS.
+   ========================================================================= */
+
+/* ==========================================================================
+   L0 — PARENT: MOTION & ARTIFACT DESIGN SYSTEM v1.0
+   Copied verbatim from ../motion-system/tokens.css (moved into this brand
+   folder 2026-08-26 from RightClickAI-seo-workspace/standards/motion-system/).
+   Values here are settled. If the parent changes, re-copy this block whole;
+   do not hand-patch it.
+   ========================================================================== */
+
+:root {
+  /* ---- 1. GROUND ---- */
+  --ms-ground:        #070B16;
+  --ms-ground-deep:   #04060E;
+  --ms-ground-raised: #0C1222;
+
+  /* ---- 2. AMBIENT BLOOM ---- */
+  --ms-bloom-cool:  hsl(215 78% 42%);
+  --ms-bloom-warm:  hsl(272 72% 52%);
+  --ms-bloom-alpha: 0.42;
+  --ms-bloom-blur:  160px;
+  --ms-bloom-size:  58%;
+
+  /* ---- 3. HUE RAMP (index, not decoration) ---- */
+  --ms-ramp-1: #E8EDF7;   /* silver-white  — foundation / step 01 */
+  --ms-ramp-2: #4FE0D0;   /* cyan-teal     — step 02 */
+  --ms-ramp-3: #5B8CFF;   /* blue          — step 03 */
+  --ms-ramp-4: #A47BFF;   /* violet        — step 04 */
+  --ms-ramp-5: #E85FBF;   /* magenta       — step 05 (cap: 5 slots) */
+
+  /* ---- 4. INK ---- */
+  --ms-ink-1: #FFFFFF;
+  --ms-ink-2: rgba(255,255,255,0.72);
+  --ms-ink-3: rgba(255,255,255,0.62);
+  --ms-ink-4: rgba(255,255,255,0.30);
+
+  /* ---- 5. GLASS ---- */
+  --ms-glass-fill:   rgba(255,255,255,0.045);
+  --ms-glass-scrim:  rgba(7,11,22,0.72);
+  --ms-glass-line:   rgba(255,255,255,0.14);
+  --ms-glass-line-2: rgba(255,255,255,0.28);
+  --ms-glass-blur:   18px;
+
+  /* ---- 6. GLOW ---- */
+  --ms-hue: var(--ms-ramp-3);
+  --ms-glow-soft:
+      0 1px 2px rgba(0,0,0,0.55),
+      0 12px 40px rgba(0,0,0,0.42),
+      0 0 0 1px var(--ms-glass-line);
+  --ms-glow-lit:
+      0 1px 2px rgba(0,0,0,0.55),
+      0 12px 40px rgba(0,0,0,0.42),
+      0 0 0 1px var(--ms-glass-line-2),
+      0 0 28px -4px var(--ms-hue),
+      inset 0 0 22px -12px var(--ms-hue);
+
+  /* ---- 7. RADIUS ---- */
+  --ms-r-chip:  12px;
+  --ms-r-card:  16px;
+  --ms-r-panel: 24px;
+  --ms-r-pill:  999px;
+
+  /* ---- 8. SPACE (8px grid) ---- */
+  --ms-s-1: 8px;   --ms-s-2: 16px;  --ms-s-3: 24px;
+  --ms-s-4: 32px;  --ms-s-5: 40px;  --ms-s-6: 64px;
+  --ms-gutter:      24px;
+  --ms-card-pad:    32px;
+  --ms-row-gap:     16px;
+  --ms-rail-chip:   56px;
+  --ms-rail-gap:    12px;
+
+  /* ---- 9. TYPE ---- */
+  --ms-font: "Satoshi","Poppins",ui-sans-serif,system-ui,
+             "Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --ms-t-display: 700 clamp(38px,6.2vw,76px)/0.98 var(--ms-font);
+  --ms-t-title:   600 clamp(20px,2.1vw,30px)/1.18 var(--ms-font);
+  --ms-t-body:    400 clamp(14px,1.05vw,17px)/1.55 var(--ms-font);
+  --ms-t-eyebrow: 600 11px/1.4 var(--ms-font);
+  --ms-track-display: -0.022em;
+  --ms-track-title:   -0.012em;
+  --ms-track-eyebrow: 0.18em;
+
+  /* ---- 10. MOTION — INTERFACE CLOCK ---- */
+  --ms-d-feedback: 90ms;
+  --ms-d-micro:    140ms;
+  --ms-d-exit:     180ms;
+  --ms-d-enter:    240ms;
+  --ms-d-draw:     320ms;
+  --ms-d-grow:     260ms;
+  --ms-d-gather:   400ms;
+  --ms-d-count:    600ms;
+  --ms-d-narrative-max: 1500ms;
+  --ms-d-attention: 640ms;
+  --ms-stagger:      90ms;
+  --ms-stagger-list: 50ms;
+  --ms-type-char:    18ms;
+  --ms-d-ambient:    18s;
+  --ms-ease-out:   cubic-bezier(0.16, 0.84, 0.32, 1);
+  --ms-ease-in:    cubic-bezier(0.55, 0.00, 0.85, 0.30);
+  --ms-ease-soft:  cubic-bezier(0.42, 0.00, 0.20, 1);
+}
+
+/* ==========================================================================
+   L1 — BRAND CONSTANTS (theme-invariant)
+   These do not change between light and dark. They are the identity.
+   ========================================================================== */
+
+:root {
+  /* ---- 1.1 THE MARK'S OWN VALUES ------------------------------------
+     Fixed by the logo build. The ring cascade runs ramp-3 -> ramp-4 with
+     opacity restarting darker on each ring: 1.00->0.55, 0.72->0.38,
+     0.52->0.22. Reproduce the cascade with these, never by eyeballing. */
+  /* SUPERSEDED — see "THE MARK — RESOLVED" at the foot of this file. These
+     three are the v1.0 blue→violet cascade, kept for provenance only. */
+  --rc-mark-start:  var(--ms-ramp-3);          /* #5B8CFF, ring 1 head  */
+  --rc-mark-end:    var(--ms-ramp-4);          /* #A47BFF, ring 3 tail  */
+  --rc-mark-flat:   var(--ms-ramp-3);          /* the one-colour cut    */
+
+  /* Three-tint cut — the printable fallback. A gradient cannot survive
+     one-colour reproduction; these are the flat stand-ins. */
+  --rc-tint-1: 1.00;
+  --rc-tint-2: 0.72;
+  --rc-tint-3: 0.52;
+
+  /* Cascade opacities, ring head -> ring tail. Ring N starts below where
+     ring N-1 finished. */
+  --rc-cascade-1: 1.00 0.55;
+  --rc-cascade-2: 0.72 0.38;
+  --rc-cascade-3: 0.52 0.22;
+
+  /* ---- 1.2 BRAND HUES -----------------------------------------------
+     Stated in HSL so derivations are legible. Both ramp anchors are
+     S=100%; the ramp is a hue+lightness sweep, not a saturation sweep. */
+  --rc-h-blue:    222;   /* ramp-3 = hsl(222 100% 68%) */
+  --rc-h-violet:  259;   /* ramp-4 = hsl(259 100% 74%) */
+  --rc-h-ground:  224;   /* ground = hsl(224 52% 6%)   */
+
+  /* ---- 1.3 TYPE FAMILY ----------------------------------------------
+     Satoshi ships from Fontshare. Fontshare is blocked in some contexts
+     (the artifact CSP allows fonts.googleapis.com / fonts.gstatic.com ONLY),
+     so the stack must survive without it.
+
+     Plus Jakarta Sans is the Google-Fonts stand-in — same geometric
+     grotesque class, same closed apertures. It is NOT metric-compatible.
+     Measured at 100px in Chrome:
+
+       family              x-height   cap    "Handgloves" advance
+       Satoshi                 49      72          515.00
+       Plus Jakarta Sans       54      75          571.50   +10.2% / +11.0%
+       Poppins                 45      67          477.70    -8.2% /  -7.2%
+       system-ui (Segoe UI)    50      70          521.70    +2.0% /  +1.3%
+
+     So a plain swap reflows by ~11%. Accept that (headlines get a touch
+     wider) or kill it — see the size-adjust block below, which was measured
+     to land PJS on Satoshi exactly: x-height 49 = 49, advance -0.02%.
+
+     Order note: Poppins sits AFTER Jakarta because it is the parent motion
+     system's fallback and must stay in the chain, but it is 8% too small —
+     it is the third choice, not the second. */
+  --rc-font: "Satoshi", "Satoshi Fallback", "Plus Jakarta Sans", "Poppins",
+             ui-sans-serif, system-ui, "Segoe UI", Roboto,
+             Helvetica, Arial, sans-serif;
+  --rc-font-mono: ui-monospace, "SF Mono", "JetBrains Mono",
+                  "Cascadia Mono", Menlo, Consolas, monospace;
+
+  /* ---- 1.4 TYPE SCALE — ratio 1.25, anchored at 16px body ------------
+     Nine steps: 13 16 20 25 31 39 49 61 76.
+     Eyebrow (11px) is deliberately OFF the ladder — caps at +0.18em
+     tracking read one step larger than they measure, so it must sit
+     below step 1 or it competes with body-sm. */
+  --rc-fs-eyebrow:   11px;   /* off-ladder, intentional */
+  --rc-fs-body-sm:   13px;   /* step 0  */
+  --rc-fs-body:      16px;   /* step 1  — the anchor */
+  --rc-fs-lead:      20px;   /* step 2  */
+  --rc-fs-title-3:   25px;   /* step 3  */
+  --rc-fs-title-2:   31px;   /* step 4  */
+  --rc-fs-title-1:   39px;   /* step 5  */
+  --rc-fs-display-3: 49px;   /* step 6  */
+  --rc-fs-display-2: 61px;   /* step 7  */
+  --rc-fs-display-1: 76px;   /* step 8  — matches --ms-t-display cap */
+
+  /* Fluid pairs. Each role carries its own slope — the ladder does NOT
+     scale by one factor. Measured rendering, 1280px -> 375px:
+       display-1  76 -> 50   (-34%)
+       title-1    39 -> 30   (-23%)
+       lead       20 -> 18   (-10%)
+       body       16 -> 15   ( -6%)
+     Display collapses hardest because a 76px hero at 375px is unreadable,
+     while 16px body is correct at every width. The clamp minimums are a
+     guard rail below ~216px, not the phone size. */
+  --rc-t-eyebrow:   600 var(--rc-fs-eyebrow)/1.4  var(--rc-font);
+  --rc-t-body-sm:   400 var(--rc-fs-body-sm)/1.5  var(--rc-font);
+  --rc-t-body:      400 clamp(15px, 0.30vw + 14px, 16px)/1.6  var(--rc-font);
+  --rc-t-lead:      400 clamp(17px, 0.80vw + 15px, 20px)/1.45 var(--rc-font);
+  --rc-t-title-3:   600 clamp(20px, 1.30vw + 16px, 25px)/1.22 var(--rc-font);
+  --rc-t-title-2:   600 clamp(24px, 1.80vw + 18px, 31px)/1.18 var(--rc-font);
+  --rc-t-title-1:   700 clamp(28px, 2.80vw + 19px, 39px)/1.14 var(--rc-font);
+  --rc-t-display-3: 700 clamp(31px, 4.20vw + 20px, 49px)/1.06 var(--rc-font);
+  --rc-t-display-2: 700 clamp(34px, 5.60vw + 21px, 61px)/1.02 var(--rc-font);
+  --rc-t-display-1: 700 clamp(38px, 7.40vw + 22px, 76px)/0.98 var(--rc-font);
+
+  --rc-track-display: -0.022em;
+  --rc-track-title:   -0.012em;
+  --rc-track-lead:    -0.008em;
+  --rc-track-body:     0em;
+  --rc-track-small:    0.002em;
+  --rc-track-eyebrow:  0.18em;   /* the signature */
+
+  --rc-w-regular: 400;
+  --rc-w-medium:  500;
+  --rc-w-semi:    600;
+  --rc-w-bold:    700;
+
+  /* ---- 1.5 RADIUS / SPACE — aliases onto the parent ------------------ */
+  --rc-r-xs:    6px;
+  --rc-r-sm:    8px;
+  --rc-r-chip:  var(--ms-r-chip);    /* 12 */
+  --rc-r-card:  var(--ms-r-card);    /* 16 */
+  --rc-r-panel: var(--ms-r-panel);   /* 24 */
+  --rc-r-pill:  var(--ms-r-pill);
+
+  --rc-s-1: var(--ms-s-1);  --rc-s-2: var(--ms-s-2);  --rc-s-3: var(--ms-s-3);
+  --rc-s-4: var(--ms-s-4);  --rc-s-5: var(--ms-s-5);  --rc-s-6: var(--ms-s-6);
+  --rc-s-7: 96px;  --rc-s-8: 128px;
+
+  --rc-max-w:    1160px;
+  --rc-max-w-tx: 68ch;                        /* measure cap for prose  */
+  --rc-pad-x:    clamp(20px, 5vw, 72px);
+  --rc-section-y: clamp(80px, 10vw, 128px);
+
+  /* ---- 1.6 MOTION — aliases onto the parent -------------------------- */
+  --rc-d-press:  var(--ms-d-feedback);
+  --rc-d-micro:  var(--ms-d-micro);
+  --rc-d-exit:   var(--ms-d-exit);
+  --rc-d-enter:  var(--ms-d-enter);
+  --rc-d-panel:  var(--ms-d-grow);
+  --rc-d-reveal: 560ms;                       /* narrative, not response */
+  --rc-ease-out:  var(--ms-ease-out);
+  --rc-ease-in:   var(--ms-ease-in);
+  --rc-ease-soft: var(--ms-ease-soft);
+}
+
+/* ==========================================================================
+   L2 — SEMANTIC, DARK GROUND (default)
+   Every value below has a light-theme counterpart. If you add one here you
+   MUST add it under [data-theme="light"] too, or the light page inherits a
+   dark value and fails silently.
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---- 2.1 ELEVATION -------------------------------------------------
+     On dark, elevation = fill gets lighter. Four steps, hsl(224 ~50% L)
+     with L stepping 6 / 9 / 12 / 16. */
+  --rc-e0:      var(--ms-ground);        /* #070B16 page ground         */
+  --rc-e-deep:  var(--ms-ground-deep);   /* #04060E spotlight stage     */
+  --rc-e1:      var(--ms-ground-raised); /* #0C1222 card                */
+  --rc-e2:      #11182D;                 /* nested card, active row     */
+  --rc-e3:      #18213A;                 /* modal, popover, menu        */
+  --rc-e-sunken: #04060E;                /* well, code block, inset     */
+  --rc-e-glass:  var(--ms-glass-fill);
+  --rc-e-scrim:  var(--ms-glass-scrim);
+
+  --rc-shadow-1: 0 1px 2px rgba(0,0,0,.55);
+  --rc-shadow-2: 0 1px 2px rgba(0,0,0,.55), 0 12px 40px rgba(0,0,0,.42);
+  --rc-shadow-3: 0 2px 4px rgba(0,0,0,.60), 0 30px 80px -10px rgba(0,0,0,.66);
+
+  /* ---- 2.2 INK — four levels, no fifth ------------------------------- */
+  --rc-ink-1: var(--ms-ink-1);   /* #FFF          titles, values        */
+  --rc-ink-2: var(--ms-ink-2);   /* .72           body                  */
+  --rc-ink-3: var(--ms-ink-3);   /* .62           eyebrow, qualifier    */
+  --rc-ink-4: var(--ms-ink-4);   /* .30           watermark, disabled   */
+  --rc-ink-inverse: #0B1220;     /* text ON an accent or white fill     */
+
+  /* ---- 2.3 BORDER / DIVIDER LADDER ----------------------------------- */
+  --rc-line-hair:  rgba(255,255,255,0.08);  /* table rule, faint split  */
+  --rc-line:       var(--ms-glass-line);    /* .14 default card edge    */
+  --rc-line-2:     var(--ms-glass-line-2);  /* .28 hover / active edge  */
+  --rc-line-strong: rgba(255,255,255,0.42); /* 4.0:1 — control boundaries */
+
+  /* ---- 2.4 ACCENT ----------------------------------------------------
+     On dark the accent IS ramp-3, unmodified. #5B8CFF on #070B16 is
+     6.21:1 — clears AA for body text with headroom. */
+  --rc-accent:        var(--ms-ramp-3);          /* #5B8CFF            */
+  --rc-accent-hover:  #7BA1FF;                   /* +8% L              */
+  --rc-accent-press:  #4478F0;                   /* -8% L              */
+  --rc-accent-2:      var(--ms-ramp-4);          /* #A47BFF violet     */
+  --rc-accent-ink:    #0B1220;                   /* text on accent fill*/
+  --rc-accent-tint-06: rgba(91,140,255,0.06);
+  --rc-accent-tint-12: rgba(91,140,255,0.12);
+  --rc-accent-tint-20: rgba(91,140,255,0.20);
+  --rc-accent-line:    rgba(91,140,255,0.34);
+  --rc-accent-glow:    rgba(91,140,255,0.26);
+
+  /* ---- 2.5 SEMANTIC STATUS -------------------------------------------
+     Chosen to sit clear of the ramp. success is hue 155 (the ramp's
+     nearest neighbour is ramp-2 cyan-teal at 172 — 17deg is enough
+     separation at these saturations). danger is hue 358, clear of
+     ramp-5 magenta at 318. info deliberately IS the accent.
+     NEVER carry meaning on colour alone — pair with an icon and a word. */
+  --rc-success:      #3DDC97;   /* 11.1:1 on ground */
+  --rc-success-ink:  #0B1220;
+  --rc-success-text: var(--rc-success);
+  --rc-success-tint: rgba(61,220,151,0.12);
+  --rc-success-line: rgba(61,220,151,0.30);
+
+  --rc-warn:         #FFC24D;   /* the fill — 12.2:1 on ground        */
+  --rc-warn-ink:     #0B1220;   /* ink placed ON the amber fill        */
+  --rc-warn-text:    #FFC24D;   /* warn TEXT on the ground — 12.2:1    */
+  --rc-warn-tint:    rgba(255,194,77,0.12);
+  --rc-warn-line:    rgba(255,194,77,0.30);
+
+  --rc-danger:       #FF6B72;   /*  7.1:1 on ground */
+  --rc-danger-ink:   #0B1220;
+  --rc-danger-text:  var(--rc-danger);
+  --rc-danger-tint:  rgba(255,107,114,0.12);
+  --rc-danger-line:  rgba(255,107,114,0.30);
+
+  --rc-info:         var(--rc-accent);
+  --rc-info-ink:     #0B1220;
+  --rc-info-text:    var(--rc-accent);
+  --rc-info-tint:    var(--rc-accent-tint-12);
+  --rc-info-line:    var(--rc-accent-line);
+
+  /* ---- 2.6 FOCUS -----------------------------------------------------
+     White ring + dark halo. The halo is the 3:1 carrier when the ring
+     lands on a bright bloom overlap — do not drop it. */
+  --rc-focus-ring: #FFFFFF;
+  --rc-focus-halo: rgba(0,0,0,0.85);
+  --rc-focus-w:    2px;
+  --rc-focus-off:  2px;
+
+  /* ---- 2.7 LINK ------------------------------------------------------
+     Visited walks one step UP the ramp (blue -> violet). That is the
+     ramp doing index work, which is what it is for. */
+  --rc-link:            var(--rc-accent);
+  --rc-link-hover:      var(--rc-accent-hover);
+  --rc-link-press:      var(--rc-accent-press);
+  --rc-link-visited:    var(--rc-accent-2);
+  --rc-link-underline:  rgba(91,140,255,0.38);
+  --rc-link-underline-hover: var(--rc-accent);
+
+  /* ---- 2.8 FORM FIELD ------------------------------------------------ */
+  --rc-field-bg:          rgba(255,255,255,0.06);
+  --rc-field-bg-hover:    rgba(255,255,255,0.09);
+  --rc-field-bg-focus:    rgba(255,255,255,0.10);
+  --rc-field-bg-disabled: rgba(255,255,255,0.03);
+  /* 1.4.11: an input's boundary needs 3:1 against the adjacent colour.
+     .16 measured 1.36:1 against the field fill. line-strong (.42) is 3.5:1
+     and is exactly what that token exists for. Do not thin it for looks. */
+  --rc-field-line:         var(--rc-line-strong);
+  --rc-field-line-hover:   rgba(255,255,255,0.58);
+  --rc-field-line-focus:   var(--rc-accent);
+  --rc-field-line-invalid: var(--rc-danger);
+  --rc-field-ink:          var(--rc-ink-1);
+  --rc-field-placeholder:  rgba(255,255,255,0.48);  /* NOT ink-4 — placeholder is text */
+  --rc-field-ink-disabled: var(--rc-ink-4);
+  --rc-field-ring-focus:   0 0 0 3px rgba(91,140,255,0.24);
+  --rc-field-ring-invalid: 0 0 0 3px rgba(255,107,114,0.24);
+  --rc-field-label:        var(--rc-ink-3);
+
+  /* ---- 2.9 BLOOM ----------------------------------------------------- */
+  --rc-bloom-cool:  var(--ms-bloom-cool);
+  --rc-bloom-warm:  var(--ms-bloom-warm);
+  --rc-bloom-alpha: var(--ms-bloom-alpha);
+  --rc-bloom-blur:  var(--ms-bloom-blur);
+  --rc-bloom-size:  var(--ms-bloom-size);
+}
+
+/* ==========================================================================
+   L3 — SEMANTIC, LIGHT GROUND
+   NOT an inversion. Three things change structurally:
+
+   1. ACCENT DARKENS. #5B8CFF on paper is 3.02:1 — it fails AA for text and
+      fails white-on-it for a button. The light accent is the same hue at
+      lower lightness and pulled saturation: hsl(226 76% 52%) = #2853E2.
+      5.87:1 on paper, 6.14:1 for white on it. Both directions clear AA.
+   2. ELEVATION REVERSES ITS CARRIER. On dark, a raised surface gets
+      lighter. On paper you run out of headroom at step one, so elevation
+      is carried by SHADOW + BORDER, and the fill stays white throughout.
+      Depth downward (sunken) is the only fill move available.
+   3. INK-3 STAYS AT .62. Same measurement discipline as the parent: .62
+      alpha of #0B1220 on #F7F9FC is 5.17:1. Do not thin it to make a page
+      feel airier.
+   ========================================================================== */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ---- 3.1 ELEVATION --------------------------------------------------
+     Paper is cool-neutral at the ground's own hue (224), not warm. A warm
+     paper under a blue accent makes the accent read purple. */
+  --rc-e0:      #FCFDFE;    /* page ground — flat near-white (was #F7F9FC cool paper) */
+  --rc-e-deep:  #F4F6FA;    /* full-bleed band, alternating section    */
+  --rc-e1:      #FFFFFF;    /* card                                    */
+  --rc-e2:      #FFFFFF;    /* nested — separated by shadow, not fill  */
+  --rc-e3:      #FFFFFF;    /* modal, popover                          */
+  /* A light card is #FFF on #F7F9FC — 1.03:1. The fill separates nothing.
+     Every raised light surface needs BOTH --rc-line AND a --rc-shadow-*.
+     Either alone under-separates. On dark, the fill does the work and the
+     border is optional. */
+  --rc-e-sunken: #F4F6FA;   /* well, code block, inset                 */
+  --rc-e-glass:  rgba(255,255,255,0.72);
+  --rc-e-scrim:  rgba(252,253,254,0.90);
+
+  --rc-shadow-1: 0 1px 2px rgba(11,18,32,.06);
+  --rc-shadow-2: 0 1px 2px rgba(11,18,32,.05), 0 8px 24px rgba(11,18,32,.08);
+  --rc-shadow-3: 0 2px 4px rgba(11,18,32,.06), 0 30px 70px -12px rgba(11,18,32,.20);
+
+  /* ---- 3.2 INK — mirrors the dark ladder's ratios --------------------- */
+  --rc-ink-1: #0B1220;                     /* 17.1:1 on paper           */
+  --rc-ink-2: rgba(11,18,32,0.76);         /*  9.4:1                    */
+  --rc-ink-3: rgba(11,18,32,0.62);         /*  5.2:1 — the AA floor     */
+  --rc-ink-4: rgba(11,18,32,0.34);         /* decorative / disabled     */
+  --rc-ink-inverse: #FFFFFF;
+
+  /* ---- 3.3 BORDER / DIVIDER ------------------------------------------- */
+  --rc-line-hair:   rgba(11,18,32,0.06);
+  --rc-line:        rgba(11,18,32,0.10);
+  --rc-line-2:      rgba(11,18,32,0.16);
+  --rc-line-strong: rgba(11,18,32,0.48);   /* 3.3:1 — control boundaries */
+
+  /* ---- 3.4 ACCENT ----------------------------------------------------- */
+  --rc-accent:        #2853E2;   /* hsl(226 76% 52%) */
+  --rc-accent-hover:  #1B47DA;   /* hsl(226 78% 48%) */
+  --rc-accent-press:  #123ECE;   /* hsl(226 84% 44%) */
+  --rc-accent-2:      #7039D1;   /* hsl(262 62% 52%) — violet, darkened */
+  --rc-accent-ink:    #FFFFFF;
+  --rc-accent-tint-06: rgba(40,83,226,0.06);
+  --rc-accent-tint-12: rgba(40,83,226,0.10);
+  --rc-accent-tint-20: rgba(40,83,226,0.16);
+  --rc-accent-line:    rgba(40,83,226,0.28);
+  --rc-accent-glow:    rgba(40,83,226,0.22);
+
+  /* ---- 3.5 SEMANTIC STATUS --------------------------------------------
+     Amber splits into a fill and an ink. #F5A524 is 1.9:1 on paper — it
+     works as a dot, a border, or a fill, and NEVER as text. Warning text
+     uses --rc-warn-ink. This split does not exist on dark, where the
+     amber is already high-contrast. */
+  --rc-success:      #0E7A54;   /* 5.1:1 on paper, 5.3:1 white-on-it */
+  --rc-success-ink:  #FFFFFF;
+  --rc-success-text: var(--rc-success);
+  --rc-success-tint: rgba(14,122,84,0.09);
+  --rc-success-line: rgba(14,122,84,0.26);
+
+  --rc-warn:         #F5A524;   /* FILL / DOT / BORDER ONLY — 1.9:1  */
+  --rc-warn-ink:     #0B1220;   /* ink placed ON the amber fill      */
+  --rc-warn-text:    #8A5300;   /* warn TEXT on paper — 6.0:1        */
+  --rc-warn-tint:    rgba(245,165,36,0.14);
+  --rc-warn-line:    rgba(245,165,36,0.42);
+
+  --rc-danger:       #C2262E;   /* 5.5:1 on paper, 5.8:1 white-on-it */
+  --rc-danger-ink:   #FFFFFF;
+  --rc-danger-text:  var(--rc-danger);
+  --rc-danger-tint:  rgba(194,38,46,0.08);
+  --rc-danger-line:  rgba(194,38,46,0.26);
+
+  --rc-info:         var(--rc-accent);
+  --rc-info-ink:     #FFFFFF;
+  --rc-info-text:    var(--rc-accent);
+  --rc-info-tint:    var(--rc-accent-tint-12);
+  --rc-info-line:    var(--rc-accent-line);
+
+  /* ---- 3.6 FOCUS — inverted carrier ------------------------------------
+     Accent ring + white halo. A white ring on paper is invisible; a black
+     ring on paper has no halo to separate it from dark ink. */
+  --rc-focus-ring: var(--rc-accent);
+  --rc-focus-halo: rgba(255,255,255,0.95);
+
+  /* ---- 3.7 LINK -------------------------------------------------------- */
+  --rc-link:           var(--rc-accent);
+  --rc-link-hover:     var(--rc-accent-hover);
+  --rc-link-press:     var(--rc-accent-press);
+  --rc-link-visited:   var(--rc-accent-2);
+  --rc-link-underline: rgba(40,83,226,0.32);
+  --rc-link-underline-hover: var(--rc-accent);
+
+  /* ---- 3.8 FORM FIELD --------------------------------------------------
+     On paper a field is a WELL, not a raised chip: fill is white, and the
+     border does the work. The dark theme does the opposite. */
+  --rc-field-bg:          #FFFFFF;
+  --rc-field-bg-hover:    #FFFFFF;
+  --rc-field-bg-focus:    #FFFFFF;
+  --rc-field-bg-disabled: #EDF1F7;
+  /* 1.4.11 again, and worse on paper: a white field on #F7F9FC has no fill
+     contrast at all, so the border carries the entire boundary. .18 measured
+     1.48:1. .48 measures 3.3:1. It looks heavier than a fashionable light
+     form. It is also the only version a keyboard user can find. */
+  --rc-field-line:         var(--rc-line-strong);
+  --rc-field-line-hover:   rgba(11,18,32,0.62);
+  --rc-field-line-focus:   var(--rc-accent);
+  --rc-field-line-invalid: var(--rc-danger);
+  --rc-field-ink:          var(--rc-ink-1);
+  --rc-field-placeholder:  rgba(11,18,32,0.60);  /* NOT ink-4 — placeholder is text */
+  --rc-field-ink-disabled: var(--rc-ink-4);
+  --rc-field-ring-focus:   0 0 0 3px rgba(40,83,226,0.18);
+  --rc-field-ring-invalid: 0 0 0 3px rgba(194,38,46,0.16);
+  --rc-field-label:        var(--rc-ink-3);
+
+  /* ---- 3.9 BLOOM — quieter on paper -------------------------------------
+     Same two hues, but alpha drops from .42 to .10. At .42 on paper the
+     blooms read as printing errors, not atmosphere. */
+  --rc-bloom-cool:  hsl(215 78% 52%);
+  --rc-bloom-warm:  hsl(272 72% 62%);
+  --rc-bloom-alpha: 0.10;
+  --rc-bloom-blur:  180px;
+}
+
+/* ==========================================================================
+   L4 — PRIMITIVES
+   The small number of rules that must ship with the tokens because getting
+   them wrong breaks accessibility rather than looks.
+   ========================================================================== */
+
+/* ---- 4.1 FOCUS — works on both grounds, resolves through the theme ---- */
+:where(a, button, [role="button"], input, select, textarea, summary,
+       [tabindex]):focus-visible {
+  outline: var(--rc-focus-w) solid var(--rc-focus-ring);
+  outline-offset: var(--rc-focus-off);
+  box-shadow: 0 0 0 4px var(--rc-focus-halo);
+  border-radius: var(--rc-r-chip);
+}
+:where(a, button, [role="button"], input, select, textarea,
+       [tabindex]):focus:not(:focus-visible) { outline: none; }
+
+/* ---- 4.2 THE NON-NEGOTIABLE ------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ms-d-feedback:0ms; --ms-d-micro:0ms; --ms-d-exit:0ms;
+    --ms-d-enter:0ms;    --ms-d-draw:0ms;  --ms-d-grow:0ms;
+    --ms-d-gather:0ms;   --ms-d-count:0ms; --ms-d-attention:0ms;
+    --ms-stagger:0ms;    --ms-stagger-list:0ms; --ms-type-char:0ms;
+    --ms-d-ambient:0s;   --rc-d-reveal:0ms;
+  }
+  *, *::before, *::after {
+    animation-duration:1ms !important; animation-iteration-count:1 !important;
+    transition-duration:1ms !important; scroll-behavior:auto !important;
+  }
+}
+
+/* ---- 4.2b ZERO-REFLOW FALLBACK (optional) -----------------------------
+   size-adjust can only be attached to an @font-face you declare yourself, and
+   you cannot re-declare a family Google Fonts already served. So this needs
+   Plus Jakarta Sans SELF-HOSTED as woff2. Drop the file next to this CSS,
+   uncomment, and "Satoshi Fallback" takes over the slot ahead of the plain
+   family in --rc-font.
+
+   90.1% is measured, not guessed: it puts PJS at x-height 49 (Satoshi: 49)
+   and "Handgloves" at 514.92px (Satoshi: 515.00). Cap-height still lands at
+   68 vs Satoshi's 72 — PJS carries a different cap-to-x proportion and no
+   single scalar fixes both. Headlines are marginally shorter; nothing reflows.
+
+@font-face {
+  font-family: "Satoshi Fallback";
+  src: url("plus-jakarta-sans-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  size-adjust: 90.1%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122;
+}
+*/
+
+/* ---- 4.3 SELECTION / SCROLLBAR --------------------------------------- */
+::selection { background: var(--rc-accent-tint-20); color: var(--rc-ink-1); }
+:root { scrollbar-color: var(--rc-line-strong) transparent; }
+
+/* ---- 4.4 THE EYEBROW — the signature, one rule --------------------------
+   Uppercase, 11px, +0.18em. If it is not tracked it is not our eyebrow. */
+.rc-eyebrow {
+  font: var(--rc-t-eyebrow);
+  letter-spacing: var(--rc-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--rc-ink-3);
+  display: inline-block;
+}
+.rc-eyebrow--accent { color: var(--rc-accent); }
+
+/* ---- 4.5 AMBIENT BLOOM — the ground is never a flat colour ------------ */
+.rc-ground {
+  position: relative;
+  background: var(--rc-e0);
+  isolation: isolate;
+}
+.rc-ground::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(var(--rc-bloom-size) var(--rc-bloom-size) at 12% 8%,
+      var(--rc-bloom-cool) 0%, transparent 70%),
+    radial-gradient(var(--rc-bloom-size) var(--rc-bloom-size) at 88% 92%,
+      var(--rc-bloom-warm) 0%, transparent 70%);
+  opacity: var(--rc-bloom-alpha);
+  filter: blur(var(--rc-bloom-blur));
+  /* A large blur radius expands the element's paint area and inflates
+     document scrollWidth — measured 397 vs a 375 viewport. Clip it. */
+  clip-path: inset(0);
+}
+
+/* ==========================================================================
+   L2.5 — GREEN GROUND, v1.1 (2026-09-26)
+
+   WHY THIS IS AN APPENDED BLOCK AND NOT AN EDIT IN PLACE.
+   Everything above was measured — the type metrics, the contrast sweep, the
+   nine-step ladder, the cascade opacities. Re-typing those to change a hue
+   would put all of it at risk for no gain. This block redefines COLOUR ONLY,
+   for both grounds, and wins by cascade order at equal specificity. Delete
+   the block and the file is v1.0 again. Nothing else reverts.
+
+   WHAT CHANGED. The L1/L2 identity moves from cool-navy ground + blue→violet
+   accent to a green scale. Ratified by Ben 2026-09-26 off directions R and S
+   in `reference-page.html`, which is the locked build this block serves.
+
+   WHAT DID NOT CHANGE, and must not be changed here:
+   - L0 `--ms-*`. Still copied verbatim from brand/motion-system/tokens.css.
+     If the parent moves, re-copy that block whole.
+   - Type family, the nine-step scale, line-heights, tracking, radius, space,
+     motion, the focus geometry. All still v1.0 and all still measured.
+   - `--rc-mark-*` as written in L1 above. Those values are the SUPERSEDED
+     blue→violet cascade; the green cut is at the foot of this file under
+     THE MARK — RESOLVED, and wins by cascade order.
+
+   THE GREEN SCALE. Eight steps. Everything below derives from these; do not
+   introduce a ninth or a one-off.
+     950 #06251C   800 #0B4535   700 #0E5A45   600 #12735A
+     400 #4FA98B   200 #BFE0D2   100 #E3F1EA   050 #F1F8F4
+   ========================================================================== */
+
+:root {
+  /* ---- the scale itself, theme-invariant ---------------------------- */
+  --rc-g-950: #06251C;
+  --rc-g-800: #0B4535;
+  --rc-g-700: #0E5A45;
+  --rc-g-600: #12735A;
+  --rc-g-400: #4FA98B;
+  --rc-g-200: #BFE0D2;
+  --rc-g-100: #E3F1EA;
+  --rc-g-050: #F1F8F4;
+  --rc-h-green: 158;   /* 700 = hsl(158 74% 20%) */
+
+  /* ---- RAMP AS INDEX — fixed meanings, assigned 2026-09-26 ----------
+     The ramp is no longer decorative and no longer the accent. Each hue
+     now names one thing and names nothing else. Five slots, hard cap.
+     Hue is never the only carrier: every use pairs with a label or a
+     position (WCAG 1.4.1), which is why a seven-item set gets value
+     steps and an index, not two invented hues. */
+  /* MARKER, NEVER SURFACE — ruled 2026-09-26.
+     Three of these hues are blue, violet and cyan, and Ben killed blue and
+     violet as WORLD colour. Both rules hold, because the ban is on area and
+     the ramp is not an area: a ramp hue may appear only as a MARKER sitting
+     ON a neutral or green surface, never AS the surface, the fill, the field
+     or the atmosphere. Cap it at roughly 2% of a frame and never larger than
+     the node size.
+
+     So a thing that IS ops data does not become cyan. Its MARKER becomes
+     cyan, and the thing itself stays neutral. That is exactly what the
+     locked build does: white plates, coloured nodes. A set of seven peer
+     surfaces therefore stays neutral no matter what each one is, and carries
+     identity in its node cluster, its edge label and its index. */
+  --rc-idx-data:   var(--ms-ramp-2);   /* #4FE0D0  ops data            */
+  --rc-idx-wiki:   var(--ms-ramp-3);   /* #5B8CFF  wiki                */
+  --rc-idx-skills: var(--ms-ramp-4);   /* #A47BFF  skills              */
+  --rc-idx-human:  var(--rc-accent);   /* the human decision point     */
+  --rc-idx-spare:  var(--ms-ramp-5);   /* #E85FBF  unassigned — leave it */
+
+  /* ---- NODE / STATE MARKER — settled 2026-09-26 ---------------------
+     Square, not round. Done = filled. Live = outlined with the core drawn
+     as two inset rings so the core colour sits INSIDE the square. Ahead =
+     empty outline. Lifted from direction C and applied everywhere. */
+  --rc-node-size: 11px;
+  --rc-node-r:    2px;
+  --rc-node-bw:   1.5px;
+}
+
+/* --------------------------------------------------------------------------
+   L2.5a — DARK GROUND (default)
+   -------------------------------------------------------------------------- */
+:root,
+[data-theme="dark"] {
+  --rc-e0:       #060D0B;
+  --rc-e-deep:   #030705;
+  --rc-e1:       #0B1511;
+  --rc-e2:       #0F1C17;
+  --rc-e3:       #14251E;
+  --rc-e-sunken: #030705;
+  --rc-e-scrim:  rgba(6,13,11,0.72);   /* was ms-glass-scrim, navy-based */
+
+  /* ink and line ladders are unchanged — a white alpha ladder is ground-
+     agnostic and the measured 0.62 floor for ink-3 still holds. */
+
+  --rc-accent:        #14B37D;   /* hsl(160 79% 39%) — the lift. #0E5A45
+                                    measures 1.9:1 here and cannot carry. */
+  --rc-accent-hover:  #2AC791;
+  --rc-accent-press:  #0E9B6A;
+  --rc-accent-2:      var(--ms-ramp-2);   /* #4FE0D0, the live-state core */
+  --rc-accent-ink:    #04241A;
+  --rc-accent-tint-06: rgba(20,179,125,0.06);
+  --rc-accent-tint-12: rgba(20,179,125,0.12);
+  --rc-accent-tint-20: rgba(20,179,125,0.20);
+  --rc-accent-line:    rgba(20,179,125,0.34);
+  --rc-accent-glow:    rgba(20,179,125,0.26);
+
+  /* SUCCESS COLLIDES WITH THE ACCENT NOW. On a green-accent system, green
+     alone no longer means "it worked" — it also means "this is a control".
+     So success keeps a green but a lighter one, and every success state
+     MUST ship a glyph as well. Do not remove the glyph to save space. */
+  --rc-success:      #2AC791;
+  --rc-success-ink:  #04241A;
+  --rc-success-text: #6FE4B8;
+  --rc-success-tint: rgba(42,199,145,0.14);
+  --rc-success-line: rgba(42,199,145,0.38);
+
+  /* warn and danger are unchanged — they were never green and still read. */
+
+  --rc-info:      var(--ms-ramp-3);   /* #5B8CFF — the freed blue         */
+  --rc-info-ink:  #04241A;
+  --rc-info-text: var(--ms-ramp-3);
+  --rc-info-tint: rgba(91,140,255,0.14);
+  --rc-info-line: rgba(91,140,255,0.36);
+
+  --rc-focus-ring: #4FE0D0;
+  --rc-focus-halo: rgba(79,224,208,0.28);
+
+  --rc-link:            var(--rc-accent);
+  --rc-link-hover:      var(--rc-accent-hover);
+  --rc-link-press:      var(--rc-accent-press);
+  --rc-link-visited:    var(--ms-ramp-4);
+  --rc-link-underline:  rgba(20,179,125,0.38);
+  --rc-link-underline-hover: var(--rc-accent);
+
+  --rc-field-line-focus: var(--rc-accent);
+  --rc-field-ring-focus: 0 0 0 3px rgba(20,179,125,0.24);
+  --rc-field-label:      var(--rc-ink-3);
+
+  --rc-bloom-cool:  hsl(152 74% 32%);
+  --rc-bloom-warm:  hsl(140 60% 28%);
+  --rc-bloom-alpha: 0.48;
+  --rc-bloom-blur:  120px;
+  --rc-bloom-size:  58%;
+}
+
+/* --------------------------------------------------------------------------
+   L2.5b — LIGHT GROUND
+   Direction R. This is the primary surface: marketing pages, reports,
+   proposals, dashboards, and the sim board. The dark ground above is a
+   marketing surface only.
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --rc-e0:       #FFFFFF;
+  --rc-e-deep:   #F1F8F4;
+  --rc-e1:       rgba(255,255,255,0.92);   /* the card, over the bloom    */
+  --rc-e2:       #F1F8F4;
+  --rc-e3:       #FFFFFF;
+  --rc-e-sunken: #E9F3EC;                  /* the panel, and the 3D deck  */
+  --rc-e-glass:  rgba(255,255,255,0.72);
+  --rc-e-scrim:  rgba(255,255,255,0.86);
+
+  /* Shadows carry the green, not a neutral grey. This is the single
+     cheapest thing that stops a light page reading as a default template. */
+  --rc-shadow-1: 0 1px 2px rgba(6,37,28,0.04);
+  --rc-shadow-2: 0 1px 2px rgba(6,37,28,0.04), 0 26px 44px -30px rgba(14,90,69,0.70);
+  --rc-shadow-3: 0 2px 4px rgba(6,37,28,0.07), 0 40px 80px -30px rgba(14,90,69,0.80);
+
+  --rc-ink-1: #06251C;                  /* 15.8:1 on #FFF               */
+  --rc-ink-2: #44554E;                  /*  8.1:1                       */
+  --rc-ink-3: #6C8379;                  /*  4.6:1 — the AA floor        */
+  --rc-ink-4: rgba(6,37,28,0.34);       /* decorative / disabled only   */
+  --rc-ink-inverse: #F1FBF7;
+
+  --rc-line-hair:   rgba(14,90,69,0.07);
+  --rc-line:        rgba(14,90,69,0.15);
+  --rc-line-2:      rgba(14,90,69,0.24);
+  --rc-line-strong: rgba(14,90,69,0.40);
+
+  --rc-accent:        #0E5A45;   /* 8.4:1 on #FFF — carries body text    */
+  --rc-accent-hover:  #12735A;
+  --rc-accent-press:  #0B4535;
+  --rc-accent-2:      #4FA98B;
+  --rc-accent-ink:    #F1FBF7;
+  --rc-accent-tint-06: rgba(14,90,69,0.06);
+  --rc-accent-tint-12: rgba(14,90,69,0.10);
+  --rc-accent-tint-20: rgba(14,90,69,0.16);
+  --rc-accent-line:    rgba(14,90,69,0.28);
+  --rc-accent-glow:    rgba(14,90,69,0.22);
+
+  /* Same collision as on dark, same remedy: a glyph is mandatory. */
+  --rc-success:      #12735A;
+  --rc-success-ink:  #F1FBF7;
+  --rc-success-text: #0B4535;
+  --rc-success-tint: rgba(18,115,90,0.10);
+  --rc-success-line: rgba(18,115,90,0.32);
+
+  --rc-info:      #2853E2;
+  --rc-info-ink:  #FFFFFF;
+  --rc-info-text: #2853E2;
+  --rc-info-tint: rgba(40,83,226,0.08);
+  --rc-info-line: rgba(40,83,226,0.28);
+
+  --rc-focus-ring: #0E5A45;
+  --rc-focus-halo: rgba(14,90,69,0.22);
+
+  --rc-link:            var(--rc-accent);
+  --rc-link-hover:      var(--rc-accent-hover);
+  --rc-link-press:      var(--rc-accent-press);
+  --rc-link-visited:    #6550B9;
+  --rc-link-underline:  rgba(14,90,69,0.32);
+  --rc-link-underline-hover: var(--rc-accent);
+
+  --rc-field-bg:          #FFFFFF;
+  --rc-field-bg-hover:    #FCFEFD;
+  --rc-field-bg-focus:    #FFFFFF;
+  --rc-field-bg-disabled: #F1F8F4;
+  --rc-field-line:        rgba(14,90,69,0.22);
+  --rc-field-line-hover:  rgba(14,90,69,0.34);
+  --rc-field-line-focus:  var(--rc-accent);
+  --rc-field-ink:         var(--rc-ink-1);
+  --rc-field-placeholder: #8CA39A;
+  --rc-field-ink-disabled: var(--rc-ink-4);
+  --rc-field-ring-focus:  0 0 0 3px rgba(14,90,69,0.18);
+  --rc-field-label:       var(--rc-ink-2);
+
+  --rc-bloom-cool:  hsl(152 66% 44%);
+  --rc-bloom-warm:  hsl(140 58% 42%);
+  --rc-bloom-alpha: 0.20;
+  --rc-bloom-blur:  120px;
+}
+
+/* --------------------------------------------------------------------------
+   L2.5c — THE BLOOM FIELD, CORRECTED FOR v1.1
+
+   v1.0's `.rc-ground` puts one bloom top-left and one bottom-right at
+   `--rc-bloom-size` 58%. The locked build uses THREE, at fixed positions,
+   sized so the field runs the whole page instead of fading out under the
+   hero. Positions are part of the identity now; do not move them per page.
+   -------------------------------------------------------------------------- */
+.rc-ground::before {
+  background:
+    radial-gradient(58% 58% at -4% -12%,  var(--rc-bloom-cool) 0%, transparent 70%),
+    radial-gradient(50% 50% at 104% 6%,   var(--rc-bloom-warm) 0%, transparent 70%),
+    radial-gradient(46% 46% at 48% 58%,   var(--rc-bloom-cool) 0%, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   L2.5d — MOTION, v1.1 (2026-09-26)
+   Companion to INTERACTION.md, which carries the prose, the eight light-ground
+   states, and the scroll policy. Read that before changing a number here.
+
+   THREE LAYERS, THREE BARS. One cap across all motion is wrong in both
+   directions — it false-fails a cinematic reveal and lets a sluggish dropdown
+   pass. Classify by what triggers it:
+     pointer/keyboard, user waiting     -> functional, <300ms HARD
+     pointer, marketing, decorative     -> expressive hover, 0.35-0.6s
+     scroll position or first view      -> narrative, 0.75-1.1s
+   Continuous ambient motion is exempt from all three but still bound by the
+   transform/opacity rule. Provenance: mengto DELTAS D1.
+   -------------------------------------------------------------------------- */
+:root {
+  /* ---- EASING — these OVERRIDE the L0 aliases on purpose -------------
+     L0 carries --ms-ease-out: cubic-bezier(0.16,0.84,0.32,1). Emil's curve
+     leaves the origin harder and is what standards/interaction-motion-
+     standards.md mandates, so the brand layer uses it. L0 is untouched: the
+     twelve diagram patterns were timed against the parent curve and keep it.
+     Building a §6 PATTERN -> use --ms-*. Building INTERFACE -> use --rc-*. */
+  --rc-ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --rc-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --rc-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* --rc-ease-in stays defined for exits that fly off-screen and is BANNED
+     on any enter, hover or morph. It delays the first movement, which is the
+     frame the user is watching. */
+
+  /* ---- FUNCTIONAL LAYER — < 300ms, hard ---------------------------- */
+  --rc-d-press:   120ms;   /* :active scale(0.97) on every pressable    */
+  --rc-d-hover:   160ms;   /* functional hover — edge, shadow, 1px lift */
+  --rc-d-micro:   140ms;   /* dropdown, tooltip, chip                   */
+  --rc-d-exit:    180ms;   /* ~65% of enter; the user already decided    */
+  --rc-d-enter:   240ms;   /* card, panel, layer                        */
+  --rc-d-panel:   260ms;   /* container grow-to-fit                     */
+  --rc-d-attention: 640ms; /* error wobble — attention, not feedback    */
+
+  /* ---- EXPRESSIVE HOVER — 0.35-0.6s, marketing surfaces only -------
+     Did not exist in v1.0, which is why every hover in the system was
+     being timed against the functional bar and reading flat. */
+  --rc-d-hover-x: 420ms;
+
+  /* ---- NARRATIVE LAYER — 0.75-1.1s -------------------------------- */
+  --rc-d-reveal:  800ms;   /* section reveal. WAS 560ms in v1.0, which sat
+                              BELOW the 0.75s narrative floor — a contra-
+                              diction inside our own tokens. Corrected. */
+  --rc-d-reveal-max: 1100ms;
+
+  /* ---- STAGGER — measured, not guessed ---------------------------- */
+  --rc-stagger-list:  50ms;   /* rows in a plain list. Not 30, not 100  */
+  --rc-stagger-layer: 90ms;   /* layers in a built set — iso stack, chain */
+
+  /* ---- SCROLL — the policy that did not exist ---------------------
+     Full rules in INTERACTION.md §3. The load-bearing ones: reveal ONCE,
+     never on scroll-back; a content reveal never scrubs; no pinning on a
+     content page; one smooth-scroll engine or none. */
+  --rc-scroll-start: 80%;  /* section top hits 80% down the viewport.
+                              top bottom fires off-screen and is wasted;
+                              top center means arriving mid-build. */
+  --rc-reveal-rise:  12px; /* not 40 — a long travel reads as a slide-in */
+}
+
+/* Reduced motion resolves to the TRUE STATIC END-STATE, not a faster
+   animation. Keep opacity and colour where they aid comprehension; drop
+   everything that moves. JS motion must ALSO check
+   matchMedia('(prefers-reduced-motion: reduce)') and jump to the final
+   value — an observer that only shortens its duration still moves. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rc-d-press:0ms; --rc-d-hover:0ms; --rc-d-micro:0ms; --rc-d-exit:0ms;
+    --rc-d-enter:0ms; --rc-d-panel:0ms; --rc-d-attention:0ms;
+    --rc-d-hover-x:0ms; --rc-d-reveal:0ms; --rc-d-reveal-max:0ms;
+    --rc-stagger-list:0ms; --rc-stagger-layer:0ms; --rc-reveal-rise:0px;
+  }
+}
+
+/* Hover is gated behind a real pointer. Touch fires hover on tap and leaves
+   the state stuck on. Every hover rule in a component belongs inside this. */
+@media (hover: hover) and (pointer: fine) {
+  /* component hover rules go here */
+}
+
+/* --------------------------------------------------------------------------
+   THE MARK — RESOLVED 2026-09-26. Option B2, "deep".
+
+   The logo was the last thing in the system contradicting itself: a blue→violet
+   ring cascade above a green button in every nav bar. Ben picked B (re-cut the
+   cascade in green) and then rejected the first cut as neon.
+
+   WHY THE FIRST CUT WAS NEON, because it is the reusable part: that remap moved
+   the HUE and kept the source blue's lightness and saturation. Blue at L 68%
+   S 100% is a strong blue; the same two numbers at a green hue give #5BFFC3,
+   full-saturation mint. The neon was never a green problem. It was a lightness
+   problem, and the fix is to move lightness and saturation, not hue.
+
+   B2 holds the hue travel at 158° → 176° (18°) and re-cuts the value ladder so
+   the head lands beside --rc-g-700. Mark and button are then the same green.
+
+   THE COST, measured rather than assumed. The original cascade travelled 37° of
+   hue; B2 travels 18°. Rings are separated by hue AND by the opacity cascade
+   (1.00 → 0.22), so cutting the hue contribution by half leans the separation on
+   the value ladder. At 64 and 50px all three rings read. At 35px ring 3 is faint
+   but present. At 20px and below the mark collapses to a blob —
+   AND SO DOES THE ORIGINAL BLUE, tested side by side as a control in
+   ../logo/standalone-logo/reduction-green.html. The small-size failure is the
+   cascade, not the colour. B2 is no worse at any size than what shipped.
+
+   Hence the floor below: the cascade is the mark at 32px and up; the node form
+   is the mark below that. That is the same square as --rc-node-*, so the nav
+   mark and every state marker on the page become one object at small sizes.
+   -------------------------------------------------------------------------- */
+:root {
+  /* Ring cascade, head → tail. Light ground. */
+  --rc-mark-start: #0D6042;   /* ring 1 head — beside --rc-g-700 #0E5A45 */
+  --rc-mark-mid:   #15725E;
+  --rc-mark-end:   #1F827B;   /* ring 3 tail */
+  --rc-mark-flat:  #0E5A45;   /* the one-colour cut = the accent            */
+
+  /* Lifted twin. #0D6042 at L 0.215 is invisible on #060D0B, exactly as
+     #0E5A45 is, so the mark lifts on dark the same way --rc-accent does. */
+  --rc-mark-start-dark: #1A9E6D;
+  --rc-mark-mid-dark:   #25B193;
+  --rc-mark-end-dark:   #33C1B8;
+  --rc-mark-flat-dark:  #14B37D;
+
+  /* Cascade opacities, ring head → ring tail. Unchanged from v1.0 — the
+     ladder is doing MORE work now, so do not flatten it to compensate for
+     the shorter hue sweep. */
+  --rc-cascade-1: 1.00 0.55;
+  --rc-cascade-2: 0.72 0.38;
+  --rc-cascade-3: 0.52 0.22;
+
+  /* The size floor. Below this the cascade is a blob in any colour. */
+  --rc-mark-min: 32px;
+}
+
+/* --------------------------------------------------------------------------
+   MARK USAGE — three rules
+
+   1. AT 32px AND UP use the cascade:
+        ../logo/standalone-logo/svg-green/r2-p35-green.svg
+        ../logo/standalone-logo/svg-green/r2-p35-ondark-green.svg
+      r2-p35 is the locked variant. r1/r3/r4 exist in the same cut for the
+      cases the logo brief already covers.
+
+   2. BELOW 32px use the node form — the --rc-node-* square with the accent
+      ground and an --rc-idx-data core. It is what reference-page.html's nav
+      already uses, and it is the state marker at size, so the two agree.
+
+   3. ONE-COLOUR REPRODUCTION uses --rc-mark-flat. A gradient cannot survive a
+      single-colour cut; do not approximate the cascade with a mid tone.
+   -------------------------------------------------------------------------- */
