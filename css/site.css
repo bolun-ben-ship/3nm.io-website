@@ -204,7 +204,7 @@ html.no-js .nav { position: absolute; }
   white-space: nowrap;
   transition: color var(--rc-d-micro) var(--rc-ease-out);
 }
-.nav__links a[aria-current="page"], .foot__links a[aria-current="page"] {
+.nav__links a[aria-current], .foot__links a[aria-current] {
   color: var(--rc-ink-1);
   text-decoration: underline 1px;
   text-underline-offset: 6px;
@@ -227,6 +227,12 @@ html.no-js .nav { position: absolute; }
   }
   .nav__links { gap: 14px; margin-right: 14px; }
   .nav__links a { font-size: 14px; }
+}
+/* FIX-PLAN-R8 P1.2: with Blog in the bar, 360 px needs a tighter nav and the Book button's arrow drops out. */
+@media (max-width: 399px) {
+  .nav__links { gap: 10px; margin-right: 10px; }
+  .nav__links a { font-size: 13px; }
+  .nav .btn--sm .btn__arrow { display: none; }
 }
 
 /* ---- node: mark, rail marker, list marker (one component) --------------- */

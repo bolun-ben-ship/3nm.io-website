@@ -12,13 +12,7 @@
     { "source": "/case-study-executive-recruitment", "destination": "/case-studies#executive-recruitment", "permanent": true },
     { "source": "/compliance-workflow-case-study", "destination": "/case-studies#compliance-workflow", "permanent": true },
     { "source": "/about", "destination": "/", "permanent": false },
-    { "source": "/how-it-works", "destination": "/", "permanent": false },
-    { "source": "/blog", "destination": "/", "permanent": false },
-    { "source": "/why-ai-automation-projects-fail", "destination": "/", "permanent": false },
-    { "source": "/cost-of-manual-workflows", "destination": "/", "permanent": false },
-    { "source": "/operational-visibility-first", "destination": "/", "permanent": false },
-    { "source": "/self-improving-system", "destination": "/", "permanent": false },
-    { "source": "/what-is-an-ai-operating-system", "destination": "/", "permanent": false }
+    { "source": "/how-it-works", "destination": "/", "permanent": false }
   ],
   "headers": [
     {

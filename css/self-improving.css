@@ -1,0 +1,597 @@
+/* ==========================================================================
+   css/self-improving.css: the self-improving-system lead-magnet page only. FIX-PLAN-R8 P4.4 (R14, R15).
+   Loads after tokens.css, site.css and pages.css. Every class here is .si- prefixed; the shared shell
+   (.pg-sec, .pg-hero, .page__in, .pg-list, .faq-item, .guide--aside, .guide--strip, .post-table, #closing)
+   is pages.css's and is used as it is.
+
+   Copy        the live page's, word for word (R14). Mock UI is static cards; no motion but .reveal on the
+               hero children and #closing, plus the R15 pulse on the graph's green node.
+   Surfaces    flat cards: --rc-e1 fill + a 1px neutral hairline. No rail, no gradient. A box that holds a
+               guide slot has no fill (R6 0.2.4).
+   Colour      tokens only, no literal colour in this file. Ramp hues are not used; the only green is
+               --rc-g-400 on the graph's node (R15, never the accent) and the square list markers.
+               --rc-accent reaches this page only through .btn--primary.
+   SVG         every ported SVG paints through the classes below (P4.5): edges --rc-line-strong, nodes
+               --rc-ink-3 / --rc-ink-4, labels --rc-ink-2 / --rc-ink-1, the node --rc-g-400.
+   Measure     running text 18px/1.7 at <= 68ch; 17px/1.65 under 600 px. Figures and metrics are mono,
+               tabular-nums. The page never scrolls sideways at 360 px: the table scrolls inside its wrap.
+   ========================================================================== */
+
+/* ---- hero ------------------------------------------------------------------ */
+.si-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "top g" "head g";
+  column-gap: 48px;
+}
+.si-hero__top { grid-area: top; }
+.si-hero__head { grid-area: head; min-width: 0; }
+.si-hero__grid > .guide { grid-area: g; align-self: end; }
+.si-topbar {
+  max-width: 56ch;
+  margin: 0 0 28px;
+  font: 400 15px/1.55 var(--f-body);
+  color: var(--rc-ink-3);
+  text-wrap: pretty;
+}
+.si-hero .si-h1 {
+  margin: 0 0 20px;
+  max-width: 20ch;
+  font: 600 clamp(36px, 4.6vw, 60px)/1.08 var(--f-display);
+  letter-spacing: -0.024em;
+  text-wrap: balance;
+}
+.si-hero .si-lede { max-width: 60ch; }
+
+.si-pillars {
+  list-style: none;
+  margin: clamp(40px, 6vh, 56px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.si-pillar {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 24px;
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-pillar .node { margin-bottom: 4px; }
+.si-pillar__t { font: 600 17px/1.35 var(--f-display); letter-spacing: -0.01em; color: var(--rc-ink-1); text-wrap: pretty; }
+.si-pillar__b { font: 400 15px/1.6 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+
+.si-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 32px;
+}
+.si-cta__note, .si-panel__note {
+  font: 400 13px/1.5 var(--f-mono);
+  color: var(--rc-ink-3);
+}
+/* the two blueprint CTAs are long; under a phone width they wrap rather than push the page sideways */
+.si-cta .btn, .si-panel .btn { max-width: 100%; }
+
+/* the five scattered messages: static cards, a quiet stagger instead of the live float */
+.si-chaos {
+  margin: clamp(56px, 8vh, 88px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.si-msg {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px 18px 18px;
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-msg:nth-child(3n + 2) { transform: translateY(20px); }
+.si-msg__head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.si-msg__ic {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--rc-line-2);
+  border-radius: var(--rc-r-xs);
+  font: 500 11px/1 var(--f-mono);
+  color: var(--rc-ink-2);
+}
+.si-msg__who { min-width: 0; font: 500 14px/1.3 var(--f-body); color: var(--rc-ink-1); }
+.si-msg__meta {
+  margin-left: auto;
+  flex: none;
+  font: 400 12px/1.3 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-3);
+}
+.si-msg__sub { font: 500 14px/1.45 var(--f-body); color: var(--rc-ink-1); }
+.si-msg__body { font: 400 15px/1.55 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-msg__at { font: 500 0.93em var(--f-mono); color: var(--rc-ink-1); }
+.si-msg__amt { font: 400 12px/1.4 var(--f-mono); font-variant-numeric: tabular-nums; color: var(--rc-ink-3); }
+.si-chaos__sum { display: grid; gap: 10px; align-content: start; padding: 16px 18px; }
+.si-chaos__n {
+  font: 500 clamp(48px, 3vw + 24px, 64px)/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--rc-ink-1);
+}
+.si-chaos__cap { max-width: 28ch; font: 400 14px/1.5 var(--f-body); color: var(--rc-ink-3); }
+
+/* ---- body: content column + the live page's sidebar ---------------------------- */
+.si-layout { display: grid; grid-template-columns: minmax(0, 1fr); }
+.si-main { min-width: 0; }
+.si-sec {
+  position: relative;
+  padding-block: clamp(56px, 8vh, 96px);
+  border-top: 1px solid var(--rc-line-hair);
+}
+.si-sec h2 { max-width: 26ch; margin-bottom: 20px; font-size: clamp(26px, 1vw + 18px, 39px); }
+.si-sec > p:not(.eyebrow):not(.si-caption) {
+  max-width: 68ch;
+  font: 400 18px/1.7 var(--f-body);
+  color: var(--rc-ink-2);
+  text-wrap: pretty;
+}
+.si-sec > .si-vsl, .si-sec > .si-steps, .si-sec > .si-example, .si-sec > .si-graphcard, .si-sec > .si-inout,
+.si-sec > .si-pain, .si-sec > .si-exhibit, .si-sec > .si-cmp-wrap, .si-sec > .si-faq { margin-top: 36px; }
+.si-sec > .si-cmp-wrap { margin-bottom: 0; }
+.si-sec.si-optin, .si-sec.si-start { border-top: 0; padding-top: 0; }
+.si-sec.si-start { padding-bottom: clamp(56px, 8vh, 96px); }
+
+.si-label {
+  margin: 0 0 10px;
+  font: 500 var(--rc-fs-eyebrow)/1.4 var(--f-mono);
+  letter-spacing: var(--rc-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--rc-ink-3);
+}
+.si-link {
+  color: var(--rc-ink-1);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rc-line-strong);
+  text-underline-offset: 3px;
+  transition: text-underline-offset var(--rc-d-hover-x) var(--rc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .si-link:hover { text-underline-offset: 5px; text-decoration-color: currentColor; }
+}
+
+/* inline icons (ported, recoloured): strokes and fills through classes only */
+.si-ic-line {
+  fill: none;
+  stroke: var(--rc-ink-3);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.si-ic-fill { fill: var(--rc-ink-1); }
+
+/* video placeholder: a flat card, nothing that pretends to play */
+.si-vsl {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: 24px;
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-vsl__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 9px;
+  border: 1px solid var(--rc-line-2);
+  border-radius: var(--rc-r-sm);
+  font: 500 12px/1.2 var(--f-mono);
+  letter-spacing: 0.02em;
+  color: var(--rc-ink-2);
+}
+.si-vsl__play {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--rc-line-2);
+  border-radius: var(--rc-r-card);
+}
+.si-vsl__play svg { display: block; margin-left: 3px; }
+.si-vsl__poster {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  max-width: 52ch;
+  font: 400 15px/1.5 var(--f-body);
+  color: var(--rc-ink-2);
+}
+.si-sec > .si-caption { margin-top: 14px; max-width: 64ch; font: 400 15px/1.6 var(--f-body); color: var(--rc-ink-3); }
+
+/* the two blueprint panels (#optin, #start): hairline, no fill, as the closing panel */
+.si-panel {
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-panel > p:not(.eyebrow):not(.si-panel__note) {
+  max-width: 56ch;
+  font: 400 17px/1.65 var(--f-body);
+  color: var(--rc-ink-2);
+  text-wrap: pretty;
+}
+.si-panel .btnrow { margin: 28px 0 0; }
+.si-panel__note { max-width: 64ch; margin-top: 16px; }
+
+/* the mechanism: three numbered steps */
+.si-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 28px;
+}
+.si-step { display: grid; align-content: start; gap: 10px; padding-top: 20px; border-top: 1px solid var(--rc-line-2); }
+.si-step__n {
+  font: 500 28px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-3);
+}
+.si-step__t { font: 600 19px/1.3 var(--f-display); letter-spacing: -0.01em; }
+.si-step__b { font: 400 16px/1.6 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-example {
+  padding: clamp(22px, 3vw, 32px);
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-example__b { max-width: 68ch; font: 400 17px/1.7 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+
+/* today / after */
+.si-ba {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.si-ba__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(22px, 3vw, 32px);
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-ba__t { font: 600 20px/1.3 var(--f-display); letter-spacing: -0.01em; text-wrap: balance; }
+.si-ba__sub { margin: 10px 0 24px; font: 400 15px/1.6 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-ba__arrow { align-self: center; display: grid; place-items: center; }
+.si-ba__arrow svg { display: block; width: 40px; height: 24px; }
+.si-chips { list-style: none; margin: auto 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 8px; }
+.si-chips li {
+  padding: 6px 10px;
+  border: 1px solid var(--rc-line-2);
+  border-radius: var(--rc-r-sm);
+  font: 400 12.5px/1.2 var(--f-mono);
+  color: var(--rc-ink-2);
+  white-space: nowrap;
+}
+/* scattered, and held still: a fixed tilt per chip, no motion */
+.si-chips li:nth-child(odd) { transform: rotate(-1.4deg); }
+.si-chips li:nth-child(3n) { transform: rotate(1.6deg) translateY(3px); }
+.si-chips li:nth-child(4n) { transform: translateY(-4px); }
+.si-mini { display: block; width: 100%; max-width: 360px; height: auto; margin: auto auto 0; }
+
+/* the knowledge graph */
+.si-graphcard {
+  margin-inline: 0;
+  overflow: hidden;
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-graphcard__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--rc-line-hair);
+  font: 400 12px/1.4 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-3);
+}
+.si-graphcard__t { color: var(--rc-ink-2); font-weight: 500; }
+.si-graph { display: block; width: 100%; height: auto; padding: 8px 12px 12px; }
+
+.si-g-edge { fill: none; stroke: var(--rc-line-strong); stroke-width: 1.5; }
+.si-mini .si-g-edge { stroke-width: 1.4; }
+.si-g-leaf { fill: var(--rc-ink-4); }
+.si-g-node { fill: var(--rc-ink-3); }
+.si-g-label, .si-g-hublabel {
+  font-family: var(--f-body);
+  font-size: 20px;
+  font-weight: 500;
+  paint-order: stroke;               /* a halo in the card's own fill knocks the edges out behind the words */
+  stroke: var(--rc-e1);
+  stroke-width: 8px;
+  stroke-linejoin: round;
+}
+.si-g-label { fill: var(--rc-ink-2); }
+.si-g-hublabel { fill: var(--rc-ink-1); }
+
+/* R15: the green node is --rc-g-400 (never the accent). It breathes: opacity 1 -> .55 -> 1, 2.4 s, and holds
+   at 1 under reduced motion and html.rm. */
+.si-g-hub { fill: var(--rc-g-400); animation: si-pulse 2.4s ease-in-out infinite; }
+@keyframes si-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
+html.rm .si-g-hub { animation: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .si-g-hub { animation: none; opacity: 1; }
+}
+
+.si-inout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; }
+.si-inout .pg-list { max-width: none; }
+
+/* the five pain cards */
+.si-pain { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.si-pain__card {
+  display: grid;
+  grid-template-columns: var(--rc-node-size) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 22px;
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-pain__card .node { margin-top: 7px; }
+.si-pain__card p { font: 400 16px/1.6 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-pain__card strong { font-family: var(--f-display); font-size: 17px; letter-spacing: -0.01em; }
+.si-pain__card p > strong:first-child { display: block; margin-bottom: 4px; }
+.si-pain__card--wide { grid-column: 1 / -1; }
+
+/* the proof: the lead exhibit, then four hairline cards */
+.si-exhibit {
+  padding: clamp(24px, 3vw, 36px);
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-exhibit__t { margin-bottom: 12px; font: 600 clamp(22px, 0.8vw + 16px, 26px)/1.2 var(--f-display); letter-spacing: -0.02em; }
+.si-exhibit__b { max-width: 68ch; font: 400 17px/1.7 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.si-proof__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-proof__card .si-label { margin: 0; }
+.si-proof__t { font: 600 19px/1.3 var(--f-display); letter-spacing: -0.01em; text-wrap: balance; }
+.si-proof__b { font: 400 15px/1.65 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-proof__m {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--rc-line-hair);
+  font: 500 13px/1.5 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink-1);
+}
+
+/* the honest comparison: the table scrolls inside its wrap, never the page */
+.si-cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--rc-r-sm); }
+.si-cmp-wrap:focus-visible { outline: var(--rc-focus-w) solid var(--rc-focus-ring); outline-offset: 4px; }
+.si-cmp {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font: 400 15px/1.5 var(--f-body);
+  color: var(--rc-ink-2);
+}
+.si-cmp th, .si-cmp td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rc-line-hair);
+}
+.si-cmp th:first-child { padding-left: 0; }
+.si-cmp-wrap .si-cmp td { font: inherit; color: inherit; }   /* pages.css styles .post-table's 2nd column as a figure column; every cell here is prose */
+.si-cmp-wrap .si-cmp .si-cmp__us { color: var(--rc-ink-1); }
+.si-cmp thead th { vertical-align: bottom; border-bottom-color: var(--rc-line-2); }
+.si-cmp thead th:first-child, .si-cmp tbody th {
+  font: 500 12px/1.4 var(--f-mono);
+  letter-spacing: var(--rc-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--rc-ink-3);
+}
+.si-cmp tbody th { width: 15%; }
+.si-cmp__h { display: block; font: 600 15px/1.3 var(--f-display); letter-spacing: -0.01em; text-transform: none; color: var(--rc-ink-1); }
+.si-cmp__s { display: block; margin-top: 4px; font: 400 12px/1.4 var(--f-mono); letter-spacing: 0; text-transform: none; color: var(--rc-ink-3); }
+.si-cmp .si-cmp__us { background: var(--rc-e1); color: var(--rc-ink-1); }
+.si-cmp thead .si-cmp__us { border-radius: var(--rc-r-sm) var(--rc-r-sm) 0 0; }
+.si-cmp thead .si-cmp__us .si-cmp__h::before {     /* the one square marker on the column that is this page's */
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 8px 2px 0;
+  border-radius: 1px;
+  background: var(--node-fill);
+}
+
+/* the guarantee */
+.si-guarantee {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding: clamp(28px, 4vw, 48px);
+  background: var(--rc-e1);
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-guarantee__ic {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rc-line-2);
+  border-radius: var(--rc-r-sm);
+}
+.si-guarantee__ic svg { display: block; }
+.si-guarantee__ic .si-ic-line { stroke: var(--node-fill); }
+.si-sec .si-guarantee__h { max-width: 30ch; margin: 0; font-size: clamp(24px, 1vw + 16px, 32px); line-height: 1.22; }
+.si-guarantee__sub { max-width: 60ch; font: 400 17px/1.65 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+
+/* the sidebar: on this page + the author */
+.si-aside {
+  display: grid;
+  gap: 32px;
+  align-content: start;
+  padding-block: clamp(56px, 8vh, 96px);
+  border-top: 1px solid var(--rc-line-hair);
+}
+.si-toc__h {
+  margin: 0 0 8px;
+  font: 500 var(--rc-fs-eyebrow)/1.4 var(--f-mono);
+  letter-spacing: var(--rc-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--eyebrow);
+}
+.si-toc ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rc-line-hair); }
+.si-toc li { border-bottom: 1px solid var(--rc-line-hair); }
+.si-toc a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 0;
+  font: 500 15px/1.3 var(--f-body);
+  color: var(--rc-ink-2);
+  text-decoration: none;
+  transition: color var(--rc-d-hover) var(--rc-ease-out), transform var(--rc-d-hover-x) var(--rc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .si-toc a:hover { color: var(--rc-ink-1); transform: translateX(3px); } }
+.si-toc a:active { transform: scale(.97); transition-duration: var(--rc-d-press); }
+.si-author {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 20px;
+  border: 1px solid var(--rc-line);
+  border-radius: var(--rc-r-card);
+}
+.si-author__pic { display: block; margin-bottom: 8px; }
+.si-author__pic img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--rc-r-sm);
+  box-shadow: inset 0 0 0 1px var(--rc-line);
+}
+.si-author__name { font: 600 16px/1.3 var(--f-display); color: var(--rc-ink-1); }
+.si-author__role { font: 400 12px/1.4 var(--f-mono); color: var(--rc-ink-3); }
+.si-author__bio { margin-top: 4px; font: 400 14px/1.55 var(--f-body); color: var(--rc-ink-2); text-wrap: pretty; }
+.si-author__link { margin-top: 2px; gap: 6px; }
+
+/* ---- desktop: the sidebar sits left of the content and sticks ------------------ */
+@media (min-width: 1100px) and (min-aspect-ratio: 1/1) {
+  .si-layout { grid-template-columns: 220px minmax(0, 1fr); column-gap: 64px; }
+  .si-main { grid-column: 2; grid-row: 1; }
+  .si-aside {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+    padding-block: clamp(56px, 8vh, 96px) 0;
+  }
+}
+
+/* ---- tablet / portrait ------------------------------------------------------------ */
+@media (max-width: 899px), (max-aspect-ratio: 999/1000) {
+  .si-hero__grid { grid-template-areas: "top g" "head head"; column-gap: 16px; }
+  /* STAGE-MGR R8: 12 px under the read slot, so it clears the h1's first line box when the slot is the taller cell
+     (390x844: the slot bottom met the h1 top, and the glyph box rose 3 px into it; r12-guides (o)) */
+  .si-hero__grid > .guide { align-self: start; margin-bottom: 12px; }
+}
+@media (max-width: 899px) {
+  .si-pillars, .si-steps, .si-proof { grid-template-columns: minmax(0, 1fr); }
+  .si-chaos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .si-msg:nth-child(3n + 2) { transform: none; }
+  .si-msg:nth-child(even) { transform: translateY(14px); }
+  .si-ba { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .si-ba__arrow svg { transform: rotate(90deg); }
+}
+@media (max-width: 699px) {
+  .si-inout, .si-pain { grid-template-columns: minmax(0, 1fr); }
+  /* R10 (director): the honest comparison stacks on a phone. A 760 px scroller crushed four prose columns into a
+     word a line and left this page's own column off screen. Each row becomes a block: the row label, then this page's
+     column first (order -1), then the three alternatives, each named by its td's data-label. Same words, same DOM. */
+  .si-cmp-wrap { overflow: visible; }
+  .si-cmp, .si-cmp tbody, .si-cmp tr, .si-cmp th, .si-cmp td { display: block; }
+  .si-cmp-wrap .si-cmp { min-width: 0; }       /* beats pages.css .post-table table { min-width: 520px } */
+  .si-cmp thead {                                  /* visually hidden; the cells carry their own labels */
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .si-cmp tbody tr {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 12px;
+    border-bottom: 1px solid var(--rc-line-hair);
+  }
+  .si-cmp tbody tr:first-child { border-top: 1px solid var(--rc-line-2); }
+  .si-cmp tbody th { order: -2; width: auto; padding: 0 0 10px; border: 0; }
+  .si-cmp td { padding: 8px 0; border: 0; }
+  .si-cmp td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font: 400 12px/1.4 var(--f-mono);
+    color: var(--rc-ink-3);
+  }
+  .si-cmp td.si-cmp__us { order: -1; margin: 0 0 6px; padding: 12px 14px; border-radius: var(--rc-r-sm); }
+  .si-cmp td.si-cmp__us::before { color: var(--rc-ink-1); }   /* its own label, brighter; the e1 fill marks it */
+}
+@media (max-width: 599px) {
+  .si-sec > p:not(.eyebrow):not(.si-caption) { font-size: 17px; line-height: 1.65; }
+  .si-chaos { grid-template-columns: minmax(0, 1fr); }
+  .si-msg:nth-child(even) { transform: none; }
+  .si-vsl { aspect-ratio: auto; min-height: 260px; padding-block: 64px 96px; }
+  .si-cta .btn, .si-panel .btn { white-space: normal; text-align: left; line-height: 1.3; padding-block: 12px; }
+  .si-g-label, .si-g-hublabel { font-size: 34px; stroke-width: 12px; }
+  .si-graphcard__bar { padding: 10px 14px; }
+  .si-graph { padding: 4px 4px 8px; }
+}
+
+/* slot collapse: with no guides the hero is one column */
+html.no-js .si-hero__grid, html.no-guides .si-hero__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "top" "head"; }
+
+/* reduced motion: hover nudges off (the pulse is handled above) */
+html.rm .si-toc a, html.rm .si-link { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .si-toc a, .si-link { transition: none; }
+}
+/* a short desktop (1366×768, 1280×720): the ~700 px sidebar would sit below the fold, so it scrolls with the page */
+@media (min-width: 1100px) and (min-aspect-ratio: 1/1) and (max-height: 819px) {
+  .si-aside { position: static; }
+}

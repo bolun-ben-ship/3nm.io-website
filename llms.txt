@@ -6,7 +6,16 @@
 
 - [Home](https://www.3nm.io/): Your people and your agents. One team.
 - [Case studies](https://www.3nm.io/case-studies): Built to fit, owned outright.
-- [FAQ](https://www.3nm.io/faq): Common questions about what I build, pricing, and how a real engagement works.
+- [Blog](https://www.3nm.io/blog): Articles by Bolun (Ben) Liu.
+- [FAQ](https://www.3nm.io/faq): What an agentic workspace is, who it's for, the four-week first build, price, the guarantee and your data.
+
+## Blog
+
+- [Why Most AI Automation Projects Fail Before the First Line of Code](https://www.3nm.io/why-ai-automation-projects-fail): Most AI automation projects fail before a single line of code is written.
+- [The Real Cost of Running a 25-Person Service Business on Manual Workflows](https://www.3nm.io/cost-of-manual-workflows): 3–4 hours of skilled time lost to manual work every day.
+- [Stage 1 Before Stage 2: Why Operational Visibility Has to Come First](https://www.3nm.io/operational-visibility-first): Automation built on top of fragmented, invisible operations fails in ways that are hard to diagnose and expensive to fix.
+- [The Self-Improving System: Knowledge That Compounds Overnight](https://www.3nm.io/self-improving-system): A knowledge system that reads across everything your firm knows and gets smarter every night on its own.
+- [What Is an AI Operating System? How SMEs Are Replacing Entire SaaS Stacks](https://www.3nm.io/what-is-an-ai-operating-system): An AI operating system is a custom-built platform that centralises all business data and automates high-leverage workflows — replacing disconnected SaaS tools for a fraction of the cost.
 
 ## What it is
 

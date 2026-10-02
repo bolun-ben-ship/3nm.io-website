@@ -1,4 +1,5 @@
-// guide-page.js — the guides-only renderer for the subpages (case-studies.html, faq.html). FIX-PLAN-R7 §1 S3.
+// guide-page.js — the guides-only renderer for the subpages (case-studies.html, faq.html, blog.html and the five
+// article pages). FIX-PLAN-R7 §1 S3; the read beat FIX-PLAN-R8 §1 S1.
 // STAGE owns this file. Loaded as <script type="module" src="js/guide-page.js">; it self-mounts when canvas#guides and
 // at least one .guide[data-guide-fig] exist. No stage, no walls, no floor: one transparent full-viewport canvas, the
 // seven guide figures (cast.js buildGuides), one room per slot (x = 1000 + 40·k), drawn through scissor/viewport passes
@@ -6,13 +7,15 @@
 //
 // Slot contract (§0.3, PAGE writes it):
 //   <div class="guide guide--aside|guide--strip" data-guide="<unique id>" data-guide-fig="<fig>[,<fig>]"
-//        data-guide-beat="count|ask|greet" data-guide-trigger="<selector>" [data-face-count="<text>"] aria-hidden="true">
-//   A fig used twice on a page, an unknown fig or beat, or a missing trigger → html.no-guides and stop.
+//        data-guide-beat="count|ask|greet|read" data-guide-trigger="<selector>" [data-face-count="<text>"] aria-hidden="true">
+//   A fig used twice on a page, an unknown fig or beat, or a missing trigger → html.no-guides and stop. A read slot has
+//   exactly one fig, a READER (a fig that holds its own guide card: cap, scarf, beanie); its shape defaults to aside.
 // Class hooks: html.guides-on (first draw); html.no-guides (no WebGL, ?noguides=1, any failure or contract error).
 // html.rm is PAGE's and is not read here: reduced motion is computed locally (matchMedia or ?static=1).
 //
 // Beats (§S3.8): count (case studies; serialised: the face's live-text slot 8 is shared by every agent), ask (FAQ;
-// reacts to a <details> opening), greet (the closing band; Lim hands the key, scarf waves). Every beat runs on
+// reacts to a <details> opening), greet (the closing band; Lim hands the key, scarf waves), read (blog + articles; the
+// holder reads its own sheet, turns the page, ^ ^). Every beat runs on
 // performance.now() seconds; idle is breath / head bob / blinks only (no periodic nods or glances).
 //
 // Debug (window.__guidePage): ready (a Promise: the first draw, or a bail), state() → { [id]: { armed, drawn, beat,
@@ -38,13 +41,21 @@ const nowS = () => performance.now() / 1000;
 const sign = (v) => (v > 0 ? 1 : v < 0 ? -1 : 0);
 
 const FIG_IDS = ['bow', 'cap', 'hat', 'phones', 'scarf', 'beanie', 'Lim'];   // cast.js GUIDE_FIGS ids
-const BEATS = ['count', 'ask', 'greet'];
+const BEATS = ['count', 'ask', 'greet', 'read'];
+// read: the figs that hold their own guide card. Hardcoded because readSlots() runs before cast.js loads; it MUST equal
+// cast.js GUIDE_CARDS.filter((c) => c.holder === c.id).map((c) => c.id), and boot() checks that after the load (a
+// mismatch on a page with a read slot → html.no-guides).
+const READERS = ['cap', 'scarf', 'beanie'];
 
 // ---- rooms and cameras (copied from guides.js; see the header) ------------------------------------------------------------
 const ROOM_X0 = 1000, ROOM_DX = 40;
 const NEAR = 0.05, FAR = 30;
 const ASIDE = { fov: 20, el: 8, az: -12, fh: 0.95, cy: 0.42 };   // guides.js ASIDE.phones, for every aside
 const ASIDE_POOL_FIT = 0.9, ASIDE_MIN_W = 0.5;
+// a read aside: the raised sheet stands a card's width outside the right hand (screen-left of the figure), so the
+// frame is a little wider and its centre moves toward the sheet (world x; − = screen-left), keeping sheet and figure in
+// the slot (STAGE-MGR R8: the comment's last line was missing).
+const ASIDE_READ = { fh: 1.05, dx: -0.07 };
 const STRIP = { fov: 10, el: 12, az: 0 };
 const K_DESK = 164, K_MOB = 108, K_SWITCH = 150;
 const STRIP_REF_Y = 0.3, STRIP_FOOT_PX = 9;
@@ -66,6 +77,12 @@ const Q_REST_DESK = 20, Q_REST_MOB = -15, Q_FACE_ASK = 0.50, Q_FACE_HAPPY = 1.70
 // greet
 const G_REST_LIM = 15, G_REST_SCARF = -15, G_FACE_LIM = 50, G_FACE_SCARF = -50, G_END = 2.80,
   G_WAVE_A = 1.80, G_WAVE_B = 2.80, G_WAVE_EDGE = 0.15, G_WAVE = 150, G_WAVE_ROLL = 18, G_WAVE_N = 2, G_WAVE_OUT = 25;
+// read (FIX-PLAN-R8 S1.3): up .. read .. dip (the page turn at R_DIP) .. up .. read .. look at the trigger, ^ ^ .. rest.
+// R_HEAD_YAW is + toward screen-right (YS); R_HEAD_SIDE turns it toward the sheet (held in the right hand, side 'R'),
+// sign checked in pixels. Cells index faces/cards.js CARD_DOCS: 9 memo, 0 note.
+const R_REST = -15, R_UP = 0.30, R_READ1 = 1.70, R_DIP = 1.85, R_UP2 = 2.00, R_READ2 = 2.80, R_LOOK = 3.10,
+  R_HAPPY_A = 3.00, R_HAPPY_B = 3.60, R_BACK_A = 3.50, R_END = 3.80, R_EYE = 0.30, R_HEAD_YAW = 20, R_HEAD_SIDE = -1,
+  R_PITCH = -8, R_CELL_A = 9, R_CELL_B = 0;
 
 const html = document.documentElement;
 const qs = new URLSearchParams(location.search);
@@ -100,6 +117,8 @@ function readSlots() {
     for (const f of figs) { if (FIG_IDS.indexOf(f) < 0 || seenFig.has(f)) return null; seenFig.add(f); }
     if (beat === 'greet') {
       if (figs.length !== 2 || figs.indexOf('Lim') < 0 || figs.indexOf('scarf') < 0) return null;
+    } else if (beat === 'read') {
+      if (figs.length !== 1 || READERS.indexOf(figs[0]) < 0) return null;   // one reader: it holds its own sheet
     } else if (figs.length !== 1 || figs[0] === 'Lim') return null;   // count / ask: one agent (a face to read)
     let trig = null;
     try { trig = document.querySelector(sel); } catch (e) { trig = null; }
@@ -151,6 +170,12 @@ async function boot() {
   if (Array.isArray(castMod.GUIDE_FIGS)) {
     const known = castMod.GUIDE_FIGS.map((d) => d.id);
     for (const s of slotsIn) for (const f of s.figs) if (known.indexOf(f) < 0) throw new Error('guide-page: fig');
+  }
+  if (slotsIn.some((s) => s.beat === 'read')) {
+    // READERS (hardcoded for readSlots) against the source of truth
+    if (!Array.isArray(castMod.GUIDE_CARDS)) throw new Error('guide-page: cards');
+    const own = castMod.GUIDE_CARDS.filter((c) => c.holder === c.id).map((c) => c.id);
+    if (own.length !== READERS.length || READERS.some((id) => own.indexOf(id) < 0)) throw new Error('guide-page: readers');
   }
   mount(THREE, castMod, stageMod.THEMES, canvas, slotsIn, reduced);
 }
@@ -304,15 +329,15 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
   function placeCam(g) {
     const r = g.r, cam = g.cam, w = r.width, h = r.height, aspect = w / h;
     if (g.shape === 'aside') {
-      const A = ASIDE;
+      const A = ASIDE, rd = g.beat === 'read', fh0 = rd ? ASIDE_READ.fh : A.fh;
       lens(cam, A.fov, aspect);
-      const fh = Math.max(A.fh, ASIDE_MIN_W / aspect), cy = A.cy - (fh - A.fh) * 0.25;
+      const fh = Math.max(fh0, ASIDE_MIN_W / aspect), cy = A.cy - (fh - A.fh) * 0.25;
       g.poolS = Math.min(1, ASIDE_POOL_FIT * fh * aspect / POOL_W);
       // STAGE-MGR R7: the lens sits on the side the figure faces at rest. ASIDE.az (-12) suits a figure that rests toward
       // screen-left (count, mobile asker). The desktop asker rests at +20 and looks right (+50 at full look): with the lens
       // on the left its screen went edge-on and "^ ^" was unreadable, so the azimuth mirrors for a right-facing rest.
       const restR = g.beat === 'ask' && deskMQ && deskMQ.matches ? Q_REST_DESK > 0 : false;
-      aim(cam, g.rx, cy, 0, fh / (2 * Math.tan(A.fov * DEG / 2)), A.el, restR ? -A.az : A.az);
+      aim(cam, g.rx + (rd ? ASIDE_READ.dx : 0), cy, 0, fh / (2 * Math.tan(A.fov * DEG / 2)), A.el, restR ? -A.az : A.az);
     } else {
       g.poolS = 1;
       const k = g.kpx, el = STRIP.el * DEG;
@@ -369,14 +394,14 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
     g.start = now; g.played = true; g.ended = false; g.held = -1;
     dispatch(g.id, g.beat, 'start');
     // the end event must not wait for the loop: a reader who scrolls on disarms the slot and stops the rAF
-    if (g.beat !== 'ask') setTimeout(sweepEnds, Math.ceil((g.beat === 'count' ? cEnd(g) : G_END) * 1000) + 20);
+    if (g.beat !== 'ask') setTimeout(sweepEnds, Math.ceil(endOf(g) * 1000) + 20);
   }
   function sweepEnds() {
     if (failed) return;
     const now = nowS();
     for (const g of slots) {
       if (g.pin !== null || g.start < 0 || g.ended || g.beat === 'ask') continue;
-      if (now - g.start >= (g.beat === 'count' ? cEnd(g) : G_END)) endBeat(g);
+      if (now - g.start >= endOf(g)) endBeat(g);
     }
   }
   function endBeat(g) {
@@ -385,6 +410,8 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
     dispatch(g.id, g.beat, 'end');
   }
   const cEnd = (g) => (g.count ? C_END : C_END - C_SKIP);
+  // a beat's length, s (ask has none: it ends on its release)
+  const endOf = (g) => (g.beat === 'count' ? cEnd(g) : g.beat === 'greet' ? G_END : g.beat === 'read' ? R_END : Infinity);
   // a count's text window is [C_TURN, C_TEXT_END); one that has started but not passed it holds the face's text slot
   function textBusy(except, now) {
     for (const g of counts) {
@@ -406,10 +433,10 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
             if (!open) g.held = -1; else if (g.held < 0) g.held = now;
           } else if (gate(g, now)) startBeat(g, now);
         }
-        if (g.start >= 0 && !g.ended && now - g.start >= cEnd(g)) endBeat(g);
-      } else if (g.beat === 'greet') {
+        if (g.start >= 0 && !g.ended && now - g.start >= endOf(g)) endBeat(g);
+      } else if (g.beat === 'greet' || g.beat === 'read') {
         if (gate(g, now)) startBeat(g, now);
-        if (g.start >= 0 && !g.ended && now - g.start >= G_END) endBeat(g);
+        if (g.start >= 0 && !g.ended && now - g.start >= endOf(g)) endBeat(g);
       } else if (g.beat === 'ask') {
         if (g.start >= 0 && !g.ended) {
           const det = g.tgt && g.tgt.det;
@@ -550,13 +577,52 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
     put('scarf');
   }
 
+  // read: the holder raises its own sheet (cell 9), reads it (eyes along the lines), dips it and turns the page (cell 0 at
+  // the bottom of the dip), reads again, then looks at the trigger with ^ ^ and returns to rest. The card is posed every
+  // frame (frameBody hides every card first), after the figure (a card follows its holder's LAST pose).
+  const readCard = {};   // card id -> { mode, cell }: the last call (debug.state) and the cell hideCards keeps
+  function poseRead(g, now) {
+    const fid = g.figs[0], it = idleT(now), tb = tOf(g, now);
+    let yawD = R_REST, headYaw = 0, pitch = 0, frame = F.open, up = 0, cell = R_CELL_A;
+    if (tb === Infinity) frame = F.happy;                 // reduced: the rest pose, the sheet in hand, ^ ^ held
+    else if (tb >= 0 && tb < R_END) {
+      // the arm: up, down for the turn, up again, down
+      up = ez(tb, 0, R_UP) - ez(tb, R_READ1, R_DIP) + ez(tb, R_DIP, R_UP2) - ez(tb, R_READ2, R_LOOK);
+      if (tb >= R_DIP) cell = R_CELL_B;
+      // the head: toward the sheet while reading (held through the dip), then toward the trigger
+      const rd = ez(tb, 0, R_UP) - ez(tb, R_READ2, R_LOOK);
+      const w = ez(tb, R_READ2, R_LOOK) - ez(tb, R_BACK_A, R_END);
+      headYaw = R_HEAD_SIDE * R_HEAD_YAW * rd;
+      pitch = R_PITCH * rd;
+      if (w > 0) {
+        lookAt(g, g.trig, LK);
+        yawD = lerp(R_REST, LK.body, w);
+        headYaw += LK.head * w;
+        pitch += LK.pitch * w;
+      }
+      if (tb >= R_HAPPY_A && tb < R_HAPPY_B) frame = F.happy;
+      else if (tb >= R_UP && tb < R_READ1) frame = Math.floor((tb - R_UP) / R_EYE) % 2 ? F.lookR : F.lookL;
+      else if (tb >= R_UP2 && tb < R_READ2) frame = Math.floor((tb - R_UP2) / R_EYE) % 2 ? F.lookR : F.lookL;
+    }
+    P0(g.rx, yawD);
+    P.armR = lerp(ARM.carryH, ARM.show, up);
+    P.headYaw = YS * headYaw * DEG; P.headPitch = pitch * DEG; P.frame = frame; P.t = it;
+    put(fid);
+    const mode = up > 0.5 ? 'show' : 'hand';
+    G.card(fid, { mode, holder: fid, side: 'R', cell });   // a reader's card id is its own id (GUIDE_CARDS)
+    const rc = readCard[fid] || (readCard[fid] = { mode, cell });
+    rc.mode = mode; rc.cell = cell;
+  }
+
   function poseSlot(g, now, dt) {
     poolS = g.poolS;
     if (g.beat === 'count') poseCount(g, now);
     else if (g.beat === 'ask') poseAsk(g, now, dt);
+    else if (g.beat === 'read') poseRead(g, now);
     else poseGreet(g, now);
   }
-  function hideCards() { for (const id of CARD_IDS) G.card(id, { mode: 'hidden' }); }
+  // hidden cards keep a reader's current cell, so a read card's cell attribute is not re-uploaded twice a frame
+  function hideCards() { for (const id of CARD_IDS) G.card(id, { mode: 'hidden', cell: readCard[id] ? readCard[id].cell : undefined }); }
 
   // ---- the passes ---------------------------------------------------------------------------------------------------------
   // copied from guides.js draw(): the slot's viewport, the visible part as the scissor, a depth clear, the room's camera
@@ -674,7 +740,8 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
       g.r.right = g.r.width; g.r.bottom = g.r.height; g.kpx = K_DESK; g.qw = g.r.width; g.cx = 0; g.cy = 0;
       placeCam(g);
       const pin = g.pin;
-      g.pin = g.beat === 'greet' ? 0.9 : g.beat === 'count' ? 1.0 : 1.0;   // a mid-beat pose: cards out, a face frame
+      // a mid-beat pose: cards out, a face frame (read 1.2: the sheet up, mid-read)
+      g.pin = g.beat === 'greet' ? 0.9 : g.beat === 'read' ? 1.2 : 1.0;
       poseSlot(g, nowS(), 0);
       g.pin = pin;
       keyAt(g.rx);
@@ -718,12 +785,12 @@ function mount(THREE, castMod, THEMES, canvas, slotsIn, reduced) {
     const now = nowS(), out = {};
     for (const g of slots) {
       const tb = tOf(g, now);
-      const end = g.beat === 'count' ? cEnd(g) : g.beat === 'greet' ? G_END : Infinity;
-      const live = tb >= 0 && tb !== Infinity && tb < end && (g.beat !== 'ask' || g.start >= 0 || g.pin !== null);
+      const live = tb >= 0 && tb !== Infinity && tb < endOf(g) && (g.beat !== 'ask' || g.start >= 0 || g.pin !== null);
       out[g.id] = { armed: g.armed, drawn: g.drawn, beat: live ? g.beat : null, played: g.played, t: live ? tb : null,
         vis: g.vis, figs: g.figs.slice(),
         pose: g.figs.map((f) => (lastPose[f] ? { fig: f, yaw: Math.round(lastPose[f].yaw * 10) / 10,
           head: Math.round(lastPose[f].head * 10) / 10, pitch: Math.round(lastPose[f].pitch * 10) / 10, frame: lastPose[f].frame } : null)) };
+      if (g.beat === 'read') { const rc = readCard[g.figs[0]]; out[g.id].card = rc ? { mode: rc.mode, cell: rc.cell } : null; }
     }
     return out;
   };
