@@ -1,10 +1,11 @@
 # RightClick:AI
 
-> Your people and your agents. One team. Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so. First build in about 4 weeks. You own the code and the data. For owner-run teams of 5–25. Bolun (Ben) Liu · Founder, RightClick:AI · Singapore.
+> Stop being the bottleneck. For owners of businesses with 5 to 25 people. Right now everything goes through you, because the numbers live in spreadsheets, WhatsApp and people's heads. I put them on one screen so you can see how the business is doing without asking anyone. Built on your own accounts. About 4 weeks to set up. Bolun (Ben) Liu · Founder, RightClick:AI · Singapore.
 
 ## Key pages
 
-- [Home](https://www.3nm.io/): Your people and your agents. One team.
+- [Home](https://www.3nm.io/): Stop being the bottleneck. Your numbers on one screen, checked against your own books.
+- [How it works](https://www.3nm.io/how-it-works): Your people and your agents. One team. The six layers that let AI agents work beside your staff.
 - [Case studies](https://www.3nm.io/case-studies): Built to fit, owned outright.
 - [Blog](https://www.3nm.io/blog): Articles by Bolun (Ben) Liu.
 - [FAQ](https://www.3nm.io/faq): What an agentic workspace is, who it's for, the four-week first build, price, the guarantee and your data.
@@ -18,6 +19,16 @@
 - [What Is an AI Operating System? How SMEs Are Replacing Entire SaaS Stacks](https://www.3nm.io/what-is-an-ai-operating-system): An AI operating system is a custom-built platform that centralises all business data and automates high-leverage workflows — replacing disconnected SaaS tools for a fraction of the cost.
 
 ## What it is
+
+Every number in an owner-run business usually goes through the owner: sales in the accounting tool, jobs in a spreadsheet, updates on WhatsApp, the rest in people's heads. I fix the numbers first, then build the screen on top. I pull your numbers out of every system, then check every total against your own books before you see the screen.
+
+- **Your screen**: Money in, money out and what's owed; every job with its owner and due date; who on the team is producing; answers to plain questions from your own data; numbers that stay put when someone leaves.
+- **One build**: A delivery business doing about 80 jobs a day with 6 drivers kept its jobs in spreadsheets and its drivers on a separate app, and paid someone to type up the day at 6pm. I built them one system instead: the office books a job, the driver closes it with photos of the signed invoice, and each customer sees their own orders as they move. The code and the data are theirs at handover.
+- **What comes after**: Once your numbers are connected and checked, I can build a custom app on top of them. Automations only work once the workflow underneath is connected, so that part always comes first.
+
+Four steps, about four weeks: a 30-minute call → one scoping call (I write down what "done" means in one sentence, then I quote) → your numbers, cleaned and checked, on your own accounts → your screen goes live, with recorded walkthroughs for your team.
+
+## How it works: the six layers
 
 Agentic workspaces. I build the six layers that let AI agents work beside your staff — on your data, on your say-so. Your people set the rules, the agents do the legwork, and every hand-off is on the record.
 

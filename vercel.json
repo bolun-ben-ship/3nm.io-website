@@ -11,8 +11,7 @@
     { "source": "/case-study-3pl-logistics", "destination": "/case-studies#3pl-logistics", "permanent": true },
     { "source": "/case-study-executive-recruitment", "destination": "/case-studies#executive-recruitment", "permanent": true },
     { "source": "/compliance-workflow-case-study", "destination": "/case-studies#compliance-workflow", "permanent": true },
-    { "source": "/about", "destination": "/", "permanent": false },
-    { "source": "/how-it-works", "destination": "/", "permanent": false }
+    { "source": "/about", "destination": "/", "permanent": false }
   ],
   "headers": [
     {

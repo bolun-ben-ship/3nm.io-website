@@ -1,12 +1,15 @@
 <!doctype html>
-<html lang="en" class="no-js" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RightClick:AI — Agentic workspaces</title>
-<meta name="description" content="Your people and your agents. One team. Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so.">
-<meta property="og:title" content="RightClick:AI — Your people and your agents. One team.">
-<meta property="og:description" content="Your people and your agents. One team. Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The six-layer film moved to /how-it-works (2026-10-10). Its old in-page anchors follow it there;
+     #how and #proof stay, because this page has its own sections by those names (the four steps, the proof). -->
+<script>(function(h){if(/^#(intro|l[1-6]|together|close|compare|promise|system|night)$/.test(h))location.replace('how-it-works'+h)})(location.hash)</script>
+<title>Stop being the bottleneck | RightClick:AI</title>
+<meta name="description" content="For owners of 5 to 25 person businesses. I put your numbers on one screen you own, checked against your own books, so you can see how the business is doing without asking anyone.">
+<meta property="og:title" content="Stop being the bottleneck | RightClick:AI">
+<meta property="og:description" content="For owners of 5 to 25 person businesses. I put your numbers on one screen you own, checked against your own books, so you can see how the business is doing without asking anyone.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.3nm.io/">
 <meta property="og:site_name" content="RightClick:AI">
@@ -35,16 +38,6 @@
    }
   },
   {
-   "@type": "Service",
-   "@id": "https://www.3nm.io/#service",
-   "name": "Agentic workspaces",
-   "provider": {
-    "@id": "https://www.3nm.io/#org"
-   },
-   "areaServed": "SG",
-   "description": "Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so."
-  },
-  {
    "@type": "WebSite",
    "@id": "https://www.3nm.io/#website",
    "url": "https://www.3nm.io/",
@@ -52,251 +45,353 @@
    "publisher": {
     "@id": "https://www.3nm.io/#org"
    }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://www.3nm.io/#webpage",
+   "url": "https://www.3nm.io/",
+   "name": "Stop being the bottleneck",
+   "description": "For owners of 5 to 25 person businesses. I put your numbers on one screen you own, checked against your own books, so you can see how the business is doing without asking anyone.",
+   "isPartOf": {
+    "@id": "https://www.3nm.io/#website"
+   },
+   "about": {
+    "@id": "https://www.3nm.io/#org"
+   }
   }
  ]
 }
 </script>
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FFFFFF"><!-- --rc-e0 light -->
+<meta name="theme-color" content="#FFFFFF">
 <!-- favicon: rounded square = --rc-mark-flat (#0E5A45), inner square = --rc-idx-data (#4FE0D0) -->
 <link rel="icon" href="img/logo/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="img/logo/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="img/logo/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<script>document.documentElement.classList.replace('no-js','js')</script>
+<!-- .js gates the hidden-at-rest states. If page.js never runs, .js-fail shows everything after 2.5s. -->
+<script>(function(d){d.classList.add('js');window.__fbFail=setTimeout(function(){d.classList.add('js-fail')},2500)})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500&family=Instrument+Sans:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap">
+<!-- tokens.css is shared with the other pages (same values as brand/design-system/tokens.css v1.1);
+     the page's own CSS and JS live in home/ so they never collide with the site's css/ and js/ -->
 <link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="vendor/lenis.css">
-<link rel="stylesheet" href="css/site.css">
-<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
-<script defer src="vendor/lenis.min.js"></script>
+<link rel="stylesheet" href="home/page.css">
+<noscript><style>#book-form{display:none}</style></noscript>
+<script defer src="home/page.js"></script>
 <script defer src="vendor/gsap.min.js"></script>
 <script defer src="vendor/ScrollTrigger.min.js"></script>
-<script type="module" src="js/main.js"></script>
-<script type="module" src="js/book.js"></script>
-<script type="module" src="js/proof.js"></script>
-<noscript><style>.reveal{opacity:1!important;transform:none!important}#stage,.rail{display:none!important}</style></noscript>
+<script defer src="home/stage.js"></script>
+<script type="module" src="home/book.js"></script>
+<script defer src="js/navmenu.js"></script>
 </head>
-<body>
+<!-- data-theme here as well as on <html>: a host that rewrites <html data-theme> (the claude.ai Artifact viewer in
+     dark mode) would otherwise switch the brand tokens to their dark set under a page built light-only. -->
+<body data-theme="light">
 <a class="skip" href="#main">Skip to content</a>
-<canvas id="stage" aria-hidden="true"></canvas>
-<div id="jumpveil" data-theme="dark" aria-hidden="true"></div>
-<div class="vp-probe" aria-hidden="true"><i class="vp-probe__s"></i><i class="vp-probe__l"></i></div>
+<div class="readbar" aria-hidden="true"><span id="readbar"></span></div>
 
-<header class="nav" id="nav" data-theme="light">
-  <a class="brand" href="#hero" aria-label="RightClick:AI, back to top"><img class="brand__logo brand__logo--light" src="img/logo/mark.svg" width="32" height="32" alt="" aria-hidden="true"><img class="brand__logo brand__logo--dark" src="img/logo/mark-ondark.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand__word">RightClick:AI</span></a>
-  <nav class="nav__links" aria-label="Site"><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav>
-  <a class="btn btn--primary btn--sm" href="#book" data-cta="nav">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a>
+<header class="nav" id="nav">
+  <div class="nav__in wrap">
+    <a class="mark" href="#top" aria-label="RightClick:AI, back to top" translate="no"><b aria-hidden="true"></b><span>RightClick:AI</span></a>
+    <nav class="nav__links" aria-label="Site">
+      <a href="how-it-works">How it works</a>
+      <a href="case-studies">Case studies</a>
+      <a href="blog">Blog</a>
+      <a href="faq">FAQ</a>
+    </nav>
+    <details class="nav__menu"><summary>Menu</summary><nav class="nav__sheet" aria-label="Site"><a href="how-it-works">How it works</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav></details>
+    <a class="btn btn--primary btn--sm" href="#book" data-cta="nav">Book a 30-minute call<span class="btn__arr" aria-hidden="true">&rarr;</span></a>
+  </div>
 </header>
 
-<nav class="rail" id="rail" data-theme="dark" aria-label="The six layers"><ol><li><a class="rail__item" href="#l1" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">01 Context</span></a></li><li><a class="rail__item" href="#l2" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">02 Operational data</span></a></li><li><a class="rail__item" href="#l3" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">03 AI agents</span></a></li><li><a class="rail__item" href="#l4" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">04 The workspace</span></a></li><li><a class="rail__item" href="#l5" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">05 Ledger</span></a></li><li><a class="rail__item" href="#l6" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">06 Admin panel</span></a></li></ol></nav>
+<nav class="rail" aria-label="Sections">
+  <ol>
+    <li><a href="#top" data-rail-link="0"><i></i><span>Your screen</span></a></li>
+    <li><a href="#numbers" data-rail-link="1"><i></i><span>Where your numbers live</span></a></li>
+    <li><a href="#sheet" data-rail-link="2"><i></i><span>The spreadsheet</span></a></li>
+    <li><a href="#slip" data-rail-link="3"><i></i><span>Things slip through</span></a></li>
+    <li><a href="#leaves" data-rail-link="4"><i></i><span>When someone leaves</span></a></li>
+    <li><a href="#app" data-rail-link="5"><i></i><span>One more app</span></a></li>
+    <li><a href="#hire" data-rail-link="6"><i></i><span>Hiring someone</span></a></li>
+    <li><a href="#cost" data-rail-link="7"><i></i><span>What it costs</span></a></li>
+    <li><a href="#fix" data-rail-link="8"><i></i><span>How I fix it</span></a></li>
+    <li><a href="#monday" data-rail-link="9"><i></i><span>Your Monday</span></a></li>
+    <li><a href="#apps" data-rail-link="10"><i></i><span>Custom apps</span></a></li>
+    <li><a href="#how" data-rail-link="11"><i></i><span>Four steps</span></a></li>
+    <li><a href="#ben" data-rail-link="12"><i></i><span>Who builds it</span></a></li>
+    <li><a href="#questions" data-rail-link="13"><i></i><span>Questions</span></a></li>
+    <li><a href="#book" data-rail-link="14"><i></i><span>Book a call</span></a></li>
+  </ol>
+</nav>
 
 <main id="main" tabindex="-1">
-  <section id="hero" class="sec sec--hero" data-theme="light" data-key="0" data-hold="0,0.75" aria-labelledby="hero-h">
-    <div class="hero__copy">
-      <p class="eyebrow">AGENTIC WORKSPACES</p>
-      <h1 id="hero-h"><span class="h1-line">Your people</span> <span class="h1-line">and your agents.</span> <span class="h1-line">One team.</span></h1>
-      <p class="lede">Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so.</p>
-      <div class="btnrow">
-        <a class="btn btn--primary" href="#book" data-cta="hero">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="#intro">See the six layers<span class="btn__arrow btn__arrow--down" aria-hidden="true">↓</span></a>
+
+<!-- ============================================================
+     THE STORY. Text scrolls at its natural length in the left
+     column; the stage is position:sticky in the right column and
+     its timeline follows scroll progress through the steps. No pin.
+     ============================================================ -->
+<section class="story" id="top" aria-label="Where your numbers go">
+  <div class="story__grid wrap">
+
+    <!-- step 0 · hero -->
+    <header class="step step--hero" data-step="0" data-rail="0">
+      <div class="step__in">
+        <p class="eyb hero-in" style="--i:0">For owners of businesses with 5 to 25 people</p>
+        <h1 class="h1"><span class="ln"><span class="hero-ln" style="--i:0">Stop being the</span></span> <span class="ln"><span class="hero-ln" style="--i:1">bottleneck.</span></span></h1>
+        <p class="lead">Right now <span class="ref" data-ref="queue">everything goes through you</span>, because the numbers live in spreadsheets, WhatsApp and people’s heads. I put them on one screen so you can see how the business is doing without asking anyone.</p>
+        <ul class="ticks hero-in" style="--i:2">
+          <li><i class="chk" aria-hidden="true"></i>Every job, who has it, and which ones are slipping</li>
+          <li><i class="chk" aria-hidden="true"></i>Money in, money out, and whether payroll is covered</li>
+          <li><i class="chk" aria-hidden="true"></i>The few things that actually need you</li>
+        </ul>
+        <div class="btnrow hero-in" style="--i:2">
+          <a class="btn btn--primary" href="#book" data-cta="hero">Book a 30-minute call<span class="btn__arr" aria-hidden="true">&rarr;</span></a>
+          <a class="tlink" href="#numbers">See where your numbers go <span class="tlink__arr" aria-hidden="true">&darr;</span></a>
+        </div>
+        <ul class="facts hero-in" style="--i:3">
+          <li>30 projects live since March 2026</li>
+          <li>Built on your own accounts</li>
+          <li>About 4 weeks to set up</li>
+        </ul>
       </div>
-      <ul class="facts facts--hero"><li>First build in about 4 weeks</li><li>You own the code and the data</li><li>For owner-run teams of 5–25</li></ul>
+    </header>
+
+    <!-- the stage: built by tools/stage_svg.py to the diagram-design skill -->
+    <div class="story__stage">
+      <div class="stage-pin">
+        <div class="stage" id="stage" data-step="0">
+          <!-- STAGE:BEGIN --><svg class="stage__svg" viewBox="0 0 640 640" role="img" aria-labelledby="stage-title stage-desc" focusable="false"><title id="stage-title">Where your numbers go</title><desc id="stage-desc">Sales, costs, the pipeline and updates, plus what lives in people’s heads, all queue up for the owner, and the fixes that do not hold; then every total is checked against the owner’s own books and lands on one screen that sends the owner two things, and a custom app runs on top of it.</desc><defs><marker id="mk" viewBox="0 0 8 6" markerWidth="8" markerHeight="6" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon class="mk" points="0 0, 8 3, 0 6"/></marker><marker id="mk-acc" viewBox="0 0 8 6" markerWidth="8" markerHeight="6" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon class="mk mk--acc" points="0 0, 8 3, 0 6"/></marker><marker id="mk-bad" viewBox="0 0 8 6" markerWidth="8" markerHeight="6" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon class="mk mk--bad" points="0 0, 8 3, 0 6"/></marker></defs><g id="figA" class="fig" transform="translate(0 86)"><path class="cn s0" data-show="0-5" style="--d:0" data-key="accounting" marker-end="url(#mk)" id="cA1" d="M92 112 L92 132 A8 8 0 0 0 100 140 L216 140 A8 8 0 0 1 224 148 L224 188"/><path class="cn" data-show="6" style="--d:1" data-key="accounting" marker-end="url(#mk)" id="cA1r" d="M92 112 L92 132 A8 8 0 0 0 100 140 L256 140 A8 8 0 0 1 264 148 L264 304"/><path class="cn" data-show="7" style="--d:1" data-key="accounting" marker-end="url(#mk)" id="cA1L" d="M92 112 L92 132 A8 8 0 0 0 100 140 L216 140 A8 8 0 0 1 224 148 L224 296"/><path class="cn s0" data-show="0-5" style="--d:0" data-key="cost" marker-end="url(#mk)" id="cA2" d="M244 112 L244 152 A8 8 0 0 0 252 160 L280 160 A8 8 0 0 1 288 168 L288 188"/><path class="cn" data-show="6" style="--d:1" data-key="cost" marker-end="url(#mk)" id="cA2r" d="M244 112 L244 152 A8 8 0 0 0 252 160 L280 160 A8 8 0 0 1 288 168 L288 304"/><path class="cn" data-show="7" style="--d:1" data-key="cost" marker-end="url(#mk)" id="cA2L" d="M244 112 L244 152 A8 8 0 0 0 252 160 L280 160 A8 8 0 0 1 288 168 L288 296"/><path class="cn s0" data-show="0-5" style="--d:0" data-key="spreadsheet" marker-end="url(#mk)" id="cA3" d="M396 112 L396 152 A8 8 0 0 1 388 160 L360 160 A8 8 0 0 0 352 168 L352 188"/><path class="cn" data-show="6" style="--d:1" data-key="spreadsheet" marker-end="url(#mk)" id="cA3r" d="M396 112 L396 152 A8 8 0 0 1 388 160 L348 160 A8 8 0 0 0 340 168 L340 304"/><path class="cn" data-show="7" style="--d:1" data-key="spreadsheet" marker-end="url(#mk)" id="cA3L" d="M396 112 L396 152 A8 8 0 0 1 388 160 L360 160 A8 8 0 0 0 352 168 L352 296"/><path class="cn s0" data-show="0-2" style="--d:0" data-key="whatsapp" marker-end="url(#mk)" id="cA4" d="M548 112 L548 132 A8 8 0 0 1 540 140 L424 140 A8 8 0 0 0 416 148 L416 188"/><path class="cn cn--bad" data-show="3-5" style="--d:1" data-key="whatsapp" marker-end="url(#mk-bad)" id="cA4x" d="M548 112 L548 132 A8 8 0 0 1 540 140 L424 140 A8 8 0 0 0 416 148 L416 188"/><path class="cn cn--bad" data-show="6" style="--d:1" data-key="whatsapp" marker-end="url(#mk-bad)" id="cA4r" d="M548 112 L548 132 A8 8 0 0 1 540 140 L368 140 A8 8 0 0 0 360 148 L360 304"/><path class="cn cn--bad" data-show="7" style="--d:1" data-key="whatsapp" marker-end="url(#mk-bad)" id="cA4L" d="M548 112 L548 132 A8 8 0 0 1 540 140 L424 140 A8 8 0 0 0 416 148 L416 296"/><path class="cn s0" data-show="0-2" style="--d:0" data-key="heads" marker-end="url(#mk)" id="cAp" d="M320 36 L320 188"/><path class="cn cn--bad" data-show="3-5" style="--d:1" data-key="slips" marker-end="url(#mk-bad)" id="cApx" d="M320 36 L320 188"/><path class="cn cn--bad" data-show="6" style="--d:1" data-key="slips" marker-end="url(#mk-bad)" id="cApr" d="M320 36 L320 304"/><path class="cn cn--bad" data-show="7" style="--d:1" data-key="slips" marker-end="url(#mk-bad)" id="cApL" d="M320 36 L320 296"/><path class="cn cn--bad" data-show="5" style="--d:1" data-key="app" marker-end="url(#mk-bad)" id="cA5" d="M500 228 L480 228"/><path class="cn cn--bad" data-show="6" style="--d:1" data-key="app" marker-end="url(#mk-bad)" id="cA5r" d="M556 268 L556 304 A8 8 0 0 1 548 312 L384 312"/><path class="cn cn--bad" data-show="7" style="--d:1" data-key="app" marker-end="url(#mk-bad)" id="cA5L" d="M556 268 L556 328 A8 8 0 0 1 548 336 L480 336"/><path class="cn s0" data-show="0-5" style="--d:0" marker-end="url(#mk)" id="cAdir" d="M320 268 L320 428"/><path class="cn" data-show="7" style="--d:1" marker-end="url(#mk)" id="cAdirL" d="M320 376 L320 428"/><path class="cn" data-show="6" style="--d:3" data-key="ops" marker-end="url(#mk)" id="cAy1" d="M300 384 L300 428"/><path class="cn" data-show="6" style="--d:3" data-key="ops" marker-end="url(#mk)" id="cAy2" d="M340 428 L340 384"/><path class="cn cn--bad" data-show="6" style="--d:4" data-key="leave" marker-end="url(#mk-bad)" id="cAx" d="M384 344 L604 344"/><path class="cn cn--dot" data-show="2-7" style="--d:1" data-key="pasting" id="cAg" marker-end="url(#mk)" d="M256 468 L176 468"/><path class="lead" data-show="1-7" style="--d:2" data-key="cabinet" d="M384 468 L404 468"/><path class="brk" data-show="1" style="--d:1" d="M164 80 l8 8 M172 80 l-8 8"/><path class="brk" data-show="1" style="--d:2" d="M468 80 l8 8 M476 80 l-8 8"/><g class="qwrap"><g class="qshake"><g class="nd nd--lane s0" data-show="0-7" style="--d:0" data-key="queue"><rect class="nd__mask" x="160" y="188" width="320" height="80" rx="6"/><rect class="nd__box nd__box--lane" x="160" y="188" width="320" height="80" rx="6"/></g><g class="tag tag--q s0" data-show="0-7" style="--d:0" data-key="queue" data-x="172" data-y="198"><rect class="tag__bg" x="172" y="198" width="116" height="16" rx="2"/><text class="t-tag" x="178" y="209.5">GOES THROUGH YOU</text></g><rect class="slot s0" data-show="0-7" x="236" y="226" width="24" height="24" rx="3"/><rect class="slot s0" data-show="0-7" x="272" y="226" width="24" height="24" rx="3"/><rect class="slot s0" data-show="0-7" x="308" y="226" width="24" height="24" rx="3"/><rect class="slot s0" data-show="0-7" x="344" y="226" width="24" height="24" rx="3"/><rect class="slot s0" data-show="0-7" x="380" y="226" width="24" height="24" rx="3"/><rect class="qtok s0" data-show="0-7" style="--d:0" data-key="queue" x="240" y="230" width="16" height="16" rx="2"/><rect class="qtok s0" data-show="0-7" style="--d:1" data-key="queue" x="276" y="230" width="16" height="16" rx="2"/><rect class="qtok" data-show="1-7" style="--d:2" data-key="queue" x="312" y="230" width="16" height="16" rx="2"/><rect class="qtok" data-show="3-7" style="--d:3" data-key="queue" x="348" y="230" width="16" height="16" rx="2"/><rect class="qtok" data-show="3-7" style="--d:4" data-key="queue" x="384" y="230" width="16" height="16" rx="2"/></g></g><g class="nd s0" data-show="0-7" style="--d:0" data-key="heads"><rect class="nd__mask" x="192" y="-40" width="256" height="76" rx="6"/><rect class="nd__box nd__box--dash" x="192" y="-40" width="256" height="76" rx="6"/><text class="t-name" x="204" y="18">People’s heads</text><g class="person"><circle cx="352" cy="-7" r="4.5"/><path d="M344 7 a8 8 0 0 1 16 0 Z"/></g><g class="person"><circle cx="400" cy="-7" r="4.5"/><path d="M392 7 a8 8 0 0 1 16 0 Z"/></g><g class="person"><circle cx="424" cy="-7" r="4.5"/><path d="M416 7 a8 8 0 0 1 16 0 Z"/></g><g class="person s0" data-show="0-3"><circle cx="376" cy="-7" r="4.5"/><path d="M368 7 a8 8 0 0 1 16 0 Z"/></g><g class="person person--gone" data-show="4-7" style="--d:1" data-key="resigned"><circle cx="376" cy="-7" r="4.5"/><path d="M368 7 a8 8 0 0 1 16 0 Z"/></g></g><g class="person person--exit" data-show="4" data-key="resigned"><circle cx="376" cy="-7" r="4.5"/><path d="M368 7 a8 8 0 0 1 16 0 Z"/></g><g class="tag tag--bad" data-show="4-7" style="--d:1" data-key="resigned" data-x="204" data-y="-28"><rect class="tag__bg" x="204" y="-28" width="90" height="16" rx="2"/><text class="t-tag" x="210" y="-16.5">SHE RESIGNED</text></g><g class="nd s0" data-show="0-7" style="--d:0" data-key="accounting"><rect class="nd__mask" x="28" y="56" width="128" height="56" rx="6"/><rect class="nd__box" x="28" y="56" width="128" height="56" rx="6"/><text class="t-name" x="40" y="94">Sales</text></g><g class="nd s0" data-show="0-7" style="--d:0" data-key="cost"><rect class="nd__mask" x="180" y="56" width="128" height="56" rx="6"/><rect class="nd__box" x="180" y="56" width="128" height="56" rx="6"/><text class="t-name" x="192" y="94">Cost</text></g><g class="nd s0" data-show="0-7" style="--d:0" data-key="spreadsheet"><rect class="nd__mask" x="332" y="56" width="128" height="56" rx="6"/><rect class="nd__box" x="332" y="56" width="128" height="56" rx="6"/><text class="t-name" x="344" y="94">Pipeline</text></g><g class="nd s0" data-show="0-7" style="--d:0" data-key="whatsapp"><rect class="nd__mask" x="484" y="56" width="128" height="56" rx="6"/><rect class="nd__box" x="484" y="56" width="128" height="56" rx="6"/><text class="t-name" x="496" y="94">Updates</text></g><g class="ubadge s0" data-show="0-2" style="--d:0" data-key="whatsapp"><g class="ubadge__in"><circle cx="612" cy="56" r="10"/><text class="ubadge__t" x="612" y="59.6" text-anchor="middle">3</text></g></g><g class="ubadge" data-show="3-6" style="--d:1" data-key="whatsapp"><g class="ubadge__in"><circle cx="612" cy="56" r="10"/><text class="ubadge__t" x="612" y="59.6" text-anchor="middle">12</text></g></g><g class="ubadge" data-show="7" style="--d:1" data-key="whatsapp"><g class="ubadge__in"><circle cx="612" cy="56" r="10"/><text class="ubadge__t" x="612" y="59.6" text-anchor="middle">28</text></g></g><g class="nd" data-show="5-7" style="--d:0" data-key="app"><rect class="nd__mask" x="500" y="188" width="112" height="80" rx="6"/><rect class="nd__box" x="500" y="188" width="112" height="80" rx="6"/><text class="t-name" x="512" y="238">One more</text><text class="t-name" x="512" y="258">app</text></g><g class="detail detail--bad" data-show="5" style="--d:2" data-key="three"><rect class="detail__o" x="140" y="68" width="11" height="11" rx="2"/><rect class="detail__c" x="143.5" y="71.5" width="4" height="4" rx="1"/></g><g class="detail detail--bad" data-show="5" style="--d:3" data-key="three"><rect class="detail__o" x="292" y="68" width="11" height="11" rx="2"/><rect class="detail__c" x="295.5" y="71.5" width="4" height="4" rx="1"/></g><g class="detail detail--bad" data-show="5" style="--d:4" data-key="three"><rect class="detail__o" x="592" y="200" width="11" height="11" rx="2"/><rect class="detail__c" x="595.5" y="203.5" width="4" height="4" rx="1"/></g><g class="tag tag--bad" data-show="5" style="--d:5" data-key="three" data-x="500" data-y="280"><rect class="tag__bg" x="500" y="280" width="90" height="16" rx="2"/><text class="t-tag" x="506" y="291.5">THREE PLACES</text></g><g class="nd" data-show="6" style="--d:1" data-key="ops"><rect class="nd__mask" x="256" y="304" width="128" height="80" rx="6"/><rect class="nd__box" x="256" y="304" width="128" height="80" rx="6"/><text class="t-name" x="268" y="354">Ops</text><text class="t-name" x="268" y="374">manager</text></g><g class="tag" data-show="6" style="--d:1" data-key="ops" data-x="268" data-y="316"><rect class="tag__bg" x="268" y="316" width="38" height="16" rx="2"/><text class="t-tag" x="274" y="327.5">HIRE</text></g><g class="nd nd--you s0" data-show="0-7" style="--d:0" data-key="you"><rect class="nd__mask" x="256" y="428" width="128" height="80" rx="6"/><rect class="nd__box" x="256" y="428" width="128" height="80" rx="6"/><text class="t-name t-name--you" x="268" y="490">You</text></g><g class="tag tag--inv s0" data-show="0-7" style="--d:0" data-x="268" data-y="440"><rect class="tag__bg" x="268" y="440" width="44" height="16" rx="2"/><text class="t-tag" x="274" y="451.5">OWNER</text></g><g class="tag" data-show="1-6" style="--d:2" data-key="cabinet" data-x="404" data-y="456"><rect class="tag__bg" x="404" y="456" width="142" height="16" rx="2"/><text class="t-tag" x="410" y="467.5">HUMAN FILING CABINET</text></g><g class="tag tag--bad" data-show="7" style="--d:1" data-key="hours" data-x="404" data-y="456"><rect class="tag__bg" x="404" y="456" width="110" height="16" rx="2"/><text class="t-tag" x="410" y="467.5">25 HOURS A WEEK</text></g><g class="nd nd--sheet" data-show="2-7" style="--d:0" data-key="sheet"><rect class="nd__mask" x="16" y="428" width="160" height="80" rx="6"/><rect class="nd__box" x="16" y="428" width="160" height="80" rx="6"/><text class="t-name" x="28" y="478">God-tier</text><text class="t-name" x="28" y="498">spreadsheet</text><g class="cells"><rect class="cell" x="136" y="476" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:0" x="136" y="476" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:0" x="136" y="476" width="9" height="7" rx="1"/><rect class="cell" x="148" y="476" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:1" x="148" y="476" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:1" x="148" y="476" width="9" height="7" rx="1"/><rect class="cell" x="160" y="476" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:2" x="160" y="476" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:2" x="160" y="476" width="9" height="7" rx="1"/><rect class="cell" x="136" y="486" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:3" x="136" y="486" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:3" x="136" y="486" width="9" height="7" rx="1"/><rect class="cell" x="148" y="486" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:4" x="148" y="486" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:4" x="148" y="486" width="9" height="7" rx="1"/><rect class="cell" x="160" y="486" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:5" x="160" y="486" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:5" x="160" y="486" width="9" height="7" rx="1"/><rect class="cell" x="136" y="496" width="9" height="7" rx="1"/><rect class="cell-on goes" style="--i:6" x="136" y="496" width="9" height="7" rx="1"/><rect class="cell-old" style="--i:6" x="136" y="496" width="9" height="7" rx="1"/><rect class="cell" x="148" y="496" width="9" height="7" rx="1"/><rect class="cell-on" style="--i:7" x="148" y="496" width="9" height="7" rx="1"/><rect class="cell" x="160" y="496" width="9" height="7" rx="1"/><rect class="cell-on" style="--i:8" x="160" y="496" width="9" height="7" rx="1"/></g></g><g class="tag tag--warn" data-show="2-7" style="--d:2" data-key="stale" data-x="28" data-y="440"><rect class="tag__bg" x="28" y="440" width="84" height="16" rx="2"/><text class="t-tag" x="34" y="451.5">OUT OF DATE</text></g><rect class="nd__bad" data-show="3-7" style="--d:2" x="16" y="428" width="160" height="80" rx="6"/><rect class="nd__bad" data-show="4-7" style="--d:2" x="192" y="-40" width="256" height="76" rx="6"/><rect class="nd__bad" data-show="5-7" style="--d:2" x="500" y="188" width="112" height="80" rx="6"/><rect class="nd__bad nd__bad--dash" data-show="6" style="--d:4" x="256" y="304" width="128" height="80" rx="6"/><g class="brkx" data-show="3-5,7" style="--d:3" data-key="whatsapp"><circle cx="416" cy="166" r="8"/><path d="M412.8 162.8 L419.2 169.2 M419.2 162.8 L412.8 169.2"/></g><g class="brkx" data-show="3-5,7" style="--d:3" data-key="slips"><circle cx="320" cy="150" r="8"/><path d="M316.8 146.8 L323.2 153.2 M323.2 146.8 L316.8 153.2"/></g><g class="tag tag--bad" data-show="3-5,7" style="--d:4" data-key="slips" data-x="272" data-y="120" data-cx="320"><rect class="tag__bg" x="272.0" y="120" width="96" height="16" rx="2"/><text class="t-tag" x="278.0" y="131.5">SLIPS THROUGH</text></g><g class="brkx" data-show="5" style="--d:3" data-key="app"><circle cx="490" cy="228" r="8"/><path d="M486.8 224.8 L493.2 231.2 M493.2 224.8 L486.8 231.2"/></g><g class="brkx" data-show="6" style="--d:3" data-key="app"><circle cx="556" cy="290" r="8"/><path d="M552.8 286.8 L559.2 293.2 M559.2 286.8 L552.8 293.2"/></g><g class="brkx" data-show="7" style="--d:3" data-key="app"><circle cx="518" cy="336" r="8"/><path d="M514.8 332.8 L521.2 339.2 M521.2 332.8 L514.8 339.2"/></g><g class="bang" data-show="3-7" style="--d:3" data-key="sheet"><circle cx="176" cy="428" r="9"/><text class="bang__t" x="176" y="432.2" text-anchor="middle">!</text></g><g class="bang" data-show="4-7" style="--d:3" data-key="resigned"><circle cx="448" cy="-40" r="9"/><text class="bang__t" x="448" y="-35.8" text-anchor="middle">!</text></g><g class="bang" data-show="5-7" style="--d:3" data-key="app"><circle cx="612" cy="188" r="9"/><text class="bang__t" x="612" y="192.2" text-anchor="middle">!</text></g><g class="bang" data-show="6" style="--d:5" data-key="ops"><circle cx="384" cy="304" r="9"/><text class="bang__t" x="384" y="308.2" text-anchor="middle">!</text></g><g class="bang" data-show="7" style="--d:3" data-key="hours"><circle cx="384" cy="428" r="9"/><text class="bang__t" x="384" y="432.2" text-anchor="middle">!</text></g><g class="lbl" data-show="2-7" style="--d:2" data-key="pasting" data-cx="216" data-ys="468" data-side="above"><rect class="lbl__mask" x="187.0" y="448" width="54" height="14" rx="2"/><text class="t-lbl" x="216" y="458" text-anchor="middle">PASTING</text></g><g class="lbl" data-show="3" style="--d:2" data-key="whatsapp" data-cx="482" data-ys="140" data-side="above"><rect class="lbl__mask" x="453.0" y="120" width="54" height="14" rx="2"/><text class="t-lbl" x="482" y="130" text-anchor="middle">CHASING</text></g><g class="lbl lbl--bad" data-show="6" style="--d:4" data-key="leave" data-cx="494" data-ys="344" data-side="above"><rect class="lbl__mask" x="455.5" y="324" width="73" height="14" rx="2"/><text class="t-lbl" x="494" y="334" text-anchor="middle">THEY LEAVE</text></g><path class="mvpath" data-show="2-5" id="mvSheet" d="M300 446 Q222 336 150 486"/><g class="mv mv--coin" aria-hidden="true" data-paths="cA1 cA1r cA1L" data-dur="2600" data-phase="0"><g class="mv__in"><circle r="7"/><text class="mv__t" y="3.4" text-anchor="middle">$</text></g></g><g class="mv mv--coin" aria-hidden="true" data-paths="cA2 cA2r cA2L" data-dur="2600" data-phase="0.5"><g class="mv__in"><circle r="7"/><text class="mv__t" y="3.4" text-anchor="middle">$</text></g></g><g class="mv mv--sheet" aria-hidden="true" data-paths="mvSheet" data-dur="3000" data-phase="0"><g class="mv__in"><g class="sh-l"><rect class="sh-b" x="-9" y="-7" width="9" height="14" rx="1.5"/><path class="sh-g" d="M-9 -2.3 H0 M-9 2.3 H0 M-4.5 -7 V7"/></g><g class="sh-r"><rect class="sh-b" x="0" y="-7" width="9" height="14" rx="1.5"/><path class="sh-g" d="M0 -2.3 H9 M0 2.3 H9 M4.5 -7 V7"/></g><path class="sh-crack" d="M0.5 -8 L-1.5 -3 L1.5 0 L-1 4 L0.5 8"/></g></g><g class="mv mv--fly" aria-hidden="true" data-paths="cAy1" data-dur="560" data-phase="0" data-jitter="2.5"><g class="mv__in"><rect x="-4" y="-4" width="8" height="8" rx="2"/></g></g><g class="mv mv--fly" aria-hidden="true" data-paths="cAy1" data-dur="560" data-phase="0.5" data-jitter="2.5"><g class="mv__in"><rect x="-4" y="-4" width="8" height="8" rx="2"/></g></g><g class="mv mv--fly" aria-hidden="true" data-paths="cAy2" data-dur="560" data-phase="0.25" data-jitter="2.5"><g class="mv__in"><rect x="-4" y="-4" width="8" height="8" rx="2"/></g></g><g class="mv mv--fly" aria-hidden="true" data-paths="cAy2" data-dur="560" data-phase="0.75" data-jitter="2.5"><g class="mv__in"><rect x="-4" y="-4" width="8" height="8" rx="2"/></g></g></g><g id="figB" class="fig"><g class="pan"><g class="b-back"><path class="cn" data-show="8-11" style="--d:0" marker-end="url(#mk)" data-flow="B" id="cB1" d="M188 92 L228 92"/><path class="cn" data-show="8-11" style="--d:1" marker-end="url(#mk)" data-flow="B" id="cB2" d="M188 196 L228 196"/><path class="cn" data-show="8-11" style="--d:2" marker-end="url(#mk)" data-flow="B" id="cB3" d="M188 300 L228 300"/><path class="cn" data-show="8-11" style="--d:3" marker-end="url(#mk)" data-flow="B" id="cB4" d="M188 404 L228 404"/><g class="nd" data-show="8-11" style="--d:0" data-key="systems"><rect class="nd__mask" x="28" y="64" width="160" height="56" rx="6"/><rect class="nd__box" x="28" y="64" width="160" height="56" rx="6"/><text class="t-name" x="40" y="102">Sales</text></g><g class="nd" data-show="8-11" style="--d:1" data-key="systems"><rect class="nd__mask" x="28" y="168" width="160" height="56" rx="6"/><rect class="nd__box" x="28" y="168" width="160" height="56" rx="6"/><text class="t-name" x="40" y="206">Cost</text></g><g class="nd" data-show="8-11" style="--d:2" data-key="systems"><rect class="nd__mask" x="28" y="272" width="160" height="56" rx="6"/><rect class="nd__box" x="28" y="272" width="160" height="56" rx="6"/><text class="t-name" x="40" y="310">Pipeline</text></g><g class="nd" data-show="8-11" style="--d:3" data-key="systems"><rect class="nd__mask" x="28" y="376" width="160" height="56" rx="6"/><rect class="nd__box" x="28" y="376" width="160" height="56" rx="6"/><text class="t-name" x="40" y="414">Updates</text></g><g class="nd nd--gate" data-show="8-11" style="--d:2" data-key="books"><rect class="nd__mask" x="228" y="52" width="144" height="392" rx="6"/><rect class="nd__box" x="228" y="52" width="144" height="392" rx="6"/><text class="t-name" x="240" y="266">Against your</text><text class="t-name" x="240" y="286">own books</text></g><g class="tag" data-show="8-11" style="--d:2" data-key="books" data-x="240" data-y="222"><rect class="tag__bg" x="240" y="222" width="58" height="16" rx="2"/><text class="t-tag" x="246" y="233.5">CHECKED</text></g><rect class="mk-sq" data-show="8-11" x="240" y="86.5" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done" data-show="8-11" style="--d:3" x="240" y="86.5" width="11" height="11" rx="2"/><rect class="mk-sq" data-show="8-11" x="240" y="190.5" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done" data-show="8-11" style="--d:5" x="240" y="190.5" width="11" height="11" rx="2"/><rect class="mk-sq" data-show="8-11" x="240" y="294.5" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done" data-show="8-11" style="--d:7" x="240" y="294.5" width="11" height="11" rx="2"/><rect class="mk-sq" data-show="8-11" x="240" y="398.5" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done" data-show="8-11" style="--d:9" x="240" y="398.5" width="11" height="11" rx="2"/><g class="count" data-show="9-11" style="--d:1" data-key="count"><text class="t-count" id="countN" x="228" y="488">80</text><text class="t-tag t-tag--plain" x="228" y="516">JOBS A DAY</text></g><g class="role" data-key="roles" style="--i:0"><rect class="mk-sq" x="228" y="538" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done role__done" style="--i:0" x="228" y="538" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="248" y="547.5">OFFICE</text></g><g class="role" data-key="roles" style="--i:1"><rect class="mk-sq" x="228" y="562" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done role__done" style="--i:1" x="228" y="562" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="248" y="571.5">DRIVERS</text></g><g class="role" data-key="roles" style="--i:2"><rect class="mk-sq" x="228" y="586" width="11" height="11" rx="2"/><rect class="mk-sq mk-sq--done role__done" style="--i:2" x="228" y="586" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="248" y="595.5">CUSTOMERS</text></g></g><g class="b-link"><path class="cn" data-show="11" style="--d:1" d="M-420 92 L372 92"/><path class="cn" data-show="11" style="--d:1" d="M-420 196 L372 196"/><path class="cn" data-show="11" style="--d:1" d="M-420 300 L372 300"/><path class="cn" data-show="8-11" style="--d:4" data-key="screen" marker-end="url(#mk)" data-flow="B2" id="cBp1" d="M372 92 L384 92 A8 8 0 0 1 392 100 L392 124 A8 8 0 0 0 400 132 L412 132"/><path class="cn" data-show="8-11" style="--d:5" data-key="screen" marker-end="url(#mk)" data-flow="B2" id="cBp2" d="M372 196 L384 196 A8 8 0 0 0 392 188 L392 184 A8 8 0 0 1 400 176 L412 176"/><path class="cn" data-show="8-11" style="--d:6" data-key="screen" marker-end="url(#mk)" data-flow="B2" id="cBp3" d="M372 300 L384 300 A8 8 0 0 0 392 292 L392 228 A8 8 0 0 1 400 220 L412 220"/></g><g class="nd nd--screen" data-show="8-11" style="--d:3" data-key="screen"><rect class="nd__mask" x="412" y="52" width="200" height="392" rx="6"/><rect class="nd__box nd__box--screen" x="412" y="52" width="200" height="392" rx="6"/><path class="rule" d="M424 104 H600"/><path class="rule" d="M424 374 H600"/><rect class="mk-sq" x="424" y="126.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="136">MONEY</text><rect class="mk-sq" x="424" y="170.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="180">JOBS</text><rect class="mk-sq" x="424" y="214.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="224">TEAM</text><rect class="mk-sq" x="424" y="258.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="268">QUESTIONS</text><rect class="mk-sq" x="424" y="302.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="312">NUMBERS</text><rect class="mk-sq" x="424" y="346.5" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="444" y="356">SATURDAYS</text></g><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:4" data-key="screen" x="424" y="126.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:0" data-key="screen" pathLength="1" d="M425.5 132 L429 135.6 L437 125.5"/><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:5" data-key="screen" x="424" y="170.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:1" data-key="screen" pathLength="1" d="M425.5 176 L429 179.6 L437 169.5"/><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:6" data-key="screen" x="424" y="214.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:2" data-key="screen" pathLength="1" d="M425.5 220 L429 223.6 L437 213.5"/><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:7" data-key="screen" x="424" y="258.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:3" data-key="screen" pathLength="1" d="M425.5 264 L429 267.6 L437 257.5"/><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:8" data-key="screen" x="424" y="302.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:4" data-key="screen" pathLength="1" d="M425.5 308 L429 311.6 L437 301.5"/><rect class="mk-sq mk-sq--done fld" data-show="8-9" style="--d:9" data-key="screen" x="424" y="346.5" width="11" height="11" rx="2"/><path class="tick" data-show="10-11" style="--d:5" data-key="screen" pathLength="1" d="M425.5 352 L429 355.6 L437 345.5"/><text class="t-name t-name--title" data-show="8-9" style="--d:3" data-key="screen" x="424" y="86">One screen</text><text class="t-name t-name--title" data-show="10-11" style="--d:1" data-key="monday" x="424" y="86">Monday, 8:40 AM</text><g class="tag" data-show="10-11" style="--d:2" data-key="need" data-x="424" data-y="380"><rect class="tag__bg" x="424" y="380" width="136" height="16" rx="2"/><text class="t-tag" x="430" y="391.5">TWO THINGS NEED YOU</text></g><g class="need" data-show="10-11" style="--d:3" data-key="need"><rect class="need__bg" x="424" y="406" width="84" height="30" rx="4"/><rect class="nl-o" x="434" y="415.5" width="11" height="11" rx="2"/><rect class="nl-c" x="437.5" y="419" width="4" height="4" rx="1"/><rect class="bar" x="452" y="418" width="44" height="6" rx="3"/></g><g class="need" data-show="10-11" style="--d:4" data-key="need"><rect class="need__bg" x="516" y="406" width="84" height="30" rx="4"/><rect class="nl-o" x="526" y="415.5" width="11" height="11" rx="2"/><rect class="nl-c" x="529.5" y="419" width="4" height="4" rx="1"/><rect class="bar" x="544" y="418" width="44" height="6" rx="3"/></g><path class="cn cn--acc" data-show="10-11" style="--d:3" data-key="need" marker-end="url(#mk-acc)" data-flow="B3" id="cBy1" d="M466 444 L466 532"/><path class="cn cn--acc" data-show="10-11" style="--d:4" data-key="need" marker-end="url(#mk-acc)" data-flow="B3" id="cBy2" d="M558 444 L558 532"/><g class="nd nd--you" data-show="10-11" style="--d:5" data-key="you"><rect class="nd__mask" x="448" y="532" width="128" height="80" rx="6"/><rect class="nd__box" x="448" y="532" width="128" height="80" rx="6"/><text class="t-name t-name--you" x="460" y="594">You</text></g><g class="tag tag--inv" data-show="10-11" style="--d:5" data-x="460" data-y="544"><rect class="tag__bg" x="460" y="544" width="44" height="16" rx="2"/><text class="t-tag" x="466" y="555.5">OWNER</text></g><path class="cn" data-show="11" style="--d:2" data-key="connected" marker-end="url(#mk)" data-flow="B4" id="cBa1" d="M612 248 L680 248"/><g class="tag" data-show="11" style="--d:1" data-key="apps" data-x="680" data-y="92"><rect class="tag__bg" x="680" y="92" width="77" height="16" rx="2"/><text class="t-tag" x="686" y="103.5">CUSTOM APP</text></g><g class="nd nd--app" data-show="11" style="--d:2" data-key="apps"><rect class="nd__mask" x="680" y="120" width="232" height="290" rx="6"/><rect class="nd__box" x="680" y="120" width="232" height="290" rx="6"/><text class="t-name" x="692" y="146">Loan tracker</text><rect class="app__dash" style="--i:0" x="680" y="120" width="232" height="290" rx="6"/><rect class="mk-sq mk-sq--done app__ok" style="--i:0" x="889" y="134.5" width="11" height="11" rx="2"/><path class="app__tick" style="--i:0" pathLength="1" d="M891 140 L893.6 142.8 L898 137.1"/><g class="dsh"><path class="rule" d="M692 160 H900"/><rect class="dsh-tile" x="692" y="172" width="64" height="44" rx="4"/><rect class="dsh-ln" x="700" y="181" width="28" height="4" rx="2"/><rect class="dsh-val" x="700" y="193" width="40" height="12" rx="2"/><rect class="dsh-tile" x="764" y="172" width="64" height="44" rx="4"/><rect class="dsh-ln" x="772" y="181" width="28" height="4" rx="2"/><rect class="dsh-val" x="772" y="193" width="32" height="12" rx="2"/><rect class="dsh-tile" x="836" y="172" width="64" height="44" rx="4"/><rect class="dsh-bar" x="844" y="198" width="6" height="10" rx="1"/><rect class="dsh-bar" x="854" y="192" width="6" height="16" rx="1"/><rect class="dsh-bar" x="864" y="196" width="6" height="12" rx="1"/><rect class="dsh-bar" x="874" y="186" width="6" height="22" rx="1"/><rect class="dsh-bar" x="884" y="182" width="6" height="26" rx="1"/><rect class="dsh-row" x="692" y="232" width="208" height="34" rx="4"/><rect class="mk-sq" x="700" y="243.5" width="11" height="11" rx="2"/><g class="dsh-done dsh-done--0"><rect class="mk-sq mk-sq--done" x="700" y="243.5" width="11" height="11" rx="2"/><path class="dsh-tick" d="M702.5 249 L704.8 251.4 L708.6 246.6"/></g><rect class="dsh-ln" x="720" y="242" width="76" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="720" y="252" width="46" height="4" rx="2"/><rect class="dsh-chip" x="804" y="244" width="34" height="10" rx="5"/><rect class="dsh-chip dsh-chip--done dsh-done dsh-done--0" x="804" y="244" width="34" height="10" rx="5"/><rect class="dsh-row" x="692" y="274" width="208" height="34" rx="4"/><rect class="mk-sq" x="700" y="285.5" width="11" height="11" rx="2"/><g class="dsh-done dsh-done--1"><rect class="mk-sq mk-sq--done" x="700" y="285.5" width="11" height="11" rx="2"/><path class="dsh-tick" d="M702.5 291 L704.8 293.4 L708.6 288.6"/></g><rect class="dsh-ln" x="720" y="284" width="62" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="720" y="294" width="52" height="4" rx="2"/><rect class="dsh-chip" x="804" y="286" width="34" height="10" rx="5"/><rect class="dsh-chip dsh-chip--done dsh-done dsh-done--1" x="804" y="286" width="34" height="10" rx="5"/><rect class="dsh-row" x="692" y="316" width="208" height="34" rx="4"/><rect class="mk-sq" x="700" y="327.5" width="11" height="11" rx="2"/><g class="dsh-done dsh-done--2"><rect class="mk-sq mk-sq--done" x="700" y="327.5" width="11" height="11" rx="2"/><path class="dsh-tick" d="M702.5 333 L704.8 335.4 L708.6 330.6"/></g><rect class="dsh-ln" x="720" y="326" width="76" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="720" y="336" width="58" height="4" rx="2"/><rect class="dsh-chip" x="804" y="328" width="34" height="10" rx="5"/><rect class="dsh-chip dsh-chip--done dsh-done dsh-done--2" x="804" y="328" width="34" height="10" rx="5"/><rect class="dsh-row" x="692" y="358" width="208" height="34" rx="4"/><rect class="mk-sq" x="700" y="369.5" width="11" height="11" rx="2"/><g class="dsh-done dsh-done--3"><rect class="mk-sq mk-sq--done" x="700" y="369.5" width="11" height="11" rx="2"/><path class="dsh-tick" d="M702.5 375 L704.8 377.4 L708.6 372.6"/></g><rect class="dsh-ln" x="720" y="368" width="62" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="720" y="378" width="46" height="4" rx="2"/><rect class="dsh-chip" x="804" y="370" width="34" height="10" rx="5"/><rect class="dsh-chip dsh-chip--done dsh-done dsh-done--3" x="804" y="370" width="34" height="10" rx="5"/><g class="clawd" aria-hidden="true" transform="translate(848 235.25)"><g class="clawd__walk"><g class="clawd__px" transform="scale(2.75 5.5)"><rect x="2" y="0" width="12" height="1"/><rect x="2" y="1" width="2" height="1"/><rect x="5" y="1" width="6" height="1"/><rect x="12" y="1" width="2" height="1"/><rect x="0" y="2" width="16" height="1"/><rect x="2" y="3" width="12" height="1"/><rect class="clawd__eye" x="4" y="1" width="1" height="1"/><rect class="clawd__eye" x="11" y="1" width="1" height="1"/><g class="clawd__legs clawd__legs--a"><rect x="3" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="12" y="4" width="1" height="1"/></g><g class="clawd__legs clawd__legs--b"><rect x="2" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/></g></g></g></g></g></g><rect class="ftok" aria-hidden="true" x="-4" y="-4" width="8" height="8" rx="2"/></g></g></svg><!-- STAGE:END -->
+        </div>
+      </div>
     </div>
-    <picture class="poster poster--hero"><source media="(max-aspect-ratio: 999/1000)" srcset="img/poster-hero-390.webp" width="780" height="844"><img src="img/poster-hero-1440.webp" loading="lazy" decoding="async" width="820" height="900" alt="People and small robot agents working together at six glass walls"></picture>
-  </section>
 
-  <div id="night" data-theme="dark">
-      <section id="intro" class="sec sec--night" data-key="1" data-hold="0.42,0.70" aria-labelledby="intro-h">
-        <div class="sec__sticky"><picture class="poster poster--hold"><source media="(max-aspect-ratio: 999/1000)" srcset="img/poster-hold-390.webp" width="780" height="844"><img src="img/poster-hold-1440.webp" loading="lazy" decoding="async" width="900" height="900" alt="A person and four small robot agents passing a job sheet round a shared table"></picture><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">SIX LAYERS</p>
-          <h2 id="intro-h" class="reveal" style="--i:1">Everyone works on them.</h2>
-          <p class="reveal" style="--i:2">Your people set the rules, the agents do the legwork, and every hand-off is on the record. Here is how the work moves.</p>
-        </div></div>
-      </section>
-
-      <section id="l1" class="sec sec--night sec--layer" data-key="2" data-hold="0.28,0.62" aria-labelledby="l1-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">01 — CONTEXT</p>
-          <h2 id="l1-h" class="reveal" style="--i:1">It starts with what you know.</h2>
-          <p class="reveal" style="--i:2">You and your team write down who you are, what you sell and why, who owns what, and how you sound. The agents read it before they touch anything.</p>
-          <ul class="facts reveal" style="--i:3"><li>written by 3 people</li><li>read by 30 agents</li><li>212 pages</li></ul>
-        </div></div>
-      </section>
-      <section id="l2" class="sec sec--night sec--layer" data-key="3" data-hold="0.28,0.62" aria-labelledby="l2-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">02 — OPERATIONAL DATA</p>
-          <h2 id="l2-h" class="reveal" style="--i:1">Shared notes, not a guess.</h2>
-          <p class="reveal" style="--i:2">Priya’s way of quoting, Marcus’s price list, the records in your CRM and your books. People add to it, agents keep it tidy, and everyone looks it up before they act.</p>
-          <ul class="facts reveal" style="--i:3"><li>4 connectors</li><li><span class="mk mk--skills" aria-hidden="true"></span>38 skills</li><li><span class="mk mk--data" aria-hidden="true"></span>1<span class="sep">,</span>204 records</li></ul>
-        </div></div>
-      </section>
-      <section id="l3" class="sec sec--night sec--layer" data-key="4" data-hold="0.28,0.62" aria-labelledby="l3-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">03 — AI AGENTS</p>
-          <h2 id="l3-h" class="reveal" style="--i:1">One team, two kinds of member.</h2>
-          <p class="reveal" style="--i:2">Six people, thirty agents: every agent has one job and a person it answers to. A director agent keeps them in step.</p>
-          <ul class="facts reveal" style="--i:3"><li>6 people lead</li><li>30 agents crew</li></ul>
-        </div></div>
-      </section>
-      <section id="l4" class="sec sec--night sec--layer" data-key="5" data-hold="0.28,0.62" aria-labelledby="l4-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">04 — THE WORKSPACE</p>
-          <h2 id="l4-h" class="reveal" style="--i:1">Everyone works at the same table.</h2>
-          <p class="reveal" style="--i:2">One shared workspace — a folder for every client and job — where people and agents pick up each other’s work, and every change is kept.</p>
-          <ul class="facts reveal" style="--i:3"><li>142 folders</li><li>every change kept</li></ul>
-        </div></div>
-      </section>
-      <section id="l5" class="sec sec--night sec--layer" data-key="6" data-hold="0.28,0.62" aria-labelledby="l5-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">05 — LEDGER</p>
-          <h2 id="l5-h" class="reveal" style="--i:1">Every hand-off, on the record.</h2>
-          <p class="reveal" style="--i:2">Who did what, and when: the agent that drafted it, the person who checked it. You can read it, question it and undo it.</p>
-          <ul class="facts reveal" style="--i:3"><li>3<span class="sep">,</span>480 entries this month</li><li>0 unlogged</li></ul>
-        </div></div>
-      </section>
-      <section id="l6" class="sec sec--night sec--layer" data-key="7" data-hold="0.28,0.62" aria-labelledby="l6-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">06 — ADMIN PANEL</p>
-          <h2 id="l6-h" class="reveal" style="--i:1">You still make the call.</h2>
-          <p class="reveal" style="--i:2">One view of how the week is going, and the few decisions only you should make. Nothing goes out in your name that you did not allow.</p>
-          <ul class="facts reveal" style="--i:3"><li>3 decisions waiting</li><li>30 agents working</li></ul>
-        </div></div>
-      </section>
-
-      <section id="together" class="sec sec--night" data-key="8" data-hold="0.30,0.75" aria-labelledby="together-h">
-        <div class="sec__sticky"><div class="copy">
-          <p class="eyebrow reveal" style="--i:0">TOGETHER</p>
-          <h2 id="together-h" class="reveal" style="--i:1">Six layers. One team.</h2>
-          <ol class="system reveal" id="system" style="--i:2"><li class="system__row" data-row="0" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">01</span><span class="system__name">Context</span></li><li class="system__row" data-row="1" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">02</span><span class="system__name">Operational data</span></li><li class="system__row" data-row="2" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">03</span><span class="system__name">AI agents</span></li><li class="system__row" data-row="3" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">04</span><span class="system__name">The workspace</span></li><li class="system__row" data-row="4" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">05</span><span class="system__name">Ledger</span></li><li class="system__row" data-row="5" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">06</span><span class="system__name">Admin panel</span></li></ol>
-        </div></div>
-      </section>
-
-      <section id="close" class="sec sec--night" data-key="9" data-hold="0.2,1" aria-labelledby="close-h">
-        <div class="sec__sticky"><div class="copy">
-          <h2 id="close-h" class="reveal" style="--i:0">This is the whole thing.</h2>
-          <p class="reveal" style="--i:1">I start with the foundation&nbsp;— your context and data&nbsp;— built on your real records in about four weeks. The agents, the workspace, the ledger and your panel follow. You&nbsp;own&nbsp;all&nbsp;of&nbsp;it.</p>
-          <div class="btnrow reveal" style="--i:2"><a class="btn btn--primary" href="#book" data-cta="close">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a></div>
-          <p class="reveal" style="--i:3"><a class="mono-link" href="mailto:ben@3nm.io">ben@3nm.io</a></p>
-        </div></div>
-      </section>
-
-      <section id="compare" class="proof" aria-labelledby="compare-h"><div class="proof__in cmp-grid">
-        <h2 id="compare-h" class="proof__sub reveal">One more head, or a brain that holds everything?</h2>
-        <table class="cmp reveal">
-          <thead><tr><th scope="col">Compared on</th><th scope="col">Hire an ops manager</th><th scope="col">Keep the spreadsheet</th><th scope="col" class="us" style="--r:0">Agentic workspace</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">How fast you get an answer</th><td data-label="Hire an ops manager">When they're free</td><td data-label="Keep the spreadsheet">When you find the right tab</td><td class="us" style="--r:1" data-label="Agentic workspace">Seconds</td></tr>
-            <tr><th scope="row">What it can see</th><td data-label="Hire an ops manager">What they remember</td><td data-label="Keep the spreadsheet">One sheet at a time</td><td class="us" style="--r:2" data-label="Agentic workspace">Every client, job and number together</td></tr>
-            <tr><th scope="row">Connects your apps</th><td data-label="Hire an ops manager">By hand</td><td data-label="Keep the spreadsheet">No</td><td class="us" style="--r:3" data-label="Agentic workspace">Yes</td></tr>
-            <tr><th scope="row">When someone leaves</th><td data-label="Hire an ops manager">Their knowledge goes too</td><td data-label="Keep the spreadsheet">It breaks</td><td class="us" style="--r:4" data-label="Agentic workspace">It stays</td></tr>
-            <tr><th scope="row">Who owns it</th><td data-label="Hire an ops manager">They walk away with it</td><td data-label="Keep the spreadsheet">You, until it breaks</td><td class="us" style="--r:5" data-label="Agentic workspace">You, outright</td></tr>
-            <tr><th scope="row">Time to working</th><td data-label="Hire an ops manager">Months to hire and train</td><td data-label="Keep the spreadsheet">Already here</td><td class="us" style="--r:6" data-label="Agentic workspace">About four weeks</td></tr>
-          </tbody>
-        </table>
-        <div class="guide guide--sq" data-guide="bow" data-guide-trigger="#compare .cmp" aria-hidden="true"></div>
-      </div></section>
-
-      <section id="how" class="proof" aria-labelledby="how-h"><div class="proof__in">
-        <h2 id="how-h" class="reveal">About four weeks from scoping call to a working agentic workspace.</h2>
-        <div class="tl reveal">
-          <div class="tl-bar">
-            <span class="seg s-call"><b>Call</b></span>
-            <span class="seg s-scope"><b>Scoping call</b><em>scope + quote, you approve</em></span>
-            <span class="seg s-build"><b>Build</b><em>on your accounts, your real data</em></span>
-            <span class="seg s-hand"><b>Handover</b><em>recordings + SOPs</em></span>
-            <span class="seg s-month"><b>Monthly</b><em>optional, cancel anytime</em></span>
-          </div>
-          <div class="tl-scale"><span>day 0</span><span>about four weeks</span><span>after</span></div>
-          <div class="guide guide--strip" data-guide="cap" data-guide-track="#how .tl-bar .seg" aria-hidden="true"></div>
+    <!-- the passages: in flow by default; on desktop stage.js stacks them in one still place and fades them -->
+    <div class="story__copy">
+      <article class="psg" id="numbers" data-step="1" data-rail="1">
+        <div class="step__in">
+          <p class="eyb">Where your numbers live</p>
+          <h2 class="h2">None of it talks to each other.</h2>
+          <p class="body"><span class="ref" data-ref="accounting">Sales</span> are in the accounting tool and <span class="ref" data-ref="spreadsheet">jobs</span> are in a spreadsheet. <span class="ref" data-ref="whatsapp">Updates</span> arrive on WhatsApp, and <span class="ref" data-ref="heads">the rest</span> is in people’s heads. You end up as the <span class="ref" data-ref="cabinet">human filing cabinet</span>, the one place where it all comes together.</p>
         </div>
-        <p class="proofline reveal">A data build for a 3PL logistics firm in Singapore went from signed to live in <b class="num">13 days</b>: signed <span class="num">17 June 2026</span>, live <span class="num">30 June</span>.</p>
-        <p class="proofline reveal">Want your team to try agents first? I run a free two-hour workshop at your office. Ask for one on the call.</p>
-        <h3 id="how-sub" class="proof__sub reveal">You give access and answers. I do the rest.</h3>
-        <div class="split reveal">
-          <div class="side you-side">
-            <span class="label">You</span>
-            <ul><li>Access to your accounts</li><li>Answers when two numbers disagree</li><li>Approve the scope</li></ul>
-          </div>
-          <div class="side me-side">
-            <span class="label">Me</span>
-            <ul><li>Cleaning the data</li><li>Writing the wiki</li><li>Building the skills</li><li>Connecting the apps</li><li>Recording the walkthroughs</li><li>Writing the SOPs</li></ul>
-          </div>
-          <div class="guide guide--strip" data-guide="hat" data-guide-trigger="#how .split" data-guide-marks="#how .you-side,#how .me-side" aria-hidden="true"></div>
+      </article>
+      <article class="psg" id="sheet" data-step="2" data-rail="2">
+        <div class="step__in">
+          <p class="eyb eyb--idx"><span class="idx">01</span><span class="dot" aria-hidden="true">·</span>The god-tier spreadsheet</p>
+          <h2 class="h2">By the time it’s finished, it’s <span class="ref" data-ref="stale">out of date</span>.</h2>
+          <p class="body">Someone spends hours pulling numbers out of each system and <span class="ref" data-ref="pasting">pasting them in</span>, or you burn a Saturday doing it yourself. Either way you’re reacting after the fact, and nobody is sure which version is the latest.</p>
         </div>
-        <p class="after-note reveal">The mess is normal. Every business I've built for had spreadsheets that disagreed. You don't clean up before I start.</p>
-      </div></section>
-
-      <section id="proof" class="proof" aria-labelledby="proof-h"><div class="proof__in proof-grid">
-        <h2 id="proof-h" class="reveal">I've built with AI agents every day since November 2025.</h2>
-        <div class="stats reveal">
-          <div class="stat"><b class="num" data-count="0">109,000+</b><span>agent steps in the last <span class="num">3 months</span></span></div>
-          <div class="stat"><b class="num" data-count="1">30</b><span>projects live since <span class="num">Mar 2026</span></span></div>
+      </article>
+      <article class="psg" id="slip" data-step="3" data-rail="3">
+        <div class="step__in">
+          <p class="eyb eyb--idx"><span class="idx">02</span><span class="dot" aria-hidden="true">·</span>It lives in someone’s head</p>
+          <h2 class="h2">When it gets busy, things <span class="ref" data-ref="slips">slip through</span>.</h2>
+          <p class="body">You find out what’s going on by <span class="ref" data-ref="whatsapp">chasing people on WhatsApp</span>. The job that slips through is the one that lived in someone’s head and nowhere else.</p>
         </div>
-        <p class="lead reveal">Paying clients in healthcare consulting, financial services, family offices, 3PL logistics and education consulting. On every one, the problem the owner named wasn't the real one. The real one was where the knowledge lived.</p>
-        <div class="story reveal">
-          <h3>A number that looks right isn't always right.</h3>
-          <p>On the 3PL build, I matched all <span class="num">184<span class="sep">,</span>578</span> rows of the firm's data to the owner's own workbook, to the cent. <span class="num">18 days</span> later, a second year of data loaded and one total went off by <span class="num">SGD 43.27</span>. Every chart still drew. The screen looked correct. Nobody looking at it could have known. The earlier match against the owner's workbook caught it, and I fixed it.</p>
+      </article>
+      <article class="psg" id="leaves" data-step="4" data-rail="4">
+        <div class="step__in">
+          <p class="eyb eyb--idx"><span class="idx">03</span><span class="dot" aria-hidden="true">·</span>When someone leaves</p>
+          <h2 class="h2">It breaks when the person who built it leaves.</h2>
+          <p class="body">She knew which client was which and how every number was put together. Then <span class="ref" data-ref="resigned">she resigned</span>, and you found out how much was only in her head. Now you’re piecing it together from her old files.</p>
         </div>
-        <div class="guide-rail"><div class="guide guide--aside" data-guide="phones" data-guide-trigger="#proof .stats" data-guide-trigger2="#proof .story" aria-hidden="true"></div></div>
-      </div></section>
-
-      <section id="promise" class="proof" aria-labelledby="promise-h"><div class="proof__in">
-        <div class="guarantee">
-          <h2 id="promise-h" class="gq reveal">I build until what's in the scope works.</h2>
-          <p class="lead reveal">Not a refund. The result. If what's in the signed scope isn't working on the day I said it would be, I keep building until it does, at no extra cost. Anything outside the scope is a new scope.</p>
-          <h3 class="proof__sub reveal">You own all of it.</h3>
-          <ul class="pts">
-            <li class="reveal" style="--i:0"><b>Where your data lives</b>In your own workspaces, drives and databases, named tool by tool in the scope.</li>
-            <li class="reveal" style="--i:1"><b>Whose accounts and keys</b>Yours. I get scoped access to build and hand it back at handover.</li>
-            <li class="reveal" style="--i:2"><b>Who changes things</b>You, after handover. You never need me to use it.</li>
-            <li class="reveal" style="--i:3"><b>Getting it out</b>Everything exports as files. No format only I can open.</li>
+      </article>
+      <article class="psg" id="app" data-step="5" data-rail="5">
+        <div class="step__in">
+          <p class="eyb eyb--idx"><span class="idx">04</span><span class="dot" aria-hidden="true">·</span>One more app</p>
+          <h2 class="h2"><span class="ref" data-ref="app">One more app</span> means one more place that breaks.</h2>
+          <p class="body">Most businesses this size already run several apps that don’t talk to each other, so someone types the same details in <span class="ref" data-ref="three">three places</span>. And a dashboard app can only show what your spreadsheets say.</p>
+        </div>
+      </article>
+      <article class="psg" id="hire" data-step="6" data-rail="6">
+        <div class="step__in">
+          <p class="eyb eyb--idx"><span class="idx">05</span><span class="dot" aria-hidden="true">·</span>“I’ll just hire someone”</p>
+          <h2 class="h2">An <span class="ref" data-ref="ops">ops manager</span> becomes the new bottleneck.</h2>
+          <p class="body">Hiring helps. But then everything goes through them instead of you, and when they leave, it <span class="ref" data-ref="leave">walks out the door</span> with them.</p>
+        </div>
+      </article>
+      <article class="psg" id="cost" data-step="7" data-rail="7">
+        <div class="step__in">
+          <h2 class="h2">Everything goes through you, and it’s exhausting.</h2>
+          <p class="body">A 2024 Intuit survey of 630 US businesses with 10 to 99 staff found they spend about <span class="ref" data-ref="hours">25 hours a week</span> typing in data and matching numbers across apps. One delivery business I work with was paying someone just to type up a 6pm report.</p>
+          <p class="fact"><span class="fact__n">25</span><span class="fact__l">hours a week</span></p>
+        </div>
+      </article>
+      <article class="psg" id="fix" data-step="8" data-rail="8">
+        <div class="step__in">
+          <h2 class="h2">I fix the numbers first, then build <span class="ref" data-ref="screen">the screen</span> on top.</h2>
+          <p class="body">I pull your numbers out of <span class="ref" data-ref="systems">every system</span>, so nobody has to spend hours finagling spreadsheets again. Then I check every total against <span class="ref" data-ref="books">your own books</span> before you see the screen.</p>
+        </div>
+      </article>
+      <article class="psg" id="proof" data-step="9" data-rail="8">
+        <div class="step__in">
+          <p class="body body--proof">A delivery business doing <span class="ref" data-ref="count">about 80 jobs a day</span> with 6 drivers kept its jobs in spreadsheets and its drivers on a separate app, and paid someone to type up the day at 6pm. I built them <span class="ref" data-ref="roles">one system</span> instead: the office books a job, the driver closes it with photos of the signed invoice, and each customer sees their own orders as they move. The code and the data are theirs at handover.</p>
+          <dl class="mets mets--3">
+            <div class="met"><dt class="met__n">80</dt><dd class="met__l">jobs a day</dd></div>
+            <div class="met"><dt class="met__n">6</dt><dd class="met__l">drivers</dd></div>
+            <div class="met"><dt class="met__n">1</dt><dd class="met__l">record for the office, drivers and customers</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="psg" id="monday" data-step="10" data-rail="9">
+        <div class="step__in">
+          <p class="eyb">Monday, 8:40 AM</p>
+          <h2 class="h2"><span class="ref" data-ref="need">Two things need you</span>. Everything else is already moving.</h2>
+          <p class="body">You open <span class="ref" data-ref="screen">one screen</span> with your coffee, make two calls and get on with your week. Nobody had to stop work to update you.</p>
+          <p class="sublbl">On your screen</p>
+          <ul class="onscreen">
+            <li>Money in, money out and what’s owed, so you know before payday whether payroll is covered</li>
+            <li>Every job with its owner and due date, so nothing slips through</li>
+            <li>Who on the team is producing, going by the numbers</li>
+            <li>Answers to plain questions like “which clients haven’t paid this month?”, from your own data</li>
+            <li>Numbers that stay put when someone leaves</li>
+            <li>Your Saturdays back, because nobody’s pasting spreadsheets together</li>
           </ul>
-          <div class="guide guide--strip" data-guide="pair" data-guide-trigger="#promise .pts" data-guide-trigger2="#promise .founder" aria-hidden="true"></div>
-          <p class="after-note reveal">No PSG or EDG paperwork. Grant approval takes four to six months; the build takes about four weeks.</p>
         </div>
-        <div class="founder reveal">
-          <picture><source srcset="img/ben-portrait.webp" type="image/webp"><img src="img/ben-portrait.jpg" alt="Bolun (Ben) Liu" width="72" height="72" loading="lazy" decoding="async"></picture>
-          <div>
-            <p>I'm Ben Liu, and RightClick:AI is me. I take the call, scope the build, build it and hand it over. No subcontractors, no account manager in between. You talk to the person doing the work, start to finish.</p>
-            <p class="byline">Bolun (Ben) Liu · Founder, RightClick:AI · Singapore</p>
-          </div>
+      </article>
+      <article class="psg psg--last" id="apps" data-step="11" data-rail="10">
+        <div class="step__in">
+          <p class="eyb">What comes after</p>
+          <h2 class="h2">Then I build the <span class="ref" data-ref="apps">app</span> that runs on it.</h2>
+          <p class="body">Once your numbers are connected and checked, I can build a custom app on top of them, like the <span class="ref" data-ref="apps">loan tracker</span> I built for the mortgage brokerage I work in. Automations only work once the workflow underneath is <span class="ref" data-ref="connected">connected</span>, so that part always comes first.</p>
         </div>
-      </div></section>
+      </article>
+    </div>
 
-      <section id="book" class="sec sec--night sec--book" aria-labelledby="book-h">
-        <div class="book__panel">
-          <p class="eyebrow">Get started</p>
-          <h2 id="book-h" tabindex="-1">Book a 30-minute call.<br>It's free.</h2>
-          <p class="book__lede">No pitch, no proposal. Book a call, or tell me the one thing eating your week and I'll say if it's worth one. I read every one myself, and take three projects a month.</p>
-          <form id="book-form" class="book__form" novalidate>
-            <div class="field"><label for="book-name">Your name</label><input class="field__input" id="book-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required aria-describedby="book-name-err"><p class="field__err" id="book-name-err"></p></div>
-            <div class="field"><label for="book-email">Work email</label><input class="field__input" id="book-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required aria-describedby="book-email-err"><p class="field__err" id="book-email-err"></p></div>
-            <div class="field"><label for="book-note">Not ready to book? Tell me the one thing eating your week <span class="opt">(optional)</span></label><textarea class="field__input" id="book-note" name="note" rows="3" maxlength="500" placeholder="2 to 3 sentences is enough." aria-describedby="book-note-err"></textarea><p class="field__err" id="book-note-err"></p></div>
-            <button type="submit" class="btn btn--primary">Book my free call<span class="btn__arrow" aria-hidden="true">→</span></button>
-            <p class="book__status" role="status" aria-live="polite"></p>
-            <p class="book__note">ben@3nm.io · Singapore · No pitch, no proposal.</p>
-          </form>
-          <p class="book__fallback">WhatsApp <a class="mono-link" href="https://wa.me/6591288687?text=Hi%20Ben%2C%20I'd%20like%20to%20book%20a%20free%2030-minute%20call.%20(via%203nm.io)">+65 9128 8687</a> or email <a class="mono-link" href="mailto:ben@3nm.io?subject=Book%20a%20call">ben@3nm.io</a>.</p>
-        </div>
-      </section>
+    <!-- scroll distance for the still passages (desktop only) -->
+    <div class="beat" data-beat="1" data-rail="1" style="--r:2" aria-hidden="true"></div>
+    <div class="beat" data-beat="2" data-rail="2" style="--r:3" aria-hidden="true"></div>
+    <div class="beat" data-beat="3" data-rail="3" style="--r:4" aria-hidden="true"></div>
+    <div class="beat" data-beat="4" data-rail="4" style="--r:5" aria-hidden="true"></div>
+    <div class="beat" data-beat="5" data-rail="5" style="--r:6" aria-hidden="true"></div>
+    <div class="beat" data-beat="6" data-rail="6" style="--r:7" aria-hidden="true"></div>
+    <div class="beat" data-beat="7" data-rail="7" style="--r:8" aria-hidden="true"></div>
+    <div class="beat" data-beat="8" data-rail="8" style="--r:9" aria-hidden="true"></div>
+    <div class="beat" data-beat="9" data-rail="8" style="--r:10" aria-hidden="true"></div>
+    <div class="beat" data-beat="10" data-rail="9" style="--r:11" aria-hidden="true"></div>
+    <div class="beat" data-beat="11" data-rail="10" style="--r:12" aria-hidden="true"></div>
 
-      <footer class="foot">
-        <a class="brand" href="#hero" aria-label="RightClick:AI, back to top"><img class="brand__logo brand__logo--light" src="img/logo/mark.svg" width="32" height="32" alt="" aria-hidden="true"><img class="brand__logo brand__logo--dark" src="img/logo/mark-ondark.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand__word">RightClick:AI</span></a>
-        <nav class="foot__links" aria-label="Footer"><a href="#hero">Home</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav>
-        <a class="mono-link" href="mailto:ben@3nm.io">ben@3nm.io</a>
-        <p class="foot__legal">© 2026 RightClick:AI Pte Ltd, Singapore</p>
-      </footer>
   </div>
-</main>
-<!-- FIX-PLAN-R7 P3.6: arriving on ./#book (a "Book a call" on case-studies / faq). Parsed before the deferred modules, so
-     main.js boots already at #book and skips the load intro (its own introPos > 0.5 test); js/book.js lands it exactly
-     once the stage is ready. -->
-<script>(function(){if(location.hash!=='#book')return;var b=document.getElementById('book');if(b)b.scrollIntoView({block:'start',behavior:'instant'});})();</script>
+</section>
 
-<!-- Scroll-depth buckets on this page are a WITHIN-PAGE TREND ONLY: the stage is a fixed, scroll-driven hero (INTERACTION.md §3.1 rule 4), so % of document height is not comparable with any other page. js/main.js fires {event:'hero_pin_release'} to dataLayer at the frame the day→night cut completes (#night reaches the top) — read that event as 'reader reached the content', not the buckets. GA4 forwarding needs a GTM Custom Event trigger for scroll_depth and hero_pin_release. The four proof sections after the stage runway (#compare, #how, #proof, #promise) are the page's content: read section_view and content_depth for them, not the document-height buckets. A section_view needs the section to hold the band from 20% to 50% of the viewport for 600 ms (the band keeps #promise's last strip under the nav, after a #book landing, from counting), so a Book a call fly-through (about 1.1 s across all four) does not count as four views; content_depth stays a pure how-far measure. GTM needs Custom Event triggers for section_view and content_depth (a manual step in the GTM UI). -->
+<!-- ============================================================ HOW IT WORKS -->
+<section class="sec sec--how" id="how" data-rail="11" aria-labelledby="how-h">
+  <!-- the wheel (2026-10-10): with motion allowed, page.js turns this section into a scroll-driven wheel. .how-pin holds
+       the screen while the four steps turn to the top one by one; then step 4's square grows into the done mark and
+       the guarantee line comes up under it. Without JS or with reduced motion it stays this plain list. -->
+  <div class="how-pin">
+  <div class="wrap">
+    <div class="sec__head">
+      <h2 class="h2 h2--wide reveal" id="how-h">Four steps, about four weeks. You give me access and answers.</h2>
+    </div>
+    <div class="steps" id="steps">
+      <div class="steps__track" aria-hidden="true"><span class="steps__fill" id="stepsFill"></span></div>
+      <ol class="steps__list">
+        <li class="st reveal" style="--i:0"><i class="st__node" aria-hidden="true"></i><h3 class="h3">A 30-minute call.</h3><p>Tell me the one question about your business you can’t answer today. If it isn’t worth fixing, I’ll say so.</p></li>
+        <li class="st reveal" style="--i:1"><i class="st__node" aria-hidden="true"></i><h3 class="h3">One scoping call.</h3><p>We go through every place your numbers live. I write down what “done” means in one sentence, then I quote.</p></li>
+        <li class="st reveal" style="--i:2"><i class="st__node" aria-hidden="true"></i><h3 class="h3">Your numbers, cleaned and checked.</h3><p>I set it all up on your own accounts, so you hold the passwords and can export everything as files.</p></li>
+        <li class="st reveal" style="--i:3"><i class="st__node" aria-hidden="true"></i><h3 class="h3">Your screen goes live.</h3><p>Usually about 4 weeks after the scoping call. Your team gets recorded walkthroughs, so it keeps working even if I disappear.</p></li>
+      </ol>
+    </div>
+    <p class="guarantee reveal"><i aria-hidden="true"></i>I build until what’s in the scope works, at no extra cost.</p>
+  </div>
+  <div class="how-done" aria-hidden="true"><span class="how-done__mark"><svg viewBox="0 0 88 88" focusable="false"><path class="how-done__tick" pathLength="1" d="M25 45 L38 58 L64 30"/></svg></span></div>
+  </div>
+</section>
+
+<!-- ============================================================ WHO BUILDS IT
+     2026-10-10 (Ben: "more like the top part … more diagrams"): the same shape as the story. The passages scroll in
+     the left column; the diagram holds in the right one (on a phone, under the nav) and page.js shows the beat of
+     the passage in view. The words are the section's own, split into beats; the fit card is the last beat.
+     Without JS every passage shows and the diagram shows its first beat. -->
+<section class="sec sec--ben" id="ben" data-rail="12" aria-labelledby="ben-h">
+  <div class="wrap ben2">
+    <div class="ben2__fig">
+      <div class="ben-pin">
+        <div class="ben-panel" id="benFig" data-beat="1">
+          <!-- BEN:BEGIN --><svg class="stage__svg ben__svg" viewBox="0 0 640 640" role="img" aria-labelledby="ben-svg-t ben-svg-d" focusable="false"><title id="ben-svg-t">Who builds it</title><desc id="ben-svg-d">You and Ben, start to finish, with no account manager or subcontractor in between; the first screen, every loan for a mortgage brokerage; 30 projects since March 2026; standard tools, written steps and recorded walkthroughs handed to your team; for businesses of 5 to 25 people.</desc><defs><marker id="bmk" viewBox="0 0 8 6" markerWidth="8" markerHeight="6" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon class="mk" points="0 0, 8 3, 0 6"/></marker></defs><g class="bb" data-b="1"><path class="cn" marker-end="url(#bmk)" d="M208 316 L432 316"/><path class="cn" marker-end="url(#bmk)" d="M432 340 L208 340"/><text class="t-tag t-tag--plain" x="320" y="302" text-anchor="middle">START TO FINISH</text><g class="nd" style="--d:0"><rect class="nd__mask" x="240" y="128" width="160" height="72" rx="6"/><rect class="nd__box nd__box--dash" x="240" y="128" width="160" height="72" rx="6"/><text class="t-name" x="252" y="170">Account</text><text class="t-name" x="252" y="190">manager</text></g><rect class="nd__bad nd__bad--dash" x="240" y="128" width="160" height="72" rx="6"/><g class="brkx"><circle cx="400" cy="128" r="9"/><path d="M396.5 124.5 L403.5 131.5 M403.5 124.5 L396.5 131.5"/></g><g class="nd" style="--d:0"><rect class="nd__mask" x="240" y="448" width="160" height="72" rx="6"/><rect class="nd__box nd__box--dash" x="240" y="448" width="160" height="72" rx="6"/><text class="t-name" x="252" y="502">Subcontractor</text></g><rect class="nd__bad nd__bad--dash" x="240" y="448" width="160" height="72" rx="6"/><g class="brkx"><circle cx="400" cy="448" r="9"/><path d="M396.5 444.5 L403.5 451.5 M403.5 444.5 L396.5 451.5"/></g><g class="nd nd--you" style="--d:0"><rect class="nd__mask" x="48" y="288" width="160" height="80" rx="6"/><rect class="nd__box" x="48" y="288" width="160" height="80" rx="6"/><text class="t-name t-name--you" x="60" y="350">You</text></g><g class="nd" style="--d:0"><rect class="nd__mask" x="432" y="288" width="160" height="80" rx="6"/><rect class="nd__box" x="432" y="288" width="160" height="80" rx="6"/><text class="t-name" x="444" y="350">Ben</text></g><text class="t-tag t-tag--plain" x="432" y="394">MARKETER BY TRADE</text></g><g class="bb" data-b="2"><text class="t-tag t-tag--plain" x="176" y="80">MORTGAGE BROKERAGE</text><path class="cn" marker-end="url(#bmk)" d="M320 520 L320 410"/><g class="nd" style="--d:0"><rect class="nd__mask" x="176" y="96" width="288" height="312" rx="6"/><rect class="nd__box" x="176" y="96" width="288" height="312" rx="6"/><path class="rule" d="M192 152 H448"/><rect class="dsh-row" x="192" y="172" width="256" height="32" rx="4"/><rect class="mk-sq mk-sq--done" x="202" y="182.5" width="11" height="11" rx="2"/><rect class="dsh-ln" x="224" y="181" width="96" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="224" y="191" width="58" height="4" rx="2"/><rect class="dsh-chip dsh-chip--done" x="396" y="183" width="40" height="10" rx="5"/><rect class="dsh-row" x="192" y="216" width="256" height="32" rx="4"/><rect class="mk-sq mk-sq--live" x="202" y="226.5" width="11" height="11" rx="2"/><rect class="dsh-ln" x="224" y="225" width="82" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="224" y="235" width="70" height="4" rx="2"/><rect class="dsh-chip" x="396" y="227" width="40" height="10" rx="5"/><rect class="dsh-row" x="192" y="260" width="256" height="32" rx="4"/><rect class="mk-sq mk-sq--done" x="202" y="270.5" width="11" height="11" rx="2"/><rect class="dsh-ln" x="224" y="269" width="68" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="224" y="279" width="58" height="4" rx="2"/><rect class="dsh-chip dsh-chip--done" x="396" y="271" width="40" height="10" rx="5"/><rect class="dsh-row" x="192" y="304" width="256" height="32" rx="4"/><rect class="mk-sq mk-sq--ahead" x="202" y="314.5" width="11" height="11" rx="2"/><rect class="dsh-ln" x="224" y="313" width="96" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="224" y="323" width="70" height="4" rx="2"/><rect class="dsh-chip" x="396" y="315" width="40" height="10" rx="5"/><rect class="dsh-row" x="192" y="348" width="256" height="32" rx="4"/><rect class="mk-sq mk-sq--live" x="202" y="358.5" width="11" height="11" rx="2"/><rect class="dsh-ln" x="224" y="357" width="82" height="5" rx="2.5"/><rect class="dsh-ln dsh-ln--soft" x="224" y="367" width="58" height="4" rx="2"/><rect class="dsh-chip" x="396" y="359" width="40" height="10" rx="5"/></g><text class="t-name t-name--title" x="192" y="136">Every loan</text><g class="nd" style="--d:0"><rect class="nd__mask" x="24" y="224" width="112" height="64" rx="6"/><rect class="nd__box nd__box--dash" x="24" y="224" width="112" height="64" rx="6"/><text class="t-name" x="36" y="270">Excel</text></g><rect class="nd__bad nd__bad--dash" x="24" y="224" width="112" height="64" rx="6"/><g class="brkx"><circle cx="136" cy="224" r="9"/><path d="M132.5 220.5 L139.5 227.5 M139.5 220.5 L132.5 227.5"/></g><g class="person person--b"><circle cx="288" cy="542" r="4.5"/><path d="M280 556 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b"><circle cx="320" cy="542" r="4.5"/><path d="M312 556 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b"><circle cx="352" cy="542" r="4.5"/><path d="M344 556 a8 8 0 0 1 16 0 Z"/></g><text class="t-tag t-tag--plain" x="320" y="596" text-anchor="middle">THE TEAM</text></g><g class="bb" data-b="3"><rect class="b-sq" style="--i:0" x="160" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:1" x="216" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:2" x="272" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:3" x="328" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:4" x="384" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:5" x="440" y="136" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:6" x="160" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:7" x="216" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:8" x="272" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:9" x="328" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:10" x="384" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:11" x="440" y="192" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:12" x="160" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:13" x="216" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:14" x="272" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:15" x="328" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:16" x="384" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:17" x="440" y="248" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:18" x="160" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:19" x="216" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:20" x="272" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:21" x="328" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:22" x="384" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:23" x="440" y="304" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:24" x="160" y="360" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:25" x="216" y="360" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:26" x="272" y="360" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:27" x="328" y="360" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:28" x="384" y="360" width="40" height="40" rx="3"/><rect class="b-sq" style="--i:29" x="440" y="360" width="40" height="40" rx="3"/><text class="t-count" x="160" y="470">30</text><text class="t-tag t-tag--plain" x="160" y="500">PROJECTS SINCE MARCH 2026</text></g><g class="bb" data-b="4"><path class="cn" marker-end="url(#bmk)" d="M256 152 L320 152 A8 8 0 0 1 328 160 L328 300 A8 8 0 0 0 336 308 L400 308"/><path class="cn" marker-end="url(#bmk)" d="M256 320 L400 320"/><path class="cn" marker-end="url(#bmk)" d="M256 488 L320 488 A8 8 0 0 0 328 480 L328 340 A8 8 0 0 1 336 332 L400 332"/><g class="nd" style="--d:0"><rect class="nd__mask" x="48" y="120" width="208" height="64" rx="6"/><rect class="nd__box" x="48" y="120" width="208" height="64" rx="6"/><text class="t-name" x="60" y="166">Standard tools</text></g><g class="nd" style="--d:0"><rect class="nd__mask" x="48" y="288" width="208" height="64" rx="6"/><rect class="nd__box" x="48" y="288" width="208" height="64" rx="6"/><text class="t-name" x="60" y="334">Written steps</text></g><g class="nd" style="--d:0"><rect class="nd__mask" x="48" y="452" width="208" height="72" rx="6"/><rect class="nd__box" x="48" y="452" width="208" height="72" rx="6"/><text class="t-name" x="60" y="494">Recorded</text><text class="t-name" x="60" y="514">walkthroughs</text></g><g class="nd nd--you" style="--d:0"><rect class="nd__mask" x="400" y="280" width="192" height="80" rx="6"/><rect class="nd__box" x="400" y="280" width="192" height="80" rx="6"/><text class="t-name t-name--you" x="412" y="342">Your team</text></g><text class="t-tag t-tag--plain" x="400" y="386">ANYONE TECHNICAL</text></g><g class="bb" data-b="5"><rect class="b-band" x="124.6" y="270" width="373.1" height="62" rx="8"/><g class="person person--b is-out"><circle cx="64.0" cy="294" r="4.5"/><path d="M56.0 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-out"><circle cx="81.7" cy="294" r="4.5"/><path d="M73.7 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-out"><circle cx="99.3" cy="294" r="4.5"/><path d="M91.3 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-out"><circle cx="117.0" cy="294" r="4.5"/><path d="M109.0 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="134.6" cy="294" r="4.5"/><path d="M126.6 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="152.3" cy="294" r="4.5"/><path d="M144.3 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="169.9" cy="294" r="4.5"/><path d="M161.9 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="187.6" cy="294" r="4.5"/><path d="M179.6 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="205.2" cy="294" r="4.5"/><path d="M197.2 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="222.9" cy="294" r="4.5"/><path d="M214.9 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="240.6" cy="294" r="4.5"/><path d="M232.6 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="258.2" cy="294" r="4.5"/><path d="M250.2 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="275.9" cy="294" r="4.5"/><path d="M267.9 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="293.5" cy="294" r="4.5"/><path d="M285.5 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="311.2" cy="294" r="4.5"/><path d="M303.2 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="328.8" cy="294" r="4.5"/><path d="M320.8 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="346.5" cy="294" r="4.5"/><path d="M338.5 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="364.1" cy="294" r="4.5"/><path d="M356.1 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="381.8" cy="294" r="4.5"/><path d="M373.8 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="399.4" cy="294" r="4.5"/><path d="M391.4 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="417.1" cy="294" r="4.5"/><path d="M409.1 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="434.8" cy="294" r="4.5"/><path d="M426.8 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="452.4" cy="294" r="4.5"/><path d="M444.4 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="470.1" cy="294" r="4.5"/><path d="M462.1 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-in"><circle cx="487.7" cy="294" r="4.5"/><path d="M479.7 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-past"><circle cx="505.4" cy="294" r="4.5"/><path d="M497.4 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-past"><circle cx="523.0" cy="294" r="4.5"/><path d="M515.0 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-past"><circle cx="540.7" cy="294" r="4.5"/><path d="M532.7 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-past"><circle cx="558.3" cy="294" r="4.5"/><path d="M550.3 308 a8 8 0 0 1 16 0 Z"/></g><g class="person person--b is-past"><circle cx="576.0" cy="294" r="4.5"/><path d="M568.0 308 a8 8 0 0 1 16 0 Z"/></g><path class="b-axis" d="M64 344 H576"/><path class="b-tick" d="M64.0 344 V352"/><text class="t-tag t-tag--plain" x="64.0" y="372" text-anchor="middle">1</text><path class="b-tick" d="M134.6 344 V352"/><text class="t-tag t-tag--plain" x="134.6" y="372" text-anchor="middle">5</text><path class="b-tick" d="M487.7 344 V352"/><text class="t-tag t-tag--plain" x="487.7" y="372" text-anchor="middle">25</text><text class="t-tag t-tag--acc" x="124.6" y="256">5 TO 25 PEOPLE</text><text class="t-tag t-tag--plain" x="64" y="412">UNDER 5</text><text class="t-tag t-tag--plain" x="64" y="432">KEEP IT</text><rect class="mk-sq mk-sq--done" x="124.6" y="178" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="142.6" y="187.5">NO OPS MANAGER</text><rect class="mk-sq mk-sq--done" x="124.6" y="206" width="11" height="11" rx="2"/><text class="t-tag t-tag--plain" x="142.6" y="215.5">CAN’T DO IT MANUALLY ANYMORE</text></g></svg><!-- BEN:END -->
+        </div>
+      </div>
+    </div>
+    <div class="ben2__copy">
+      <div class="bp" data-beat="1"><div class="bp__in">
+        <h2 class="h2 h2--xl" id="ben-h">I build every one of these myself.</h2>
+        <p class="body body--lg">I’m Ben, and I’m a marketer by trade.</p>
+      </div></div>
+      <div class="bp" data-beat="2"><div class="bp__in">
+        <p class="body body--lg">I built my first screen for the mortgage brokerage I work in, so the team could see every loan without opening Excel or asking anyone.</p>
+      </div></div>
+      <div class="bp" data-beat="3"><div class="bp__in">
+        <p class="body body--lg">I’ve shipped 30 projects since March 2026.</p>
+      </div></div>
+      <div class="bp" data-beat="4"><div class="bp__in">
+        <p class="body body--lg">I use standard tools and write everything down, so anyone technical can pick it up after me.</p>
+      </div></div>
+      <div class="bp bp--last" data-beat="5"><div class="bp__in">
+        <div class="fit">
+          <p class="sublbl">Who it’s for</p>
+          <p class="fit__yes"><i aria-hidden="true"></i><span>It’s for you if you own a business of 5 to 25 people, there’s no ops manager, and you’ve reached the point where you can’t do it manually anymore.</span></p>
+          <p class="fit__no"><i aria-hidden="true"></i><span>If you’re under 5 people and a spreadsheet still works, keep it.</span></p>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ QUESTIONS -->
+<section class="sec sec--faq" id="questions" data-rail="13" aria-labelledby="faq-h">
+  <div class="wrap two two--faq">
+    <div class="two__main faq__head">
+      <h2 class="h2 reveal" id="faq-h">Ask me what you’d ask anyone who builds for you.</h2>
+    </div>
+    <div class="two__side faq">
+      <details class="qa reveal" style="--i:0"><summary><h3 class="qa__q">Who has the passwords?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>You do. I build on your accounts, and you take my access back at handover.</p></div></details>
+      <details class="qa reveal" style="--i:1"><summary><h3 class="qa__q">Where does the data live, and can I get it out?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>In your own accounts. Everything exports as plain files.</p></div></details>
+      <details class="qa reveal" style="--i:2"><summary><h3 class="qa__q">What if you disappear?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>It’s built on standard tools with written steps and recorded walkthroughs, so it keeps working and anyone technical can take it over.</p></div></details>
+      <details class="qa reveal" style="--i:3"><summary><h3 class="qa__q">Do we have to change the tools we use?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>Usually not. I pull the numbers out of what you already use, so your team keeps working the way it does.</p></div></details>
+      <details class="qa reveal" style="--i:4"><summary><h3 class="qa__q">How much does it cost?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>I quote after the scoping call, once I’ve seen where your numbers live.</p></div></details>
+      <details class="qa reveal" style="--i:5"><summary><h3 class="qa__q">Our numbers are a mess. Is that a problem?</h3><i class="qa__pm" aria-hidden="true"></i></summary><div class="qa__a"><p>That’s where almost every business this size starts, and it’s the part I do first.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ BOOK -->
+<section class="sec sec--book" id="book" data-rail="14" aria-labelledby="book-h">
+  <div class="wrap">
+    <div class="book">
+      <div class="book__copy">
+        <h2 class="h2 h2--xl reveal" id="book-h" tabindex="-1">Book a 30-minute call. It’s free.</h2>
+        <p class="body body--lg reveal" style="--i:2">Bring the one question about your business you can’t answer today. You’ll leave knowing where that answer lives and what it would take to see it every Monday, whether or not we work together.</p>
+        <p class="book__mail reveal" style="--i:3"><a class="mono-link" href="mailto:ben@3nm.io">ben@3nm.io</a></p>
+      </div>
+      <div class="book__panel reveal" style="--i:2">
+        <form id="book-form" class="form" method="dialog" novalidate>
+          <div class="field"><label for="book-name">Your name</label><input class="field__input" id="book-name" name="name" type="text" autocomplete="name" required aria-describedby="book-name-err"><p class="field__err" id="book-name-err"></p></div>
+          <div class="field"><label for="book-email">Work email</label><input class="field__input" id="book-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="you@company.com" required aria-describedby="book-email-err"><p class="field__err" id="book-email-err"></p></div>
+          <div class="field"><label for="book-note">Not ready to book? Tell me the one thing eating your week <span class="opt">(optional)</span></label><textarea class="field__input" id="book-note" name="note" rows="3" maxlength="500" placeholder="2 to 3 sentences is enough." aria-describedby="book-note-err"></textarea><p class="field__err" id="book-note-err"></p></div>
+          <button type="submit" class="btn btn--primary btn--block">Book a 30-minute call<span class="btn__arr" aria-hidden="true">&rarr;</span></button>
+          <p class="book__status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="book__fallback">WhatsApp <a class="mono-link" href="https://wa.me/6591288687?text=Hi%20Ben%2C%20I'd%20like%20to%20book%20a%20free%2030-minute%20call.%20(via%203nm.io)">+65 9128 8687</a> or email <a class="mono-link" href="mailto:ben@3nm.io?subject=Book%20a%20call">ben@3nm.io</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span class="mark mark--foot" translate="no"><b aria-hidden="true"></b><span>RightClick:AI</span></span>
+    <nav class="foot__links" aria-label="Footer"><a href="how-it-works">How it works</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav>
+    <p>© 2026 RightClick:AI Pte Ltd · Singapore</p>
+  </div>
+</footer>
+
+<!-- Scroll depth: 25/50/75/90/100 buckets to dataLayer (global rule). The story uses position:sticky, not a pin,
+     so no runway is added and these buckets track real reading depth. GA4 needs a GTM Custom Event trigger for
+     scroll_depth (manual step in the GTM UI). -->
 <script>(function(){
   var marks=[25,50,75,90,100],hit={},dl=window.dataLayer=window.dataLayer||[];
   function depth(){var de=document.documentElement,b=document.body;
@@ -305,30 +400,6 @@
     return Math.min(100,Math.round((window.pageYOffset||de.scrollTop)/sh*100));}
   function check(){var p=depth();for(var i=0;i<marks.length;i++){var m=marks[i];
     if(p>=m&&!hit[m]){hit[m]=1;dl.push({event:'scroll_depth',percent:m,page_path:location.pathname});}}}
-  var t=0;window.addEventListener('scroll',function(){if(t)return;
-    t=setTimeout(function(){t=0;check();},200);},{passive:true});
-  window.addEventListener('load',check);
-})();</script>
-<script>(function(){
-  var dl=window.dataLayer=window.dataLayer||[],ids=['compare','how','proof','promise'];
-  if('IntersectionObserver' in window){
-    var held={};
-    var io=new IntersectionObserver(function(entries){
-      for(var i=0;i<entries.length;i++){(function(e){var id=e.target.id;
-        if(e.isIntersecting){if(!held[id])held[id]=setTimeout(function(){io.unobserve(e.target);dl.push({event:'section_view',section:id});},600);}
-        else if(held[id]){clearTimeout(held[id]);held[id]=0;}})(entries[i]);}
-    },{threshold:0,rootMargin:'-20% 0px -50% 0px'});
-    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el)io.observe(el);}
-  }
-  var marks=[25,50,75,100],hit={};
-  function check(){var a=document.getElementById('compare'),b=document.getElementById('book');
-    if(!a||!b)return;
-    var y=window.pageYOffset||document.documentElement.scrollTop,
-        top=a.getBoundingClientRect().top+y,end=b.getBoundingClientRect().top+y;
-    if(end<=top)return;
-    var p=(y+window.innerHeight-top)/(end-top)*100;
-    for(var i=0;i<marks.length;i++){var m=marks[i];
-      if(p>=m&&!hit[m]){hit[m]=1;dl.push({event:'content_depth',percent:m});}}}
   var t=0;window.addEventListener('scroll',function(){if(t)return;
     t=setTimeout(function(){t=0;check();},200);},{passive:true});
   window.addEventListener('load',check);

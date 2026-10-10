@@ -169,6 +169,7 @@ html.no-js .nav { position: absolute; }
   align-items: center;
   gap: 10px;
   min-height: 44px;
+  min-width: 44px;
   text-decoration: none;
   color: var(--rc-ink-1);
   transition: transform var(--rc-d-hover-x) var(--rc-ease-out);
@@ -189,11 +190,13 @@ html.no-js .nav { position: absolute; }
    light ink on the dark scrim past the cut and on the all-dark subpages. */
 .nav__links {
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: 12px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
 }
+/* 8px side padding widens Blog and FAQ to touch size; the gap and margin above shrink by the same (2026-10-10) */
+.nav__links a { padding-inline: 8px; }
 .nav__links a, .foot__links a {
   display: inline-flex;
   align-items: center;
@@ -225,15 +228,66 @@ html.no-js .nav { position: absolute; }
     white-space: nowrap;
     border: 0;
   }
-  .nav__links { gap: 14px; margin-right: 14px; }
-  .nav__links a { font-size: 14px; }
 }
 /* FIX-PLAN-R8 P1.2: with Blog in the bar, 360 px needs a tighter nav and the Book button's arrow drops out. */
 @media (max-width: 399px) {
-  .nav__links { gap: 10px; margin-right: 10px; }
-  .nav__links a { font-size: 13px; }
   .nav .btn--sm .btn__arrow { display: none; }
 }
+/* 2026-10-10: with How it works in the bar, four links, the wordmark and the Book button need about 690 px.
+   Under 768 px (measured: they collide from 600 to 680) the links move into a "Menu" (a native <details>, so it works with no JS; js/navmenu.js adds Escape and
+   tap-outside). The sheet drops under the bar, full width, on the nav's own ground: its colours are --rc-*
+   only, so it follows the nav's data-theme (light over the film's hero, dark on the subpages). */
+.nav__menu { display: none; }
+@media (max-width: 767px) {
+  .nav__links { display: none; }
+  .nav__menu { display: block; margin-left: auto; margin-right: 12px; }
+  .nav__menu > summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding-inline: 4px;
+    list-style: none;
+    cursor: pointer;
+    font: 500 15px/1 var(--f-body);
+    color: var(--rc-ink-2);
+    transition: color var(--rc-d-micro) var(--rc-ease-out);
+  }
+  .nav__menu > summary::-webkit-details-marker { display: none; }
+  .nav__menu[open] > summary {
+    color: var(--rc-ink-1);
+    text-decoration: underline 1px;
+    text-underline-offset: 6px;
+  }
+  .nav__sheet {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 4px var(--rc-pad-x) 12px;
+    background: var(--rc-e0);
+    border-bottom: 1px solid var(--rc-line);
+  }
+  .nav__menu[open] .nav__sheet { animation: nav-sheet-in var(--rc-d-enter) var(--rc-ease-out); }
+  .nav__sheet a {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    font: 500 17px/1 var(--f-body);
+    color: var(--rc-ink-1);
+    text-decoration: none;
+    border-top: 1px solid var(--rc-line-hair);
+  }
+  .nav__sheet a:first-child { border-top: 0; }
+  .nav__sheet a[aria-current] { text-decoration: underline 1px; text-underline-offset: 6px; }
+  .nav__menu > summary:active, .nav__sheet a:active { transform: scale(0.97); }
+}
+@keyframes nav-sheet-in { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .nav__menu[open] .nav__sheet { animation: none; } }
+html.rm .nav__menu[open] .nav__sheet { animation: none; }
 
 /* ---- node: mark, rail marker, list marker (one component) --------------- */
 .node {

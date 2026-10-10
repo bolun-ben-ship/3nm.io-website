@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en" class="no-js" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How it works: the six layers | RightClick:AI</title>
+<meta name="description" content="How the build works: the six layers that let AI agents work beside your staff, on your data, on your say-so. Context, operational data, AI agents, the workspace, the ledger and your admin panel.">
+<meta property="og:title" content="How it works: the six layers | RightClick:AI">
+<meta property="og:description" content="How the build works: the six layers that let AI agents work beside your staff, on your data, on your say-so. Context, operational data, AI agents, the workspace, the ledger and your admin panel.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.3nm.io/how-it-works">
+<meta property="og:site_name" content="RightClick:AI">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://www.3nm.io/how-it-works">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://www.3nm.io/#org",
+   "name": "RightClick:AI",
+   "url": "https://www.3nm.io/",
+   "email": "ben@3nm.io",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Singapore",
+    "addressCountry": "SG"
+   },
+   "founder": {
+    "@type": "Person",
+    "@id": "https://www.3nm.io/#ben",
+    "name": "Bolun Liu",
+    "alternateName": "Ben Liu"
+   }
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://www.3nm.io/#website",
+   "url": "https://www.3nm.io/",
+   "name": "RightClick:AI",
+   "publisher": {
+    "@id": "https://www.3nm.io/#org"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://www.3nm.io/how-it-works#webpage",
+   "url": "https://www.3nm.io/how-it-works",
+   "name": "How it works: the six layers",
+   "description": "How the build works: the six layers that let AI agents work beside your staff, on your data, on your say-so. Context, operational data, AI agents, the workspace, the ledger and your admin panel.",
+   "isPartOf": {
+    "@id": "https://www.3nm.io/#website"
+   },
+   "about": {
+    "@id": "https://www.3nm.io/how-it-works#service"
+   }
+  },
+  {
+   "@type": "Service",
+   "@id": "https://www.3nm.io/how-it-works#service",
+   "name": "Agentic workspaces",
+   "provider": {
+    "@id": "https://www.3nm.io/#org"
+   },
+   "areaServed": "SG",
+   "description": "Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so."
+  }
+ ]
+}
+</script>
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF"><!-- --rc-e0 light -->
+<!-- favicon: rounded square = --rc-mark-flat (#0E5A45), inner square = --rc-idx-data (#4FE0D0) -->
+<link rel="icon" href="img/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/logo/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/logo/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500&family=Instrument+Sans:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="vendor/lenis.css">
+<link rel="stylesheet" href="css/site.css">
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
+<script defer src="vendor/lenis.min.js"></script>
+<script defer src="vendor/gsap.min.js"></script>
+<script defer src="vendor/ScrollTrigger.min.js"></script>
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/book.js"></script>
+<script type="module" src="js/proof.js"></script>
+<script defer src="js/navmenu.js"></script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}#stage,.rail{display:none!important}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="jumpveil" data-theme="dark" aria-hidden="true"></div>
+<div class="vp-probe" aria-hidden="true"><i class="vp-probe__s"></i><i class="vp-probe__l"></i></div>
+
+<header class="nav" id="nav" data-theme="light">
+  <a class="brand" href="./" aria-label="RightClick:AI, home"><img class="brand__logo brand__logo--light" src="img/logo/mark.svg" width="32" height="32" alt="" aria-hidden="true"><img class="brand__logo brand__logo--dark" src="img/logo/mark-ondark.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand__word">RightClick:AI</span></a>
+  <nav class="nav__links" aria-label="Site"><a href="how-it-works" aria-current="page">How it works</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav>
+  <details class="nav__menu"><summary>Menu</summary><nav class="nav__sheet" aria-label="Site"><a href="how-it-works" aria-current="page">How it works</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav></details>
+  <a class="btn btn--primary btn--sm" href="#book" data-cta="nav">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a>
+</header>
+
+<nav class="rail" id="rail" data-theme="dark" aria-label="The six layers"><ol><li><a class="rail__item" href="#l1" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">01 Context</span></a></li><li><a class="rail__item" href="#l2" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">02 Operational data</span></a></li><li><a class="rail__item" href="#l3" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">03 AI agents</span></a></li><li><a class="rail__item" href="#l4" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">04 The workspace</span></a></li><li><a class="rail__item" href="#l5" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">05 Ledger</span></a></li><li><a class="rail__item" href="#l6" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="rail__label">06 Admin panel</span></a></li></ol></nav>
+
+<main id="main" tabindex="-1">
+  <section id="hero" class="sec sec--hero" data-theme="light" data-key="0" data-hold="0,0.75" aria-labelledby="hero-h">
+    <div class="hero__copy">
+      <p class="eyebrow">AGENTIC WORKSPACES</p>
+      <h1 id="hero-h"><span class="h1-line">Your people</span> <span class="h1-line">and your agents.</span> <span class="h1-line">One team.</span></h1>
+      <p class="lede">Hire 10× the capacity at half the cost. I build the six layers that let AI agents work beside your staff — on your data, on your say-so.</p>
+      <div class="btnrow">
+        <a class="btn btn--primary" href="#book" data-cta="hero">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="#intro">See the six layers<span class="btn__arrow btn__arrow--down" aria-hidden="true">↓</span></a>
+      </div>
+      <ul class="facts facts--hero"><li>First build in about 4 weeks</li><li>You own the code and the data</li><li>For owner-run teams of 5–25</li></ul>
+    </div>
+    <picture class="poster poster--hero"><source media="(max-aspect-ratio: 999/1000)" srcset="img/poster-hero-390.webp" width="780" height="844"><img src="img/poster-hero-1440.webp" loading="lazy" decoding="async" width="820" height="900" alt="People and small robot agents working together at six glass walls"></picture>
+  </section>
+
+  <div id="night" data-theme="dark">
+      <section id="intro" class="sec sec--night" data-key="1" data-hold="0.42,0.70" aria-labelledby="intro-h">
+        <div class="sec__sticky"><picture class="poster poster--hold"><source media="(max-aspect-ratio: 999/1000)" srcset="img/poster-hold-390.webp" width="780" height="844"><img src="img/poster-hold-1440.webp" loading="lazy" decoding="async" width="900" height="900" alt="A person and four small robot agents passing a job sheet round a shared table"></picture><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">SIX LAYERS</p>
+          <h2 id="intro-h" class="reveal" style="--i:1">Everyone works on them.</h2>
+          <p class="reveal" style="--i:2">Your people set the rules, the agents do the legwork, and every hand-off is on the record. Here is how the work moves.</p>
+        </div></div>
+      </section>
+
+      <section id="l1" class="sec sec--night sec--layer" data-key="2" data-hold="0.28,0.62" aria-labelledby="l1-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">01 — CONTEXT</p>
+          <h2 id="l1-h" class="reveal" style="--i:1">It starts with what you know.</h2>
+          <p class="reveal" style="--i:2">You and your team write down who you are, what you sell and why, who owns what, and how you sound. The agents read it before they touch anything.</p>
+          <ul class="facts reveal" style="--i:3"><li>written by 3 people</li><li>read by 30 agents</li><li>212 pages</li></ul>
+        </div></div>
+      </section>
+      <section id="l2" class="sec sec--night sec--layer" data-key="3" data-hold="0.28,0.62" aria-labelledby="l2-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">02 — OPERATIONAL DATA</p>
+          <h2 id="l2-h" class="reveal" style="--i:1">Shared notes, not a guess.</h2>
+          <p class="reveal" style="--i:2">Priya’s way of quoting, Marcus’s price list, the records in your CRM and your books. People add to it, agents keep it tidy, and everyone looks it up before they act.</p>
+          <ul class="facts reveal" style="--i:3"><li>4 connectors</li><li><span class="mk mk--skills" aria-hidden="true"></span>38 skills</li><li><span class="mk mk--data" aria-hidden="true"></span>1<span class="sep">,</span>204 records</li></ul>
+        </div></div>
+      </section>
+      <section id="l3" class="sec sec--night sec--layer" data-key="4" data-hold="0.28,0.62" aria-labelledby="l3-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">03 — AI AGENTS</p>
+          <h2 id="l3-h" class="reveal" style="--i:1">One team, two kinds of member.</h2>
+          <p class="reveal" style="--i:2">Six people, thirty agents: every agent has one job and a person it answers to. A director agent keeps them in step.</p>
+          <ul class="facts reveal" style="--i:3"><li>6 people lead</li><li>30 agents crew</li></ul>
+        </div></div>
+      </section>
+      <section id="l4" class="sec sec--night sec--layer" data-key="5" data-hold="0.28,0.62" aria-labelledby="l4-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">04 — THE WORKSPACE</p>
+          <h2 id="l4-h" class="reveal" style="--i:1">Everyone works at the same table.</h2>
+          <p class="reveal" style="--i:2">One shared workspace — a folder for every client and job — where people and agents pick up each other’s work, and every change is kept.</p>
+          <ul class="facts reveal" style="--i:3"><li>142 folders</li><li>every change kept</li></ul>
+        </div></div>
+      </section>
+      <section id="l5" class="sec sec--night sec--layer" data-key="6" data-hold="0.28,0.62" aria-labelledby="l5-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">05 — LEDGER</p>
+          <h2 id="l5-h" class="reveal" style="--i:1">Every hand-off, on the record.</h2>
+          <p class="reveal" style="--i:2">Who did what, and when: the agent that drafted it, the person who checked it. You can read it, question it and undo it.</p>
+          <ul class="facts reveal" style="--i:3"><li>3<span class="sep">,</span>480 entries this month</li><li>0 unlogged</li></ul>
+        </div></div>
+      </section>
+      <section id="l6" class="sec sec--night sec--layer" data-key="7" data-hold="0.28,0.62" aria-labelledby="l6-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">06 — ADMIN PANEL</p>
+          <h2 id="l6-h" class="reveal" style="--i:1">You still make the call.</h2>
+          <p class="reveal" style="--i:2">One view of how the week is going, and the few decisions only you should make. Nothing goes out in your name that you did not allow.</p>
+          <ul class="facts reveal" style="--i:3"><li>3 decisions waiting</li><li>30 agents working</li></ul>
+        </div></div>
+      </section>
+
+      <section id="together" class="sec sec--night" data-key="8" data-hold="0.30,0.75" aria-labelledby="together-h">
+        <div class="sec__sticky"><div class="copy">
+          <p class="eyebrow reveal" style="--i:0">TOGETHER</p>
+          <h2 id="together-h" class="reveal" style="--i:1">Six layers. One team.</h2>
+          <ol class="system reveal" id="system" style="--i:2"><li class="system__row" data-row="0" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">01</span><span class="system__name">Context</span></li><li class="system__row" data-row="1" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">02</span><span class="system__name">Operational data</span></li><li class="system__row" data-row="2" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">03</span><span class="system__name">AI agents</span></li><li class="system__row" data-row="3" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">04</span><span class="system__name">The workspace</span></li><li class="system__row" data-row="4" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">05</span><span class="system__name">Ledger</span></li><li class="system__row" data-row="5" data-state="ahead"><span class="node" aria-hidden="true"></span><span class="system__idx">06</span><span class="system__name">Admin panel</span></li></ol>
+        </div></div>
+      </section>
+
+      <section id="close" class="sec sec--night" data-key="9" data-hold="0.2,1" aria-labelledby="close-h">
+        <div class="sec__sticky"><div class="copy">
+          <h2 id="close-h" class="reveal" style="--i:0">This is the whole thing.</h2>
+          <p class="reveal" style="--i:1">I start with the foundation&nbsp;— your context and data&nbsp;— built on your real records in about four weeks. The agents, the workspace, the ledger and your panel follow. You&nbsp;own&nbsp;all&nbsp;of&nbsp;it.</p>
+          <div class="btnrow reveal" style="--i:2"><a class="btn btn--primary" href="#book" data-cta="close">Book a call<span class="btn__arrow" aria-hidden="true">→</span></a></div>
+          <p class="reveal" style="--i:3"><a class="mono-link" href="mailto:ben@3nm.io">ben@3nm.io</a></p>
+        </div></div>
+      </section>
+
+      <section id="compare" class="proof" aria-labelledby="compare-h"><div class="proof__in cmp-grid">
+        <h2 id="compare-h" class="proof__sub reveal">One more head, or a brain that holds everything?</h2>
+        <table class="cmp reveal">
+          <thead><tr><th scope="col">Compared on</th><th scope="col">Hire an ops manager</th><th scope="col">Keep the spreadsheet</th><th scope="col" class="us" style="--r:0">Agentic workspace</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">How fast you get an answer</th><td data-label="Hire an ops manager">When they're free</td><td data-label="Keep the spreadsheet">When you find the right tab</td><td class="us" style="--r:1" data-label="Agentic workspace">Seconds</td></tr>
+            <tr><th scope="row">What it can see</th><td data-label="Hire an ops manager">What they remember</td><td data-label="Keep the spreadsheet">One sheet at a time</td><td class="us" style="--r:2" data-label="Agentic workspace">Every client, job and number together</td></tr>
+            <tr><th scope="row">Connects your apps</th><td data-label="Hire an ops manager">By hand</td><td data-label="Keep the spreadsheet">No</td><td class="us" style="--r:3" data-label="Agentic workspace">Yes</td></tr>
+            <tr><th scope="row">When someone leaves</th><td data-label="Hire an ops manager">Their knowledge goes too</td><td data-label="Keep the spreadsheet">It breaks</td><td class="us" style="--r:4" data-label="Agentic workspace">It stays</td></tr>
+            <tr><th scope="row">Who owns it</th><td data-label="Hire an ops manager">They walk away with it</td><td data-label="Keep the spreadsheet">You, until it breaks</td><td class="us" style="--r:5" data-label="Agentic workspace">You, outright</td></tr>
+            <tr><th scope="row">Time to working</th><td data-label="Hire an ops manager">Months to hire and train</td><td data-label="Keep the spreadsheet">Already here</td><td class="us" style="--r:6" data-label="Agentic workspace">About four weeks</td></tr>
+          </tbody>
+        </table>
+        <div class="guide guide--sq" data-guide="bow" data-guide-trigger="#compare .cmp" aria-hidden="true"></div>
+      </div></section>
+
+      <section id="how" class="proof" aria-labelledby="how-h"><div class="proof__in">
+        <h2 id="how-h" class="reveal">About four weeks from scoping call to a working agentic workspace.</h2>
+        <div class="tl reveal">
+          <div class="tl-bar">
+            <span class="seg s-call"><b>Call</b></span>
+            <span class="seg s-scope"><b>Scoping call</b><em>scope + quote, you approve</em></span>
+            <span class="seg s-build"><b>Build</b><em>on your accounts, your real data</em></span>
+            <span class="seg s-hand"><b>Handover</b><em>recordings + SOPs</em></span>
+            <span class="seg s-month"><b>Monthly</b><em>optional, cancel anytime</em></span>
+          </div>
+          <div class="tl-scale"><span>day 0</span><span>about four weeks</span><span>after</span></div>
+          <div class="guide guide--strip" data-guide="cap" data-guide-track="#how .tl-bar .seg" aria-hidden="true"></div>
+        </div>
+        <p class="proofline reveal">A data build for a 3PL logistics firm in Singapore went from signed to live in <b class="num">13 days</b>: signed <span class="num">17 June 2026</span>, live <span class="num">30 June</span>.</p>
+        <p class="proofline reveal">Want your team to try agents first? I run a free two-hour workshop at your office. Ask for one on the call.</p>
+        <h3 id="how-sub" class="proof__sub reveal">You give access and answers. I do the rest.</h3>
+        <div class="split reveal">
+          <div class="side you-side">
+            <span class="label">You</span>
+            <ul><li>Access to your accounts</li><li>Answers when two numbers disagree</li><li>Approve the scope</li></ul>
+          </div>
+          <div class="side me-side">
+            <span class="label">Me</span>
+            <ul><li>Cleaning the data</li><li>Writing the wiki</li><li>Building the skills</li><li>Connecting the apps</li><li>Recording the walkthroughs</li><li>Writing the SOPs</li></ul>
+          </div>
+          <div class="guide guide--strip" data-guide="hat" data-guide-trigger="#how .split" data-guide-marks="#how .you-side,#how .me-side" aria-hidden="true"></div>
+        </div>
+        <p class="after-note reveal">The mess is normal. Every business I've built for had spreadsheets that disagreed. You don't clean up before I start.</p>
+      </div></section>
+
+      <section id="proof" class="proof" aria-labelledby="proof-h"><div class="proof__in proof-grid">
+        <h2 id="proof-h" class="reveal">I've built with AI agents every day since November 2025.</h2>
+        <div class="stats reveal">
+          <div class="stat"><b class="num" data-count="0">109,000+</b><span>agent steps in the last <span class="num">3 months</span></span></div>
+          <div class="stat"><b class="num" data-count="1">30</b><span>projects live since <span class="num">Mar 2026</span></span></div>
+        </div>
+        <p class="lead reveal">Paying clients in healthcare consulting, financial services, family offices, 3PL logistics and education consulting. On every one, the problem the owner named wasn't the real one. The real one was where the knowledge lived.</p>
+        <div class="story reveal">
+          <h3>A number that looks right isn't always right.</h3>
+          <p>On the 3PL build, I matched all <span class="num">184<span class="sep">,</span>578</span> rows of the firm's data to the owner's own workbook, to the cent. <span class="num">18 days</span> later, a second year of data loaded and one total went off by <span class="num">SGD 43.27</span>. Every chart still drew. The screen looked correct. Nobody looking at it could have known. The earlier match against the owner's workbook caught it, and I fixed it.</p>
+        </div>
+        <div class="guide-rail"><div class="guide guide--aside" data-guide="phones" data-guide-trigger="#proof .stats" data-guide-trigger2="#proof .story" aria-hidden="true"></div></div>
+      </div></section>
+
+      <section id="promise" class="proof" aria-labelledby="promise-h"><div class="proof__in">
+        <div class="guarantee">
+          <h2 id="promise-h" class="gq reveal">I build until what's in the scope works.</h2>
+          <p class="lead reveal">Not a refund. The result. If what's in the signed scope isn't working on the day I said it would be, I keep building until it does, at no extra cost. Anything outside the scope is a new scope.</p>
+          <h3 class="proof__sub reveal">You own all of it.</h3>
+          <ul class="pts">
+            <li class="reveal" style="--i:0"><b>Where your data lives</b>In your own workspaces, drives and databases, named tool by tool in the scope.</li>
+            <li class="reveal" style="--i:1"><b>Whose accounts and keys</b>Yours. I get scoped access to build and hand it back at handover.</li>
+            <li class="reveal" style="--i:2"><b>Who changes things</b>You, after handover. You never need me to use it.</li>
+            <li class="reveal" style="--i:3"><b>Getting it out</b>Everything exports as files. No format only I can open.</li>
+          </ul>
+          <div class="guide guide--strip" data-guide="pair" data-guide-trigger="#promise .pts" data-guide-trigger2="#promise .founder" aria-hidden="true"></div>
+          <p class="after-note reveal">No PSG or EDG paperwork. Grant approval takes four to six months; the build takes about four weeks.</p>
+        </div>
+        <div class="founder reveal">
+          <picture><source srcset="img/ben-portrait.webp" type="image/webp"><img src="img/ben-portrait.jpg" alt="Bolun (Ben) Liu" width="72" height="72" loading="lazy" decoding="async"></picture>
+          <div>
+            <p>I'm Ben Liu, and RightClick:AI is me. I take the call, scope the build, build it and hand it over. No subcontractors, no account manager in between. You talk to the person doing the work, start to finish.</p>
+            <p class="byline">Bolun (Ben) Liu · Founder, RightClick:AI · Singapore</p>
+          </div>
+        </div>
+      </div></section>
+
+      <section id="book" class="sec sec--night sec--book" aria-labelledby="book-h">
+        <div class="book__panel">
+          <p class="eyebrow">Get started</p>
+          <h2 id="book-h" tabindex="-1">Book a 30-minute call.<br>It's free.</h2>
+          <p class="book__lede">No pitch, no proposal. Book a call, or tell me the one thing eating your week and I'll say if it's worth one. I read every one myself, and take three projects a month.</p>
+          <form id="book-form" class="book__form" novalidate>
+            <div class="field"><label for="book-name">Your name</label><input class="field__input" id="book-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required aria-describedby="book-name-err"><p class="field__err" id="book-name-err"></p></div>
+            <div class="field"><label for="book-email">Work email</label><input class="field__input" id="book-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required aria-describedby="book-email-err"><p class="field__err" id="book-email-err"></p></div>
+            <div class="field"><label for="book-note">Not ready to book? Tell me the one thing eating your week <span class="opt">(optional)</span></label><textarea class="field__input" id="book-note" name="note" rows="3" maxlength="500" placeholder="2 to 3 sentences is enough." aria-describedby="book-note-err"></textarea><p class="field__err" id="book-note-err"></p></div>
+            <button type="submit" class="btn btn--primary">Book my free call<span class="btn__arrow" aria-hidden="true">→</span></button>
+            <p class="book__status" role="status" aria-live="polite"></p>
+            <p class="book__note">ben@3nm.io · Singapore · No pitch, no proposal.</p>
+          </form>
+          <p class="book__fallback">WhatsApp <a class="mono-link" href="https://wa.me/6591288687?text=Hi%20Ben%2C%20I'd%20like%20to%20book%20a%20free%2030-minute%20call.%20(via%203nm.io)">+65 9128 8687</a> or email <a class="mono-link" href="mailto:ben@3nm.io?subject=Book%20a%20call">ben@3nm.io</a>.</p>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <a class="brand" href="./" aria-label="RightClick:AI, home"><img class="brand__logo brand__logo--light" src="img/logo/mark.svg" width="32" height="32" alt="" aria-hidden="true"><img class="brand__logo brand__logo--dark" src="img/logo/mark-ondark.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand__word">RightClick:AI</span></a>
+        <nav class="foot__links" aria-label="Footer"><a href="./">Home</a><a href="how-it-works" aria-current="page">How it works</a><a href="case-studies">Case studies</a><a href="blog">Blog</a><a href="faq">FAQ</a></nav>
+        <a class="mono-link" href="mailto:ben@3nm.io">ben@3nm.io</a>
+        <p class="foot__legal">© 2026 RightClick:AI Pte Ltd, Singapore</p>
+      </footer>
+  </div>
+</main>
+<!-- FIX-PLAN-R7 P3.6: arriving on ./#book (a "Book a call" on case-studies / faq). Parsed before the deferred modules, so
+     main.js boots already at #book and skips the load intro (its own introPos > 0.5 test); js/book.js lands it exactly
+     once the stage is ready. -->
+<script>(function(){if(location.hash!=='#book')return;var b=document.getElementById('book');if(b)b.scrollIntoView({block:'start',behavior:'instant'});})();</script>
+
+<!-- Scroll-depth buckets on this page are a WITHIN-PAGE TREND ONLY: the stage is a fixed, scroll-driven hero (INTERACTION.md §3.1 rule 4), so % of document height is not comparable with any other page. js/main.js fires {event:'hero_pin_release'} to dataLayer at the frame the day→night cut completes (#night reaches the top) — read that event as 'reader reached the content', not the buckets. GA4 forwarding needs a GTM Custom Event trigger for scroll_depth and hero_pin_release. The four proof sections after the stage runway (#compare, #how, #proof, #promise) are the page's content: read section_view and content_depth for them, not the document-height buckets. A section_view needs the section to hold the band from 20% to 50% of the viewport for 600 ms (the band keeps #promise's last strip under the nav, after a #book landing, from counting), so a Book a call fly-through (about 1.1 s across all four) does not count as four views; content_depth stays a pure how-far measure. GTM needs Custom Event triggers for section_view and content_depth (a manual step in the GTM UI). -->
+<script>(function(){
+  var marks=[25,50,75,90,100],hit={},dl=window.dataLayer=window.dataLayer||[];
+  function depth(){var de=document.documentElement,b=document.body;
+    var sh=Math.max(de.scrollHeight,b.scrollHeight)-window.innerHeight;
+    if(sh<=0)return 100;
+    return Math.min(100,Math.round((window.pageYOffset||de.scrollTop)/sh*100));}
+  function check(){var p=depth();for(var i=0;i<marks.length;i++){var m=marks[i];
+    if(p>=m&&!hit[m]){hit[m]=1;dl.push({event:'scroll_depth',percent:m,page_path:location.pathname});}}}
+  var t=0;window.addEventListener('scroll',function(){if(t)return;
+    t=setTimeout(function(){t=0;check();},200);},{passive:true});
+  window.addEventListener('load',check);
+})();</script>
+<script>(function(){
+  var dl=window.dataLayer=window.dataLayer||[],ids=['compare','how','proof','promise'];
+  if('IntersectionObserver' in window){
+    var held={};
+    var io=new IntersectionObserver(function(entries){
+      for(var i=0;i<entries.length;i++){(function(e){var id=e.target.id;
+        if(e.isIntersecting){if(!held[id])held[id]=setTimeout(function(){io.unobserve(e.target);dl.push({event:'section_view',section:id});},600);}
+        else if(held[id]){clearTimeout(held[id]);held[id]=0;}})(entries[i]);}
+    },{threshold:0,rootMargin:'-20% 0px -50% 0px'});
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el)io.observe(el);}
+  }
+  var marks=[25,50,75,100],hit={};
+  function check(){var a=document.getElementById('compare'),b=document.getElementById('book');
+    if(!a||!b)return;
+    var y=window.pageYOffset||document.documentElement.scrollTop,
+        top=a.getBoundingClientRect().top+y,end=b.getBoundingClientRect().top+y;
+    if(end<=top)return;
+    var p=(y+window.innerHeight-top)/(end-top)*100;
+    for(var i=0;i<marks.length;i++){var m=marks[i];
+      if(p>=m&&!hit[m]){hit[m]=1;dl.push({event:'content_depth',percent:m});}}}
+  var t=0;window.addEventListener('scroll',function(){if(t)return;
+    t=setTimeout(function(){t=0;check();},200);},{passive:true});
+  window.addEventListener('load',check);
+})();</script>
+</body>
+</html>
