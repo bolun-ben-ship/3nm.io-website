@@ -198,11 +198,11 @@ ul, ol { padding: 0; list-style: none; }
   font: 600 1.0625rem/1 var(--f-display); letter-spacing: -0.024em;
   color: var(--rc-ink-1); text-decoration: none;
 }
-.mark b {
-  width: 18px; height: 18px; border-radius: 4px; display: block; flex: none;
-  background: var(--rc-accent);
-  box-shadow: inset 0 0 0 3px var(--rc-e0), inset 0 0 0 7px var(--rc-idx-data);
-}
+/* 2026-10-11: the locked mark (Direction R2, green cut) replaces the node square here, so the homepage
+   header and footer carry the same logo as every other page. 32px is --rc-mark-min, the cascade floor
+   (tokens.css L2.5 MARK USAGE rule 1); the page is light-only, so only the light cut ships. */
+.mark__logo { width: 32px; height: 32px; display: block; flex: none; }
+.mark--foot .mark__logo { width: 28px; height: 28px; }
 /* links carry .5rem side padding (wider touch targets) and the gap shrinks by the same, so the text sits where it did */
 .nav__links { display: flex; gap: .75rem; margin-left: auto; margin-right: -.5rem; }
 .nav__links a {
