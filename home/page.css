@@ -11,15 +11,11 @@
   --f-display: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-body: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --nav-h: 64px;
-  --pad: clamp(16px, 4vw, 48px);
-  --maxw: 1240px;
+  /* --nav-h, --pad, --maxw and .wrap live in css/layout.css, which the subpages read too (2026-10-11) */
   --focus-line: 0.5;   /* desktop: a beat crossing mid-screen swaps the still passage; phones override below */
   /* Claude Code's mascot colour, the one hue outside the brand (Ben 2026-10-10: the Claude agent in the custom app) */
   --clawd: #D77757;
 }
-@media (min-width: 1200px) { :root { --pad: max(72px, 5vw); } }
-@media (max-width: 899px)  { :root { --nav-h: 56px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -44,7 +40,6 @@ p, h1, h2, h3, ul, ol, dl, dd { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 ::selection { background: var(--rc-accent-tint-20); color: var(--rc-ink-1); }
 
-.wrap { width: min(calc(100% - 2 * var(--pad)), var(--maxw)); margin-inline: auto; }
 
 .skip {
   position: absolute; left: 12px; top: -60px; z-index: 100;
@@ -786,9 +781,30 @@ ul, ol { padding: 0; list-style: none; }
 .bp--last { min-height: 90svh; }
 .bp__in { width: 100%; max-width: 31rem; }
 .bp .h2 { margin-bottom: 1.25rem; }
-/* .82, not lower: the passage out of focus is still real text and keeps 4.5:1 on this ground (design-critic r6) */
-.sec--ben.is-js .bp { opacity: .82; transition: opacity 480ms var(--rc-ease-in-out); }
-.sec--ben.is-js .bp.is-active { opacity: 1; }
+.bpbeat { display: none; }
+/* flow (phones, short screens): the passages run one after another and the one in focus is full strength.
+   .82, not lower: the passage out of focus is still real text and keeps 4.5:1 on this ground (design-critic r6) */
+.sec--ben.is-js:not(.is-deck) .bp { opacity: .82; transition: opacity 480ms var(--rc-ease-in-out); }
+.sec--ben.is-js:not(.is-deck) .bp.is-active { opacity: 1; }
+
+/* deck (Ben 2026-10-11: "same as the first hero part animation, so fade out fade in instead of scrolling"):
+   the passages stand still in one place and crossfade, exactly as .psg does in the story above. The .bpbeat
+   spacers carry the scroll length, so the section is as long as it was. Same two durations as the story:
+   340ms out, 640ms in on a 140ms delay, so the new words arrive after the old ones have gone. */
+.sec--ben.is-deck .ben2 { grid-template-rows: repeat(5, auto); }
+.sec--ben.is-deck .ben2__fig { grid-row: 1 / -1; }
+.sec--ben.is-deck .ben2__copy {
+  grid-row: 1 / -1; align-self: start; z-index: 2;
+  position: sticky; top: var(--nav-h); height: calc(100svh - var(--nav-h));
+  pointer-events: none;
+}
+.sec--ben.is-deck .bp {
+  position: absolute; inset: 0; min-height: 0; padding: 0;
+  opacity: 0; transition: opacity 340ms var(--rc-ease-out);
+}
+.sec--ben.is-deck .bp.is-active { opacity: 1; pointer-events: auto; transition: opacity 640ms var(--rc-ease-in-out) 140ms; }
+.sec--ben.is-deck .bpbeat { display: block; grid-column: 1; grid-row: var(--r); height: 82svh; }
+.sec--ben.is-deck .bpbeat:last-child { height: 100svh; }
 /* the beats: the panel shows the one for the passage in view */
 .ben__svg .bb { opacity: 0; transition: opacity 420ms var(--rc-ease-in-out); }
 .ben-panel[data-beat="1"] .bb[data-b="1"], .ben-panel[data-beat="2"] .bb[data-b="2"], .ben-panel[data-beat="3"] .bb[data-b="3"],
@@ -810,7 +826,7 @@ ul, ol { padding: 0; list-style: none; }
 .ben__svg .t-name { font-size: min(20px, calc(13px / var(--s, 1))); }
 .ben__svg :is(.t-tag, .t-lbl) { font-size: min(17px, calc(9.5px / var(--s, 1))); }
 @media (prefers-reduced-motion: reduce) {
-  .ben__svg :is(.bb, .b-sq), .sec--ben.is-js .bp { transition: none; }
+  .ben__svg :is(.bb, .b-sq), .sec--ben .bp { transition: none; }
 }
 .fit {
   padding: 1.6rem 1.75rem 1.7rem; box-shadow: var(--rc-shadow-2);

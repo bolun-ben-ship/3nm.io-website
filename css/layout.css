@@ -1,0 +1,38 @@
+/* ==========================================================================
+   LENS — layout.css : THE ONE CONTAINER SYSTEM (2026-10-11)
+
+   Before this file the homepage and the subpages measured differently. At
+   1440 the homepage put its nav row and its content at x 93 in a 1240 box;
+   the subpages ran the nav full-bleed at x 72 and set their content in a
+   1200 box whose 72px padding was INSIDE it, so the text started at x 185.
+   Two layouts on one site. This file is the homepage's system, and both
+   stylesheets now read it instead of defining their own.
+
+   Load it BEFORE home/page.css or css/site.css on every page.
+
+   .wrap      the homepage's container
+   .page__in  the subpages' container  (case studies, FAQ, blog, articles)
+   .proof__in the content sections on /how-it-works
+   All three are the same box. Do not give any of them their own max-width,
+   margin-inline or padding-inline again - put the rule here.
+
+   Full-bleed bars (the subpage .nav and .foot have no inner wrapper) centre
+   their row on the same box through padding alone: --bar-pad.
+   ========================================================================== */
+
+:root {
+  --pad: clamp(16px, 4vw, 48px);
+  --maxw: 1240px;
+  --nav-h: 64px;
+  /* the gutter a full-bleed bar needs for its row to sit on the container's edges */
+  --bar-pad: max(var(--pad), calc((100% - var(--maxw)) / 2));
+}
+@media (min-width: 1200px) { :root { --pad: max(72px, 5vw); } }
+@media (max-width: 899px)  { :root { --nav-h: 56px; } }
+
+.wrap,
+.page__in,
+.proof__in {
+  width: min(calc(100% - 2 * var(--pad)), var(--maxw));
+  margin-inline: auto;
+}

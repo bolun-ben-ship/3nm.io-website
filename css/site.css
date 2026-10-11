@@ -51,7 +51,7 @@
   --f-display: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --f-body: "Geist", ui-sans-serif, system-ui, sans-serif;
   --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --nav-h: 64px;
+  /* --nav-h, --pad, --maxw and the container rule live in css/layout.css (2026-10-11) */
 }
 
 /* per-ground helpers: dark uses --rc-g-400 so the dark accent stays on CTAs only */
@@ -148,7 +148,7 @@ html.stage-on #night { background: transparent; border-top-color: transparent; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: var(--rc-pad-x);
+  padding-inline: var(--bar-pad);   /* the row lands on .page__in's edges (layout.css) */
   background: var(--rc-e-scrim);
   border-bottom: 1px solid var(--rc-line-hair);
   -webkit-backdrop-filter: blur(10px);
@@ -267,7 +267,7 @@ html.no-js .nav { position: absolute; }
     right: 0;
     display: flex;
     flex-direction: column;
-    padding: 4px var(--rc-pad-x) 12px;
+    padding: 4px 0 12px;   /* .nav already carries --bar-pad */
     background: var(--rc-e0);
     border-bottom: 1px solid var(--rc-line);
   }
@@ -622,7 +622,7 @@ html.js:not(.rm) .h1-line:nth-child(3) { animation-delay: calc(2 * var(--rc-stag
   display: grid;
   align-content: start;
   /* eyebrow top at ~24% of the viewport height (vh first, svh where supported) */
-  padding: calc(24 * 1vh) 0 0 var(--rc-pad-x);
+  padding: calc(24 * 1vh) 0 0 var(--bar-pad);
   padding-top: calc(24 * 1svh);
 }
 .hero__copy { width: auto; }
@@ -652,7 +652,7 @@ html.js:not(.rm) .h1-line:nth-child(3) { animation-delay: calc(2 * var(--rc-stag
   pointer-events: auto;
   max-width: 460px;
   margin-left: clamp(8px, 1vw, 24px);
-  padding-right: var(--rc-pad-x);
+  padding-right: var(--bar-pad);
 }
 
 /* ---- posters: the stage's stand-in when it cannot run (FIX-R2 P2.3) --------------
@@ -878,12 +878,7 @@ html.js .book__fallback { display: none; }
   padding-block: clamp(88px, 11vh, 144px);
 }
 #compare { padding-top: clamp(120px, 18vh, 200px); }   /* the close copy clears it during the veil */
-.proof__in {
-  position: relative;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--rc-pad-x, 24px);
-}
+.proof__in { position: relative; }   /* the box itself is css/layout.css */
 /* the v4 hairline between sections, inset to the text measure (not to the padded box edge) */
 .proof + .proof { padding-top: 0; }
 .proof + .proof > .proof__in { padding-top: clamp(64px, 8vh, 112px); }
@@ -891,8 +886,8 @@ html.js .book__fallback { display: none; }
   content: '';
   position: absolute;
   top: 0;
-  left: var(--rc-pad-x, 24px);
-  right: var(--rc-pad-x, 24px);
+  left: 0;
+  right: 0;
   border-top: 1px solid var(--rc-line-hair);
 }
 #promise > .proof__in::before { display: none; }   /* the guarantee panel's own edge is the divider: no double line */
@@ -1313,7 +1308,7 @@ html.no-js .tl, html.no-gl .tl, html.no-guides .tl { grid-template-areas: "bar" 
 .foot {
   position: relative;          /* no fill: the night field (canvas, or #night's ground) runs under it, no band */
   border-top: 1px solid var(--rc-line-hair);
-  padding: var(--rc-s-5) var(--rc-pad-x);
+  padding: var(--rc-s-5) var(--bar-pad);   /* same edges as the nav and the content */
   display: flex;
   flex-wrap: wrap;
   align-items: center;

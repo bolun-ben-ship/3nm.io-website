@@ -357,18 +357,48 @@
     var svg = panel && panel.querySelector('svg'), fig = sec && sec.querySelector('.ben2__fig');
     if (!sec || !svg || !fig) return;
     var ps = Array.prototype.slice.call(sec.querySelectorAll('.bp'));
+    var bts = Array.prototype.slice.call(sec.querySelectorAll('.bpbeat'));
+    var copy = sec.querySelector('.ben2__copy');
     var mqPhone = window.matchMedia('(max-width: 899px)');
-    var queued = false, cur = 0;
+    var mqWide = window.matchMedia('(min-width: 900px)');
+    var queued = false, cur = 0, deck = false;
     sec.classList.add('is-js');
+
+    /* Deck mode (Ben 2026-10-11): the passages stand still and crossfade, as the story's .psg do, and the
+       .bpbeat spacers carry the scroll. Same guard as the story: only where EVERY passage fits the still
+       box, measured rather than guessed from a breakpoint - the fit card (beat 5) is the tallest. */
+    function setMode() {
+      var want = false;
+      if (mqWide.matches && copy && bts.length) {
+        sec.classList.add('is-deck');
+        var room = copy.getBoundingClientRect().height;
+        want = ps.every(function (p) {
+          var i = p.querySelector('.bp__in') || p;
+          return i.scrollHeight <= room - 8;
+        });
+      }
+      deck = want;
+      sec.classList.toggle('is-deck', deck);
+    }
+
     function pick() {
       queued = false;
-      // phone: 40% of the way down the text area under the diagram, so the panel changes as the new words arrive
-      var fb = fig.getBoundingClientRect().bottom;
-      var line = mqPhone.matches ? fb + 0.4 * (window.innerHeight - fb) : window.innerHeight * 0.55;
-      var beat = +ps[0].getAttribute('data-beat');
-      for (var i = 0; i < ps.length; i++) {
-        var inner = ps[i].querySelector('.bp__in') || ps[i];
-        if (inner.getBoundingClientRect().top <= line) beat = +ps[i].getAttribute('data-beat');
+      var beat, i;
+      if (deck) {
+        // the beats carry the scroll, so they say which passage is on
+        beat = +bts[0].getAttribute('data-beat');
+        for (i = 0; i < bts.length; i++) {
+          if (bts[i].getBoundingClientRect().top <= window.innerHeight * 0.5) beat = +bts[i].getAttribute('data-beat');
+        }
+      } else {
+        // phone: 40% of the way down the text area under the diagram, so the panel changes as the new words arrive
+        var fb = fig.getBoundingClientRect().bottom;
+        var line = mqPhone.matches ? fb + 0.4 * (window.innerHeight - fb) : window.innerHeight * 0.55;
+        beat = +ps[0].getAttribute('data-beat');
+        for (i = 0; i < ps.length; i++) {
+          var inner = ps[i].querySelector('.bp__in') || ps[i];
+          if (inner.getBoundingClientRect().top <= line) beat = +ps[i].getAttribute('data-beat');
+        }
       }
       if (beat === cur) return;
       cur = beat;
@@ -377,7 +407,9 @@
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(pick); } }
     window.addEventListener('scroll', queue, { passive: true });
-    window.addEventListener('resize', queue, { passive: true });
+    window.addEventListener('resize', function () { setMode(); cur = -1; queue(); }, { passive: true });
+    setMode();
+    cur = -1;
     pick();
     // labels hold their size as the panel shrinks: the same --s rule as the story's diagram
     function scale() {

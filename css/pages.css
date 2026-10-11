@@ -46,12 +46,7 @@ body::before {
 .pg-foot { z-index: 1; }
 
 /* ---- layout ------------------------------------------------------------- */
-.page__in {
-  position: relative;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--rc-pad-x);
-}
+.page__in { position: relative; }   /* the box itself is css/layout.css - the same one .wrap uses */
 .pg-sec, .faq-body { position: relative; padding-block: clamp(88px, 11vh, 144px); }
 .pg-sec + .pg-sec, .faq-body + .pg-sec { padding-top: 0; }
 .pg-sec + .pg-sec > .page__in, .faq-body + .pg-sec > .page__in { padding-top: clamp(64px, 8vh, 112px); }
@@ -59,8 +54,8 @@ body::before {
   content: '';
   position: absolute;
   top: 0;
-  left: var(--rc-pad-x);
-  right: var(--rc-pad-x);
+  left: 0;
+  right: 0;
   border-top: 1px solid var(--rc-line-hair);
 }
 .pg-close.pg-sec > .page__in::before { display: none; }   /* the panel's own edge is the divider */
@@ -587,7 +582,10 @@ html.no-js .cs-hero, html.no-guides .cs-hero { grid-template-columns: minmax(0, 
   --post-measure: 36em;
   font-family: var(--f-body);
   font-size: 18px;
-  max-width: calc(220px + 64px + var(--post-measure) + 2 * var(--rc-pad-x));
+  max-width: calc(220px + 64px + var(--post-measure));   /* the box no longer pads (css/layout.css) */
+  /* 2026-10-11: the reading measure starts on the container's LEFT edge, not centred in the viewport, so the
+     article's h1 lands under the nav's logo exactly as the homepage's copy does. Same edge as --bar-pad. */
+  margin-inline: max(var(--pad), calc((100% - var(--maxw)) / 2)) auto;
 }
 
 /* ---- the article head: eyebrow, h1, byline; the reading guide in the right cell ---- */
@@ -651,8 +649,8 @@ html.no-js .cs-hero, html.no-guides .cs-hero { grid-template-columns: minmax(0, 
   content: '';
   position: absolute;
   top: 0;
-  left: var(--rc-pad-x);
-  right: var(--rc-pad-x);
+  left: 0;
+  right: 0;
   border-top: 1px solid var(--rc-line-hair);
 }
 .post-toc { margin: 0 0 48px; }
@@ -858,8 +856,8 @@ html.no-js .cs-hero, html.no-guides .cs-hero { grid-template-columns: minmax(0, 
   content: '';
   position: absolute;
   top: 0;
-  left: var(--rc-pad-x);
-  right: var(--rc-pad-x);
+  left: 0;
+  right: 0;
   border-top: 1px solid var(--rc-line-hair);
 }
 .post-rel__h {
